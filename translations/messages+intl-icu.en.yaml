@@ -1,0 +1,37 @@
+default:
+  index:
+    title: Home
+
+form:
+  button:
+    add: Add
+    update: Update
+    delete: Delete
+    search: Search
+    cancel: Cancel
+
+modal:
+  title:
+    delete: Confirm Deletion
+
+layout:
+  name: Hub
+  navbar:
+    home: Home
+  footer:
+    madeWith: Made with
+    version: Version
+    releaseDate: Updated on
+
+enum:
+
+aria:
+  label:
+    mainNavigation: Main navigation
+    toggleNavigation: Toggle navigation
+    avatar: Avatar
+    footer: Footer
+    search: Search
+    close: Close
+  other:
+    skipToContent: Skip to content

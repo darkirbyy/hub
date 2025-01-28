@@ -1,21 +1,38 @@
-@use 'sass:color';
+// Import boostrap classes
+@import '~bootstrap/scss/bootstrap';
 
-$bgcolor: #222222;
-$checkmark: '✅ ';
+// Import icons packages
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
-.sass::before {
-  content: '❌ ';
+// Improve bootstrap classes for form
+.form-label {
+  margin-bottom: 0 !important;
 }
 
-body {
-  background-color: $bgcolor;
-  color: white;
+.help-text {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 
-  h1 {
-    color: color.adjust($bgcolor, $lightness: 50%, $alpha: 1);
-  }
+.input-group-text {
+  margin-top: ($spacer * 0) !important;
+}
 
-  .sass::before {
-    content: $checkmark;
-  }
+label.form-label.required::after,
+legend.col-form-label.required::after {
+  content: ' *';
+  color: $primary !important;
+}
+
+// Others
+.app-env-dev {
+  background: repeating-linear-gradient(
+    45deg,
+    #e7b871,
+    #e7b871 10px,
+    #ce994b 10px,
+    #ce994b 20px
+  );
+  color: #704300;
 }
