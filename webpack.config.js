@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -16,7 +17,7 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath(Encore.isProduction() ? '/' + app_name + '/build' : '/build')
     // only needed for CDN's or subdirectory deploy
-    .setManifestKeyPrefix('build/') 
+    .setManifestKeyPrefix('build/')
     // copy images files to the build
     .copyFiles({
         from: './assets/images',
@@ -79,6 +80,17 @@ Encore
         };
     })
 
+    // add https support (port option useless as the manifest will not be updated accordingly)
+    .configureDevServerOptions(options => {
+        options.server = {
+            type: 'https',
+            options: {
+                pfx: path.join(process.env.HOME, '.symfony5/certs/default.p12'),
+            }
+        }
+        // options.port = 'auto'
+    })
+
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
@@ -91,6 +103,6 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-;
+    ;
 
 module.exports = Encore.getWebpackConfig();
