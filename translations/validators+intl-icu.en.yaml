@@ -4,5 +4,13 @@ icon:
     id: '#'
     label: Label
     faClass: CSS classes
+    preview: Preview
   help:
     faClass: Check on <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a> website
+
+category:
+  name: Categories
+  label:
+    id: '#'
+    label: Label
+    icon: Icon

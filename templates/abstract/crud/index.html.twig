@@ -3,6 +3,8 @@
 {% set title = config.main_title|trans %}
 
 {% block main %}
+  {# Modal to confirm delete, if in EDIT mode #}
+  {{ block('modal', 'abstract/crud/_delete.html.twig') }}
   <section>
     <div class="container">
       {# Redefine the flashes with the same width as the cards #}
@@ -11,7 +13,7 @@
       </div>
 
       <h2>
-        {{ config.entity_name|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.index'|trans }}</span>
+        {{ (config.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.index'|trans }}</span>
       </h2>
 
       {# Back link and button to add new object #}
@@ -29,7 +31,7 @@
           <tr class="">
             {% for col in config.index_cols %}
               <th class="text-nowrap align-center" scope="col">
-                {{ ('icon.label.' ~ col)|trans({ }, 'validators') }}
+                {{ (config.entity_key ~ '.label.' ~ col)|trans({ }, 'validators') }}
               </th>
             {% endfor %}
             <th class="w-1 text-nowrap text-end align-center" scope="col">
@@ -42,13 +44,17 @@
             <tr>
               {% for col in config.index_cols %}
                 <td class="align-center">
-                  {{ attribute(object, col) }}
+                  {# TODO Dangerous ? #}
+                  {{ attribute(object, col)|raw }}
                 </td>
               {% endfor %}
               <td class="w-1 text-nowrap text-end py-1 align-center">
-                <a class="btn btn-sm btn-outline-primary p-0 px-2 py-1" href="{{ path(config.route_prefix ~ 'edit', { id: object.id }) }}">
+                <a class="btn btn-outline-primary btn-sm px-2 py-1" href="{{ path(config.route_prefix ~ 'edit', { id: object.id }) }}">
                   <span class="bi bi-pen-fill"></span><span class="ms-1 d-none d-sm-inline">{{ 'form.button.edit'|trans }}</span>
                 </a>
+                {% with { object_id: object.id, btn_class: 'btn-sm btn-sm px-2 py-1' } %}
+                {{ block('button', 'abstract/crud/_delete.html.twig') }}
+                {% endwith %}
               </td>
             </tr>
           {% endfor %}

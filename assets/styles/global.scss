@@ -55,7 +55,7 @@ $utilities: map.merge(
   margin-top: ($spacer * 0) !important;
 }
 
-label.form-label.required::after,
+input + label.form-label.required::after,
 legend.col-form-label.required::after {
   content: ' *';
   color: $primary !important;

@@ -4,5 +4,13 @@ icon:
     id: '#'
     label: Libellé
     faClass: Classes CSS
+    preview: Aperçu
   help:
     faClass: Voir sur le site de <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a>
+
+category:
+  name: Catégories
+  label:
+    id: '#'
+    label: Libellé
+    icon: Icône

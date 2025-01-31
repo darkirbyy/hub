@@ -3,7 +3,7 @@ default:
 
 admin:
   title: Administration
-  backTo: Back to administration
+  backTo: Back to main page
 
 form:
   button:
@@ -33,6 +33,7 @@ layout:
   name: Hub
   navbar:
     home: Home
+    admin: Admin
   footer:
     madeWith: Made with
     version: Version

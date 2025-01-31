@@ -23,13 +23,13 @@ final class IconController extends CrudController
         return [
             'route_prefix' => 'admin_icon_',
             'entity_class' => Icon::class,
+            'entity_key' => 'icon',
             'form_class' => IconType::class,
             'main_title' => 'admin.title',
-            'entity_name' => 'icon.name',
-            'index_cols' => ['id', 'faClass', 'label'],
+            'index_cols' => ['id', 'label', 'faClass', 'preview'],
             'index_backlink' => [
                 'text' => 'admin.backTo',
-                'route' => 'default_index',
+                'route' => 'admin_index',
             ],
         ];
     }

@@ -30,7 +30,7 @@ abstract class CrudController extends AbstractController
 
     protected function validateConfig(array $config): void
     {
-        $requiredKeys = ['route_prefix', 'entity_class', 'form_class', 'main_title', 'entity_name', 'index_cols', 'index_backlink'];
+        $requiredKeys = ['route_prefix', 'entity_class', 'entity_key', 'form_class', 'main_title', 'index_cols', 'index_backlink'];
         foreach ($requiredKeys as $key) {
             !isset($config[$key]) ? throw new \InvalidArgumentException(sprintf('Configuration key "%s" is missing.', $key)) : null;
         }

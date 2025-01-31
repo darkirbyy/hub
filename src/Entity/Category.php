@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\IconRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: IconRepository::class)]
-class Icon
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,20 +21,9 @@ class Icon
     #[Assert\Length(min: 2)]
     private ?string $label = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 2)]
-    private ?string $faClass = null;
-
-    public function __toString(): string
-    {
-        return $this->getPreview();
-    }
-
-    public function getPreview(): string
-    {
-        return '<span class="' . $this->getFaClass() . '"></span>';
-    }
+    #[ORM\ManyToOne]
+    #[Assert\Valid]
+    private ?Icon $icon = null;
 
     public function getId(): ?int
     {
@@ -53,14 +42,14 @@ class Icon
         return $this;
     }
 
-    public function getFaClass(): ?string
+    public function getIcon(): ?Icon
     {
-        return $this->faClass;
+        return $this->icon;
     }
 
-    public function setFaClass(?string $faClass): static
+    public function setIcon(?Icon $icon): static
     {
-        $this->faClass = $faClass;
+        $this->icon = $icon;
 
         return $this;
     }

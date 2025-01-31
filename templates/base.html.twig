@@ -59,6 +59,9 @@
               <li class="nav-item">
                 <a {{ currentRoute starts with 'default' ? activeLink|raw : otherLink|raw }} href="{{ path('default_index') }}">{{ 'layout.navbar.home'|trans }}</a>
               </li>
+              <li class="nav-item">
+                <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
+              </li>
             </ul>
             {# Right part of the navbar #}
             <ul class="navbar-nav">

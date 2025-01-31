@@ -3,7 +3,8 @@
 {% set title = 'default.title'|trans %}
 
 {% block main %}
-  <section>
-    <a class="btn btn-primary" href="{{ path('admin_icon_index') }}">Icones</a>
-  </section>
+  <div class="container">
+    {{ block('flash', 'theme/flash.html.twig') }}
+    WELCOME
+  </div>
 {% endblock %}
