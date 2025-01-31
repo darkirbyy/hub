@@ -26,7 +26,11 @@ final class CategoryController extends CrudController
             'entity_key' => 'category',
             'form_class' => CategoryType::class,
             'main_title' => 'admin.title',
-            'index_cols' => ['id', 'label', 'icon'],
+            'index_cols' => [
+                1 => ['getter' => 'id'],
+                2 => ['getter' => 'label'],
+                3 => ['getter' => 'icon', 'raw' => true],
+            ],
             'index_backlink' => [
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',

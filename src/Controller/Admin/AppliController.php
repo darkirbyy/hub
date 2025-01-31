@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Icon;
-use App\Form\IconType;
-use App\Repository\IconRepository;
+use App\Entity\Appli;
+use App\Form\AppliType;
+use App\Repository\AppliRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/icon', name: 'admin_icon_')]
-final class IconController extends CrudController
+#[Route('/admin/appli', name: 'admin_appli_')]
+final class AppliController extends CrudController
 {
-    public function __construct(IconRepository $repository)
+    public function __construct(AppliRepository $repository)
     {
         parent::__construct($repository);
     }
@@ -21,16 +21,15 @@ final class IconController extends CrudController
     protected function getConfig(): array
     {
         return [
-            'route_prefix' => 'admin_icon_',
-            'entity_class' => Icon::class,
-            'entity_key' => 'icon',
-            'form_class' => IconType::class,
+            'route_prefix' => 'admin_appli_',
+            'entity_class' => Appli::class,
+            'entity_key' => 'appli',
+            'form_class' => AppliType::class,
             'main_title' => 'admin.title',
             'index_cols' => [
                 1 => ['getter' => 'id'],
-                2 => ['getter' => 'label'],
-                3 => ['getter' => 'faClass'],
-                4 => ['getter' => 'preview', 'raw' => true],
+                2 => ['getter' => 'name'],
+                3 => ['getter' => 'path'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',

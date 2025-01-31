@@ -16,3 +16,13 @@ category:
     id: '#'
     label: Libellé
     icon: Icône
+
+appli:
+  name: Applications
+  label:
+    id: '#'
+    name: Nom
+    path: Chemin
+    category: Catégorie
+    description: Description
+    linkText: Texte du lien

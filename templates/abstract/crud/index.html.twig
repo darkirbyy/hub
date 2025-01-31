@@ -27,9 +27,9 @@
       <table class="mt-2 table table-striped">
         <thead>
           <tr class="">
-            {% for col in config.index_cols %}
+            {% for col in config.index_cols|ksort %}
               <th class="text-nowrap align-center" scope="col">
-                {{ (config.entity_key ~ '.label.' ~ col)|trans({ }, 'validators') }}
+                {{ (config.entity_key ~ '.label.' ~ col.getter)|trans({ }, 'validators') }}
               </th>
             {% endfor %}
             <th class="w-1 text-nowrap text-end align-center" scope="col">
@@ -40,10 +40,12 @@
         <tbody>
           {% for object in objects %}
             <tr>
-              {% for col in config.index_cols %}
+              {# {{dump(config.index_cols)}} #}
+              {% for col in config.index_cols|ksort %}
                 <td class="align-center">
                   {# TODO Dangerous ? #}
-                  {{ attribute(object, col)|raw }}
+                  {% set value = attribute(object, col.getter) %}
+                  {{ col.raw|default(false) ? value|raw : value }}
                 </td>
               {% endfor %}
               <td class="w-1 text-nowrap text-end py-1 align-center">

@@ -16,3 +16,13 @@ category:
     id: '#'
     label: Label
     icon: Icon
+
+appli:
+  name: Applications
+  label:
+    id: '#'
+    name: Name
+    path: Path
+    category: Category
+    description: Description
+    linkText: Text of the link
