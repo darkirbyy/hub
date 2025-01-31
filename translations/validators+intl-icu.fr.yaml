@@ -1,0 +1,6 @@
+icon:
+  label:
+    label: Libellé
+    faClass: Classes CSS
+  help:
+    faClass: Voir sur le site de <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a>

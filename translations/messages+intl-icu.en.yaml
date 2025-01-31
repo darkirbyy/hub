@@ -4,12 +4,25 @@ default:
 
 form:
   button:
+    new: New
+    edit: Edit
     add: Add
     update: Update
     delete: Delete
     search: Search
     cancel: Cancel
-
+  title:
+    index: List
+    add: Add
+    update: Update 
+  other: 
+    backToList: Back to the list
+    action: Actions
+  flash:
+    added: Object added !
+    updated: Object updated !
+    deleted: Object deleted !
+    
 modal:
   title:
     delete: Confirm Deletion

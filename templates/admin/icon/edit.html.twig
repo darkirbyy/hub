@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{# the object_id set if it's EDIT mode or NEW mode #}
+{% set object_id = app.request.attributes.get('id') %}
+
+{% if object_id is not null %}
+  {% set title = 'form.title.update'|trans %}
+  {% set submitButton = 'form.button.update'|trans %}
+{% else %}
+  {% set title = 'form.title.add'|trans %}
+  {% set submitButton = 'form.button.add'|trans %}
+{% endif %}
+
+{% block main %}
+  {# Modal to confirm delete, if in EDIT mode #}
+  {% if object_id is not null %}
+    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true" role="dialog" loading="lazy">
+      <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+          {# Header with title and dismiss button #}
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="delete-modal-label">
+              {{ 'modal.title.delete'|trans }}
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
+          </div>
+
+          {# Body with message #}
+          <div class="modal-body">
+            {{ 'cnfirmer'|trans }}
+            {# {{ 'game.new.modalDeleteBody'|trans({ '{name}': game_name })|raw }} #}
+          </div>
+
+          {# Footer with cancel or confirm buttons #}
+          <div class="modal-footer">
+            <form action="{{ path('admin_icon_delete', { id: object_id }) }}" method="post">
+              <button type="submit" class="btn btn-danger">
+                <span class="bi bi-trash-fill me-1"></span>
+                {{ 'form.button.delete'|trans }}
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button>
+              <input type="hidden" name="delete_token" value="{{ csrf_token('delete-' ~ object_id) }}" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-10 offset-1 col-lg-8 offset-lg-2">
+          {# Insert the flashes in the same col size as the form #}
+          {{ block('flash', 'theme/flash.html.twig') }}
+
+          <div class="my-2">
+            <a href="{{ path('admin_icon_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
+          </div>
+          {# Form #}
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+
+          {# Buttons to submit, cancel or open the delete modal on right/left for large screen / top/bottom for small screen #}
+          <div class="row">
+            {# Left part : submit #}
+            <div class="col-6 text-sm-start text-center">
+              <button type="submit" class="btn btn-primary">{{ submitButton }}</button>
+            </div>
+            {# Right part (if in EDIT mode) : open delete modal #}
+            <div class="col-6 text-sm-end text-center mt-2 mt-sm-0">
+              {% if object_id is not null %}
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+                  <span class="bi bi-trash-fill me-1"></span>
+                  {{ 'form.button.delete'|trans }}
+                </button>
+              {% endif %}
+            </div>
+          </div>
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

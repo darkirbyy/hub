@@ -4,11 +4,24 @@ default:
 
 form:
   button:
+    new: Nouveau
+    edit: Modifier
     add: Ajouter
-    update: Modifier
+    update: Mettre à jour
     delete: Supprimer
     search: Chercher
     cancel: Annuler
+  title:
+    index: Liste
+    add: Ajout
+    update: Modification
+  other: 
+    backToList: Retour à la liste 
+    action: Actions
+  flash:
+    added: Objet ajouté !
+    updated: Objet mis à jour !
+    deleted: Objet supprimé !
 
 modal:
   title:
