@@ -1,6 +1,6 @@
 {
-    "name": "darkirby/homepage",
-    "description": "Homepage of my own server, displaying all the available services",
+    "name": "darkirby/hub",
+    "description": "Hub of my own server, displaying all the available services",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
