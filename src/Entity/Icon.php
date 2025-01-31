@@ -24,6 +24,7 @@ class Icon
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
+    #[Assert\Regex('/^[a-zA-Z0-9\s\-_]+$/', 'icon.error.invalidFaClass')]
     private ?string $faClass = null;
 
     public function __toString(): string

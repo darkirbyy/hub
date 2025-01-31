@@ -16,7 +16,36 @@
 {% block main %}
   {# Modal to confirm delete, if in EDIT mode #}
   {% if object_id is not null %}
-    {{ block('modal', 'abstract/crud/_delete.html.twig') }}
+    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true" role="dialog" loading="lazy">
+      <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+          {# Header with title and dismiss button #}
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="delete-modal-label">
+              {{ 'form.modal.title'|trans }}
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
+          </div>
+
+          {# Body with message #}
+          <div class="modal-body">
+            {{ 'form.modal.body'|trans|raw }}
+          </div>
+
+          {# Footer with cancel or confirm buttons #}
+          <div class="modal-footer">
+            <form action="{{ path(config.route_prefix ~ 'delete', { id: object_id }) }}" method="post">
+              <button type="submit" class="btn btn-danger">
+                <span class="bi bi-trash-fill me-1"></span>
+                {{ 'form.button.delete'|trans }}
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button>
+              <input type="hidden" name="delete_token" value="{{ csrf_token('delete-' ~ object_id) }}" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   {% endif %}
 
   <section>
@@ -43,9 +72,10 @@
           <button type="submit" class="btn btn-primary">{{ submitButton }}</button>
           {# Right part (if in EDIT mode) : open delete modal #}
           {% if object_id is not null %}
-            {% with { object_id: object_id } %}
-            {{ block('button', 'abstract/crud/_delete.html.twig') }}
-            {% endwith %}
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+              <span class="bi bi-trash-fill"></span>
+              <span class="d-none d-sm-inline ms-1">{{ 'form.button.delete'|trans }}</span>
+            </button>
           {% endif %}
         </div>
         {{ form_end(form) }}

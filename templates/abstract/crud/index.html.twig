@@ -3,8 +3,6 @@
 {% set title = config.main_title|trans %}
 
 {% block main %}
-  {# Modal to confirm delete, if in EDIT mode #}
-  {{ block('modal', 'abstract/crud/_delete.html.twig') }}
   <section>
     <div class="container">
       {# Redefine the flashes with the same width as the cards #}
@@ -52,9 +50,6 @@
                 <a class="btn btn-outline-primary btn-sm px-2 py-1" href="{{ path(config.route_prefix ~ 'edit', { id: object.id }) }}">
                   <span class="bi bi-pen-fill"></span><span class="ms-1 d-none d-sm-inline">{{ 'form.button.edit'|trans }}</span>
                 </a>
-                {% with { object_id: object.id, btn_class: 'btn-sm btn-sm px-2 py-1' } %}
-                {{ block('button', 'abstract/crud/_delete.html.twig') }}
-                {% endwith %}
               </td>
             </tr>
           {% endfor %}
