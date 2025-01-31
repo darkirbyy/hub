@@ -1,5 +1,7 @@
 icon:
+  name: Icônes
   label:
+    id: '#'
     label: Libellé
     faClass: Classes CSS
   help:

@@ -36,7 +36,7 @@ class Icon
         return $this->label;
     }
 
-    public function setLabel(string $label): static
+    public function setLabel(?string $label): static
     {
         $this->label = $label;
 
@@ -48,7 +48,7 @@ class Icon
         return $this->faClass;
     }
 
-    public function setFaClass(string $faClass): static
+    public function setFaClass(?string $faClass): static
     {
         $this->faClass = $faClass;
 

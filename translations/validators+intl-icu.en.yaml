@@ -1,5 +1,7 @@
 icon:
+  name: Icons
   label:
+    id: '#'
     label: Label
     faClass: CSS classes
   help:

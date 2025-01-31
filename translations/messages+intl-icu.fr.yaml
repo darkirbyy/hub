@@ -1,6 +1,9 @@
 default:
-  index:
-    title: Accueil
+  title: Accueil
+
+admin:
+  title: Administration
+  backTo: Retour à l'administration
 
 form:
   button:
@@ -15,17 +18,16 @@ form:
     index: Liste
     add: Ajout
     update: Modification
-  other: 
-    backToList: Retour à la liste 
-    action: Actions
   flash:
     added: Objet ajouté !
     updated: Objet mis à jour !
     deleted: Objet supprimé !
-
-modal:
-  title:
-    delete: Confirmer la suppression
+  modal:
+    title: Confirmer la suppression
+    body: Êtes-vous sûr de vouloir supprimer l'objet ? Cette action est <strong>définitive</strong>.
+  other: 
+    backToList: Retour à la liste 
+    action: Actions
 
 layout:
   name: Hub

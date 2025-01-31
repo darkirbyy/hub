@@ -3,11 +3,13 @@
 {# the object_id set if it's EDIT mode or NEW mode #}
 {% set object_id = app.request.attributes.get('id') %}
 
+{% set title = config.main_title|trans %}
+
 {% if object_id is not null %}
-  {% set title = 'form.title.update'|trans %}
+  {% set subtitle = 'form.title.update'|trans %}
   {% set submitButton = 'form.button.update'|trans %}
 {% else %}
-  {% set title = 'form.title.add'|trans %}
+  {% set subtitle = 'form.title.add'|trans %}
   {% set submitButton = 'form.button.add'|trans %}
 {% endif %}
 
@@ -20,20 +22,19 @@
           {# Header with title and dismiss button #}
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="delete-modal-label">
-              {{ 'modal.title.delete'|trans }}
+              {{ 'form.modal.title'|trans }}
             </h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
           </div>
 
           {# Body with message #}
           <div class="modal-body">
-            {{ 'cnfirmer'|trans }}
-            {# {{ 'game.new.modalDeleteBody'|trans({ '{name}': game_name })|raw }} #}
+            {{ 'form.modal.body'|trans|raw }}
           </div>
 
           {# Footer with cancel or confirm buttons #}
           <div class="modal-footer">
-            <form action="{{ path('admin_icon_delete', { id: object_id }) }}" method="post">
+            <form action="{{ path(config.route_prefix ~ 'delete', { id: object_id }) }}" method="post">
               <button type="submit" class="btn btn-danger">
                 <span class="bi bi-trash-fill me-1"></span>
                 {{ 'form.button.delete'|trans }}
@@ -49,36 +50,34 @@
 
   <section>
     <div class="container">
-      <div class="row">
-        <div class="col-10 offset-1 col-lg-8 offset-lg-2">
-          {# Insert the flashes in the same col size as the form #}
-          {{ block('flash', 'theme/flash.html.twig') }}
+      <div class="row mx-auto w-100 w-md-75">
 
-          <div class="my-2">
-            <a href="{{ path('admin_icon_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
-          </div>
-          {# Form #}
-          {{ form_start(form) }}
-          {{ form_widget(form) }}
+        {# Insert the flashes in the same col size as the form #}
+        {{ block('flash', 'theme/flash.html.twig') }}
 
-          {# Buttons to submit, cancel or open the delete modal on right/left for large screen / top/bottom for small screen #}
-          <div class="row">
-            {# Left part : submit #}
-            <div class="col-6 text-sm-start text-center">
-              <button type="submit" class="btn btn-primary">{{ submitButton }}</button>
-            </div>
-            {# Right part (if in EDIT mode) : open delete modal #}
-            <div class="col-6 text-sm-end text-center mt-2 mt-sm-0">
-              {% if object_id is not null %}
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
-                  <span class="bi bi-trash-fill me-1"></span>
-                  {{ 'form.button.delete'|trans }}
-                </button>
-              {% endif %}
-            </div>
-          </div>
-          {{ form_end(form) }}
+        {# Subtitle and back link #}
+        <h2>{{ config.entity_name|trans({}, 'validators') }} <span class="fs-5"> - {{ subtitle }} </span></h2>
+        <div class="my-2">
+          <a href="{{ path(config.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
         </div>
+
+        {# Form #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        {# Buttons to submit, or open the delete modal on right/left layout #}
+        <div class="d-flex justify-content-between">
+          {# Left part : submit #}
+          <button type="submit" class="btn btn-primary">{{ submitButton }}</button>
+          {# Right part (if in EDIT mode) : open delete modal #}
+          {% if object_id is not null %}
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+              <span class="bi bi-trash-fill"></span>
+              <span class="d-none d-sm-inline ms-1">{{ 'form.button.delete'|trans }}</span>
+            </button>
+          {% endif %}
+        </div>
+        {{ form_end(form) }}
       </div>
     </div>
   </section>
