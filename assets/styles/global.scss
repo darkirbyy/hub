@@ -36,3 +36,15 @@ legend.col-form-label.required::after {
   );
   color: #704300;
 }
+
+.app-form-row {
+  margin-bottom: ($spacer * 1) !important;
+}
+
+.app-btn-border-light:not(.is-invalid) {
+  border-color: var(--bs-border-color) !important;
+}
+
+.app-btn-border-light.is-invalid {
+  border-color: var(--bs-form-invalid-border-color) !important;
+}

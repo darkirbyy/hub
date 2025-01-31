@@ -1,10 +1,22 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
 {% block form_row %}
-  <div class="app-form-row {% if not compound or force_error|default(false) %}{% for error in errors %} has-validation{% endfor %}{% endif %}">
-    {{ form_label(form) }}
-    {{ form_help(form) }}
-    {{ form_widget(form) }}
+  <div class="input-group app-form-row {% if not compound or force_error|default(false) %} {% for error in errors %} has-validation{% endfor %} {% endif %}">
+    <div class="form-floating">
+      {# {{ form_help(form) }} #}
+      {{ form_widget(form) }}
+      {{ form_label(form) }}
+    </div>
+    {% if form.vars.help is not empty %}
+      <button type="button"
+        class="input-group-text btn btn-outline-secondary app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
+        data-bs-toggle="popover"
+        {{ form.vars.help_html ? 'data-bs-html="true"' }}
+        data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters, form.vars.translation_domain) }}">
+        <span class="fs-5 bi bi-info-circle"></span>
+      </button>
+    {% endif %}
+
     {{ form_errors(form) }}
   </div>
 {% endblock %}
