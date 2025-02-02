@@ -40,10 +40,8 @@
         <tbody>
           {% for object in objects %}
             <tr>
-              {# {{dump(config.index_cols)}} #}
               {% for col in config.index_cols|ksort %}
                 <td class="align-center">
-                  {# TODO Dangerous ? #}
                   {% set value = attribute(object, col.getter) %}
                   {{ col.raw|default(false) ? value|raw : value }}
                 </td>

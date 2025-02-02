@@ -23,6 +23,7 @@ class AppliType extends AbstractType
                 'required' => true,
                 'label' => 'appli.label.name',
                 'attr' => [
+                    'clear_button' => true,
                     'placeholder' => 'appli.label.name',
                 ],
             ])
@@ -30,6 +31,7 @@ class AppliType extends AbstractType
                 'required' => true,
                 'label' => 'appli.label.path',
                 'attr' => [
+                    'clear_button' => true,
                     'placeholder' => 'appli.label.path',
                 ],
             ])
@@ -46,6 +48,7 @@ class AppliType extends AbstractType
                 'required' => true,
                 'label' => 'appli.label.description',
                 'attr' => [
+                    'clear_button' => true,
                     'placeholder' => 'appli.label.description',
                 ],
             ])
@@ -53,6 +56,7 @@ class AppliType extends AbstractType
                 'required' => true,
                 'label' => 'appli.label.linkText',
                 'attr' => [
+                    'clear_button' => true,
                     'placeholder' => 'appli.label.linkText',
                 ],
             ])
