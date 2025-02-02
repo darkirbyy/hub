@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AppliType extends AbstractType
 {
@@ -53,6 +54,17 @@ class AppliType extends AbstractType
                 'label' => 'appli.label.linkText',
                 'attr' => [
                     'placeholder' => 'appli.label.linkText',
+                ],
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => true,
+                'label' => 'appli.label.imageFile',
+                'help' => 'appli.help.image',
+                'allow_delete' => false,
+                'download_uri' => false,
+                'image_uri' => true,
+                'row_attr' => [
+                    'class' => 'app-form-row-bordered',
                 ],
             ]);
     }

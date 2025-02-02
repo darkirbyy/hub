@@ -7,9 +7,13 @@ namespace App\Entity;
 use App\Repository\AppliRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Entity\File as FileMeta;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
+#[Vich\Uploadable]
 class Appli
 {
     #[ORM\Id]
@@ -38,6 +42,36 @@ class Appli
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private ?string $linkText = null;
+
+    #[
+        Vich\UploadableField(
+            mapping: 'applis',
+            fileNameProperty: 'imageMeta.name',
+            size: 'imageMeta.size',
+            mimeType: 'imageMeta.mimeType',
+            originalName: 'imageMeta.originalName',
+            dimensions: 'imageMeta.dimensions',
+        ),
+    ]
+    #[Assert\NotNull]
+    #[Assert\Image(maxSize: '1Mi', minWidth: 200, maxWidth: 1000, minRatio: 0.5, maxRatio: 2)]
+    private ?File $imageFile = null;
+
+    #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
+    private ?FileMeta $imageMeta = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $updatedAt = null;
+
+    public function __construct()
+    {
+        $this->imageMeta = new FileMeta();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
 
     public function getId(): ?int
     {
@@ -102,5 +136,42 @@ class Appli
         $this->linkText = $linkText;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageMeta(FileMeta $imageMeta): void
+    {
+        $this->imageMeta = $imageMeta;
+    }
+
+    public function getImageMeta(): ?FileMeta
+    {
+        return $this->imageMeta;
+    }
+
+    public function getImageInfos(): ?string
+    {
+        return $this->imageMeta->getMimeType() .
+            ' ; ' .
+            \round($this->imageMeta->getSize() / 1024, 0) .
+            'Kio ; ' .
+            $this->imageMeta->getWidth() .
+            'x' .
+            $this->imageMeta->getHeight();
     }
 }

@@ -26,3 +26,7 @@ appli:
     category: Category
     description: Description
     linkText: Text of the link
+    imageFile: Image
+    imageInfos: Image metadata
+  help:
+    image: TODO

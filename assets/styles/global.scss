@@ -61,6 +61,11 @@ legend.col-form-label.required::after {
   color: $primary !important;
 }
 
+.col-form-label {
+  padding-left: ($spacer * 0.25) !important;
+  padding-top: ($spacer * 0) !important;
+}
+
 // Others
 .app-env-dev {
   background: repeating-linear-gradient(
@@ -75,6 +80,12 @@ legend.col-form-label.required::after {
 
 .app-form-row {
   margin-bottom: ($spacer * 1) !important;
+}
+
+.app-form-row-bordered {
+  border-radius: 5px;
+  border: var(--bs-border-color) var(--bs-border-style) var(--bs-border-width);
+  padding: ($spacer * 0.5);
 }
 
 .app-btn-border-light:not(.is-invalid) {
