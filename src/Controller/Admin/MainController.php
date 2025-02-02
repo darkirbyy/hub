@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class DefaultController extends AbstractController
+final class MainController extends AbstractController
 {
-    #[Route('/', name: 'default_index')]
+    #[Route('/admin', name: 'admin_index')]
     public function index(): Response
     {
-        return $this->render('default/index.html.twig', []);
+        return $this->render('admin/index.html.twig', []);
     }
 }

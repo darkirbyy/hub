@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'admin.title'|trans %}
+
+{% block main %}
+  <section>
+    <div class="container">
+      {{ block('flash', 'theme/flash.html.twig') }}
+      <div>
+        <a href="{{ path('admin_icon_index') }}">{{ 'icon.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
+      </div>
+      <div>
+        <a href="{{ path('admin_category_index') }}">{{ 'category.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
+      </div>
+      <div>
+        <a href="{{ path('admin_appli_index') }}">{{ 'appli.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

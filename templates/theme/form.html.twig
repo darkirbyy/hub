@@ -1,10 +1,100 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
 {% block form_row %}
-  <div class="app-form-row {% if not compound or force_error|default(false) %}{% for error in errors %} has-validation{% endfor %}{% endif %}">
-    {{ form_label(form) }}
-    {{ form_help(form) }}
-    {{ form_widget(form) }}
+  {% set help_button %}
+    {% if form.vars.help is not empty %}
+      <button type="button"
+        class="btn btn-outline-secondary py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
+        data-bs-toggle="popover"
+        {{ form.vars.help_html ? 'data-bs-html="true"' }}
+        data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters, form.vars.translation_domain) }}">
+        <span class="fs-5 bi bi-info-circle"></span>
+      </button>
+    {% endif %}
+  {% endset %}
+
+  <div class="app-form-row {{ form.vars.attr.placeholder is defined ? 'input-group' }} {{ form.vars.row_attr.class|default('') }} {% if not compound or force_error|default(false) %}{% for error in errors %}has-validation{% endfor %}{% endif %}">
+    {% if form.vars.attr.placeholder is defined %}
+      <div class="form-floating">
+        {{ form_widget(form) }}
+        {{ form_label(form) }}
+        {% if (form.vars.attr.clear_button|default(false)) == true %}
+          <small><button class="btn-close position-absolute top-50 end-0 translate-middle-y me-3" type="button" data-app-clear-id="{{ form.vars.id }}"></button></small>
+        {% endif %}
+      </div>
+      {{ help_button }}
+    {% else %}
+      {{ form_label(form) }}
+      {{ form_widget(form, { help_button: help_button }) }}
+    {% endif %}
     {{ form_errors(form) }}
   </div>
 {% endblock %}
+
+{%- block vich_image_widget -%}
+  {%- if (errors|length) > 0 -%}
+    {%- set attr = attr|merge({ class: ((attr.class|default('')) ~ ' is-invalid')|trim }) -%}
+  {%- endif -%}
+  <div class="input-group">
+    {{- form_widget(form.file, { attr: attr }) -}}
+    {# {% if form.vars.attr.clear_button|default(true) == true %}
+   <button class="btn btn-outline-secondary px-2 app-btn-border-light" type="button" data-app-clear-id="{{ form.vars.id }}"><span class="bi bi-x-lg"></span></button>
+  {% endif %} #}
+    {{ help_button|default('') }}
+  </div>
+  {%- if form.delete is defined -%}
+    {{- form_row(form.delete) -}}
+  {%- endif -%}
+
+  {% if not errors|length > 0 %}
+    {%- if image_uri -%}
+      <div class="text-center mt-2">
+        <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
+          <img src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
+        </a>
+      </div>
+    {%- endif -%}
+    {%- if download_uri -%}
+      <a href="{{ asset_helper is same as(true) ? asset(download_uri) : download_uri }}" download>
+        {{ translation_domain is same as(false) ? download_label : download_label|trans({ }, translation_domain) }}
+      </a>
+    {%- endif -%}
+  {% endif %}
+{%- endblock -%}
+
+{# 1rem 0.75rem; #}
+
+{# <a class="text-muted position-absolute" href="#" style="top: 1rem;right: 1rem;z-index: 100;"><span class="bi bi-x-lg"></span></a> #}
+
+{# {% set label = form.vars.label|trans(form.vars.label_translation_parameters, form.vars.translation_domain) %}
+      <span class="input-group-text">{{ form.vars.label_html ? label|raw : label }}</span>
+      {{ form_widget(form) }} #}
+
+{#
+{% block form_row %}
+  {% if form.vars.attr.placeholder is defined %}
+    <div class="input-group app-form-row {% if not compound or force_error|default(false) %} {% for error in errors %} has-validation{% endfor %} {% endif %}">
+      <div class="form-floating">
+        {{ form_widget(form) }}
+        {{ form_label(form) }}
+      </div>
+      {% if form.vars.help is not empty %}
+        <button type="button"
+          class="input-group-text btn btn-outline-secondary app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
+          data-bs-toggle="popover"
+          {{ form.vars.help_html ? 'data-bs-html="true"' }}
+          data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters, form.vars.translation_domain) }}">
+          <span class="fs-5 bi bi-info-circle"></span>
+        </button>
+      {% endif %}
+      {{ form_errors(form) }}
+    </div>
+  {% else %}
+    <div class="app-form-row {% if not compound or force_error|default(false) %}{% for error in errors %} has-validation{% endfor %}{% endif %}">
+      {{ form_label(form) }}
+      {{ form_help(form) }}
+      {{ form_widget(form) }}
+      {{ form_errors(form) }}
+    </div>
+  {% endif %}
+{% endblock %} #}

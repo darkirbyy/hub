@@ -1,6 +1,6 @@
-# Homepage
+# Hub
 
-Homepage of my own server, displaying all the available services.
+Hub of my own server, displaying all the available services.
 
 ## Prerequisite
 

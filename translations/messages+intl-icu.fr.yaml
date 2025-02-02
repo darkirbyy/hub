@@ -1,23 +1,39 @@
 default:
-  index:
-    title: Accueil
+  title: Accueil
+
+admin:
+  title: Administration
+  backTo: Retour à la page principale
 
 form:
   button:
+    new: Nouveau
+    edit: Modifier
     add: Ajouter
-    update: Modifier
+    update: Mettre à jour
     delete: Supprimer
     search: Chercher
     cancel: Annuler
-
-modal:
   title:
-    delete: Confirmer la suppression
+    index: Liste
+    add: Ajout
+    update: Modification
+  flash:
+    added: Objet ajouté !
+    updated: Objet mis à jour !
+    deleted: Objet supprimé !
+  modal:
+    title: Confirmer la suppression
+    body: Êtes-vous sûr de vouloir supprimer l'objet ? Cette action est <strong>définitive</strong>.
+  other: 
+    backToList: Retour à la liste 
+    action: Actions
 
 layout:
   name: Hub
   navbar:
     home: Accueil
+    admin: Admin
   footer:
     madeWith: Réalisé avec
     version: Version

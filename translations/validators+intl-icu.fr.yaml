@@ -1,0 +1,32 @@
+icon:
+  name: Icônes
+  label:
+    id: '#'
+    label: Libellé
+    faClass: Classes CSS
+    preview: Aperçu
+  help:
+    faClass: Voir sur le site de <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a>
+  error:
+    invalidFaClass: Ne doit contenir que des lettres, des chiffres, des espaces ainsi que les symboles - et _.
+
+category:
+  name: Catégories
+  label:
+    id: '#'
+    label: Libellé
+    icon: Icône
+
+appli:
+  name: Applications
+  label:
+    id: '#'
+    name: Nom
+    path: Chemin
+    category: Catégorie
+    description: Description
+    linkText: Texte du lien
+    imageFile: Image
+    imageInfos: Métadonnées de l'image
+  help:
+    image: TODO

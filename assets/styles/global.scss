@@ -1,4 +1,40 @@
-// Import boostrap classes
+@use 'sass:map';
+
+// Note :the ~ allows you to reference things in node_modules
+// Import boostrap basics
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/variables-dark';
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
+$border-color: $gray-500;
+
+// Use bootstrap API to generate custom responsive classes
+$utilities: map.merge(
+  $utilities,
+  (
+    'width': (
+      property: width,
+      class: 'w',
+      responsive: true,
+      values: (
+        1: 1%,
+        25: 25%,
+        33: 33%,
+        50: 50%,
+        66: 66%,
+        75: 75%,
+        100: 100%,
+        auto: auto,
+      ),
+    ),
+  )
+);
+
+// Import the rest of boostrap classes
+@import '~bootstrap/scss/utilities/api';
 @import '~bootstrap/scss/bootstrap';
 
 // Import icons packages
@@ -19,10 +55,15 @@
   margin-top: ($spacer * 0) !important;
 }
 
-label.form-label.required::after,
+input + label.form-label.required::after,
 legend.col-form-label.required::after {
   content: ' *';
   color: $primary !important;
+}
+
+.col-form-label {
+  padding-left: ($spacer * 0.25) !important;
+  padding-top: ($spacer * 0) !important;
 }
 
 // Others
@@ -35,4 +76,22 @@ legend.col-form-label.required::after {
     #ce994b 20px
   );
   color: #704300;
+}
+
+.app-form-row {
+  margin-bottom: ($spacer * 1) !important;
+}
+
+.app-form-row-bordered {
+  border-radius: 5px;
+  border: var(--bs-border-color) var(--bs-border-style) var(--bs-border-width);
+  padding: ($spacer * 0.5);
+}
+
+.app-btn-border-light:not(.is-invalid) {
+  border-color: var(--bs-border-color) !important;
+}
+
+.app-btn-border-light.is-invalid {
+  border-color: var(--bs-form-invalid-border-color) !important;
 }
