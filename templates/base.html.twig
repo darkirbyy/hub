@@ -18,7 +18,7 @@
     {% endblock %}
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column min-vh-100" {{ stimulus_controller('load-popover') }}>
     {# Skip to content link for screen reader #}
     <a href="#mainContent" class="visually-hidden-focusable">{{ 'aria.other.skipToContent'|trans }}</a>
     {% if env.app.env == 'dev' %}

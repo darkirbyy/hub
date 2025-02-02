@@ -6,9 +6,3 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 
 // any CSS you import will output into a single css file
 import './styles/global.scss';
-
-// Enable popover
-document.addEventListener("DOMContentLoaded", function () {
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-    tooltipTriggerList.forEach(tooltipTriggerEl => new Popover(tooltipTriggerEl))
-});

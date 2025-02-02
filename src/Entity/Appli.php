@@ -53,15 +53,15 @@ class Appli
             dimensions: 'imageMeta.dimensions',
         ),
     ]
-    #[Assert\NotNull]
-    #[Assert\Image(maxSize: '1Mi', minWidth: 200, maxWidth: 1000, minRatio: 0.5, maxRatio: 2)]
+    #[Assert\When(expression: 'this.getImageUpdatedAt() == null', constraints: [new Assert\NotBlank()])]
+    #[Assert\Image(maxSize: '1Mi', minWidth: 200, maxWidth: 1000, minRatio: 0.5, maxRatio: 2, detectCorrupted: true)]
     private ?File $imageFile = null;
 
     #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
     private ?FileMeta $imageMeta = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTime $updatedAt = null;
+    private ?\DateTime $imageUpdatedAt = null;
 
     public function __construct()
     {
@@ -145,7 +145,7 @@ class Appli
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTime();
+            $this->imageUpdatedAt = new \DateTime();
         }
     }
 
@@ -162,6 +162,11 @@ class Appli
     public function getImageMeta(): ?FileMeta
     {
         return $this->imageMeta;
+    }
+
+    public function getImageUpdatedAt(): ?\DateTime
+    {
+        return $this->imageUpdatedAt;
     }
 
     public function getImageInfos(): ?string
