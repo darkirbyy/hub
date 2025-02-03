@@ -28,5 +28,14 @@ appli:
     linkText: Texte du lien
     imageFile: Image
     imageInfos: Métadonnées de l'image
+    externalLinks: Liens externes
   help:
     image: TODO
+
+externalLink:
+  name: Liens externes
+  label:
+    id: '#'
+    icon: Icône
+    text: Texte d'accompagnement
+    url: URL

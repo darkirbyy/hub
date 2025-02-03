@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\AppliRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -63,9 +65,14 @@ class Appli
     #[ORM\Column(nullable: true)]
     private ?\DateTime $imageUpdatedAt = null;
 
+    #[ORM\OneToMany(targetEntity: ExternalLink::class, mappedBy: 'appli', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
+    private Collection $externalLinks;
+
     public function __construct()
     {
         $this->imageMeta = new FileMeta();
+        $this->externalLinks = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -178,5 +185,32 @@ class Appli
             $this->imageMeta->getWidth() .
             'x' .
             $this->imageMeta->getHeight();
+    }
+
+    public function getExternalLinks(): Collection
+    {
+        return $this->externalLinks;
+    }
+
+    public function addExternalLink(ExternalLink $externalLink): static
+    {
+        if (!$this->externalLinks->contains($externalLink)) {
+            $this->externalLinks->add($externalLink);
+            $externalLink->setAppli($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExternalLink(ExternalLink $externalLink): static
+    {
+        if ($this->externalLinks->removeElement($externalLink)) {
+            // set the owning side to null (unless already changed)
+            if ($externalLink->getAppli() === $this) {
+                $externalLink->setAppli(null);
+            }
+        }
+
+        return $this;
     }
 }

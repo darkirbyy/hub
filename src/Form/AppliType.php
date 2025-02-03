@@ -8,6 +8,7 @@ use App\Entity\Appli;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -58,6 +59,20 @@ class AppliType extends AbstractType
                 'attr' => [
                     'clear_button' => true,
                     'placeholder' => 'appli.label.linkText',
+                ],
+            ])
+            ->add('externalLinks', CollectionType::class, [
+                'required' => true,
+                'label' => 'appli.label.externalLinks',
+                'entry_type' => ExternalLinkType::class,
+                'entry_options' => [
+                    'label' => false,
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'attr' => [
+                    'data-controller' => 'embed-form',
                 ],
             ])
             ->add('imageFile', VichImageType::class, [

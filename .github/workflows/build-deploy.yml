@@ -108,6 +108,7 @@ jobs:
         TARGET: ${{ vars.SERV_PATH }}
         SCRIPT_BEFORE: |
           mkdir -p ${{ vars.SERV_PATH }}
+          mkdir -p ${{ vars.SERV_PATH }}/public/images && chmod 775 ${{ vars.SERV_PATH }}/public/images
         SCRIPT_AFTER: |
           mkdir -p ${{ vars.SERV_PATH }}/var && chmod 775 ${{ vars.SERV_PATH }}/var
           sudo /usr/bin/docker exec -u php-fpm php-fpm upgrade-app ${{ vars.SERV_PATH }}

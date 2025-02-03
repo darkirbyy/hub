@@ -24,6 +24,7 @@ class Category
     private ?string $label = null;
 
     #[ORM\ManyToOne]
+    #[Assert\NotBlank]
     private ?Icon $icon = null;
 
     #[ORM\OneToMany(targetEntity: Appli::class, mappedBy: 'category')]
@@ -68,9 +69,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, Appli>
-     */
     public function getApplis(): Collection
     {
         return $this->applis;
