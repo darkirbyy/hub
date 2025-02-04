@@ -14,20 +14,35 @@
     {% endif %}
   {% endset %}
 
-  <div class="app-form-row {{ form.vars.attr.placeholder is defined ? 'input-group' }} {{ form.vars.row_attr.class|default('') }} {% if not compound or force_error|default(false) %}{% for error in errors %}has-validation{% endfor %}{% endif %}">
-    {% if form.vars.attr.placeholder is defined %}
-      <div class="form-floating">
-        {{ form_widget(form) }}
+  {% set custom_classes = 'app-form-row' ~ ' ' ~ (not compound or (force_error|default(false)) ? (errors|length) > 0 ? 'has-validation') %}
+  {% set attributes %}
+    {% with { attr: row_attr|merge({ class: ((row_attr.class|default('')) ~ ' ' ~ custom_classes)|trim }) } %}
+    {{ block('attributes') }}
+    {% endwith %}
+  {% endset %}
+
+  <div {{ attributes }}>
+    <div class="input-group">
+      {% if form.vars.attr.placeholder is defined %}
+        <div class="form-floating">
+          {{ form_widget(form) }}
+          {{ form_label(form) }}
+          {% if (form.vars.attr.clear_button|default(false)) == true %}
+            <small>
+              <button type="button"
+                data-app-clear-id="{{ form.vars.id }}"
+                class="app-btn-clear btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
+
+              </button>
+            </small>
+          {% endif %}
+        </div>
+        {{ help_button }}
+      {% else %}
         {{ form_label(form) }}
-        {% if (form.vars.attr.clear_button|default(false)) == true %}
-          <small><button class="btn-close position-absolute top-50 end-0 translate-middle-y me-3" type="button" data-app-clear-id="{{ form.vars.id }}"></button></small>
-        {% endif %}
-      </div>
-      {{ help_button }}
-    {% else %}
-      {{ form_label(form) }}
-      {{ form_widget(form, { help_button: help_button }) }}
-    {% endif %}
+        {{ form_widget(form, { help_button: help_button }) }}
+      {% endif %}
+    </div>
     {{ form_errors(form) }}
   </div>
 {% endblock %}
@@ -66,15 +81,18 @@
 
 {% block _appli_externalLinks_widget %}
   {{ form_widget(form) }}
-  <button class="btn btn-outline-primary" type="button"><span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}</button>
+  <button class="btn btn-outline-primary" type="button" {{ stimulus_target('collec-field', 'add') }}>
+    <span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}
+  </button>
 {% endblock %}
 
 {% block _appli_externalLinks_entry_row %}
   <div class="d-flex gap-2">
     {{ form_row(form.icon) }}
-    {{ form_row(form.text, { row_attr: { class: 'flex-grow-1' } }) }}
+    {# {{ form_row(form.text, { row_attr: { class: 'flex-grow-1' } }) }} #}
+    {{ form_row(form.text) }}
     {{ form_row(form.url) }}
-    <button class="btn btn-outline-danger mb-3" type="button"><span class="bi bi-trash-fill"></span></button>
+    <button class="btn btn-outline-danger mb-3" type="button" {{ stimulus_target('collec-field', 'remove') }}><span class="bi bi-trash-fill"></span></button>
   </div>
 {% endblock %}
 

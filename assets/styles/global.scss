@@ -96,6 +96,14 @@ legend.col-form-label.required::after {
   border-color: var(--bs-form-invalid-border-color) !important;
 }
 
+.app-btn-clear:not(.is-invalid) {
+  margin-right: ($spacer * 0.75) !important;
+}
+
+.app-btn-clear.is-invalid {
+  margin-right: ($spacer * 2) !important;
+}
+
 .app-img-fit {
   width: auto;
   max-width: 100%;

@@ -71,14 +71,19 @@ class AppliType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'row_attr' => [
+                    'data-controller' => 'collec-field',
+                    'class' => 'app-form-row-bordered',
+                ],
                 'attr' => [
-                    'data-controller' => 'embed-form',
+                    'data-collec-field-target' => 'collec',
                 ],
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => true,
                 'label' => 'appli.label.imageFile',
                 'help' => 'appli.help.image',
+                'help_html' => true,
                 'allow_delete' => false,
                 'download_uri' => false,
                 'image_uri' => true,
