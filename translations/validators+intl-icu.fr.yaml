@@ -30,12 +30,12 @@ appli:
     imageInfos: Métadonnées de l'image
     externalLinks: Liens externes
   help:
-    image: TODO
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
 
 externalLink:
   name: Liens externes
   label:
     id: '#'
     icon: Icône
-    text: Texte d'accompagnement
+    text: Texte
     url: URL
