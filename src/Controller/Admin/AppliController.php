@@ -29,9 +29,9 @@ final class AppliController extends CrudController
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'name'],
-                3 => ['getter' => 'path'],
+                3 => ['getter' => 'path', 'breakpoint' => 'md'],
                 4 => ['getter' => 'category'],
-                5 => ['getter' => 'imageInfos'],
+                5 => ['getter' => 'imageInfos', 'breakpoint' => 'md'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',

@@ -31,7 +31,7 @@
         <thead>
           <tr class="">
             {% for col in config.index_cols|ksort %}
-              <th class="text-nowrap align-center" scope="col">
+              <th class="text-nowrap align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
                 {{ (config.entity_key ~ '.label.' ~ col.getter)|trans({ }, 'validators') }}
               </th>
             {% endfor %}
@@ -44,7 +44,7 @@
           {% for object in objects %}
             <tr>
               {% for col in config.index_cols|ksort %}
-                <td class="align-center">
+                <td class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
                   {% set value = attribute(object, col.getter) %}
                   {{ col.raw|default(false) ? value|raw : value }}
                 </td>
