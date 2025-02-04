@@ -7,15 +7,15 @@
     {{ block('flash', 'theme/flash.html.twig') }}
 
     {% for category in categories %}
-      <h2 class="mb-4">
+      <h2 class="mb-4 text-center text-sm-start">
         <span class="{{ category.icon.faClass }} me-2"></span> {{ category.label }}
       </h2>
 
-      <div class="d-flex gap-3 justify-content-start flex-row flex-wrap">
+      <div class="d-flex justify-content-center gap-3 justify-content-sm-start">
         {% for appli in category.applis %}
           {% set appli_url = appli.path %}
-          <div class="card" style="width: 18rem;">
-            <a href="{{ appli_url }}"><img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" /></a>
+          <div class="card">
+            <a href="{{ appli_url }}" class="card-img rounded-bottom-0"><img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" /></a>
             <div class="card-body bg-light">
               <h5 class="card-title">
                 {{ appli.name }}
