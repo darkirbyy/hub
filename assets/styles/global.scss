@@ -95,3 +95,9 @@ legend.col-form-label.required::after {
 .app-btn-border-light.is-invalid {
   border-color: var(--bs-form-invalid-border-color) !important;
 }
+
+.app-img-fit {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}

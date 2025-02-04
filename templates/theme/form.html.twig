@@ -1,5 +1,6 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
+{# Customize form field with help button at the end, and floating labels if there is a placeholder defined #}
 {% block form_row %}
   {% set help_button %}
     {% if form.vars.help is not empty %}
@@ -31,6 +32,7 @@
   </div>
 {% endblock %}
 
+{# Customize vich uploader widget to add the help button and classes to the rendered img #}
 {%- block vich_image_widget -%}
   {%- if (errors|length) > 0 -%}
     {%- set attr = attr|merge({ class: ((attr.class|default('')) ~ ' is-invalid')|trim }) -%}
@@ -50,7 +52,7 @@
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
+          <img class="app-img-fit" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
         </a>
       </div>
     {%- endif -%}
@@ -61,6 +63,20 @@
     {%- endif -%}
   {% endif %}
 {%- endblock -%}
+
+{% block _appli_externalLinks_widget %}
+  {{ form_widget(form) }}
+  <button class="btn btn-outline-primary" type="button"><span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}</button>
+{% endblock %}
+
+{% block _appli_externalLinks_entry_row %}
+  <div class="d-flex gap-2">
+    {{ form_row(form.icon) }}
+    {{ form_row(form.text, { row_attr: { class: 'flex-grow-1' } }) }}
+    {{ form_row(form.url) }}
+    <button class="btn btn-outline-danger mb-3" type="button"><span class="bi bi-trash-fill"></span></button>
+  </div>
+{% endblock %}
 
 {# 1rem 0.75rem; #}
 
