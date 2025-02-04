@@ -22,8 +22,8 @@
   {% endset %}
 
   <div {{ attributes }}>
-    <div class="input-group">
-      {% if form.vars.attr.placeholder is defined %}
+    {% if form.vars.attr.placeholder is defined %}
+      <div class="input-group">
         <div class="form-floating">
           {{ form_widget(form) }}
           {{ form_label(form) }}
@@ -38,11 +38,11 @@
           {% endif %}
         </div>
         {{ help_button }}
-      {% else %}
-        {{ form_label(form) }}
-        {{ form_widget(form, { help_button: help_button }) }}
-      {% endif %}
-    </div>
+      </div>
+    {% else %}
+      {{ form_label(form) }}
+      {{ form_widget(form, { help_button: help_button }) }}
+    {% endif %}
     {{ form_errors(form) }}
   </div>
 {% endblock %}
@@ -67,7 +67,7 @@
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img class="app-img-fit" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
+          <img class="app-img-fit" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="{{ 'aria.other.download'|trans }}" />
         </a>
       </div>
     {%- endif -%}
@@ -79,24 +79,27 @@
   {% endif %}
 {%- endblock -%}
 
-{% block _appli_externalLinks_widget %}
-  {{ form_widget(form) }}
-  <button class="btn btn-outline-primary" type="button" {{ stimulus_target('collec-field', 'add') }}>
-    <span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}
-  </button>
+{% block collection_row %}
+  {% set custom_row_attr = { 'data-controller': 'collec-field' } %}
+  {% set row_attr = row_attr|merge(custom_row_attr) %}
+  {{- form_row(form, { row_attr: row_attr }) -}}
 {% endblock %}
 
-{% block _appli_externalLinks_entry_row %}
+{% block collection_widget %}
+  {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
+  {% set attr = attr|merge(custom_attr) %}
+  {{- parent() -}}
+  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add"><span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}</button>
+{% endblock %}
+
+{% block collection_entry_row %}
   <div class="d-flex gap-2">
-    {{ form_row(form.icon) }}
-    {# {{ form_row(form.text, { row_attr: { class: 'flex-grow-1' } }) }} #}
-    {{ form_row(form.text) }}
-    {{ form_row(form.url) }}
-    <button class="btn btn-outline-danger mb-3" type="button" {{ stimulus_target('collec-field', 'remove') }}><span class="bi bi-trash-fill"></span></button>
+    {% for row in form.children %}
+      {{ form_row(row) }}
+    {% endfor %}
+    <button class="btn btn-outline-danger mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash-fill"></span></button>
   </div>
 {% endblock %}
-
-{# 1rem 0.75rem; #}
 
 {# <a class="text-muted position-absolute" href="#" style="top: 1rem;right: 1rem;z-index: 100;"><span class="bi bi-x-lg"></span></a> #}
 

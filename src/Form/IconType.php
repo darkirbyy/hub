@@ -39,7 +39,7 @@ class IconType extends AbstractType
             'data_class' => Icon::class,
             'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate', // TODO : remove and keep HTML validation ?
+                'novalidate' => 'novalidate',
             ],
         ]);
     }

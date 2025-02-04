@@ -41,7 +41,7 @@ class CategoryType extends AbstractType
             'data_class' => Category::class,
             'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate', // TODO : remove and keep HTML validation ?
+                'novalidate' => 'novalidate',
             ],
         ]);
     }

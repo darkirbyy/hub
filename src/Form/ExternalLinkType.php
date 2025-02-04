@@ -38,6 +38,9 @@ class ExternalLinkType extends AbstractType
                 'required' => true,
                 'default_protocol' => 'http',
                 'label' => 'externalLink.label.url',
+                'row_attr' => [
+                    'class' => 'flex-grow-1',
+                ],
                 'attr' => [
                     'placeholder' => 'externalLink.label.url',
                 ],
@@ -50,7 +53,7 @@ class ExternalLinkType extends AbstractType
             'data_class' => ExternalLink::class,
             'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate', // TODO : remove and keep HTML validation ?
+                'novalidate' => 'novalidate',
             ],
         ]);
     }

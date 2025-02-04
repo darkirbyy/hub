@@ -72,11 +72,7 @@ class AppliType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'row_attr' => [
-                    'data-controller' => 'collec-field',
                     'class' => 'app-form-row-bordered',
-                ],
-                'attr' => [
-                    'data-collec-field-target' => 'collec',
                 ],
             ])
             ->add('imageFile', VichImageType::class, [
@@ -99,7 +95,8 @@ class AppliType extends AbstractType
             'data_class' => Appli::class,
             'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate', // TODO : remove and keep HTML validation ?
+                'novalidate' => 'novalidate',
+                'data-controller' => 'clear-button',
             ],
         ]);
     }
