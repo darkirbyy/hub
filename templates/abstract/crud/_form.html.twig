@@ -1,0 +1,10 @@
+{% block form %}
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+
+  {# Buttons to submit #}
+  <div class="text-start">
+    <button type="submit" class="btn btn-primary">{{ 'form.button.save'|trans }}</button>
+  </div>
+  {{ form_end(form) }}
+{% endblock %}

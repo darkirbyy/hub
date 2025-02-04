@@ -62,7 +62,7 @@ class AppliType extends AbstractType
                 ],
             ])
             ->add('externalLinks', CollectionType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'appli.label.externalLinks',
                 'entry_type' => ExternalLinkType::class,
                 'entry_options' => [

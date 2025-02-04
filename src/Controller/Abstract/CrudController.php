@@ -71,7 +71,7 @@ abstract class CrudController extends AbstractController
             return $this->redirectToRoute($this->getConfig()['route_prefix'] . 'index');
         }
 
-        return $this->render('abstract/crud/edit.html.twig', [
+        return $this->render($isNewObject ? 'abstract/crud/new.html.twig' : 'abstract/crud/edit.html.twig', [
             'config' => $this->getConfig(),
             'form' => $form,
         ]);

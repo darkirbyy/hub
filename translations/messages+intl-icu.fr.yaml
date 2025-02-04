@@ -12,6 +12,7 @@ form:
     add: Ajouter
     update: Mettre à jour
     delete: Supprimer
+    save: Enregistrer
     search: Chercher
     cancel: Annuler
   title:

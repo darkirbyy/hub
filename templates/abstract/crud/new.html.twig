@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% set title = config.main_title|trans %}
+
+{% block main %}
+  <section>
+    <div class="container">
+      <div class="row mx-auto w-100 w-md-75">
+        {# Insert the flashes in the same col size as the form #}
+        {{ block('flash', 'theme/flash.html.twig') }}
+
+        {# Subtitle and back link #}
+        <h2>
+          {{ (config.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.add'|trans }}</span>
+        </h2>
+        <div class="my-2">
+          <a href="{{ path(config.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
+        </div>
+
+        {# Actual form #}
+        {{ block('form', 'abstract/crud/_form.html.twig') }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

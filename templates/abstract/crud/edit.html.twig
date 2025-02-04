@@ -1,52 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{# the object_id set if it's EDIT mode or NEW mode #}
-{% set object_id = app.request.attributes.get('id') %}
-
 {% set title = config.main_title|trans %}
 
-{% if object_id is not null %}
-  {% set subtitle = 'form.title.update'|trans %}
-  {% set submitButton = 'form.button.update'|trans %}
-{% else %}
-  {% set subtitle = 'form.title.add'|trans %}
-  {% set submitButton = 'form.button.add'|trans %}
-{% endif %}
+{# the object_id from the route parameters #}
+{% set object_id = app.request.attributes.get('id') %}
 
 {% block main %}
-  {# Modal to confirm delete, if in EDIT mode #}
-  {% if object_id is not null %}
-    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true" role="dialog" loading="lazy">
-      <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-        <div class="modal-content">
-          {# Header with title and dismiss button #}
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="delete-modal-label">
-              {{ 'form.modal.title'|trans }}
-            </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
-          </div>
-
-          {# Body with message #}
-          <div class="modal-body">
-            {{ 'form.modal.body'|trans|raw }}
-          </div>
-
-          {# Footer with cancel or confirm buttons #}
-          <div class="modal-footer">
-            <form action="{{ path(config.route_prefix ~ 'delete', { id: object_id }) }}" method="post">
-              <button type="submit" class="btn btn-danger">
-                <span class="bi bi-trash-fill me-1"></span>
-                {{ 'form.button.delete'|trans }}
-              </button>
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button>
-              <input type="hidden" name="delete_token" value="{{ csrf_token('delete-' ~ object_id) }}" />
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endif %}
+  {# Modal to confirm delete #}
+  {{ block('delete_modal', 'abstract/crud/_delete.html.twig') }}
 
   <section>
     <div class="container">
@@ -54,31 +15,19 @@
         {# Insert the flashes in the same col size as the form #}
         {{ block('flash', 'theme/flash.html.twig') }}
 
-        {# Subtitle and back link #}
+        {# Subtitle and back link + delete button #}
         <h2>
-          {{ (config.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ subtitle }}</span>
+          {{ (config.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.update'|trans }}</span>
         </h2>
-        <div class="my-2">
+        <div class="my-2 d-flex justify-content-between align-items-center">
           <a href="{{ path(config.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
+          {% with { path: path(config.route_prefix ~ 'delete', { id: object_id }), token: csrf_token('delete-' ~ object_id), text_class: 'd-sm-inline ms-1' } %}
+          {{ block('delete_button', 'abstract/crud/_delete.html.twig') }}
+          {% endwith %}
         </div>
 
-        {# Form #}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-
-        {# Buttons to submit, or open the delete modal on right/left layout #}
-        <div class="d-flex justify-content-between">
-          {# Left part : submit #}
-          <button type="submit" class="btn btn-primary">{{ submitButton }}</button>
-          {# Right part (if in EDIT mode) : open delete modal #}
-          {% if object_id is not null %}
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
-              <span class="bi bi-trash-fill"></span>
-              <span class="d-none d-sm-inline ms-1">{{ 'form.button.delete'|trans }}</span>
-            </button>
-          {% endif %}
-        </div>
-        {{ form_end(form) }}
+        {# Actual form #}
+        {{ block('form', 'abstract/crud/_form.html.twig') }}
       </div>
     </div>
   </section>
