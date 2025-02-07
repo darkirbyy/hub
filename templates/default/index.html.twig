@@ -5,31 +5,84 @@
 {% block main %}
   <div class="container">
     {{ block('flash', 'theme/flash.html.twig') }}
-
+    {#
     {% for category in categories %}
-      <h2 class="mb-4 text-center text-sm-start">
+    <section>
+      <h2 class="mb-2 py-2 mx-5 text-center text-md-start bg-primary">
         <span class="{{ category.icon.faClass }} me-2"></span> {{ category.label }}
       </h2>
 
-      <div class="d-flex justify-content-center gap-3 justify-content-sm-start">
-        {% for appli in category.applis %}
-          {% set appli_url = appli.path %}
-          <div class="card">
-            <a href="{{ appli_url }}" class="card-img rounded-bottom-0"><img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" /></a>
-            <div class="card-body bg-light">
-              <h5 class="card-title">
-                {{ appli.name }}
-              </h5>
-              <p class="card-text">
-                {{ appli.description }}
-              </p>
-              <div class="text-right">
-                <a href="{{ appli_url }}" class="btn btn-secondary">{{ appli.linkText }}</a>
+      <div id="carouselExampleControls" class="carousel carousel-dark d-flex gap-2 slide">
+        <button class="carousel-control-prev w-auto position-relative" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <div class="carousel-inner app-carousel-inner w-auto d-flex gap-3">
+          {% set appli_active = true %}
+          {% for appli in category.applis %}
+            {% set appli_url = appli.path %}
+            <div class="carousel-item w-auto d-block app-carousel-item {{ appli_active ? 'active'}}">
+              <div class="card">
+                <a href="{{ appli_url }}" class="card-img rounded-bottom-0">
+                  <img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" />
+                </a>
+                <div class="card-body bg-light">
+                  <h5 class="card-title">
+                    {{ appli.name }}
+                  </h5>
+                  <p class="card-text">
+                    {{ appli.description }}
+                  </p>
+                  <div class="text-right">
+                    <a href="{{ appli_url }}" class="btn btn-secondary">{{ appli.linkText }}</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+            {% set appli_active = false %}
+          {% endfor %}
+        </div>
+        <button class="carousel-control-next w-auto position-relative" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
+    </section>
+    {% endfor %} #}
+
+    {% for category in categories %}
+      <section data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
+        <div class="d-flex gap-3">
+          <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev"><span class="fa-solid fa-chevron-left fa-xl"></span></button>
+          <div class="swiper" id="swiper-{{ category.id }}-main">
+            <h2 class="mb-3 text-center text-md-start">
+              <span class="{{ category.icon.faClass }} me-2"></span> {{ category.label }}
+            </h2>
+            <div class="swiper-wrapper">
+              {% for appli in category.applis %}
+                {% set appli_url = server_uri ~ appli.path %}
+                <div class="card swiper-slide">
+                  <a href="{{ appli_url }}" class="card-img rounded-bottom-0">
+                    <img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" />
+                  </a>
+                  <div class="card-body bg-light">
+                    <h5 class="card-title">
+                      {{ appli.name }}
+                    </h5>
+                    <p class="card-text">
+                      {{ appli.description }}
+                    </p>
+                    <div class="text-right">
+                      <a href="{{ appli_url }}" class="btn btn-outline-secondary">{{ appli.linkText }}</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-next"><span class="fa-solid fa-chevron-right fa-xl"></span></button>
+        </div>
+      </section>
     {% endfor %}
   </div>
 {% endblock %}

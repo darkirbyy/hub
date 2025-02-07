@@ -66,13 +66,13 @@ legend.col-form-label.required::after {
   padding-top: ($spacer * 0) !important;
 }
 
-// Home cards
+// Home carousels and cards
 
 .card {
-  max-width: 20rem;
-  width: 400px;
+  width: 22rem;
+  height: 30rem;
 
-  // width: 100%;
+  // box-shadow: 0px 3px 5px 2px #595959;
 }
 
 .card-img {
@@ -85,6 +85,20 @@ legend.col-form-label.required::after {
 
 .card-img:hover img {
   transform: scale(1.1);
+}
+
+.btn-swiper {
+  padding: 0;
+  border: 0;
+  font-size: 2rem;
+  color: var(--bs-text-body);
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in;
+}
+
+.btn-swiper:hover,
+.btn-swiper:active {
+  opacity: 1;
 }
 
 // .grid-action a:hover {

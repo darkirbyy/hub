@@ -31,6 +31,7 @@ class AppliType extends AbstractType
             ->add('path', TextType::class, [
                 'required' => true,
                 'label' => 'appli.label.path',
+                'help' => 'appli.help.path',
                 'attr' => [
                     'clear_button' => true,
                     'placeholder' => 'appli.label.path',

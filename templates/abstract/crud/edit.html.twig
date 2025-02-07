@@ -21,7 +21,7 @@
         </h2>
         <div class="my-2 d-flex justify-content-between align-items-center">
           <a href="{{ path(config.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
-          {% with { path: path(config.route_prefix ~ 'delete', { id: object_id }), token: csrf_token('delete-' ~ object_id), text_class: 'd-sm-inline ms-1' } %}
+          {% with { path: path(config.route_prefix ~ 'delete', { id: object_id }), token: csrf_token('delete-' ~ object_id), text_class: 'd-md-inline ms-1' } %}
           {{ block('delete_button', 'abstract/crud/_delete.html.twig') }}
           {% endwith %}
         </div>

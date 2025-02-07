@@ -31,6 +31,7 @@ appli:
     externalLinks: Liens externes
   help:
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
+    path: Sans '/' au début
 
 externalLink:
   name: Liens externes
