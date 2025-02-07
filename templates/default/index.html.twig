@@ -2,54 +2,21 @@
 
 {% set title = 'default.title'|trans %}
 
+{% block h1 %}
+  <div class="container-fluid p-0 pb-1 mb-3 bg-primary-subtle">
+    <h1 class="text-center">
+      {{ 'default.h1'|trans }}
+    </h1>
+
+    <div class="px-4 fs-5 text-center">
+      {{ 'default.text'|trans|raw }}
+    </div>
+  </div>
+{% endblock %}
+
 {% block main %}
   <div class="container">
-    {{ block('flash', 'theme/flash.html.twig') }}
-    {#
-    {% for category in categories %}
-    <section>
-      <h2 class="mb-2 py-2 mx-5 text-center text-md-start bg-primary">
-        <span class="{{ category.icon.faClass }} me-2"></span> {{ category.label }}
-      </h2>
-
-      <div id="carouselExampleControls" class="carousel carousel-dark d-flex gap-2 slide">
-        <button class="carousel-control-prev w-auto position-relative" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <div class="carousel-inner app-carousel-inner w-auto d-flex gap-3">
-          {% set appli_active = true %}
-          {% for appli in category.applis %}
-            {% set appli_url = appli.path %}
-            <div class="carousel-item w-auto d-block app-carousel-item {{ appli_active ? 'active'}}">
-              <div class="card">
-                <a href="{{ appli_url }}" class="card-img rounded-bottom-0">
-                  <img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" />
-                </a>
-                <div class="card-body bg-light">
-                  <h5 class="card-title">
-                    {{ appli.name }}
-                  </h5>
-                  <p class="card-text">
-                    {{ appli.description }}
-                  </p>
-                  <div class="text-right">
-                    <a href="{{ appli_url }}" class="btn btn-secondary">{{ appli.linkText }}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% set appli_active = false %}
-          {% endfor %}
-        </div>
-        <button class="carousel-control-next w-auto position-relative" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </section>
-    {% endfor %} #}
-
+    {# {{ block('flash', 'theme/flash.html.twig') }} #}
     {% for category in categories %}
       <section data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
         <div class="d-flex gap-3">
@@ -65,15 +32,24 @@
                   <a href="{{ appli_url }}" class="card-img rounded-bottom-0">
                     <img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" />
                   </a>
-                  <div class="card-body bg-light">
+                  <div class="card-body bg-light d-flex flex-column justify-content-between">
                     <h5 class="card-title">
                       {{ appli.name }}
                     </h5>
-                    <p class="card-text">
+                    <p class="card-text card-truncated">
                       {{ appli.description }}
                     </p>
-                    <div class="text-right">
-                      <a href="{{ appli_url }}" class="btn btn-outline-secondary">{{ appli.linkText }}</a>
+                    <div class="d-flex flex-row gap-2 justify-content-start align-items-end">
+                      <div class="flex-fill text-start">
+                        <a href="{{ appli_url }}" class="btn btn-primary">{{ appli.linkText }}</a>
+                      </div>
+                      {% for externalLink in appli.externalLinks %}
+                        <div>
+                          <a href="{{ externalLink.url }}" class="btn btn-sm btn-outline-secondary py-0 px-1 fs-5" title="{{ externalLink.text }}">
+                            <span class="{{ externalLink.icon.faClass }}"></span>
+                          </a>
+                        </div>
+                      {% endfor %}
                     </div>
                   </div>
                 </div>

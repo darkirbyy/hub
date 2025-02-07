@@ -6,14 +6,41 @@
   <section>
     <div class="container">
       {{ block('flash', 'theme/flash.html.twig') }}
-      <div>
-        <a href="{{ path('admin_icon_index') }}">{{ 'icon.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
-      </div>
-      <div>
-        <a href="{{ path('admin_category_index') }}">{{ 'category.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
-      </div>
-      <div>
-        <a href="{{ path('admin_appli_index') }}">{{ 'appli.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
+      <div class="d-flex flex-wrap flex-row justify-content-center gap-4 justify-content-md-start">
+        <div class="flex-fill">
+          <h3 class="mb-2 text-center">
+            {{ 'admin.applications'|trans }}
+          </h3>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_icon_index') }}">
+              {{ 'icon.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_category_index') }}">
+              {{ 'category.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_appli_index') }}">
+              {{ 'appli.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex-fill">
+          <h3 class="mb-2 text-center">
+            {{ 'admin.users'|trans }}
+          </h3>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action list-group-item-light" href="#">Test</a>
+          </div>
+        </div>
+
+        <div class="flex-fill">
+          <h3 class="mb-2 text-center">
+            {{ 'admin.status'|trans }}
+          </h3>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action list-group-item-light" href="#">Nginx status</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

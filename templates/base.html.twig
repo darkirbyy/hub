@@ -6,7 +6,7 @@
     <meta name="turbo-refresh-method" content="morph" />
     <meta name="turbo-refresh-scroll" content="preserve" />
     <title>
-      {{ title ~ ' - ' ~ ('layout.name'|trans) ~ ' - ' ~ 'Darkirby' }}
+      {{ title ~ ' - ' ~ ('layout.name'|trans) }}
     </title>
     <link rel="icon" href=" {{ asset('build/favicon.png') }}" />
     {% block stylesheets %}
@@ -30,69 +30,61 @@
         {% endfor %}
       </div>
     {% endif %}
-    {# The HEADER regroup the navbar and the main title #}
+    {# The HEADER defines the navbar #}
     <header>
-      <nav class="navbar navbar-expand-sm bg-body-secondary" aria-label="{{ 'aria.label.mainNavigation'|trans }}">
+      <nav class="navbar navbar-expand bg-body-secondary bg-primary-subtle" aria-label="{{ 'aria.label.mainNavigation'|trans }}">
         {% set currentRoute = app.current_route %}
         {% set activeLink = 'class="nav-link active" aria-current="page" aria-selected="true"' %}
         {% set otherLink = 'class="nav-link"' %}
-        {# Navbar with 3 blocks : the brand, the navigation button for small screen and the content #}
         <div class="container-fluid">
-          {# Brand #}
-          <div class="navbar-brand">
-            {{ 'layout.name'|trans }}
-          </div>
-          {# Navigation button for small screen #}
-          <button class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="{{ 'aria.label.toggleNavigation'|trans }}">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          {# Content as two lists : one on the left, the other on the right for lage screen / both on the top of each other for small screen #}
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {# Left part of the navbar #}
-            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          {# Left part of the navbar #}
+          <ul class="navbar-nav me-auto align-items-center">
+            <li class="nav-item fs-5">
+              <a {{ currentRoute starts with 'default' ? activeLink|raw : otherLink|raw }} href="{{ path('default_index') }}">
+                <span class="fa-solid fa-house me-2"></span>{{ 'layout.navbar.home'|trans }}
+              </a>
+            </li>
+            {% if env.app.env == 'dev' %}
               <li class="nav-item">
-                <a {{ currentRoute starts with 'default' ? activeLink|raw : otherLink|raw }} href="{{ path('default_index') }}">{{ 'layout.navbar.home'|trans }}</a>
+                <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
               </li>
-              {% if env.app.env == 'dev' %}
-                <li class="nav-item">
-                  <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
-                </li>
-              {% endif %}
-            </ul>
-            {# Right part of the navbar #}
-            {# <ul class="navbar-nav">
-              <li class="nav-item dropdown">Se connecter</li>
-            </ul> #}
-          </div>
+            {% endif %}
+          </ul>
+          {# Right part of the navbar #}
+          <ul class="navbar-nav">
+            {# TODO : use trans #}
+            <li class="nav-item dropdown">Se connecter</li>
+          </ul>
         </div>
       </nav>
-      {# Main title #}
-      <div class="container-fluid text-center py-2">
-        <h1>
-          {{ title }}
-        </h1>
-      </div>
     </header>
 
-    {# The MAIN block must be redefined on each page, including the flash block with the bood wrapper #}
+    {# The main block MUST be redefined on each page, including the flash block in the right place
+       The h1 block CAN be redefined on a page, to customize the h1 title #}
     <main class="flex-grow-1" role="main" id="mainContent">
-      {% block main %}
-        {{ block('flash', 'theme/flash.html.twig') }}
-        <div class="text-center">
-          Some content !
+      {% block h1 %}
+        <div class="container-fluid p-0 py-2 mb-2">
+          <h1 class="text-center">
+            {{ title }}
+          </h1>
         </div>
+      {% endblock %}
+
+      {% block main %}
+        <section>
+          <div class="container">
+            {{ block('flash', 'theme/flash.html.twig') }}
+            <div class="text-center">
+              Some content !
+            </div>
+          </div>
+        </section>
       {% endblock %}
     </main>
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.label.footer'|trans }}">
-      <div class="container-fluid fw-light bg-body-secondary small mt-4 py-2">
+      <div class="container-fluid fw-light bg-body-secondary small mt-4 py-3">
         <div class="row gw-md-4">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">

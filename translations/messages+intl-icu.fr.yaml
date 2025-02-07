@@ -1,9 +1,15 @@
 default:
   title: Accueil
+  h1: Bonjour
+  text: <p>Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.</p><p>Bonne visite 😀</p>
 
 admin:
   title: Administration
   backTo: Retour à la page principale
+  applications: Applications
+  users: Utilisateurs
+  status: Statuts
+
 
 form:
   button:
@@ -33,7 +39,7 @@ form:
 layout:
   name: Hub
   navbar:
-    home: Accueil
+    home: Hub
     admin: Admin
   footer:
     madeWith: Réalisé avec
