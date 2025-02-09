@@ -7,7 +7,7 @@ admin:
   title: Administration
   backTo: Retour à la page principale
   users: Utilisateurs
-  status: Etats
+  status: Statuts
   parameters: Paramètres
   applications: Applications
   general: Général

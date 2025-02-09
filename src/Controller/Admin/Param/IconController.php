@@ -25,7 +25,7 @@ final class IconController extends CrudController
             'entity_class' => Icon::class,
             'entity_key' => 'icon',
             'form_class' => IconType::class,
-            'main_title' => 'admin.title',
+            'main_title' => 'admin.parameters',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'label'],

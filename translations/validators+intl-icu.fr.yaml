@@ -40,3 +40,12 @@ externalLink:
     icon: Icône
     text: Texte
     url: URL
+
+status:
+  name: Etats
+  label:
+    id: '#'
+    number: Ordre
+    icon: Icône
+    label: Libellé
+    url: URL de l'iframe

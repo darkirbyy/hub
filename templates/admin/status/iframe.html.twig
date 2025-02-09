@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'admin.status'|trans %}
+
+{% block main %}
+  <section>
+    <div class="container">
+      <h3>
+        {{ status.label }}
+      </h3>
+      <div class="my-2">
+        <a href="{{ path('admin_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'admin.backTo'|trans }}</a>
+      </div>
+      <iframe class="w-100 mx-auto flex-fill" height="3000" src="{{ status.url }}" data-controller="resize-iframe" frameborder="0"></iframe>
+    </div>
+  </section>
+{% endblock %}

@@ -2,15 +2,21 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\Param\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin', name: 'admin_')]
 final class MainController extends AbstractController
 {
-    #[Route('/admin', name: 'admin_index')]
-    public function index(): Response
+    #[Route('', name: 'index')]
+    public function index(StatusRepository $statusRepo): Response
     {
-        return $this->render('admin/index.html.twig', []);
+        $statuses = $statusRepo->findByOrder();
+
+        return $this->render('admin/index.html.twig', [
+            'statuses' => $statuses,
+        ]);
     }
 }

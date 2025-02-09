@@ -25,7 +25,7 @@ final class AppliController extends CrudController
             'entity_class' => Appli::class,
             'entity_key' => 'appli',
             'form_class' => AppliType::class,
-            'main_title' => 'admin.title',
+            'main_title' => 'admin.parameters',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'name'],

@@ -21,7 +21,11 @@
             {{ 'admin.status'|trans }}
           </h3>
           <div class="list-group">
-            <a class="list-group-item list-group-item-action list-group-item-light" href="#">Nginx status</a>
+            {% for status in statuses %}
+              <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_status_show', { id: status.id }) }}">
+                <span class="{{ status.icon.faClass }} me-1"></span>{{ status.label }}
+              </a>
+            {% endfor %}
           </div>
         </div>
 
@@ -38,6 +42,9 @@
             </a>
             <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_param_appli_index') }}">
               {{ 'appli.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_param_status_index') }}">
+              {{ 'status.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
             </a>
           </div>
         </div>

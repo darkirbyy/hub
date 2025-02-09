@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Param;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Param\Category;
-use App\Form\Param\CategoryType;
-use App\Repository\Param\CategoryRepository;
+use App\Entity\Param\Status;
+use App\Form\Param\StatusType;
+use App\Repository\Param\StatusRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/param/category', name: 'admin_param_category_')]
-final class CategoryController extends CrudController
+#[Route('/admin/param/status', name: 'admin_param_status_')]
+final class StatusController extends CrudController
 {
-    public function __construct(CategoryRepository $repository)
+    public function __construct(StatusRepository $repository)
     {
         parent::__construct($repository);
     }
@@ -21,15 +21,17 @@ final class CategoryController extends CrudController
     protected function getConfig(): array
     {
         return [
-            'route_prefix' => 'admin_param_category_',
-            'entity_class' => Category::class,
-            'entity_key' => 'category',
-            'form_class' => CategoryType::class,
+            'route_prefix' => 'admin_param_status_',
+            'entity_class' => Status::class,
+            'entity_key' => 'status',
+            'form_class' => StatusType::class,
             'main_title' => 'admin.parameters',
             'index_cols' => [
                 1 => ['getter' => 'id'],
-                2 => ['getter' => 'label'],
+                2 => ['getter' => 'number'],
                 3 => ['getter' => 'icon', 'raw' => true],
+                4 => ['getter' => 'label'],
+                5 => ['getter' => 'url'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',
