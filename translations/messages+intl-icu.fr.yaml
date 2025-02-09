@@ -6,10 +6,11 @@ default:
 admin:
   title: Administration
   backTo: Retour à la page principale
-  applications: Applications
   users: Utilisateurs
-  status: Statuts
-
+  status: Etats
+  parameters: Paramètres
+  applications: Applications
+  general: Général
 
 form:
   button:

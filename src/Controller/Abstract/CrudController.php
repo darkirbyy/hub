@@ -41,7 +41,7 @@ abstract class CrudController extends AbstractController
     {
         $objects = $this->repository->findAll();
 
-        return $this->render('abstract/crud/index.html.twig', [
+        return $this->render('theme/crud/index.html.twig', [
             'config' => $this->getConfig(),
             'objects' => $objects,
         ]);
@@ -71,7 +71,7 @@ abstract class CrudController extends AbstractController
             return $this->redirectToRoute($this->getConfig()['route_prefix'] . 'index');
         }
 
-        return $this->render($isNewObject ? 'abstract/crud/new.html.twig' : 'abstract/crud/edit.html.twig', [
+        return $this->render($isNewObject ? 'theme/crud/new.html.twig' : 'theme/crud/edit.html.twig', [
             'config' => $this->getConfig(),
             'form' => $form,
         ]);

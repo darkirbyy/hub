@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Param;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Category;
-use App\Form\CategoryType;
-use App\Repository\CategoryRepository;
+use App\Entity\Param\Category;
+use App\Form\Param\CategoryType;
+use App\Repository\Param\CategoryRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/category', name: 'admin_category_')]
+#[Route('/admin/param/category', name: 'admin_param_category_')]
 final class CategoryController extends CrudController
 {
     public function __construct(CategoryRepository $repository)
@@ -21,7 +21,7 @@ final class CategoryController extends CrudController
     protected function getConfig(): array
     {
         return [
-            'route_prefix' => 'admin_category_',
+            'route_prefix' => 'admin_param_category_',
             'entity_class' => Category::class,
             'entity_key' => 'category',
             'form_class' => CategoryType::class,

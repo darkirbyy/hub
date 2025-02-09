@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Repository\Param;
 
-use App\Entity\Icon;
+use App\Entity\Param\ExternalLink;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class IconRepository extends ServiceEntityRepository
+class ExternalLinkRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Icon::class);
+        parent::__construct($registry, ExternalLink::class);
     }
 }

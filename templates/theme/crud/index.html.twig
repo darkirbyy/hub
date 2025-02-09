@@ -4,7 +4,7 @@
 
 {% block main %}
   {# Modal to confirm delete #}
-  {{ block('delete_modal', 'abstract/crud/_delete.html.twig') }}
+  {{ block('delete_modal', 'theme/crud/_delete.html.twig') }}
 
   <section>
     <div class="container">
@@ -54,7 +54,7 @@
                   <span class="bi bi-pen-fill"></span><span class="d-none">{{ 'form.button.edit'|trans }}</span>
                 </a>
                 {% with { path: path(config.route_prefix ~ 'delete', { id: object.id }), token: csrf_token('delete-' ~ object.id), btn_class: 'btn-sm px-2 py-1' } %}
-                {{ block('delete_button', 'abstract/crud/_delete.html.twig') }}
+                {{ block('delete_button', 'theme/crud/_delete.html.twig') }}
                 {% endwith %}
               </td>
             </tr>

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Form\Param;
 
-use App\Entity\Appli;
-use App\Entity\Category;
+use App\Entity\Param\Appli;
+use App\Entity\Param\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

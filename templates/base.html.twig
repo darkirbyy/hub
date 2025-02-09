@@ -40,7 +40,7 @@
           {# Left part of the navbar #}
           <ul class="navbar-nav me-auto align-items-center">
             <li class="nav-item fs-5">
-              <a {{ currentRoute starts with 'default' ? activeLink|raw : otherLink|raw }} href="{{ path('default_index') }}">
+              <a {{ currentRoute starts with 'home' ? activeLink|raw : otherLink|raw }} href="{{ path('home_index') }}">
                 <span class="fa-solid fa-house me-2"></span>{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
