@@ -1,0 +1,44 @@
+{% block delete_button %}
+  <button type="button"
+    class="btn btn-outline-danger {{ btn_class|default('') }}"
+    data-bs-toggle="modal"
+    data-bs-target="#delete-modal"
+    data-bs-path="{{ path }}"
+    data-bs-token="{{ token }}">
+    <span class="bi bi-trash-fill"></span>
+    <span class="d-none {{ text_class|default('') }}">{{ 'form.button.delete'|trans }}</span>
+  </button>
+{% endblock %}
+
+{% block delete_modal %}
+  <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true" role="dialog" loading="lazy" data-controller="delete-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {# Header with title and dismiss button #}
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete-modal-label">
+            {{ 'form.modal.title'|trans }}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
+        </div>
+
+        {# Body with message #}
+        <div class="modal-body">
+          {{ 'form.modal.body'|trans|raw }}
+        </div>
+
+        {# Footer with cancel or confirm buttons #}
+        <div class="modal-footer">
+          <form method="post" data-delete-modal-target="form">
+            <button type="submit" class="btn btn-danger">
+              <span class="bi bi-trash-fill me-1"></span>
+              {{ 'form.button.delete'|trans }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button>
+            <input type="hidden" name="delete_token" data-delete-modal-target="hidden" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

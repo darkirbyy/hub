@@ -2,15 +2,21 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\Param\ToolRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin', name: 'admin_')]
 final class MainController extends AbstractController
 {
-    #[Route('/admin', name: 'admin_index')]
-    public function index(): Response
+    #[Route('', name: 'index')]
+    public function index(ToolRepository $toolRepo): Response
     {
-        return $this->render('admin/index.html.twig', []);
+        $toolsByType = $toolRepo->findAndGroup();
+
+        return $this->render('admin/index.html.twig', [
+            'tools_by_type' => $toolsByType,
+        ]);
     }
 }

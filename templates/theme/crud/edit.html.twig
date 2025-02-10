@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% set title = config.main_title|trans %}
+
+{# the object_id from the route parameters #}
+{% set object_id = app.request.attributes.get('id') %}
+
+{% block main %}
+  {# Modal to confirm delete #}
+  {{ block('delete_modal', 'theme/crud/_delete.html.twig') }}
+
+  <section>
+    <div class="container">
+      <div class="row mx-auto w-100 w-md-75">
+        {# Insert the flashes in the same col size as the form #}
+        {{ block('flash', 'theme/flash.html.twig') }}
+
+        {# Subtitle and back link + delete button #}
+        <h2>
+          {{ (config.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.update'|trans }}</span>
+        </h2>
+        <div class="my-2 d-flex justify-content-between align-items-center">
+          <a href="{{ path(config.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
+          {% with { path: path(config.route_prefix ~ 'delete', { id: object_id }), token: csrf_token('delete-' ~ object_id), text_class: 'd-md-inline ms-1' } %}
+          {{ block('delete_button', 'theme/crud/_delete.html.twig') }}
+          {% endwith %}
+        </div>
+
+        {# Actual form #}
+        {{ block('form', 'theme/crud/_form.html.twig') }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

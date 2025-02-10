@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'admin.tools'|trans %}
+
+{% block main %}
+  <section class="container flex-grow-1 d-flex flex-column">
+    <h3>
+      {{ tool.label }}
+    </h3>
+    <div class="my-2">
+      <a href="{{ path('admin_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'admin.backTo'|trans }}</a>
+    </div>
+    <div class="flex-grow-1">
+      <iframe class="w-100 h-100 mx-auto" src="{{ tool.url }}" frameborder="0"></iframe>
+    </div>
+  </section>
+{% endblock %}

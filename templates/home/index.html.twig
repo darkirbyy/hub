@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'default.title'|trans %}
+
+{% block h1 %}
+  <div class="container-fluid p-0 pb-1 mb-3 bg-primary-subtle">
+    <h1 class="text-center">
+      {{ 'default.h1'|trans }}
+    </h1>
+
+    <div class="px-4 fs-5 text-center">
+      {{ 'default.text'|trans|raw }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="container">
+    {# {{ block('flash', 'theme/flash.html.twig') }} #}
+    {% for category in categories %}
+      <section data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
+        <div class="d-flex gap-3">
+          <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev"><span class="fa-solid fa-chevron-left fa-xl"></span></button>
+          <div class="swiper" id="swiper-{{ category.id }}-main">
+            <h2 class="mb-3 text-center text-md-start">
+              <span class="{{ category.icon.faClass }} fa-fw me-2"></span> {{ category.label }}
+            </h2>
+            <div class="swiper-wrapper">
+              {% for appli in category.applis %}
+                {% set appli_url = server_uri ~ appli.path %}
+                <div class="card swiper-slide">
+                  <a href="{{ appli_url }}" class="card-img rounded-bottom-0">
+                    <img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.name }}" />
+                  </a>
+                  <div class="card-body bg-light d-flex flex-column justify-content-between">
+                    <h5 class="card-title">
+                      {{ appli.name }}
+                    </h5>
+                    <p class="card-text flex-grow-1">
+                      {{ appli.description }}
+                    </p>
+                    <div class="d-flex flex-row gap-2 justify-content-start align-items-end">
+                      <div class="flex-fill text-start">
+                        <a href="{{ appli_url }}" class="btn btn-primary">{{ appli.linkText }}</a>
+                      </div>
+                      {% for externalLink in appli.externalLinks %}
+                        <div>
+                          <a href="{{ externalLink.url }}" class="btn btn-sm btn-outline-secondary py-0 px-1 fs-5" title="{{ externalLink.text }}">
+                            <span class="{{ externalLink.icon.faClass }}"></span>
+                          </a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-next"><span class="fa-solid fa-chevron-right fa-xl"></span></button>
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+{% endblock %}

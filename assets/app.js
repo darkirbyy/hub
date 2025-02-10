@@ -1,8 +1,9 @@
 // start the Stimulus application
 import './bootstrap';
 
-// import boostrap plugins (you can specify which plugins you need)
-import { Tooltip, Toast, Popover } from 'bootstrap';
+// import swiper SCSS
+import 'swiper/scss';
+import 'swiper/scss/navigation';
 
-// any CSS you import will output into a single css file
+// import app custom SCSS 
 import './styles/global.scss';

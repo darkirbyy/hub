@@ -1,9 +1,17 @@
 default:
   title: Accueil
+  h1: Bonjour
+  text: <p>Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.</p><p>Bonne visite 😀</p>
 
 admin:
   title: Administration
   backTo: Retour à la page principale
+  users: Utilisateurs
+  tools: Outils
+  parameters: Paramètres
+  hub: Hub
+  global: Global
+  web: Web
 
 form:
   button:
@@ -12,6 +20,7 @@ form:
     add: Ajouter
     update: Mettre à jour
     delete: Supprimer
+    save: Enregistrer
     search: Chercher
     cancel: Annuler
   title:
@@ -28,11 +37,12 @@ form:
   other: 
     backToList: Retour à la liste 
     action: Actions
+    none: Aucun
 
 layout:
   name: Hub
   navbar:
-    home: Accueil
+    home: Hub
     admin: Admin
   footer:
     madeWith: Réalisé avec
@@ -51,3 +61,4 @@ aria:
     close: Fermer
   other:
     skipToContent: Aller au contenu
+    download: Télécharger

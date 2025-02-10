@@ -28,5 +28,25 @@ appli:
     linkText: Texte du lien
     imageFile: Image
     imageInfos: Métadonnées de l'image
+    externalLinks: Liens externes
   help:
-    image: TODO
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
+    path: Sans '/' au début
+
+externalLink:
+  name: Liens externes
+  label:
+    id: '#'
+    icon: Icône
+    text: Texte
+    url: URL
+
+tool:
+  name: Outils
+  label:
+    id: '#'
+    number: Ordre
+    type: Type
+    icon: Icône
+    label: Libellé
+    url: URL de l'iframe

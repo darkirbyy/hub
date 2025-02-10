@@ -1,5 +1,6 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
+{# Customize form field with help button at the end, and floating labels if there is a placeholder defined #}
 {% block form_row %}
   {% set help_button %}
     {% if form.vars.help is not empty %}
@@ -13,16 +14,31 @@
     {% endif %}
   {% endset %}
 
-  <div class="app-form-row {{ form.vars.attr.placeholder is defined ? 'input-group' }} {{ form.vars.row_attr.class|default('') }} {% if not compound or force_error|default(false) %}{% for error in errors %}has-validation{% endfor %}{% endif %}">
+  {% set custom_classes = 'app-form-row' ~ ' ' ~ (not compound or (force_error|default(false)) ? (errors|length) > 0 ? 'has-validation') %}
+  {% set attributes %}
+    {% with { attr: row_attr|merge({ class: ((row_attr.class|default('')) ~ ' ' ~ custom_classes)|trim }) } %}
+    {{ block('attributes') }}
+    {% endwith %}
+  {% endset %}
+
+  <div {{ attributes }}>
     {% if form.vars.attr.placeholder is defined %}
-      <div class="form-floating">
-        {{ form_widget(form) }}
-        {{ form_label(form) }}
-        {% if (form.vars.attr.clear_button|default(false)) == true %}
-          <small><button class="btn-close position-absolute top-50 end-0 translate-middle-y me-3" type="button" data-app-clear-id="{{ form.vars.id }}"></button></small>
-        {% endif %}
+      <div class="input-group">
+        <div class="form-floating">
+          {{ form_widget(form) }}
+          {{ form_label(form) }}
+          {% if (form.vars.attr.clear_button|default(false)) == true %}
+            <small>
+              <button type="button"
+                data-app-clear-id="{{ form.vars.id }}"
+                class="app-btn-clear btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
+
+              </button>
+            </small>
+          {% endif %}
+        </div>
+        {{ help_button }}
       </div>
-      {{ help_button }}
     {% else %}
       {{ form_label(form) }}
       {{ form_widget(form, { help_button: help_button }) }}
@@ -31,6 +47,7 @@
   </div>
 {% endblock %}
 
+{# Customize vich uploader widget to add the help button and classes to the rendered img #}
 {%- block vich_image_widget -%}
   {%- if (errors|length) > 0 -%}
     {%- set attr = attr|merge({ class: ((attr.class|default('')) ~ ' is-invalid')|trim }) -%}
@@ -50,7 +67,7 @@
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
+          <img class="app-img-fit" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="{{ 'aria.other.download'|trans }}" />
         </a>
       </div>
     {%- endif -%}
@@ -62,7 +79,27 @@
   {% endif %}
 {%- endblock -%}
 
-{# 1rem 0.75rem; #}
+{% block collection_row %}
+  {% set custom_row_attr = { 'data-controller': 'collec-field' } %}
+  {% set row_attr = row_attr|merge(custom_row_attr) %}
+  {{- form_row(form, { row_attr: row_attr }) -}}
+{% endblock %}
+
+{% block collection_widget %}
+  {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
+  {% set attr = attr|merge(custom_attr) %}
+  {{- parent() -}}
+  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add"><span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}</button>
+{% endblock %}
+
+{% block collection_entry_row %}
+  <div class="d-flex gap-2">
+    {% for row in form.children %}
+      {{ form_row(row) }}
+    {% endfor %}
+    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash-fill"></span></button>
+  </div>
+{% endblock %}
 
 {# <a class="text-muted position-absolute" href="#" style="top: 1rem;right: 1rem;z-index: 100;"><span class="bi bi-x-lg"></span></a> #}
 

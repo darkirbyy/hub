@@ -6,14 +6,56 @@
   <section>
     <div class="container">
       {{ block('flash', 'theme/flash.html.twig') }}
-      <div>
-        <a href="{{ path('admin_icon_index') }}">{{ 'icon.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
-      </div>
-      <div>
-        <a href="{{ path('admin_category_index') }}">{{ 'category.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
-      </div>
-      <div>
-        <a href="{{ path('admin_appli_index') }}">{{ 'appli.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span></a>
+      <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
+        <div class="flex-fill">
+          <h3 class="mb-2 text-center">
+            {{ 'admin.users'|trans }}
+          </h3>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="#">Test</a>
+          </div>
+        </div>
+
+        <div class="flex-fill">
+          <h3 class="mb-2 text-center">
+            {{ 'admin.tools'|trans }}
+          </h3>
+          <div class="list-group">
+            {% for type, tools in tools_by_type %}
+              <span class="list-group-item fw-bold list-group-item-primary">{{ type }}</span>
+              {% for tool in tools %}
+                <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_tool_show', { id: tool.id }) }}">
+                  <span class="{{ tool.icon.faClass|default('fa-solid fa-question') }} fa-fw me-1"></span>{{ tool.label }}
+                </a>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="flex-fill">
+          <h3 class="mb-2 text-center">
+            {{ 'admin.parameters'|trans }}
+          </h3>
+          <div class="list-group">
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.hub'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_category_index') }}">
+              <span class="bi bi-arrow-right me-1"></span> {{ 'category.name'|trans({ }, 'validators') }}
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_appli_index') }}">
+              <span class="bi bi-arrow-right me-1"></span> {{ 'appli.name'|trans({ }, 'validators') }}
+            </a>
+
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.tools'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_tool_index') }}">
+              <span class="bi bi-arrow-right me-1"></span>{{ 'tool.name'|trans({ }, 'validators') }}
+            </a>
+
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.global'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_icon_index') }}">
+              <span class="bi bi-arrow-right me-1"></span> {{ 'icon.name'|trans({ }, 'validators') }}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
