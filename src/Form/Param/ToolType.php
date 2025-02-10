@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Param;
 
 use App\Entity\Param\Icon;
-use App\Entity\Param\Status;
+use App\Entity\Param\Tool;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -15,16 +15,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class StatusType extends AbstractType
+class ToolType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('number', IntegerType::class, [
                 'required' => true,
-                'label' => 'status.label.number',
+                'label' => 'tool.label.number',
                 'attr' => [
-                    'placeholder' => 'status.label.number',
+                    'placeholder' => 'tool.label.number',
+                ],
+            ])
+            ->add('type', TextType::class, [
+                'required' => true,
+                'label' => 'tool.label.type',
+                'attr' => [
+                    'placeholder' => 'tool.label.type',
                 ],
             ])
             ->add('icon', EntityType::class, [
@@ -32,24 +39,24 @@ class StatusType extends AbstractType
                 'class' => Icon::class,
                 'choice_label' => 'label',
                 'placeholder' => new TranslatableMessage('form.other.none'),
-                'label' => 'status.label.icon',
+                'label' => 'tool.label.icon',
                 'attr' => [
-                    'placeholder' => 'status.label.icon',
+                    'placeholder' => 'tool.label.icon',
                 ],
             ])
             ->add('label', TextType::class, [
                 'required' => true,
-                'label' => 'status.label.label',
+                'label' => 'tool.label.label',
                 'attr' => [
-                    'placeholder' => 'status.label.label',
+                    'placeholder' => 'tool.label.label',
                 ],
             ])
             ->add('url', UrlType::class, [
                 'required' => true,
                 'default_protocol' => 'http',
-                'label' => 'status.label.url',
+                'label' => 'tool.label.url',
                 'attr' => [
-                    'placeholder' => 'status.label.url',
+                    'placeholder' => 'tool.label.url',
                 ],
             ]);
     }
@@ -57,7 +64,7 @@ class StatusType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Status::class,
+            'data_class' => Tool::class,
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',

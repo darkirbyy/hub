@@ -27,7 +27,6 @@ export default class extends Controller {
     const newRemoveTarget = this.collecTarget.lastElementChild.querySelector(
       '[data-collec-field-target="remove"]'
     );
-    console.log(newRemoveTarget);
     newRemoveTarget.addEventListener('click', (event) => {
       this.removeFromCollec(event, newRemoveTarget);
     });

@@ -7,7 +7,7 @@ admin:
   title: Administration
   backTo: Retour à la page principale
   users: Utilisateurs
-  status: Statuts
+  tools: Outils
   parameters: Paramètres
   hub: Hub
   global: Global

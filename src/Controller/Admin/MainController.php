@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Repository\Param\StatusRepository;
+use App\Repository\Param\ToolRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,12 +11,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class MainController extends AbstractController
 {
     #[Route('', name: 'index')]
-    public function index(StatusRepository $statusRepo): Response
+    public function index(ToolRepository $toolRepo): Response
     {
-        $statuses = $statusRepo->findByOrder();
+        $toolsByType = $toolRepo->findAndGroup();
 
         return $this->render('admin/index.html.twig', [
-            'statuses' => $statuses,
+            'tools_by_type' => $toolsByType,
         ]);
     }
 }

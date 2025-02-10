@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity\Param;
 
-use App\Repository\Param\StatusRepository;
+use App\Repository\Param\ToolRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: StatusRepository::class)]
+#[ORM\Entity(repositoryClass: ToolRepository::class)]
 #[UniqueEntity('number')]
-class Status
+class Tool
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,11 +19,11 @@ class Status
     private ?int $id = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Icon $icon = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
     private ?string $label = null;
 
@@ -36,6 +36,11 @@ class Status
     #[Assert\NotBlank]
     #[Assert\GreaterThanOrEqual(0)]
     private ?int $number = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2)]
+    private ?string $type = null;
 
     public function getId(): ?int
     {
@@ -86,6 +91,18 @@ class Status
     public function setNumber(?int $number): static
     {
         $this->number = $number;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }

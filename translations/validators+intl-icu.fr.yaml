@@ -41,11 +41,12 @@ externalLink:
     text: Texte
     url: URL
 
-status:
-  name: Etats
+tool:
+  name: Outils
   label:
     id: '#'
     number: Ordre
+    type: Type
     icon: Icône
     label: Libellé
     url: URL de l'iframe

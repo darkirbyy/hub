@@ -24,6 +24,7 @@ class Category
     private ?string $label = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private ?Icon $icon = null;
 
