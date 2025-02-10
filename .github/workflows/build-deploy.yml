@@ -100,7 +100,7 @@ jobs:
       with:
         SSH_PRIVATE_KEY: ${{ secrets.SERV_KEYS }}
         ARGS: "--recursive --delete --links --owner --group --perms --compress --checksum --verbose"
-        EXCLUDE: "/var/, /.env.local, /.env.${{ inputs.environment }}.local"
+        EXCLUDE: "/var/, /.env.local, /.env.${{ inputs.environment }}.local, /public/images/"
         SOURCE: "build/"
         REMOTE_HOST: ${{ vars.SERV_ADDR }}
         REMOTE_USER: ${{ secrets.SERV_USER }}
