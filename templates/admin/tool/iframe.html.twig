@@ -11,7 +11,7 @@
       <a href="{{ path('admin_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'admin.backTo'|trans }}</a>
     </div>
     <div class="flex-grow-1">
-      <iframe class="w-100 h-100 mx-auto" src="{{ tool.url }}" frameborder="0"></iframe>
+      <iframe class="w-100 h-100 mx-auto" srcdoc="{{ content }}" frameborder="0"></iframe>
     </div>
   </section>
 {% endblock %}
