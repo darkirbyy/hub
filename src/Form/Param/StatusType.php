@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class StatusType extends AbstractType
 {
@@ -30,6 +31,7 @@ class StatusType extends AbstractType
                 'required' => false,
                 'class' => Icon::class,
                 'choice_label' => 'label',
+                'placeholder' => new TranslatableMessage('form.other.none'),
                 'label' => 'status.label.icon',
                 'attr' => [
                     'placeholder' => 'status.label.icon',

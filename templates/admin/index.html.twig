@@ -6,13 +6,13 @@
   <section>
     <div class="container">
       {{ block('flash', 'theme/flash.html.twig') }}
-      <div class="d-flex flex-wrap flex-row justify-content-center gap-4 justify-content-md-start">
+      <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
             {{ 'admin.users'|trans }}
           </h3>
           <div class="list-group">
-            <a class="list-group-item list-group-item-action list-group-item-light" href="#">Test</a>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="#">Test</a>
           </div>
         </div>
 
@@ -21,9 +21,10 @@
             {{ 'admin.status'|trans }}
           </h3>
           <div class="list-group">
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.web'|trans }}</span>
             {% for status in statuses %}
-              <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_status_show', { id: status.id }) }}">
-                <span class="{{ status.icon.faClass }} me-1"></span>{{ status.label }}
+              <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_status_show', { id: status.id }) }}">
+                <span class="{{ status.icon.faClass }} fa-fw me-1"></span>{{ status.label }}
               </a>
             {% endfor %}
           </div>
@@ -34,17 +35,22 @@
             {{ 'admin.parameters'|trans }}
           </h3>
           <div class="list-group">
-            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_param_icon_index') }}">
-              {{ 'icon.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.hub'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_category_index') }}">
+              <span class="bi bi-arrow-right me-1"></span> {{ 'category.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_param_category_index') }}">
-              {{ 'category.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_appli_index') }}">
+              <span class="bi bi-arrow-right me-1"></span> {{ 'appli.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_param_appli_index') }}">
-              {{ 'appli.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.status'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_status_index') }}">
+              <span class="bi bi-arrow-right me-1"></span>{{ 'status.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-light" href="{{ path('admin_param_status_index') }}">
-              {{ 'status.name'|trans({ }, 'validators') }}<span class="bi bi-arrow-right ms-1"></span>
+
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.global'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_icon_index') }}">
+              <span class="bi bi-arrow-right me-1"></span> {{ 'icon.name'|trans({ }, 'validators') }}
             </a>
           </div>
         </div>

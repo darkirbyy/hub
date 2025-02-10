@@ -9,8 +9,9 @@ admin:
   users: Utilisateurs
   status: Statuts
   parameters: Paramètres
-  applications: Applications
-  general: Général
+  hub: Hub
+  global: Global
+  web: Web
 
 form:
   button:
@@ -36,6 +37,7 @@ form:
   other: 
     backToList: Retour à la liste 
     action: Actions
+    none: Aucun
 
 layout:
   name: Hub

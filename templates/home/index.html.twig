@@ -23,7 +23,7 @@
           <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev"><span class="fa-solid fa-chevron-left fa-xl"></span></button>
           <div class="swiper" id="swiper-{{ category.id }}-main">
             <h2 class="mb-3 text-center text-md-start">
-              <span class="{{ category.icon.faClass }} me-2"></span> {{ category.label }}
+              <span class="{{ category.icon.faClass }} fa-fw me-2"></span> {{ category.label }}
             </h2>
             <div class="swiper-wrapper">
               {% for appli in category.applis %}
@@ -36,7 +36,7 @@
                     <h5 class="card-title">
                       {{ appli.name }}
                     </h5>
-                    <p class="card-text card-truncated">
+                    <p class="card-text flex-grow-1">
                       {{ appli.description }}
                     </p>
                     <div class="d-flex flex-row gap-2 justify-content-start align-items-end">
