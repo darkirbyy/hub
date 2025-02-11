@@ -41,15 +41,14 @@ externalLink:
     text: Texte
     url: URL
 
-tool:
-  name: Outils
+shortcut:
+  name: Raccourcis
   label:
     id: '#'
     number: Ordre
     type: Type
-    icon: Icône
     label: Libellé
-    url: URL de l'iframe
+    url: URL
 
 user:
   name: Utilisateurs

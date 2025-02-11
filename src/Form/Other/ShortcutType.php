@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Other;
 
-use App\Entity\Hub\Icon;
-use App\Entity\Other\Tool;
+use App\Entity\Other\Shortcut;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -15,48 +14,38 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class ToolType extends AbstractType
+class ShortcutType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('number', IntegerType::class, [
                 'required' => true,
-                'label' => 'tool.label.number',
+                'label' => 'shortcut.label.number',
                 'attr' => [
-                    'placeholder' => 'tool.label.number',
+                    'placeholder' => 'shortcut.label.number',
                 ],
             ])
             ->add('type', TextType::class, [
                 'required' => true,
-                'label' => 'tool.label.type',
+                'label' => 'shortcut.label.type',
                 'attr' => [
-                    'placeholder' => 'tool.label.type',
-                ],
-            ])
-            ->add('icon', EntityType::class, [
-                'required' => false,
-                'class' => Icon::class,
-                'choice_label' => 'label',
-                'placeholder' => new TranslatableMessage('form.other.none'),
-                'label' => 'tool.label.icon',
-                'attr' => [
-                    'placeholder' => 'tool.label.icon',
+                    'placeholder' => 'shortcut.label.type',
                 ],
             ])
             ->add('label', TextType::class, [
                 'required' => true,
-                'label' => 'tool.label.label',
+                'label' => 'shortcut.label.label',
                 'attr' => [
-                    'placeholder' => 'tool.label.label',
+                    'placeholder' => 'shortcut.label.label',
                 ],
             ])
             ->add('url', UrlType::class, [
                 'required' => true,
                 'default_protocol' => 'http',
-                'label' => 'tool.label.url',
+                'label' => 'shortcut.label.url',
                 'attr' => [
-                    'placeholder' => 'tool.label.url',
+                    'placeholder' => 'shortcut.label.url',
                 ],
             ]);
     }
@@ -64,7 +53,7 @@ class ToolType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Tool::class,
+            'data_class' => Shortcut::class,
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',

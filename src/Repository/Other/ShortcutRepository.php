@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Repository\Other;
 
-use App\Entity\Other\Tool;
+use App\Entity\Other\Shortcut;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class ToolRepository extends ServiceEntityRepository
+class ShortcutRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Tool::class);
+        parent::__construct($registry, Shortcut::class);
     }
 
     public function findAndGroup(): array
@@ -22,18 +22,18 @@ class ToolRepository extends ServiceEntityRepository
         $qb->orderBy('s.type', 'ASC')->addOrderBy('s.number', 'ASC');
 
         // Execute and fetch the query
-        $tools = $qb->getQuery()->getResult();
+        $shortcuts = $qb->getQuery()->getResult();
 
         // Group by type
-        $toolsByType = [];
-        foreach ($tools as $tool) {
-            $type = $tool->getType();
-            if (!isset($toolsByType[$type])) {
-                $toolsByType[$type] = [];
+        $shortcutsByType = [];
+        foreach ($shortcuts as $shortcut) {
+            $type = $shortcut->getType();
+            if (!isset($shortcutsByType[$type])) {
+                $shortcutsByType[$type] = [];
             }
-            $toolsByType[$type][] = $tool;
+            $shortcutsByType[$type][] = $shortcut;
         }
 
-        return $toolsByType;
+        return $shortcutsByType;
     }
 }

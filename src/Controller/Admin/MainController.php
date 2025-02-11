@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Repository\Other\ToolRepository;
+use App\Repository\Other\ShortcutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,12 +11,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class MainController extends AbstractController
 {
     #[Route('', name: 'index')]
-    public function index(ToolRepository $toolRepo): Response
+    public function index(ShortcutRepository $shortcutRepo): Response
     {
-        // $toolsByType = $toolRepo->findAndGroup();
+        $shortcutsByType = $shortcutRepo->findAndGroup();
 
         return $this->render('admin/index.html.twig', [
-            // 'tools_by_type' => $toolsByType,
+            'shortcuts_by_type' => $shortcutsByType,
         ]);
     }
 }

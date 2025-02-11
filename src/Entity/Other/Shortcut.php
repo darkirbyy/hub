@@ -5,23 +5,20 @@ declare(strict_types=1);
 namespace App\Entity\Other;
 
 use App\Entity\Hub\Icon;
-use App\Repository\Other\ToolRepository;
+use App\Repository\Other\ShortcutRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ToolRepository::class)]
+#[ORM\Entity(repositoryClass: ShortcutRepository::class)]
 #[UniqueEntity('number')]
-class Tool
+class Shortcut
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Icon $icon = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
@@ -46,18 +43,6 @@ class Tool
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIcon(): ?Icon
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(?Icon $icon): static
-    {
-        $this->icon = $icon;
-
-        return $this;
     }
 
     public function getLabel(): ?string
