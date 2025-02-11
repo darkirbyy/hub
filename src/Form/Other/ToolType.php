@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Param;
+namespace App\Form\Other;
 
-use App\Entity\Param\Icon;
-use App\Entity\Param\Tool;
+use App\Entity\Hub\Icon;
+use App\Entity\Other\Tool;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;

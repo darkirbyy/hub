@@ -6,16 +6,11 @@ default:
 admin:
   title: Administration
   backTo: Retour à la page principale
-  connections:
-    title:  Connexions
-    accounts: Comptes
-  tools:
-    title: Outils
-  parameters:
-    title: Paramètres
-    hub: Hub
-    tools: Outils
-    global: Global
+  configs: Configurations
+  hub: Hub
+  accounts: Comptes
+  others: Autres
+  shortcuts: Raccourcis
 
 form:
   button:

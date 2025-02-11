@@ -2,33 +2,35 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Param;
+namespace App\Form\Hub;
 
-use App\Entity\Param\Icon;
+use App\Entity\Hub\Category;
+use App\Entity\Hub\Icon;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class IconType extends AbstractType
+class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('label', TextType::class, [
                 'required' => true,
-                'label' => 'icon.label.label',
+                'label' => 'category.label.label',
                 'attr' => [
-                    'placeholder' => 'icon.label.label',
+                    'placeholder' => 'category.label.label',
                 ],
             ])
-            ->add('faClass', TextType::class, [
+            ->add('icon', EntityType::class, [
                 'required' => true,
-                'label' => 'icon.label.faClass',
-                'help' => 'icon.help.faClass',
-                'help_html' => true,
+                'class' => Icon::class,
+                'choice_label' => 'label',
+                'label' => 'category.label.icon',
                 'attr' => [
-                    'placeholder' => 'icon.label.faClass',
+                    'placeholder' => 'category.label.icon',
                 ],
             ]);
     }
@@ -36,7 +38,7 @@ class IconType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Icon::class,
+            'data_class' => Category::class,
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',

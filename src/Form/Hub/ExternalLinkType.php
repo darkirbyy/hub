@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Param;
+namespace App\Form\Hub;
 
-use App\Entity\Param\ExternalLink;
-use App\Entity\Param\Icon;
+use App\Entity\Hub\ExternalLink;
+use App\Entity\Hub\Icon;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

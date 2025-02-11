@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Param;
+namespace App\Controller\Admin\Hub;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Param\Icon;
-use App\Form\Param\IconType;
-use App\Repository\Param\IconRepository;
+use App\Entity\Hub\Icon;
+use App\Form\Hub\IconType;
+use App\Repository\Hub\IconRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/param/icon', name: 'admin_param_icon_')]
+#[Route('/admin/hub/icon', name: 'admin_hub_icon_')]
 final class IconController extends CrudController
 {
     public function __construct(IconRepository $repository)
@@ -21,11 +21,11 @@ final class IconController extends CrudController
     protected function getConfig(): array
     {
         return [
-            'route_prefix' => 'admin_param_icon_',
+            'route_prefix' => 'admin_hub_icon_',
             'entity_class' => Icon::class,
             'entity_key' => 'icon',
             'form_class' => IconType::class,
-            'main_title' => 'admin.parameters.title',
+            'main_title' => 'admin.configs',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'label'],

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Param;
+namespace App\Entity\Other;
 
-use App\Repository\Param\ToolRepository;
+use App\Entity\Hub\Icon;
+use App\Repository\Other\ToolRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;

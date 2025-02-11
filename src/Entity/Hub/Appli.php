@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Param;
+namespace App\Entity\Hub;
 
-use App\Repository\Param\AppliRepository;
+use App\Repository\Hub\AppliRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Param;
+namespace App\Controller\Admin\Other;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Param\Tool;
-use App\Form\Param\ToolType;
-use App\Repository\Param\ToolRepository;
+use App\Entity\Other\Tool;
+use App\Form\Other\ToolType;
+use App\Repository\Other\ToolRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/param/tool', name: 'admin_param_tool_')]
+#[Route('/admin/other/tool', name: 'admin_other_tool_')]
 final class ToolController extends CrudController
 {
     public function __construct(ToolRepository $repository)
@@ -21,11 +21,11 @@ final class ToolController extends CrudController
     protected function getConfig(): array
     {
         return [
-            'route_prefix' => 'admin_param_tool_',
+            'route_prefix' => 'admin_other_tool_',
             'entity_class' => Tool::class,
             'entity_key' => 'tool',
             'form_class' => ToolType::class,
-            'main_title' => 'admin.parameters.title',
+            'main_title' => 'admin.others',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'type'],

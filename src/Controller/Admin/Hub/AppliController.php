@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Param;
+namespace App\Controller\Admin\Hub;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Param\Appli;
-use App\Form\Param\AppliType;
-use App\Repository\Param\AppliRepository;
+use App\Entity\Hub\Appli;
+use App\Form\Hub\AppliType;
+use App\Repository\Hub\AppliRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/param/appli', name: 'admin_param_appli_')]
+#[Route('/admin/hub/appli', name: 'admin_hub_appli_')]
 final class AppliController extends CrudController
 {
     public function __construct(AppliRepository $repository)
@@ -21,11 +21,11 @@ final class AppliController extends CrudController
     protected function getConfig(): array
     {
         return [
-            'route_prefix' => 'admin_param_appli_',
+            'route_prefix' => 'admin_hub_appli_',
             'entity_class' => Appli::class,
             'entity_key' => 'appli',
             'form_class' => AppliType::class,
-            'main_title' => 'admin.parameters.title',
+            'main_title' => 'admin.configs',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'name'],

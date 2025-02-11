@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Param;
+namespace App\Repository\Hub;
 
-use App\Entity\Param\Category;
+use App\Entity\Hub\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

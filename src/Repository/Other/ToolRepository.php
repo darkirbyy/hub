@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Param;
+namespace App\Repository\Other;
 
-use App\Entity\Param\Tool;
+use App\Entity\Other\Tool;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
