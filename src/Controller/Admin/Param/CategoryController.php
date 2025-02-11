@@ -25,7 +25,7 @@ final class CategoryController extends CrudController
             'entity_class' => Category::class,
             'entity_key' => 'category',
             'form_class' => CategoryType::class,
-            'main_title' => 'admin.parameters',
+            'main_title' => 'admin.parameters.title',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'label'],

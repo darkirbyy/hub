@@ -25,7 +25,7 @@ final class ToolController extends CrudController
             'entity_class' => Tool::class,
             'entity_key' => 'tool',
             'form_class' => ToolType::class,
-            'main_title' => 'admin.parameters',
+            'main_title' => 'admin.parameters.title',
             'index_cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'type'],

@@ -50,3 +50,11 @@ tool:
     icon: Icône
     label: Libellé
     url: URL de l'iframe
+
+user:
+  name: Utilisateurs
+  label:
+    id: '#'
+    username: Nom d'utilisateur
+    imageFile: Avatar
+    imageInfos: Métadonnées de l'avatar

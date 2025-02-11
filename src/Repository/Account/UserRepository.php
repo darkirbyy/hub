@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\User;
+namespace App\Repository\Account;
 
-use App\Entity\User\User;
+use App\Entity\Account\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
