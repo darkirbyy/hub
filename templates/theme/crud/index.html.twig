@@ -29,7 +29,7 @@
       {# Table displaying all objects #}
       <table class="mt-2 table table-striped">
         <thead>
-          <tr class="">
+          <tr>
             {% for col in config.index_cols|ksort %}
               <th class="text-nowrap align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
                 {{ (config.entity_key ~ '.label.' ~ (col.label is defined ? col.label : col.getter))|trans({ }, 'validators') }}
@@ -40,13 +40,16 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
+          {% if config.index_sort is defined %}
+            {% set objects = objects|sort((a, b) => deep_attribute(a, config.index_sort) <=> deep_attribute(b, config.index_sort)) %}
+          {% endif %}
+
           {% for object in objects %}
             <tr>
               {% for col in config.index_cols|ksort %}
                 <td class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
-                  {# {% set value = deep_attribute(object, col.getter) %} #}
-                  {% set value = attribute(object, col.getter) %}
+                  {% set value = deep_attribute(object, col.getter) %}
                   {{ col.filters is defined ? value|apply_filters(col.filters) : value }}
                 </td>
               {% endfor %}

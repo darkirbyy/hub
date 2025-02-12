@@ -28,16 +28,17 @@ final class AppliController extends CrudController
             'main_title' => 'admin.configs',
             'index_cols' => [
                 // 1 => ['getter' => 'id'],
+                1 => ['getter' => 'category'],
                 2 => ['getter' => 'title'],
                 3 => ['getter' => 'name', 'breakpoint' => 'md'],
                 4 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
-                5 => ['getter' => 'category'],
                 6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
+            'index_sort' => 'category.label',
         ];
     }
 }

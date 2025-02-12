@@ -29,12 +29,13 @@ final class CategoryController extends CrudController
             'index_cols' => [
                 // 1 => ['getter' => 'id'],
                 2 => ['getter' => 'label'],
-                3 => ['getter' => 'icon'],
+                3 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
+            'index_sort' => 'label',
         ];
     }
 }

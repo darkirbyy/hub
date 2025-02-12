@@ -18,10 +18,10 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return [];
     }
 
-    // public function getFunctions()
-    // {
-    //     return [new TwigFunction('deep_attribute', [$this, 'getDeepAttribute'])];
-    // }
+    public function getFunctions()
+    {
+        return [new TwigFunction('deep_attribute', [$this, 'deepAttribute'])];
+    }
 
     public function getFilters(): array
     {
@@ -34,23 +34,28 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         ];
     }
 
-    // public function getDeepAttribute($object, $path)
-    // {
-    //     $attributes = explode('.', $path);
+    public function deepAttribute($object, $path)
+    {
+        $attributes = explode('.', $path);
 
-    //     foreach ($attributes as $attribute) {
-    //         $getter = 'get' . ucfirst($attribute);
-    //         if (is_object($object) && property_exists($object, $attribute)) {
-    //             $object = $object->$getter();
-    //         } elseif (is_array($object) && array_key_exists($attribute, $object)) {
-    //             $object = $object[$attribute];
-    //         } else {
-    //             return null; // ou une valeur par défaut si l'attribut n'existe pas
-    //         }
-    //     }
+        foreach ($attributes as $attribute) {
+            $getter = 'get' . ucfirst($attribute);
+            $isGetter = 'is' . ucfirst($attribute);
+            $hasGetter = 'has' . ucfirst($attribute);
 
-    //     return $object;
-    // }
+            if (method_exists($object, $getter)) {
+                $object = $object->$getter();
+            } elseif (method_exists($object, $isGetter)) {
+                $object = $object->$isGetter();
+            } elseif (method_exists($object, $hasGetter)) {
+                $object = $object->$hasGetter();
+            } else {
+                return null;
+            }
+        }
+
+        return $object;
+    }
 
     public function applyFilters(Environment $env, $value, $filters)
     {

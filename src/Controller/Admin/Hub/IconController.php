@@ -36,6 +36,7 @@ final class IconController extends CrudController
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
+            'index_sort' => 'label',
         ];
     }
 }
