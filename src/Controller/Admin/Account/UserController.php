@@ -6,11 +6,14 @@ use App\Entity\Account\User;
 use App\Form\Account\NewUserType;
 use App\Repository\Account\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 
 #[Route('/admin/account/user', name: 'admin_account_user_')]
 class UserController extends AbstractController
@@ -25,8 +28,35 @@ class UserController extends AbstractController
             'cols' => [
                 1 => ['getter' => 'id'],
                 2 => ['getter' => 'username'],
-                3 => ['getter' => 'imageInfos', 'breakpoint' => 'md'],
+                3 => ['getter' => 'dateLastCo'],
+                // 3 => ['getter' => 'imageInfos', 'breakpoint' => 'md'],
             ],
+        ]);
+    }
+
+    #[Route('/new', name: 'new')]
+    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
+    {
+        $user = new User();
+        $form = $this->createForm(NewUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // generate a random temporary password and encode it
+            $plainPassword = $this->generatePassword();
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
+            $em->persist($user);
+            $em->flush();
+
+            // do anything else you need here, like send an email
+            $this->addFlash('success', ['message' => 'admin.user.flash.added', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword], 'raw' => true]);
+
+            return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/account/user/new.html.twig', [
+            'form' => $form,
         ]);
     }
 
@@ -38,30 +68,61 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new')]
-    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit', name: 'edit', requirements: ['id' => '\d+'])]
+    public function edit(User $user, Request $request, EntityManagerInterface $em): Response
     {
-        $user = new User();
         $form = $this->createForm(NewUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
-
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $em->persist($user);
+            $em->flush();
 
             // do anything else you need here, like send an email
+            $this->addFlash('success', ['message' => 'admin.user.flash.updated', 'params' => ['username' => $user->getUsername()], 'raw' => true]);
 
-            return $this->redirectToRoute('admin_account_user_index');
+            return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/account/user/new.html.twig', [
+        return $this->render('admin/account/user/edit.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/reset', name: 'reset', requirements: ['id' => '\d+'])]
+    public function reset(User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
+    {
+        // generate a random temporary password and encode it
+        $plainPassword = $this->generatePassword();
+        $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
+        $em->persist($user);
+        $em->flush();
+
+        // do anything else you need here, like send an email
+        $this->addFlash('success', ['message' => 'admin.user.flash.reset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword], 'raw' => true]);
+
+        return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[IsCsrfTokenValid(new Expression('"delete-" ~ args["user"].getId()'), tokenKey: 'delete_token')]
+    #[Route('/{id}/delete', name: 'delete', requirements: ['id' => '\d+'])]
+    public function delete(User $user, EntityManagerInterface $em): Response
+    {
+        $em->remove($user);
+        $em->flush();
+
+        $this->addFlash('success', ['message' => 'admin.user.flash.deleted', 'params' => ['username' => $user->getUsername()], 'raw' => true]);
+
+        return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function generatePassword()
+    {
+        $generator = new ComputerPasswordGenerator();
+        $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols()->setLength(20);
+        $plainPassword = $generator->generatePassword();
+
+        return $plainPassword;
     }
 }

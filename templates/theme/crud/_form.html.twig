@@ -8,3 +8,16 @@
   </div>
   {{ form_end(form) }}
 {% endblock %}
+
+{# {% block turbo_form %}
+  {{ form_start(form, {action: action_route|default('')}) }}
+  <div class="d-flex justify-content-between gap-2">
+
+    {{ form_widget(form) }}
+    <div class="text-start">
+      <button type="submit" class="btn btn-sm btn-outline-primary">{{ 'form.button.save'|trans }}</button>
+      <a class="btn btn-sm btn-outline-secondary">{{ 'form.button.cancel'|trans }}</a>
+    </div>
+  </div>
+  {{ form_end(form) }}
+{% endblock %} #}

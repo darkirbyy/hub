@@ -68,7 +68,7 @@ abstract class CrudController extends AbstractController
 
             $this->addFlash('success', ['message' => $isNewObject ? 'form.flash.added' : 'form.flash.updated']);
 
-            return $this->redirectToRoute($this->getConfig()['route_prefix'] . 'index');
+            return $this->redirectToRoute($this->getConfig()['route_prefix'] . 'index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render($isNewObject ? 'theme/crud/new.html.twig' : 'theme/crud/edit.html.twig', [
@@ -89,6 +89,6 @@ abstract class CrudController extends AbstractController
 
         $this->addFlash('success', ['message' => 'form.flash.deleted']);
 
-        return $this->redirectToRoute($this->getConfig()['route_prefix'] . 'index');
+        return $this->redirectToRoute($this->getConfig()['route_prefix'] . 'index', [], Response::HTTP_SEE_OTHER);
     }
 }

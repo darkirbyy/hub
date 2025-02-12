@@ -24,7 +24,7 @@
 
         {# Body with message #}
         <div class="modal-body">
-          {{ 'form.modal.body'|trans|raw }}
+          {{ modal_body|default('form.modal.body')|trans(modal_param|default({ }))|raw }}
         </div>
 
         {# Footer with cancel or confirm buttons #}

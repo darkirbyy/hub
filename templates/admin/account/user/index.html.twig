@@ -45,13 +45,13 @@
             <tr>
               {% for col in cols|ksort %}
                 <td class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
-                  {% set value = attribute(object, col.getter) %}
-                  {{ col.raw|default(false) ? value|raw : value }}
+                  {% set value = attribute(user, col.getter) %}
+                  {{ value }}
                 </td>
               {% endfor %}
               <td class="w-1 text-nowrap text-end py-1 align-center">
                 <a class="btn btn-outline-primary btn-sm px-2 py-1" href="{{ path('admin_account_user_show', { id: user.id }) }}">
-                  <span class="bi bi-pen-fill"></span><span class="d-none">{{ 'form.button.edit'|trans }}</span>
+                  <span class="bi bi-eye-fill me-1"></span>{{ 'form.button.see'|trans }}
                 </a>
               </td>
             </tr>

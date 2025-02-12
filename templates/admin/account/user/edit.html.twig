@@ -2,6 +2,9 @@
 
 {% set title = 'admin.accounts'|trans %}
 
+{# the object_id from the route parameters #}
+{% set user_id = app.request.attributes.get('id') %}
+
 {% block main %}
   <section>
     <div class="container">
@@ -14,11 +17,15 @@
           {{ 'user.name'|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.add'|trans }}</span>
         </h2>
         <div class="my-2">
-          <a href="{{ path('admin_account_user_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
+          <a href="{{ path('admin_account_user_show', { id: user_id }) }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToSee'|trans }}</a>
         </div>
 
         {# Actual form #}
+        {# <turbo-frame id="edit">
+          {% with {action_route: path('admin_account_user_edit', {id: user_id}) } %} #}
         {{ block('form', 'theme/crud/_form.html.twig') }}
+        {# {% endwith %}
+        </turbo-frame> #}
       </div>
     </div>
   </section>

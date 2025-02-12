@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'admin.accounts'|trans %}
+
+{% macro row(label, content, action) %}
+  <div class="row mx-2 border-bottom mb-2 rounded align-items-center bg-body-secondary">
+    <div class="col-5 col-md-4 py-2 text-truncate">
+      {{ label }}
+    </div>
+    <div class="col-5 col-md-4 py-2">
+      {{ content }}
+    </div>
+    <div class="col-2 col-md-4 py-1 text-end">
+      {{ action|raw }}
+    </div>
+  </div>
+{% endmacro %}
+
+{% block main %}
+  {% with { modal_body: 'admin.user.modal.body', modal_param: { username: user.username } } %}
+  {{ block('delete_modal', 'theme/crud/_delete.html.twig') }}
+  {% endwith %}
+
+  <section>
+    <div class="container">
+      {# Redefine the flashes with the same width as the cards #}
+      <div class="mx-auto">
+        {{ block('flash', 'theme/flash.html.twig') }}
+      </div>
+
+      <h2>
+        {{ 'user.name'|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.see'|trans }}</span>
+      </h2>
+
+      <div class="my-2">
+        <a href="{{ path('admin_account_user_index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
+      </div>
+
+      {% set button %}
+        <a href="{{ path('admin_account_user_edit', { id: user.id }) }}" class="btn btn-sm btn-outline-primary">
+          <span class="bi bi-pen-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
+        </a>
+      {% endset %}
+      {# <turbo-frame id="edit"> #}
+      {{ _self.row('user.label.username'|trans({ }, 'validators'), user.username, button) }}
+      {# </turbo-frame> #}
+
+      {% set button %}
+        <a href="{{ path('admin_account_user_reset', { id: user.id }) }}" class="btn btn-sm btn-outline-primary">
+          <span class="bi bi-eraser-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.reset'|trans }}</span>
+        </a>
+      {% endset %}
+      {{ _self.row('user.label.password'|trans({ }, 'validators'), '***', button) }}
+
+      {{ _self.row('user.label.dateAdd'|trans({ }, 'validators'), user.dateAdd|format_datetime('medium', 'medium'), '') }}
+      {{ _self.row('user.label.dateUpdate'|trans({ }, 'validators'), user.dateUpdate|format_datetime('medium', 'medium'), '') }}
+      {{ _self.row('user.label.dateLastCo'|trans({ }, 'validators'), user.dateLastCo ? user.dateLastCo|format_datetime('medium', 'medium') : '-', '') }}
+
+      {% set button %}
+        {# <button type="button" class="btn btn-sm btn-outline-primary">
+          <span class="bi bi-pen-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
+        </button> #}
+      {% endset %}
+      {{ _self.row('user.label.imageFile'|trans({ }, 'validators'), user.imageFile, button) }}
+
+      {% set button %}
+        {% with { path: path('admin_account_user_delete', { id: user.id }), token: csrf_token('delete-' ~ user.id), btn_class: 'btn-sm', text_class: 'd-none d-md-inline ms-md-1' }
+        %}
+        {{ block('delete_button', 'theme/crud/_delete.html.twig') }}
+        {% endwith %}
+      {% endset %}
+      {{ _self.row('', '', button) }}
+    </div>
+  </section>
+{% endblock %}

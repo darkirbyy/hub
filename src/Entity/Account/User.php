@@ -17,6 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
+#[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
 #[UniqueEntity(fields: ['username'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -29,6 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
+    #[Assert\Regex('/^[a-zA-Z0-9\-_]+$/', 'user.error.invalidUsername')]
     private ?string $username = null;
 
     #[ORM\Column]
@@ -45,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             dimensions: 'imageMeta.dimensions',
         ),
     ]
-    #[Assert\Image(maxSize: '5Mi', minWidth: 64, maxWidth: 512, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
+    #[Assert\Image(maxSize: '1Mi', minWidth: 64, maxWidth: 512, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
     private ?File $imageFile = null;
 
     #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
@@ -88,7 +90,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): static
+    public function setUsername(?string $username): static
     {
         $this->username = $username;
 

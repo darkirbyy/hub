@@ -55,5 +55,13 @@ user:
   label:
     id: '#'
     username: Nom d'utilisateur
+    password: Mot de passe
+    dateAdd: Date création
+    dateUpdate: Date dernière modification
+    dateLastCo: Date dernière connexion
     imageFile: Avatar
     imageInfos: Métadonnées de l'avatar
+  help:
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 512px<br>Poids maximum : 1Mio'
+  error:
+    invalidUsername: Ne doit contenir que des lettres, des chiffres, et les symboles - et _.
