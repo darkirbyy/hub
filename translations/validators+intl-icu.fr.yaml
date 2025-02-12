@@ -8,7 +8,7 @@ icon:
   help:
     faClass: Voir sur le site de <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a>
   error:
-    invalidFaClass: Ne doit contenir que des lettres, des chiffres, des espaces ainsi que les symboles - et _.
+    invalidFaClass: Ne doit contenir que des lettres, des chiffres, des espaces ou les symboles - et _.
 
 category:
   name: Catégories
@@ -62,6 +62,7 @@ user:
     imageFile: Avatar
     imageInfos: Métadonnées de l'avatar
   help:
+    username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 512px<br>Poids maximum : 1Mio'
   error:
-    invalidUsername: Ne doit contenir que des lettres, des chiffres, et les symboles - et _.
+    invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.

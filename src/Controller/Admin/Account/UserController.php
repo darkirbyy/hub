@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Account;
 
 use App\Entity\Account\User;
+use App\Form\Account\EditUserType;
 use App\Form\Account\NewUserType;
 use App\Repository\Account\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,7 +72,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', requirements: ['id' => '\d+'])]
     public function edit(User $user, Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(NewUserType::class, $user);
+        $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

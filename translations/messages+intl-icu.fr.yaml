@@ -24,7 +24,7 @@ form:
   button:
     see: Voir
     new: Nouveau
-    edit: Modifier
+    edit: Editer
     delete: Supprimer
     save: Enregistrer
     reset: Réinitialiser

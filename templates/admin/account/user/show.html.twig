@@ -4,6 +4,7 @@
 
 {% macro row(label, content, action) %}
   <div class="row mx-2 border-bottom mb-2 rounded align-items-center bg-body-secondary">
+    {# {{ action is not empty ? '<turbo-frame id="edit">' }} #}
     <div class="col-5 col-md-4 py-2 text-truncate">
       {{ label }}
     </div>
@@ -13,6 +14,7 @@
     <div class="col-2 col-md-4 py-1 text-end">
       {{ action|raw }}
     </div>
+    {# {{ action is not empty ? '</turbo-frame>' }} #}
   </div>
 {% endmacro %}
 
@@ -41,9 +43,9 @@
           <span class="bi bi-pen-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
         </a>
       {% endset %}
-      {# <turbo-frame id="edit"> #}
-      {{ _self.row('user.label.username'|trans({ }, 'validators'), user.username, button) }}
-      {# </turbo-frame> #}
+      <turbo-frame id="edit">
+        {{ _self.row('user.label.username'|trans({ }, 'validators'), user.username, button) }}
+      </turbo-frame>
 
       {% set button %}
         <a href="{{ path('admin_account_user_reset', { id: user.id }) }}" class="btn btn-sm btn-outline-primary">

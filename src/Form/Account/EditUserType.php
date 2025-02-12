@@ -10,17 +10,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NewUserType extends AbstractType
+class EditUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('username', TextType::class, [
             'required' => true,
-            'label' => 'user.label.username',
+            'label' => false,
             'help' => 'user.help.username',
-            'attr' => [
-                'clear_button' => true,
-                'placeholder' => 'user.label.username',
+            'row_attr' => [
+                'class' => 'mb-0',
             ],
         ]);
     }
@@ -32,7 +31,6 @@ class NewUserType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'clear-button',
             ],
         ]);
     }
