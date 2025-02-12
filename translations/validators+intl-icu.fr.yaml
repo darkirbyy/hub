@@ -29,7 +29,7 @@ appli:
     linkText: Texte du lien
     public: Publique
     imageFile: Image
-    imageInfos: Métadonnées de l'image
+    imageMeta: Métadonnées de l'image
     externalLinks: Liens externes
   help:
     title: Apparaît sur les cartes du HUB
@@ -64,7 +64,7 @@ user:
     dateUpdate: Date dernière modification
     dateLastCo: Date dernière connexion
     imageFile: Avatar
-    imageInfos: Métadonnées de l'avatar
+    imageMeta: Métadonnées de l'avatar
   help:
     username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 512px<br>Poids maximum : 1Mio'

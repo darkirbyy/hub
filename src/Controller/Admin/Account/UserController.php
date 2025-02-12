@@ -51,7 +51,7 @@ class UserController extends AbstractController
             $em->flush();
 
             // do anything else you need here, like send an email
-            $this->addFlash('success', ['message' => 'admin.user.flash.added', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword], 'raw' => true]);
+            $this->addFlash('success', ['message' => 'admin.user.flash.added', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
             return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,7 +80,7 @@ class UserController extends AbstractController
             $em->flush();
 
             // do anything else you need here, like send an email
-            $this->addFlash('success', ['message' => 'admin.user.flash.updated', 'params' => ['username' => $user->getUsername()], 'raw' => true]);
+            $this->addFlash('success', ['message' => 'admin.user.flash.updated', 'params' => ['username' => $user->getUsername()]]);
 
             return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -101,7 +101,7 @@ class UserController extends AbstractController
         $em->flush();
 
         // do anything else you need here, like send an email
-        $this->addFlash('success', ['message' => 'admin.user.flash.reset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword], 'raw' => true]);
+        $this->addFlash('success', ['message' => 'admin.user.flash.reset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
         return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }
@@ -113,7 +113,7 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
 
-        $this->addFlash('success', ['message' => 'admin.user.flash.deleted', 'params' => ['username' => $user->getUsername()], 'raw' => true]);
+        $this->addFlash('success', ['message' => 'admin.user.flash.deleted', 'params' => ['username' => $user->getUsername()]]);
 
         return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
     }

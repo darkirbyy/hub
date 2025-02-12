@@ -4,7 +4,6 @@
 
 {% macro row(label, content, action) %}
   <div class="row mx-2 border-bottom mb-2 rounded align-items-center bg-body-secondary">
-    {# {{ action is not empty ? '<turbo-frame id="edit">' }} #}
     <div class="col-5 col-md-4 py-2 text-truncate">
       {{ label }}
     </div>
@@ -14,7 +13,6 @@
     <div class="col-2 col-md-4 py-1 text-end">
       {{ action }}
     </div>
-    {# {{ action is not empty ? '</turbo-frame>' }} #}
   </div>
 {% endmacro %}
 

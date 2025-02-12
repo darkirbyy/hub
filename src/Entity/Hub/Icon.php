@@ -31,12 +31,7 @@ class Icon
 
     public function __toString(): string
     {
-        return $this->getPreview();
-    }
-
-    public function getPreview(): string
-    {
-        return '<span class="' . $this->getFaClass() . '"></span>';
+        return $this->getLabel();
     }
 
     public function getId(): ?int

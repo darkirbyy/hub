@@ -27,10 +27,10 @@ final class IconController extends CrudController
             'form_class' => IconType::class,
             'main_title' => 'admin.configs',
             'index_cols' => [
-                1 => ['getter' => 'id'],
+                // 1 => ['getter' => 'id'],
                 2 => ['getter' => 'label'],
                 3 => ['getter' => 'faClass'],
-                4 => ['getter' => 'preview', 'raw' => true],
+                4 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',

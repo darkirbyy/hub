@@ -27,7 +27,7 @@ final class ShortcutController extends CrudController
             'form_class' => ShortcutType::class,
             'main_title' => 'admin.others',
             'index_cols' => [
-                1 => ['getter' => 'id'],
+                // 1 => ['getter' => 'id'],
                 2 => ['getter' => 'type'],
                 3 => ['getter' => 'number'],
                 4 => ['getter' => 'label'],

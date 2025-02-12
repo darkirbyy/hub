@@ -23,7 +23,7 @@
           <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev"><span class="fa-solid fa-chevron-left fa-xl"></span></button>
           <div class="swiper" id="swiper-{{ category.id }}-main">
             <h2 class="mb-3 text-center text-md-start">
-              <span class="{{ category.icon.faClass }} fa-fw me-2"></span> {{ category.label }}
+              {{ category.icon.faClass|fmt_fa_class('fa-fw me-2')|raw }} {{ category.label }}
             </h2>
             <div class="swiper-wrapper">
               {% for appli in category.applis %}

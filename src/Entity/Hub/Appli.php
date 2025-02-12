@@ -212,17 +212,6 @@ class Appli
         return $this->imageUpdatedAt;
     }
 
-    public function getImageInfos(): ?string
-    {
-        return $this->imageMeta->getMimeType() .
-            ' ; ' .
-            \round($this->imageMeta->getSize() / 1024, 0) .
-            'Kio ; ' .
-            $this->imageMeta->getWidth() .
-            'x' .
-            $this->imageMeta->getHeight();
-    }
-
     public function getExternalLinks(): Collection
     {
         return $this->externalLinks;

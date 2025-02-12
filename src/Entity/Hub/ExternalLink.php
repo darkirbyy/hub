@@ -34,6 +34,11 @@ class ExternalLink
     #[ORM\JoinColumn(nullable: false)]
     private ?Appli $appli = null;
 
+    public function __toString(): string
+    {
+        return $this->getText();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

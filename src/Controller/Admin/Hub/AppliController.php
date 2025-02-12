@@ -30,10 +30,9 @@ final class AppliController extends CrudController
                 // 1 => ['getter' => 'id'],
                 2 => ['getter' => 'title'],
                 3 => ['getter' => 'name', 'breakpoint' => 'md'],
-                // 4 => ['getter' => 'path', 'breakpoint' => 'md'],
-                5 => ['getter' => 'public'],
-                6 => ['getter' => 'category'],
-                7 => ['getter' => 'imageInfos', 'breakpoint' => 'md'],
+                4 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
+                5 => ['getter' => 'category'],
+                6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',
