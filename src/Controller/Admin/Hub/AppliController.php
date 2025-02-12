@@ -27,11 +27,13 @@ final class AppliController extends CrudController
             'form_class' => AppliType::class,
             'main_title' => 'admin.configs',
             'index_cols' => [
-                1 => ['getter' => 'id'],
-                2 => ['getter' => 'name'],
-                3 => ['getter' => 'path', 'breakpoint' => 'md'],
-                4 => ['getter' => 'category'],
-                5 => ['getter' => 'imageInfos', 'breakpoint' => 'md'],
+                // 1 => ['getter' => 'id'],
+                2 => ['getter' => 'title'],
+                3 => ['getter' => 'name', 'breakpoint' => 'md'],
+                // 4 => ['getter' => 'path', 'breakpoint' => 'md'],
+                5 => ['getter' => 'public'],
+                6 => ['getter' => 'category'],
+                7 => ['getter' => 'imageInfos', 'breakpoint' => 'md'],
             ],
             'index_backlink' => [
                 'text' => 'admin.backTo',

@@ -17,6 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
 #[UniqueEntity('path')]
+#[UniqueEntity('name')]
 #[Vich\Uploadable]
 class Appli
 {
@@ -27,6 +28,10 @@ class Appli
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 2)]
+    private ?string $title = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(min: 2)]
     private ?string $name = null;
 
@@ -46,6 +51,10 @@ class Appli
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private ?string $linkText = null;
+
+    #[ORM\Column]
+    #[Assert\NotNull]
+    private ?bool $public = null;
 
     #[
         Vich\UploadableField(
@@ -73,6 +82,7 @@ class Appli
 
     public function __construct()
     {
+        $this->public = false;
         $this->imageMeta = new FileMeta();
         $this->externalLinks = new ArrayCollection();
     }
@@ -85,6 +95,18 @@ class Appli
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -119,6 +141,18 @@ class Appli
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function isPublic(): ?bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(?bool $public): static
+    {
+        $this->public = $public;
 
         return $this;
     }

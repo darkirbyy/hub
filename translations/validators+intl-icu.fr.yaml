@@ -21,17 +21,21 @@ appli:
   name: Applications
   label:
     id: '#'
+    title: Titre
     name: Nom
     path: Chemin
     category: Catégorie
     description: Description
     linkText: Texte du lien
+    public: Publique
     imageFile: Image
     imageInfos: Métadonnées de l'image
     externalLinks: Liens externes
   help:
+    title: Apparaît sur les cartes du HUB
+    name: Doit être identique à la variable APP_NAME renseignée dans l'application cible
+    path: Définit le chemin de l'application cible depuis la racine du serveur, sans '/' au début
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
-    path: Sans '/' au début
 
 externalLink:
   name: Liens externes

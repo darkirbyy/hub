@@ -47,6 +47,9 @@ form:
     backToSee: Retour aux détails
     action: Actions
     none: Aucun
+  choice:
+    yes: Oui
+    no: Non
 
 layout:
   name: Hub
@@ -57,8 +60,6 @@ layout:
     madeWith: Réalisé avec
     version: Version
     releaseDate: Mise à jour le
-
-enum:
 
 aria:
   label:

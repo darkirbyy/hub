@@ -25,7 +25,7 @@
     {% if form.vars.attr.placeholder is defined %}
       <div class="input-group">
         <div class="form-floating">
-          {{ form_widget(form) }}
+          {{ form_widget(form, { attr: { class: form.vars.attr.clear_button|default(false) ? 'pe-5' : '' } }) }}
           {{ form_label(form) }}
           {% if (form.vars.attr.clear_button|default(false)) == true %}
             <small>
@@ -100,38 +100,3 @@
     <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash-fill"></span></button>
   </div>
 {% endblock %}
-
-{# <a class="text-muted position-absolute" href="#" style="top: 1rem;right: 1rem;z-index: 100;"><span class="bi bi-x-lg"></span></a> #}
-
-{# {% set label = form.vars.label|trans(form.vars.label_translation_parameters, form.vars.translation_domain) %}
-      <span class="input-group-text">{{ form.vars.label_html ? label|raw : label }}</span>
-      {{ form_widget(form) }} #}
-
-{#
-{% block form_row %}
-  {% if form.vars.attr.placeholder is defined %}
-    <div class="input-group app-form-row {% if not compound or force_error|default(false) %} {% for error in errors %} has-validation{% endfor %} {% endif %}">
-      <div class="form-floating">
-        {{ form_widget(form) }}
-        {{ form_label(form) }}
-      </div>
-      {% if form.vars.help is not empty %}
-        <button type="button"
-          class="input-group-text btn btn-outline-secondary app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
-          data-bs-toggle="popover"
-          {{ form.vars.help_html ? 'data-bs-html="true"' }}
-          data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters, form.vars.translation_domain) }}">
-          <span class="fs-5 bi bi-info-circle"></span>
-        </button>
-      {% endif %}
-      {{ form_errors(form) }}
-    </div>
-  {% else %}
-    <div class="app-form-row {% if not compound or force_error|default(false) %}{% for error in errors %} has-validation{% endfor %}{% endif %}">
-      {{ form_label(form) }}
-      {{ form_help(form) }}
-      {{ form_widget(form) }}
-      {{ form_errors(form) }}
-    </div>
-  {% endif %}
-{% endblock %} #}

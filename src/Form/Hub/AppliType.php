@@ -8,6 +8,7 @@ use App\Entity\Hub\Appli;
 use App\Entity\Hub\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,9 +21,19 @@ class AppliType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('title', TextType::class, [
+                'required' => true,
+                'label' => 'appli.label.title',
+                'help' => 'appli.help.title',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'appli.label.title',
+                ],
+            ])
             ->add('name', TextType::class, [
                 'required' => true,
                 'label' => 'appli.label.name',
+                'help' => 'appli.help.name',
                 'attr' => [
                     'clear_button' => true,
                     'placeholder' => 'appli.label.name',
@@ -46,6 +57,7 @@ class AppliType extends AbstractType
                     'placeholder' => 'appli.label.category',
                 ],
             ])
+
             ->add('description', TextareaType::class, [
                 'required' => true,
                 'label' => 'appli.label.description',
@@ -60,6 +72,23 @@ class AppliType extends AbstractType
                 'attr' => [
                     'clear_button' => true,
                     'placeholder' => 'appli.label.linkText',
+                ],
+            ])
+            ->add('public', ChoiceType::class, [
+                'required' => true,
+                'choices' => [
+                    'form.choice.yes' => true,
+                    'form.choice.no' => false,
+                ],
+                'choice_translation_domain' => 'messages',
+                'label' => 'appli.label.public',
+                'label_attr' => [
+                    'class' => 'radio-inline',
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'row_attr' => [
+                    'class' => 'app-form-row-bordered',
                 ],
             ])
             ->add('externalLinks', CollectionType::class, [
