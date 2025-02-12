@@ -37,8 +37,8 @@ export default class extends Controller {
         prevEl: '#swiper-' + this.idValue + '-button-prev',
         nextEl: '#swiper-' + this.idValue + '-button-next',
         disabledClass: 'opacity-0',
-        hiddenClass: 'd-none',
-        lockClass: 'd-none',
+        // hiddenClass: 'd-none',
+        // lockClass: 'd-none',
       },
     });
   }
