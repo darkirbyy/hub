@@ -44,7 +44,7 @@
             {% for type, shortcuts in shortcuts_by_type %}
               <span class="list-group-item fw-bold list-group-item-primary">{{ type }}</span>
               {% for shortcut in shortcuts %}
-                <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ shortcut.url }}">
+                <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ shortcut.url }}" data-turbo="false">
                   <span class="fa-solid fa-arrow-up-right-from-square fa-fw me-1"></span>{{ shortcut.label }}
                 </a>
               {% endfor %}

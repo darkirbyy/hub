@@ -29,9 +29,9 @@
               </h2>
               <div class="swiper-wrapper">
                 {% for appli in category.applis %}
-                  {% set appli_url = server_uri ~ appli.path %}
+                  {% set appli_url = server_base_url ~ appli.path %}
                   <div class="card swiper-slide">
-                    <a href="{{ appli_url }}" class="card-img rounded-bottom-0 d-flex align-items-center">
+                    <a href="{{ appli_url }}" class="card-img rounded-bottom-0 d-flex align-items-center" data-turbo="false">
                       <img src="{{ vich_uploader_asset(appli, 'imageFile') }}" class="card-img-top" alt="{{ appli.title }}" />
                     </a>
                     <div class="card-body bg-light d-flex flex-column justify-content-between">
@@ -43,11 +43,11 @@
                       </p>
                       <div class="d-flex flex-row gap-2 justify-content-start align-items-end">
                         <div class="flex-fill text-start">
-                          <a href="{{ appli_url }}" class="btn btn-primary">{{ appli.linkText }}</a>
+                          <a href="{{ appli_url }}" class="btn btn-primary" data-turbo="false">{{ appli.linkText }}</a>
                         </div>
                         {% for externalLink in appli.externalLinks %}
                           <div>
-                            <a href="{{ externalLink.url }}" class="btn btn-sm btn-outline-secondary py-0 px-1 fs-5" title="{{ externalLink.text }}">
+                            <a href="{{ externalLink.url }}" class="btn btn-sm btn-outline-secondary py-0 px-1 fs-5" title="{{ externalLink.text }}" data-turbo="false">
                               <span class="{{ externalLink.icon.faClass }}"></span>
                             </a>
                           </div>

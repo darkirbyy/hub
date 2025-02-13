@@ -17,11 +17,11 @@ class HomeController extends AbstractController
     public function index(CategoryRepository $categoryRepo, Request $request): Response
     {
         $categories = $categoryRepo->findAndSort();
-        $serverUri = $request->getUri();
+        $serverBaseUrl = $request->getSchemeAndHttpHost();
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
-            'server_uri' => $serverUri,
+            'server_base_url' => $serverBaseUrl,
         ]);
     }
 }

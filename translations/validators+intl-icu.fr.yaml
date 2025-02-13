@@ -6,7 +6,7 @@ icon:
     faClass: Classes CSS
     preview: Aperçu
   help:
-    faClass: Voir sur le site de <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a>
+    faClass: Voir sur le site de <a href="https://fontawesome.com/icons" data-turbo="false" target="_blank">Font Awesome</a>
   error:
     invalidFaClass: Ne doit contenir que des lettres, des chiffres, des espaces ou les symboles - et _.
 
@@ -37,7 +37,7 @@ appli:
   help:
     title: Apparaît sur les cartes du HUB
     name: Doit être identique à la variable APP_NAME renseignée dans l'application cible
-    path: Définit le chemin de l'application cible depuis la racine du serveur, sans '/' au début
+    path: Définit le chemin de l'application cible depuis la racine du serveur, en commençant par '/'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
 
 externalLink:
