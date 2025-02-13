@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Extension;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -30,6 +31,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('ksort', [$this, 'sortByKeys']),
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass'], ['is_safe' => []]),
+            new TwigFilter('fmt_image_file', [$this, 'fmtImageFile']),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
         ];
     }
@@ -80,6 +82,13 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     public function fmtFaClass(string $input, string $custom = ''): string
     {
         return '<span class="' . $input . ' ' . $custom . '"></span>';
+    }
+
+    public function fmtImageFile(File $input, string $custom = ''): string
+    {
+        $path = explode('public', (string) $input);
+
+        return '<img src="' . $path[1] . '" class="' . $custom . '"/>';
     }
 
     public function fmtImageMeta(FileMeta $input): string

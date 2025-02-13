@@ -18,7 +18,7 @@ final class AppliController extends CrudController
         parent::__construct($repository);
     }
 
-    protected function getConfig(): array
+    protected function setConfigMain(): array
     {
         return [
             'route_prefix' => 'admin_hub_appli_',
@@ -26,7 +26,13 @@ final class AppliController extends CrudController
             'entity_key' => 'appli',
             'form_class' => AppliType::class,
             'main_title' => 'admin.configs',
-            'index_cols' => [
+        ];
+    }
+
+    protected function setConfigIndex(): array
+    {
+        return [
+            'cols' => [
                 // 1 => ['getter' => 'id'],
                 1 => ['getter' => 'category'],
                 2 => ['getter' => 'title'],
@@ -34,11 +40,32 @@ final class AppliController extends CrudController
                 4 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
                 6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
             ],
-            'index_backlink' => [
+            'backlink' => [
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
-            'index_sort' => 'category.label',
+            'button' => [
+                'show' => true,
+            ],
+            'sort' => 'category.label',
+        ];
+    }
+
+    protected function setConfigShow(): array
+    {
+        return [
+            'rows' => [
+                0 => ['getter' => 'id'],
+                1 => ['getter' => 'category'],
+                2 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
+                3 => ['getter' => 'title'],
+                4 => ['getter' => 'name'],
+                5 => ['getter' => 'path'],
+                6 => ['getter' => 'description'],
+                7 => ['getter' => 'linkText'],
+                8 => ['getter' => 'imageFile', 'filters' => 'fmt_image_file("img-fluid")|raw'],
+                9 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
+            ],
         ];
     }
 }

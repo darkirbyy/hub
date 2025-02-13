@@ -1,16 +1,4 @@
-{% block delete_button %}
-  <button type="button"
-    class="btn btn-outline-danger {{ btn_class|default('') }}"
-    data-bs-toggle="modal"
-    data-bs-target="#delete-modal"
-    data-bs-path="{{ path }}"
-    data-bs-token="{{ token }}">
-    <span class="bi bi-trash-fill"></span>
-    <span class="d-none {{ text_class|default('') }}">{{ 'form.button.delete'|trans }}</span>
-  </button>
-{% endblock %}
-
-{% block delete_modal %}
+{% block delete %}
   <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true" role="dialog" loading="lazy" data-controller="delete-modal">
     <div class="modal-dialog">
       <div class="modal-content">

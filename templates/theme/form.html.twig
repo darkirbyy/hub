@@ -67,7 +67,7 @@
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img class="app-img-fit" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="{{ 'aria.other.download'|trans }}" />
+          <img class="img-fluid" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="{{ 'aria.other.download'|trans }}" />
         </a>
       </div>
     {%- endif -%}

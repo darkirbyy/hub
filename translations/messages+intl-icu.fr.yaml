@@ -22,8 +22,8 @@ admin:
 
 form:
   button:
-    see: Voir
     new: Nouveau
+    show: Voir
     edit: Editer
     delete: Supprimer
     save: Enregistrer
@@ -32,9 +32,9 @@ form:
     cancel: Annuler
   title:
     index: Liste
-    add: Ajout
-    update: Modification
-    see: Détails
+    new: Ajout
+    show: Détails
+    edit: Modification
   flash:
     added: Objet ajouté !
     updated: Objet mis à jour !
@@ -43,6 +43,7 @@ form:
     title: Confirmer la suppression
     body: Êtes-vous sûr de vouloir supprimer l'objet ? Cette action est <strong>définitive</strong>.
   other: 
+    back: Retour
     backToList: Retour à la liste 
     backToSee: Retour aux détails
     action: Actions

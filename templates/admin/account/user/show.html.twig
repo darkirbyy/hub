@@ -18,7 +18,7 @@
 
 {% block main %}
   {% with { modal_body: 'admin.user.modal.body', modal_param: { username: user.username } } %}
-  {{ block('delete_modal', 'theme/crud/_delete.html.twig') }}
+  {{ block('delete', 'theme/crud/_modal.html.twig') }}
   {% endwith %}
 
   <section>
@@ -29,7 +29,7 @@
       </div>
 
       <h2>
-        {{ 'user.name'|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.see'|trans }}</span>
+        {{ 'user.name'|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.show'|trans }}</span>
       </h2>
 
       <div class="my-2">
@@ -66,7 +66,7 @@
       {% set button %}
         {% with { path: path('admin_account_user_delete', { id: user.id }), token: csrf_token('delete-' ~ user.id), btn_class: 'btn-sm', text_class: 'd-none d-md-inline ms-md-1' }
         %}
-        {{ block('delete_button', 'theme/crud/_delete.html.twig') }}
+        {{ block('delete', 'theme/crud/_button.html.twig') }}
         {% endwith %}
       {% endset %}
       {{ _self.row('', '', button) }}

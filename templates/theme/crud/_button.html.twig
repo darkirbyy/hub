@@ -1,0 +1,33 @@
+{% block new %}
+  <a href="{{ path }}" class="btn btn-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.new'|trans }}">
+    <span class="bi bi-plus-square-fill" aria-hidden="true"></span>
+    <span class="d-none {{ text_class|default('') }}">{{ 'form.button.new'|trans }}</span>
+  </a>
+{% endblock %}
+
+{% block show %}
+  <a href="{{ path }}" class="btn btn-outline-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.show'|trans }}">
+    <span class="bi bi-eye-fill" aria-hidden="true"></span>
+    <span class="d-none {{ text_class|default('') }}">{{ 'form.button.show'|trans }}</span>
+  </a>
+{% endblock %}
+
+{% block edit %}
+  <a href="{{ path }}" class="btn btn-outline-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.edit'|trans }}">
+    <span class="bi bi-pen-fill" aria-hidden="true"></span>
+    <span class="d-none {{ text_class|default('') }}">{{ 'form.button.edit'|trans }}</span>
+  </a>
+{% endblock %}
+
+{% block delete %}
+  <button type="button"
+    class="btn btn-outline-danger {{ btn_class|default('') }}"
+    data-bs-toggle="modal"
+    data-bs-target="#delete-modal"
+    data-bs-path="{{ path }}"
+    data-bs-token="{{ token }}"
+    aria-label="{{ 'form.button.delete'|trans }}">
+    <span class="bi bi-trash-fill" aria-hidden="true"></span>
+    <span class="d-none {{ text_class|default('') }}">{{ 'form.button.delete'|trans }}</span>
+  </button>
+{% endblock %}

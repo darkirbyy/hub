@@ -18,7 +18,7 @@ final class ShortcutController extends CrudController
         parent::__construct($repository);
     }
 
-    protected function getConfig(): array
+    protected function setConfigMain(): array
     {
         return [
             'route_prefix' => 'admin_other_shortcut_',
@@ -26,18 +26,37 @@ final class ShortcutController extends CrudController
             'entity_key' => 'shortcut',
             'form_class' => ShortcutType::class,
             'main_title' => 'admin.others',
-            'index_cols' => [
+        ];
+    }
+
+    protected function setConfigIndex(): array
+    {
+        return [
+            'cols' => [
                 // 1 => ['getter' => 'id'],
                 2 => ['getter' => 'type'],
                 3 => ['getter' => 'number'],
                 4 => ['getter' => 'label'],
                 5 => ['getter' => 'url', 'breakpoint' => 'md'],
             ],
-            'index_backlink' => [
+            'backlink' => [
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
-            'index_sort' => 'type',
+            'sort' => 'type',
+        ];
+    }
+
+    protected function setConfigShow(): array
+    {
+        return [
+            'rows' => [
+                0 => ['getter' => 'id'],
+                2 => ['getter' => 'type'],
+                3 => ['getter' => 'number'],
+                4 => ['getter' => 'label'],
+                5 => ['getter' => 'url', 'breakpoint' => 'md'],
+            ],
         ];
     }
 }

@@ -4,7 +4,7 @@
 
 {% block main %}
   {# Modal to confirm delete #}
-  {# {{ block('delete_modal', 'theme/crud/_delete.html.twig') }} #}
+  {# {{ block('delete', 'theme/crud/_modal.html.twig') }} #}
 
   <section>
     <div class="container">
@@ -51,7 +51,7 @@
               {% endfor %}
               <td class="w-1 text-nowrap text-end py-1 align-center">
                 <a class="btn btn-outline-primary btn-sm px-2 py-1" href="{{ path('admin_account_user_show', { id: user.id }) }}">
-                  <span class="bi bi-eye-fill"></span> <span class="d-none d-md-inline ms-md-1">{{ 'form.button.see'|trans }}</span>
+                  <span class="bi bi-eye-fill"></span> <span class="d-none d-md-inline ms-md-1">{{ 'form.button.show'|trans }}</span>
                 </a>
               </td>
             </tr>
