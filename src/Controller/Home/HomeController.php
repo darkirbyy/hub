@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepo, Request $request): Response
     {
-        $categories = $categoryRepo->findAll();
+        $categories = $categoryRepo->findAndSort();
         $serverUri = $request->getUri();
 
         return $this->render('home/index.html.twig', [

@@ -15,6 +15,7 @@ category:
   label:
     id: '#'
     label: Libellé
+    number: Ordre
     icon: Icône
     applis: Applications
 
@@ -23,12 +24,13 @@ appli:
   label:
     id: '#'
     title: Titre
+    category: Catégorie
+    number: Ordre
+    public: Publique
     name: Nom
     path: Chemin
-    category: Catégorie
     description: Description
     linkText: Texte du lien
-    public: Publique
     imageFile: Image
     imageMeta: Métadonnées de l'image
     externalLinks: Liens externes
@@ -50,9 +52,9 @@ shortcut:
   name: Raccourcis
   label:
     id: '#'
-    number: Ordre
-    type: Type
     label: Libellé
+    type: Type
+    number: Ordre
     url: URL
 
 user:

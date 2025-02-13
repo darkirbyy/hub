@@ -17,11 +17,11 @@ class ShortcutType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('number', IntegerType::class, [
+            ->add('label', TextType::class, [
                 'required' => true,
-                'label' => 'shortcut.label.number',
+                'label' => 'shortcut.label.label',
                 'attr' => [
-                    'placeholder' => 'shortcut.label.number',
+                    'placeholder' => 'shortcut.label.label',
                 ],
             ])
             ->add('type', TextType::class, [
@@ -31,11 +31,11 @@ class ShortcutType extends AbstractType
                     'placeholder' => 'shortcut.label.type',
                 ],
             ])
-            ->add('label', TextType::class, [
+            ->add('number', IntegerType::class, [
                 'required' => true,
-                'label' => 'shortcut.label.label',
+                'label' => 'shortcut.label.number',
                 'attr' => [
-                    'placeholder' => 'shortcut.label.label',
+                    'placeholder' => 'shortcut.label.number',
                 ],
             ])
             ->add('url', UrlType::class, [

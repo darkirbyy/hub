@@ -8,15 +8,22 @@ use App\Repository\Hub\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[UniqueEntity('number')]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\GreaterThanOrEqual(0)]
+    private ?int $number = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
@@ -29,6 +36,7 @@ class Category
     private ?Icon $icon = null;
 
     #[ORM\OneToMany(targetEntity: Appli::class, mappedBy: 'category')]
+    #[ORM\OrderBy(['number' => 'ASC'])]
     private Collection $applis;
 
     public function __construct()
@@ -44,6 +52,18 @@ class Category
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?int $number): static
+    {
+        $this->number = $number;
+
+        return $this;
     }
 
     public function getLabel(): ?string

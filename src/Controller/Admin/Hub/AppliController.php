@@ -33,11 +33,12 @@ final class AppliController extends CrudController
     {
         return [
             'cols' => [
-                // 1 => ['getter' => 'id'],
-                1 => ['getter' => 'category'],
-                2 => ['getter' => 'title'],
-                3 => ['getter' => 'name', 'breakpoint' => 'md'],
+                // 0 => ['getter' => 'id'],
+                1 => ['getter' => 'title'],
+                2 => ['getter' => 'category'],
+                3 => ['getter' => 'number'],
                 4 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
+                5 => ['getter' => 'name', 'breakpoint' => 'md'],
                 6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
             ],
             'backlink' => [
@@ -47,7 +48,7 @@ final class AppliController extends CrudController
             'button' => [
                 'show' => true,
             ],
-            'sort' => 'category.label',
+            'repo_method' => 'findAndSort',
         ];
     }
 
@@ -56,16 +57,17 @@ final class AppliController extends CrudController
         return [
             'rows' => [
                 0 => ['getter' => 'id'],
-                1 => ['getter' => 'category'],
-                2 => ['getter' => 'title'],
-                3 => ['getter' => 'name'],
-                4 => ['getter' => 'path'],
-                5 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
-                6 => ['getter' => 'description'],
-                7 => ['getter' => 'linkText'],
-                8 => ['getter' => 'imageFile', 'filters' => 'fmt_image_file("img-fluid")|raw'],
-                9 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
-                10 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec'],
+                1 => ['getter' => 'title'],
+                2 => ['getter' => 'category'],
+                3 => ['getter' => 'number'],
+                4 => ['getter' => 'public', 'filters' => 'fmt_bool|trans'],
+                5 => ['getter' => 'name'],
+                6 => ['getter' => 'path'],
+                7 => ['getter' => 'description'],
+                8 => ['getter' => 'linkText'],
+                9 => ['getter' => 'imageFile', 'filters' => 'fmt_image_file("img-fluid")|raw'],
+                10 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
+                11 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec'],
             ],
         ];
     }

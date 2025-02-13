@@ -33,11 +33,11 @@ final class ShortcutController extends CrudController
     {
         return [
             'cols' => [
-                // 1 => ['getter' => 'id'],
+                // 0 => ['getter' => 'id'],
+                1 => ['getter' => 'label'],
                 2 => ['getter' => 'type'],
                 3 => ['getter' => 'number'],
-                4 => ['getter' => 'label'],
-                5 => ['getter' => 'url', 'breakpoint' => 'md'],
+                4 => ['getter' => 'url', 'breakpoint' => 'md'],
             ],
             'backlink' => [
                 'text' => 'admin.backTo',
@@ -55,10 +55,10 @@ final class ShortcutController extends CrudController
         return [
             'rows' => [
                 0 => ['getter' => 'id'],
+                1 => ['getter' => 'label'],
                 2 => ['getter' => 'type'],
                 3 => ['getter' => 'number'],
-                4 => ['getter' => 'label'],
-                5 => ['getter' => 'url', 'breakpoint' => 'md'],
+                4 => ['getter' => 'url', 'breakpoint' => 'md'],
             ],
         ];
     }

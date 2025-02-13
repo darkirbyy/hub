@@ -35,8 +35,9 @@ final class CategoryController extends CrudController
             'cols' => [
                 // 1 => ['getter' => 'id'],
                 1 => ['getter' => 'label'],
-                2 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
-                3 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
+                2 => ['getter' => 'number'],
+                3 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
+                4 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
             ],
             'backlink' => [
                 'text' => 'admin.backTo',
@@ -45,7 +46,7 @@ final class CategoryController extends CrudController
             'button' => [
                 'show' => false,
             ],
-            'sort' => 'label',
+            'repo_method' => 'findAndSort',
         ];
     }
 
@@ -55,8 +56,9 @@ final class CategoryController extends CrudController
             'rows' => [
                 0 => ['getter' => 'id'],
                 1 => ['getter' => 'label'],
-                2 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
-                3 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
+                2 => ['getter' => 'number'],
+                3 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
+                4 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
             ],
         ];
     }

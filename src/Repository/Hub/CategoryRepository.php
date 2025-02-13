@@ -14,4 +14,14 @@ class CategoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Category::class);
     }
+
+    public function findAndSort(): array
+    {
+        // Build the query (fetch one more result to determine is there are more to fetch)
+        $qb = $this->createQueryBuilder('c');
+        $qb->orderBy('c.number', 'ASC');
+
+        // Execute and fetch the query
+        return $qb->getQuery()->getResult();
+    }
 }

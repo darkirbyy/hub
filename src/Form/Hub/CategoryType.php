@@ -8,6 +8,7 @@ use App\Entity\Hub\Category;
 use App\Entity\Hub\Icon;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,13 @@ class CategoryType extends AbstractType
                 'label' => 'category.label.label',
                 'attr' => [
                     'placeholder' => 'category.label.label',
+                ],
+            ])
+            ->add('number', IntegerType::class, [
+                'required' => true,
+                'label' => 'category.label.number',
+                'attr' => [
+                    'placeholder' => 'category.label.number',
                 ],
             ])
             ->add('icon', EntityType::class, [

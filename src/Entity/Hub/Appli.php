@@ -16,8 +16,9 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
-#[UniqueEntity('path')]
 #[UniqueEntity('name')]
+#[UniqueEntity('path')]
+#[UniqueEntity('number')]
 #[Vich\Uploadable]
 class Appli
 {
@@ -44,6 +45,11 @@ class Appli
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private ?Category $category = null;
+
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\GreaterThanOrEqual(0)]
+    private ?int $number = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -141,6 +147,18 @@ class Appli
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?int $number): static
+    {
+        $this->number = $number;
 
         return $this;
     }

@@ -42,10 +42,6 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          {% if config_index.sort is not empty %}
-            {% set objects = objects|sort((a, b) => deep_attribute(a, config_index.sort) <=> deep_attribute(b, config_index.sort)) %}
-          {% endif %}
-
           {% for object in objects %}
             <tr>
               {% for col in config_index.cols|ksort %}

@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,24 +31,6 @@ class AppliType extends AbstractType
                     'placeholder' => 'appli.label.title',
                 ],
             ])
-            ->add('name', TextType::class, [
-                'required' => true,
-                'label' => 'appli.label.name',
-                'help' => 'appli.help.name',
-                'attr' => [
-                    'clear_button' => true,
-                    'placeholder' => 'appli.label.name',
-                ],
-            ])
-            ->add('path', TextType::class, [
-                'required' => true,
-                'label' => 'appli.label.path',
-                'help' => 'appli.help.path',
-                'attr' => [
-                    'clear_button' => true,
-                    'placeholder' => 'appli.label.path',
-                ],
-            ])
             ->add('category', EntityType::class, [
                 'required' => true,
                 'class' => Category::class,
@@ -57,21 +40,11 @@ class AppliType extends AbstractType
                     'placeholder' => 'appli.label.category',
                 ],
             ])
-
-            ->add('description', TextareaType::class, [
+            ->add('number', IntegerType::class, [
                 'required' => true,
-                'label' => 'appli.label.description',
+                'label' => 'appli.label.number',
                 'attr' => [
-                    'clear_button' => true,
-                    'placeholder' => 'appli.label.description',
-                ],
-            ])
-            ->add('linkText', TextType::class, [
-                'required' => true,
-                'label' => 'appli.label.linkText',
-                'attr' => [
-                    'clear_button' => true,
-                    'placeholder' => 'appli.label.linkText',
+                    'placeholder' => 'appli.label.number',
                 ],
             ])
             ->add('public', ChoiceType::class, [
@@ -91,6 +64,41 @@ class AppliType extends AbstractType
                     'class' => 'app-form-row-bordered',
                 ],
             ])
+            ->add('name', TextType::class, [
+                'required' => true,
+                'label' => 'appli.label.name',
+                'help' => 'appli.help.name',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'appli.label.name',
+                ],
+            ])
+            ->add('path', TextType::class, [
+                'required' => true,
+                'label' => 'appli.label.path',
+                'help' => 'appli.help.path',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'appli.label.path',
+                ],
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => true,
+                'label' => 'appli.label.description',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'appli.label.description',
+                ],
+            ])
+            ->add('linkText', TextType::class, [
+                'required' => true,
+                'label' => 'appli.label.linkText',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'appli.label.linkText',
+                ],
+            ])
+
             ->add('externalLinks', CollectionType::class, [
                 'required' => false,
                 'label' => 'appli.label.externalLinks',

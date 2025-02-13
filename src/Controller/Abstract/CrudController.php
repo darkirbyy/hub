@@ -61,7 +61,6 @@ abstract class CrudController extends AbstractController
                 'delete' => true,
             ],
             'repo_method' => 'findAll',
-            'sort' => null,
         ];
 
         foreach ($requiredKeys as $key) {

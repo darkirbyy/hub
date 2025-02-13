@@ -45,7 +45,7 @@ final class IconController extends CrudController
             'button' => [
                 'show' => false,
             ],
-            'sort' => 'label',
+            'repo_method' => 'findAndSort',
         ];
     }
 
