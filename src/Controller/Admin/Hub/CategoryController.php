@@ -34,8 +34,9 @@ final class CategoryController extends CrudController
         return [
             'cols' => [
                 // 1 => ['getter' => 'id'],
-                2 => ['getter' => 'label'],
-                3 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
+                1 => ['getter' => 'label'],
+                2 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
+                3 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
             ],
             'backlink' => [
                 'text' => 'admin.backTo',
@@ -55,6 +56,7 @@ final class CategoryController extends CrudController
                 0 => ['getter' => 'id'],
                 1 => ['getter' => 'label'],
                 2 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
+                3 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
             ],
         ];
     }

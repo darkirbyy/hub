@@ -15,7 +15,7 @@ class ShortcutRepository extends ServiceEntityRepository
         parent::__construct($registry, Shortcut::class);
     }
 
-    public function findAndGroup(): array
+    public function findAndSort(): array
     {
         // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('s');
@@ -23,6 +23,13 @@ class ShortcutRepository extends ServiceEntityRepository
 
         // Execute and fetch the query
         $shortcuts = $qb->getQuery()->getResult();
+
+        return $shortcuts;
+    }
+
+    public function findAndSortAndGroup(): array
+    {
+        $shortcuts = $this->findAndSort();
 
         // Group by type
         $shortcutsByType = [];

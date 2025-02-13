@@ -16,6 +16,7 @@ category:
     id: '#'
     label: Libellé
     icon: Icône
+    applis: Applications
 
 appli:
   name: Applications

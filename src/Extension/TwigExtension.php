@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Extension;
 
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpFoundation\File\File;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -30,6 +31,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('apply_filters', [$this, 'applyFilters'], ['needs_environment' => true, 'is_safe' => ['html']]),
             new TwigFilter('ksort', [$this, 'sortByKeys']),
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
+            new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass'], ['is_safe' => []]),
             new TwigFilter('fmt_image_file', [$this, 'fmtImageFile']),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
@@ -77,6 +79,11 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     public function fmtBool(bool $input): string
     {
         return $input ? 'form.choice.yes' : 'form.choice.no';
+    }
+
+    public function fmtCollec(PersistentCollection $input): string
+    {
+        return implode(', ', $input->toArray());
     }
 
     public function fmtFaClass(string $input, string $custom = ''): string

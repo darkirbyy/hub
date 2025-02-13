@@ -13,7 +13,7 @@ final class MainController extends AbstractController
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(ShortcutRepository $shortcutRepo): Response
     {
-        $shortcutsByType = $shortcutRepo->findAndGroup();
+        $shortcutsByType = $shortcutRepo->findAndSortAndGroup();
 
         return $this->render('admin/index.html.twig', [
             'shortcuts_by_type' => $shortcutsByType,

@@ -46,7 +46,7 @@ final class ShortcutController extends CrudController
             'button' => [
                 'show' => false,
             ],
-            'sort' => 'type',
+            'repo_method' => 'findAndSort',
         ];
     }
 
