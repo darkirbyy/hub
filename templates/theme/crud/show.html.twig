@@ -34,16 +34,13 @@
 
       {% for row in config_show.rows %}
         <div class="row mx-auto border-bottom mb-2 rounded bg-light">
-          <div class="col-4 col-md-2 py-2 text-end text-break">
+          <div class="col-4 col-md-3 py-2 text-end text-break">
             {{ (config_main.entity_key ~ '.label.' ~ (row.label is defined ? row.label : row.getter))|trans({ }, 'validators') }}
           </div>
-          <div class="col-8 col-md-10 py-2 border-start">
+          <div class="col-8 col-md-9 py-2 border-start">
             {% set value = deep_attribute(object, row.getter) %}
-            {{ row.filters is defined ? value|apply_filters(row.filters) : value }}
+            {{ value is not null ? row.filters is defined ? value|apply_filters(row.filters) : value : '-' }}
           </div>
-          {# <div class="col-2 col-md-4 py-1 text-end">
-          {{ action }}
-        </div> #}
         </div>
       {% endfor %}
     </div>

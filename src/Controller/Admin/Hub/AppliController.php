@@ -24,7 +24,6 @@ final class AppliController extends CrudController
             'route_prefix' => 'admin_hub_appli_',
             'entity_class' => Appli::class,
             'entity_key' => 'appli',
-            'form_class' => AppliType::class,
             'main_title' => 'admin.configs',
         ];
     }
@@ -69,6 +68,20 @@ final class AppliController extends CrudController
                 10 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
                 11 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec'],
             ],
+        ];
+    }
+
+    protected function setConfigNew(): array
+    {
+        return [
+            'form_class' => AppliType::class,
+        ];
+    }
+
+    protected function setConfigEdit(): array
+    {
+        return [
+            'form_class' => AppliType::class,
         ];
     }
 }

@@ -1,7 +1,7 @@
 icon:
   name: Icônes
   label:
-    id: '#'
+    id: ID
     label: Libellé
     faClass: Classes CSS
     preview: Aperçu
@@ -13,7 +13,7 @@ icon:
 category:
   name: Catégories
   label:
-    id: '#'
+    id: ID
     label: Libellé
     number: Ordre
     icon: Icône
@@ -22,7 +22,7 @@ category:
 appli:
   name: Applications
   label:
-    id: '#'
+    id: ID
     title: Titre
     category: Catégorie
     number: Ordre
@@ -43,7 +43,7 @@ appli:
 externalLink:
   name: Liens externes
   label:
-    id: '#'
+    id: ID
     icon: Icône
     text: Texte
     url: URL
@@ -51,7 +51,7 @@ externalLink:
 shortcut:
   name: Raccourcis
   label:
-    id: '#'
+    id: ID
     label: Libellé
     type: Type
     number: Ordre
@@ -60,11 +60,11 @@ shortcut:
 user:
   name: Utilisateurs
   label:
-    id: '#'
+    id: ID
     username: Nom d'utilisateur
     password: Mot de passe
     dateAdd: Date création
-    dateUpdate: Date dernière modification
+    dateUpdate: Date modification
     dateLastCo: Date dernière connexion
     imageFile: Avatar
     imageMeta: Métadonnées de l'avatar

@@ -24,7 +24,6 @@ final class IconController extends CrudController
             'route_prefix' => 'admin_hub_icon_',
             'entity_class' => Icon::class,
             'entity_key' => 'icon',
-            'form_class' => IconType::class,
             'main_title' => 'admin.configs',
         ];
     }
@@ -58,6 +57,20 @@ final class IconController extends CrudController
                 2 => ['getter' => 'faClass'],
                 3 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
             ],
+        ];
+    }
+
+    protected function setConfigNew(): array
+    {
+        return [
+            'form_class' => IconType::class,
+        ];
+    }
+
+    protected function setConfigEdit(): array
+    {
+        return [
+            'form_class' => IconType::class,
         ];
     }
 }

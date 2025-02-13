@@ -32,6 +32,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('ksort', [$this, 'sortByKeys']),
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
             new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
+            new TwigFilter('fmt_password', [$this, 'fmtPassword']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass'], ['is_safe' => []]),
             new TwigFilter('fmt_image_file', [$this, 'fmtImageFile']),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
@@ -84,6 +85,11 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     public function fmtCollec(PersistentCollection $input): string
     {
         return implode(', ', $input->toArray());
+    }
+
+    public function fmtPassword(string $input): string
+    {
+        return '***';
     }
 
     public function fmtFaClass(string $input, string $custom = ''): string

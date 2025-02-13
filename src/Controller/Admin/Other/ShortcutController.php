@@ -24,7 +24,6 @@ final class ShortcutController extends CrudController
             'route_prefix' => 'admin_other_shortcut_',
             'entity_class' => Shortcut::class,
             'entity_key' => 'shortcut',
-            'form_class' => ShortcutType::class,
             'main_title' => 'admin.others',
         ];
     }
@@ -60,6 +59,20 @@ final class ShortcutController extends CrudController
                 3 => ['getter' => 'number'],
                 4 => ['getter' => 'url', 'breakpoint' => 'md'],
             ],
+        ];
+    }
+
+    protected function setConfigNew(): array
+    {
+        return [
+            'form_class' => ShortcutType::class,
+        ];
+    }
+
+    protected function setConfigEdit(): array
+    {
+        return [
+            'form_class' => ShortcutType::class,
         ];
     }
 }

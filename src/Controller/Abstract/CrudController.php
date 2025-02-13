@@ -22,92 +22,54 @@ abstract class CrudController extends AbstractController
 
     abstract protected function setConfigShow(): array;
 
+    abstract protected function setConfigNew(): array;
+
+    abstract protected function setConfigEdit(): array;
+
     protected ServiceEntityRepositoryInterface $repository;
     protected array $configMain;
     protected array $configIndex;
     protected array $configShow;
+    protected array $configNew;
+    protected array $configEdit;
 
     public function __construct(ServiceEntityRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->validateConfigMain($this->setConfigMain());
-        $this->validateConfigIndex($this->setConfigIndex());
-        $this->validateConfigShow($this->setConfigShow());
-    }
-
-    protected function validateConfigMain(array $configMain): void
-    {
-        $requiredKeys = ['route_prefix', 'entity_class', 'entity_key', 'form_class', 'main_title'];
-        foreach ($requiredKeys as $key) {
-            if (!isset($configMain[$key])) {
-                throw new \InvalidArgumentException(sprintf('Main configuration key "%s" is missing.', $key));
-            }
-        }
-        $this->configMain = $configMain;
-    }
-
-    protected function validateConfigIndex(array $configIndex): void
-    {
-        $requiredKeys = ['cols'];
-        $defaultKeys = [
-            'backlink' => [
-                'text' => 'form.other.back',
-                'route' => 'home_index',
+        $this->configMain = $this->validateConfig($this->setConfigMain(), ['route_prefix', 'entity_class', 'entity_key', 'main_title'], []);
+        $this->configIndex = $this->validateConfig(
+            $this->setConfigIndex(),
+            ['cols'],
+            [
+                'template' => 'theme/crud/index.html.twig',
+                'button' => ['new' => true, 'show' => true, 'edit' => true, 'delete' => true],
+                'backlink' => ['text' => 'form.other.back', 'route' => 'home_index'],
+                'repo_method' => 'findAll',
             ],
-            'button' => [
-                'new' => true,
-                'show' => true,
-                'edit' => true,
-                'delete' => true,
+        );
+        $this->configShow = $this->validateConfig(
+            $this->setConfigShow(),
+            ['rows'],
+            [
+                'template' => 'theme/crud/show.html.twig',
+                'button' => ['edit' => true, 'delete' => true],
             ],
-            'repo_method' => 'findAll',
-        ];
-
-        foreach ($requiredKeys as $key) {
-            if (!isset($configIndex[$key])) {
-                throw new \InvalidArgumentException(sprintf('Index configuration key "%s" is missing.', $key));
-            }
-        }
-
-        foreach ($configIndex['cols'] as $index => $cell) {
-            $this->validateCell($cell);
-        }
-
-        $this->configIndex = array_replace_recursive($defaultKeys, $configIndex);
-    }
-
-    protected function validateConfigShow(array $configShow): void
-    {
-        $requiredKeys = ['rows'];
-        $defaultKeys = [
-            'button' => [
-                'edit' => true,
-                'delete' => true,
+        );
+        $this->configNew = $this->validateConfig(
+            $this->setConfigNew(),
+            ['form_class'],
+            [
+                'template' => 'theme/crud/new.html.twig',
             ],
-        ];
-
-        foreach ($requiredKeys as $key) {
-            if (!isset($configShow[$key])) {
-                throw new \InvalidArgumentException(sprintf('Show configuration key "%s" is missing.', $key));
-            }
-        }
-
-        foreach ($configShow['rows'] as $index => $cell) {
-            $this->validateCell($cell);
-        }
-
-        $this->configShow = array_replace_recursive($defaultKeys, $configShow);
-    }
-
-    protected function validateCell(array $cell)
-    {
-        $requiredKeys = ['getter'];
-
-        foreach ($requiredKeys as $key) {
-            if (!isset($cell[$key])) {
-                throw new \InvalidArgumentException(sprintf('Cell configuration key "%s" is missing.', $key));
-            }
-        }
+        );
+        $this->configEdit = $this->validateConfig(
+            $this->setConfigEdit(),
+            ['form_class'],
+            [
+                'template' => 'theme/crud/edit.html.twig',
+                'button' => ['delete' => true],
+            ],
+        );
     }
 
     #[Route('', name: 'index', methods: ['GET'])]
@@ -116,7 +78,7 @@ abstract class CrudController extends AbstractController
         $repoMethod = $this->configIndex['repo_method'];
         $objects = $this->repository->$repoMethod();
 
-        return $this->render('theme/crud/index.html.twig', [
+        return $this->render($this->configIndex['template'], [
             'config_main' => $this->configMain,
             'config_index' => $this->configIndex,
             'objects' => $objects,
@@ -130,12 +92,12 @@ abstract class CrudController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function show(int $id, Request $request, EntityManagerInterface $em): Response
+    public function show(int $id): Response
     {
         $object = $this->repository->find($id);
         empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
 
-        return $this->render('theme/crud/show.html.twig', [
+        return $this->render($this->configShow['template'], [
             'config_main' => $this->configMain,
             'config_show' => $this->configShow,
             'object' => $object,
@@ -153,7 +115,7 @@ abstract class CrudController extends AbstractController
             empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
         }
 
-        $form = $this->createForm($this->configMain['form_class'], $object);
+        $form = $this->createForm($isNewObject ? $this->configNew['form_class'] : $this->configEdit['form_class'], $object);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -165,8 +127,9 @@ abstract class CrudController extends AbstractController
             return $this->redirectToRoute($this->configMain['route_prefix'] . 'index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render($isNewObject ? 'theme/crud/new.html.twig' : 'theme/crud/edit.html.twig', [
+        return $this->render($isNewObject ? $this->configNew['template'] : $this->configEdit['template'], [
             'config_main' => $this->configMain,
+            'config_edit' => $this->configEdit,
             'form' => $form,
             'object' => $object,
         ]);
@@ -185,5 +148,21 @@ abstract class CrudController extends AbstractController
         $this->addFlash('success', ['message' => 'form.flash.deleted', 'params' => ['object' => (string) $object]]);
 
         return $this->redirectToRoute($this->configMain['route_prefix'] . 'index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    protected function validateConfig(array $config, array $requiredKeys, array $defaultKeys)
+    {
+        foreach ($requiredKeys as $key) {
+            if (!isset($config[$key])) {
+                throw new \InvalidArgumentException(sprintf('Configuration key "%s" is missing.', $key));
+            }
+            if (in_array($key, ['cols', 'rows'])) {
+                foreach ($config[$key] as $cell) {
+                    $this->validateConfig($cell, ['getter'], []);
+                }
+            }
+        }
+
+        return array_replace_recursive($defaultKeys, $config);
     }
 }

@@ -7,18 +7,14 @@ admin:
   title: Administration
   backTo: Retour à la page principale
   configs: Configurations
-  hub: Hub
   accounts: Comptes
+  hub: Hub
   others: Autres
   shortcuts: Raccourcis
   user:
     flash:
-      added: L'utilisateur <strong>{username}</strong> a été ajouté avec le mot de passe temporaire <strong>{password}</strong> !
-      reset: L'utilisateur <strong>{username}</strong> a été réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !
-      updated: L'utilisateur <strong>{username}</strong> a été mise à jour !
-      deleted: L'utilisateur <strong>{username}</strong> a été supprimé !
-    modal:
-      body: Êtes-vous sûr de vouloir supprimer l'utilisateur <strong>{username}</strong> et tout son profil ? Cette action est <strong>définitive</strong>.
+      added: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
+      reset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
 
 form:
   button:

@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             dimensions: 'imageMeta.dimensions',
         ),
     ]
-    #[Assert\Image(maxSize: '1Mi', minWidth: 64, maxWidth: 512, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
+    #[Assert\Image(maxSize: '1Mi', minWidth: 64, maxWidth: 1024, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
     private ?File $imageFile = null;
 
     #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
@@ -65,6 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->imageMeta = new FileMeta();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getUsername();
     }
 
     #[ORM\PrePersist]

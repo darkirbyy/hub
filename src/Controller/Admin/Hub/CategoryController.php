@@ -24,7 +24,6 @@ final class CategoryController extends CrudController
             'route_prefix' => 'admin_hub_category_',
             'entity_class' => Category::class,
             'entity_key' => 'category',
-            'form_class' => CategoryType::class,
             'main_title' => 'admin.configs',
         ];
     }
@@ -60,6 +59,20 @@ final class CategoryController extends CrudController
                 3 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
                 4 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
             ],
+        ];
+    }
+
+    protected function setConfigNew(): array
+    {
+        return [
+            'form_class' => CategoryType::class,
+        ];
+    }
+
+    protected function setConfigEdit(): array
+    {
+        return [
+            'form_class' => CategoryType::class,
         ];
     }
 }
