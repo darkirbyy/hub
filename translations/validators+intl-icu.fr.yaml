@@ -73,3 +73,15 @@ user:
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 1024px<br>Poids maximum : 1Mio'
   error:
     invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
+
+role:
+  name: Rôles
+  label:
+    id: ID
+    key: Clé
+    description: Description
+    appli: Application
+  help:
+    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+  error:
+    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.

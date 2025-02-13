@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IconRepository::class)]
-#[UniqueEntity('faClass')]
+#[UniqueEntity(fields: ['faClass'])]
 class Icon
 {
     #[ORM\Id]

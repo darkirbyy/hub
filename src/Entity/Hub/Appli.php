@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Hub;
 
+use App\Entity\Account\Role;
 use App\Repository\Hub\AppliRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,9 +17,9 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
-#[UniqueEntity('name')]
-#[UniqueEntity('path')]
-#[UniqueEntity('number')]
+#[UniqueEntity(fields: ['name'])]
+#[UniqueEntity(fields: ['path'])]
+#[UniqueEntity(fields: ['number'])]
 #[Vich\Uploadable]
 class Appli
 {
@@ -86,11 +87,15 @@ class Appli
     #[Assert\Valid]
     private Collection $externalLinks;
 
+    #[ORM\OneToMany(targetEntity: Role::class, mappedBy: 'appli')]
+    private Collection $roles;
+
     public function __construct()
     {
         $this->public = false;
         $this->imageMeta = new FileMeta();
         $this->externalLinks = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -251,6 +256,33 @@ class Appli
             // set the owning side to null (unless already changed)
             if ($externalLink->getAppli() === $this) {
                 $externalLink->setAppli(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRoles(): Collection
+    {
+        return $this->roles;
+    }
+
+    public function addRole(Role $role): static
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles->add($role);
+            $role->setAppli($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): static
+    {
+        if ($this->roles->removeElement($role)) {
+            // set the owning side to null (unless already changed)
+            if ($role->getAppli() === $this) {
+                $role->setAppli(null);
             }
         }
 

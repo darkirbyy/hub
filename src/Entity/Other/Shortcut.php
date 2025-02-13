@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ShortcutRepository::class)]
-#[UniqueEntity('number')]
+#[UniqueEntity(fields: ['number'])]
 class Shortcut
 {
     #[ORM\Id]

@@ -32,7 +32,7 @@ final class CategoryController extends CrudController
     {
         return [
             'cols' => [
-                // 1 => ['getter' => 'id'],
+                // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'label'],
                 2 => ['getter' => 'number'],
                 3 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],

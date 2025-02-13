@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[UniqueEntity('number')]
+#[UniqueEntity(fields: ['number'])]
 class Category
 {
     #[ORM\Id]

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Hub;
+namespace App\Controller\Admin\Account;
 
 use App\Controller\Abstract\CrudController;
-use App\Entity\Hub\Icon;
-use App\Form\Hub\IconType;
-use App\Repository\Hub\IconRepository;
+use App\Entity\Account\Role;
+use App\Form\Account\RoleType;
+use App\Repository\Account\RoleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/hub/icon', name: 'admin_hub_icon_')]
-final class IconController extends CrudController
+#[Route('/admin/account/role', name: 'admin_account_role_')]
+final class RoleController extends CrudController
 {
-    public function __construct(IconRepository $repository)
+    public function __construct(RoleRepository $repository)
     {
         parent::__construct($repository);
     }
@@ -21,9 +21,9 @@ final class IconController extends CrudController
     protected function setConfigMain(): array
     {
         return [
-            'route_prefix' => 'admin_hub_icon_',
-            'entity_class' => Icon::class,
-            'entity_key' => 'icon',
+            'route_prefix' => 'admin_account_role_',
+            'entity_class' => Role::class,
+            'entity_key' => 'role',
             'main_title' => 'admin.configs',
         ];
     }
@@ -33,9 +33,9 @@ final class IconController extends CrudController
         return [
             'cols' => [
                 // 0 => ['getter' => 'id'],
-                2 => ['getter' => 'label'],
-                3 => ['getter' => 'faClass'],
-                4 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
+                1 => ['getter' => 'key'],
+                2 => ['getter' => 'appli.name', 'label' => 'appli'],
+                3 => ['getter' => 'description'],
             ],
             'backlink' => [
                 'text' => 'admin.backTo',
@@ -53,9 +53,9 @@ final class IconController extends CrudController
         return [
             'rows' => [
                 0 => ['getter' => 'id'],
-                1 => ['getter' => 'label'],
-                2 => ['getter' => 'faClass'],
-                3 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
+                1 => ['getter' => 'key'],
+                2 => ['getter' => 'appli.name', 'label' => 'appli'],
+                3 => ['getter' => 'description'],
             ],
         ];
     }
@@ -63,14 +63,14 @@ final class IconController extends CrudController
     protected function setConfigNew(): array
     {
         return [
-            'form_class' => IconType::class,
+            'form_class' => RoleType::class,
         ];
     }
 
     protected function setConfigEdit(): array
     {
         return [
-            'form_class' => IconType::class,
+            'form_class' => RoleType::class,
         ];
     }
 }
