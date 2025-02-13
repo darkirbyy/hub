@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
     private ?FileMeta $imageMeta = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $imageUpdatedAt = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateAdd = null;
 
@@ -139,7 +142,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->dateUpdate = new \DateTime();
+            $this->imageUpdatedAt = new \DateTime();
         }
     }
 
@@ -158,15 +161,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->imageMeta;
     }
 
-    public function getImageInfos(): ?string
+    public function getImageUpdatedAt(): ?\DateTime
     {
-        return $this->imageMeta->getMimeType() .
-            ' ; ' .
-            \round($this->imageMeta->getSize() / 1024, 0) .
-            'Kio ; ' .
-            $this->imageMeta->getWidth() .
-            'x' .
-            $this->imageMeta->getHeight();
+        return $this->imageUpdatedAt;
     }
 
     public function getDateAdd(): ?\DateTimeInterface

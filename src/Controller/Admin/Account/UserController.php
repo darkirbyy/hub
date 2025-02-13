@@ -38,7 +38,7 @@ class UserController extends CrudController
             'cols' => [
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'username'],
-                2 => ['getter' => 'dateAdd', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
+                2 => ['getter' => 'imageFile', 'filters' => 'fmt_image_file("img-fluid app-avatar-small rounded-circle shadow-sm")|raw'],
                 3 => ['getter' => 'dateUpdate', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
                 4 => ['getter' => 'dateLastCo', 'filters' => 'format_datetime("short", "short")'],
             ],

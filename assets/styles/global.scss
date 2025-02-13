@@ -127,6 +127,23 @@ legend.col-form-label.required::after {
 //   filter: opacity(1);
 // }
 
+// App-specific classes
+// Avatars
+@mixin app-avatar($size) {
+  object-fit: cover;
+  object-position: center;
+  height: $size * $font-size-base;
+  width: $size * $font-size-base;
+}
+
+.app-avatar-small {
+  @include app-avatar(1.5);
+}
+
+.app-avatar-card {
+  @include app-avatar(5);
+}
+
 // Others
 .app-env-dev {
   background: repeating-linear-gradient(

@@ -34,7 +34,7 @@
 
       {% for row in config_show.rows %}
         <div class="row mx-auto border-bottom mb-2 rounded bg-light">
-          <div class="col-4 col-md-3 py-2 text-end text-break">
+          <div class="col-4 col-md-3 py-2 text-end text-truncate">
             {{ (config_main.entity_key ~ '.label.' ~ (row.label is defined ? row.label : row.getter))|trans({ }, 'validators') }}
           </div>
           <div class="col-8 col-md-9 py-2 border-start">
