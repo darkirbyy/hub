@@ -19,7 +19,7 @@ use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 #[Route('/admin/account/user', name: 'admin_account_user_')]
 class UserController extends AbstractController
 {
-    #[Route('', name: 'index')]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(UserRepository $userRepo): Response
     {
         $users = $userRepo->findAll();
@@ -35,7 +35,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new')]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
     {
         $user = new User();
@@ -61,7 +61,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(User $user): Response
     {
         return $this->render('admin/account/user/show.html.twig', [
@@ -69,7 +69,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', requirements: ['id' => '\d+'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(User $user, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(EditUserType::class, $user);
@@ -90,7 +90,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/reset', name: 'reset', requirements: ['id' => '\d+'])]
+    #[Route('/{id}/reset', name: 'reset', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function reset(User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
     {
         // generate a random temporary password and encode it
@@ -107,7 +107,7 @@ class UserController extends AbstractController
     }
 
     #[IsCsrfTokenValid(new Expression('"delete-" ~ args["user"].getId()'), tokenKey: 'delete_token')]
-    #[Route('/{id}/delete', name: 'delete', requirements: ['id' => '\d+'])]
+    #[Route('/{id}/delete', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(User $user, EntityManagerInterface $em): Response
     {
         $em->remove($user);

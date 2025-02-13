@@ -36,12 +36,12 @@ form:
     show: Détails
     edit: Modification
   flash:
-    added: Objet ajouté !
-    updated: Objet mis à jour !
-    deleted: Objet supprimé !
+    added: '<strong>{object}</strong> ajouté !'
+    updated: '<strong>{object}</strong> mis à jour !'
+    deleted: '<strong>{object}</strong> supprimé !'
   modal:
     title: Confirmer la suppression
-    body: Êtes-vous sûr de vouloir supprimer l'objet ? Cette action est <strong>définitive</strong>.
+    body: Êtes-vous sûr de vouloir supprimer <strong>{object}</strong> ? Cette action est <strong>définitive</strong>.
   other: 
     back: Retour
     backToList: Retour à la liste 

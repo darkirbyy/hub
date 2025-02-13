@@ -89,7 +89,7 @@ class Appli
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->getTitle();
     }
 
     public function getId(): ?int

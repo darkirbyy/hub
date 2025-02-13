@@ -11,9 +11,7 @@
         </div>
 
         {# Body with message #}
-        <div class="modal-body">
-          {{ modal_body|default('form.modal.body')|trans(modal_param|default({ })|map(param => param|e))|raw }}
-        </div>
+        <div class="modal-body" data-delete-modal-target="body"></div>
 
         {# Footer with cancel or confirm buttons #}
         <div class="modal-footer">

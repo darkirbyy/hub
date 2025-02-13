@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/', name: 'home_')]
 class HomeController extends AbstractController
 {
-    #[Route('', name: 'index')]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepo, Request $request): Response
     {
         $categories = $categoryRepo->findAll();

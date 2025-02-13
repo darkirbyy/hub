@@ -2,9 +2,6 @@
 
 {% set title = config_main.main_title|trans %}
 
-{# the object_id from the route parameters #}
-{% set object_id = app.request.attributes.get('id') %}
-
 {% block main %}
   {# Modal to confirm delete #}
   {{ block('delete', 'theme/crud/_modal.html.twig') }}
@@ -21,7 +18,13 @@
         </h2>
         <div class="my-2 d-flex justify-content-between align-items-center">
           <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.other.backToList'|trans }}</a>
-          {% with { path: path(config_main.route_prefix ~ 'delete', { id: object_id }), token: csrf_token('delete-' ~ object_id), text_class: 'd-md-inline ms-1' } %}
+          {% with {
+            path: path(config_main.route_prefix ~ 'delete', { id: object.id }),
+            token: csrf_token('delete-' ~ object.id),
+            body_param: { object: object },
+            text_class: 'd-md-inline ms-1',
+          }
+          %}
           {{ block('delete', 'theme/crud/_button.html.twig') }}
           {% endwith %}
         </div>

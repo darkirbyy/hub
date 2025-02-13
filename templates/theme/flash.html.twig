@@ -1,5 +1,5 @@
 {% macro trans_flash(flash) %}
-  {% set message = flash.message|trans(flash.params|default([])|map(param => param|e), flash.domain|default('messages')) %}
+  {% set message = flash.message|trans(flash.params|default({ })|map(p => p|e), flash.domain|default('messages')) %}
   {{ message|raw }}
 {% endmacro %}
 

@@ -25,7 +25,7 @@
             {% endwith %}
           {% endif %}
           {% if config_show.button.delete %}
-            {% with { path: path(config_main.route_prefix ~ 'delete', { id: object.id }), token: csrf_token('delete-' ~ object.id) } %}
+            {% with { path: path(config_main.route_prefix ~ 'delete', { id: object.id }), token: csrf_token('delete-' ~ object.id), body_param: { object: object } } %}
             {{ block('delete', 'theme/crud/_button.html.twig') }}
             {% endwith %}
           {% endif %}

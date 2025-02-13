@@ -43,6 +43,9 @@ final class ShortcutController extends CrudController
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
+            'button' => [
+                'show' => false,
+            ],
             'sort' => 'type',
         ];
     }

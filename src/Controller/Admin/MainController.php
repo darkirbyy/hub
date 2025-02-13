@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin', name: 'admin_')]
 final class MainController extends AbstractController
 {
-    #[Route('', name: 'index')]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(ShortcutRepository $shortcutRepo): Response
     {
         $shortcutsByType = $shortcutRepo->findAndGroup();
