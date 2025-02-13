@@ -35,6 +35,7 @@ class EditUserType extends AbstractType
                 'image_uri' => true,
                 'row_attr' => [
                     'class' => 'app-form-row-bordered',
+                    'image_class' => 'img-fluid app-avatar-card',
                 ],
             ]);
     }

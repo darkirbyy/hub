@@ -118,7 +118,7 @@ class AppliType extends AbstractType
                 'label' => 'appli.label.imageFile',
                 'help' => 'appli.help.image',
                 'help_html' => true,
-                'allow_delete' => false,
+                'allow_delete' => true,
                 'download_uri' => false,
                 'image_uri' => true,
                 'row_attr' => [

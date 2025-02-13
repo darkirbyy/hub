@@ -43,6 +43,7 @@ form:
     backToList: Retour à la liste 
     backToSee: Retour aux détails
     action: Actions
+    deleteImage: Supprimer l'image
     none: Aucun
   choice:
     yes: Oui

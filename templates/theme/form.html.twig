@@ -60,14 +60,16 @@
     {{ help_button|default('') }}
   </div>
   {%- if form.delete is defined -%}
-    {{- form_row(form.delete) -}}
+    {{- form_row(form.delete, { label: 'form.other.deleteImage', translation_domain: 'messages', row_attr: { class: 'm-2' } }) -}}
   {%- endif -%}
 
   {% if not errors|length > 0 %}
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img class="img-fluid" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="{{ 'aria.other.download'|trans }}" />
+          <img class="{{ row_attr.image_class|default('img-fluid') }}"
+            src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
+            alt="{{ 'aria.other.download'|trans }}" />
         </a>
       </div>
     {%- endif -%}
