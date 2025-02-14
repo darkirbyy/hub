@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Extension;
 
 use Doctrine\ORM\PersistentCollection;
-use Symfony\Component\HttpFoundation\File\File;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -34,14 +33,18 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
             new TwigFilter('fmt_password', [$this, 'fmtPassword']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass']),
-            new TwigFilter('fmt_image_file', [$this, 'fmtImageFile']),
+            new TwigFilter('fmt_image_file', [$this, 'fmtImageFile'], ['needs_environment' => true]),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
         ];
     }
 
-    public function deepAttribute($object, $path)
+    public function deepAttribute($object, $getter)
     {
-        $attributes = explode('.', $path);
+        if ('self' == $getter) {
+            return $object;
+        }
+
+        $attributes = explode('.', $getter);
 
         foreach ($attributes as $attribute) {
             $getter = 'get' . ucfirst($attribute);
@@ -97,11 +100,16 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return '<span class="' . $input . ' ' . $custom . '"></span>';
     }
 
-    public function fmtImageFile(File $input, string $custom = ''): string
+    public function fmtImageFile(Environment $env, object $input, string $fieldAlt, string $customClasses = ''): string
     {
-        $path = explode('public', (string) $input);
+        if (!empty($input->getImageMeta()->getName())) {
+            $templateString = '<img src="{{ vich_uploader_asset(object, \'imageFile\') }}" class="' . $customClasses . '" alt="{{object.' . $fieldAlt . '}}">';
+            $template = $env->createTemplate($templateString);
 
-        return '<img src="' . $path[1] . '" class="' . $custom . '"/>';
+            return $template->render(['object' => $input]);
+        } else {
+            return '-';
+        }
     }
 
     public function fmtImageMeta(FileMeta $input): string

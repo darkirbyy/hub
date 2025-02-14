@@ -38,7 +38,7 @@ class UserController extends CrudController
             'cols' => [
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'username'],
-                2 => ['getter' => 'imageFile', 'filters' => 'fmt_image_file("img-fluid app-avatar-small")|raw'],
+                2 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'fmt_image_file("username","img-fluid app-avatar-small")|raw'],
                 3 => ['getter' => 'metaRole'],
                 4 => ['getter' => 'dateLastCo', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
                 5 => ['getter' => 'dateUpdate', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
@@ -69,7 +69,7 @@ class UserController extends CrudController
                 5 => ['getter' => 'dateAdd', 'filters' => 'format_datetime("medium", "medium")'],
                 6 => ['getter' => 'dateUpdate', 'filters' => 'format_datetime("medium", "medium")'],
                 7 => ['getter' => 'dateLastCo', 'filters' => 'format_datetime("medium", "medium")'],
-                8 => ['getter' => 'imageFile', 'filters' => 'fmt_image_file("img-fluid app-avatar-card")|raw'],
+                8 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'fmt_image_file("username", "img-fluid app-avatar-card")|raw'],
                 9 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
             ],
             'template' => 'admin/user_show.html.twig',

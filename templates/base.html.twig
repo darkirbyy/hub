@@ -52,8 +52,18 @@
           </ul>
           {# Right part of the navbar #}
           <ul class="navbar-nav">
-            {# TODO : use trans #}
-            <li class="nav-item dropdown">Se connecter</li>
+            {% if is_granted('IS_AUTHENTICATED') %}
+              <li class="nav-item">
+                <a {{ currentRoute starts with 'security' ? activeLink|raw : otherLink|raw }} href="{{ path('security_profile') }}">
+                  {{ app.user|fmt_image_file('username', 'app-avatar-small')|raw }}
+                  {{ app.user.username }}
+                </a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a {{ currentRoute starts with 'security' ? activeLink|raw : otherLink|raw }} href="{{ path('security_login') }}">{{ 'layout.navbar.login'|trans }}</a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </nav>
