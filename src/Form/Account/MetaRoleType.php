@@ -1,0 +1,68 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Form\Account;
+
+use App\Entity\Account\MetaRole;
+use App\Entity\Account\Role;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class MetaRoleType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('key', TextType::class, [
+                'required' => true,
+                'label' => 'metarole.label.key',
+                'help' => 'metarole.help.key',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'metarole.label.key',
+                ],
+            ])
+            ->add('roles', EntityType::class, [
+                'required' => false,
+                'class' => Role::class,
+                'choice_label' => 'key',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'metarole.label.roles',
+                'attr' => [
+                    'class' => 'd-flex flex-row justify-content-start flex-wrap row-gap-2 column-gap-4 ms-1',
+                ],
+                'row_attr' => [
+                    'class' => 'app-form-row-bordered',
+                ],
+                'group_by' => function ($choice, $key, $value) {
+                    return (string) $choice->getAppli();
+                },
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => true,
+                'label' => 'metarole.label.description',
+                'attr' => [
+                    'clear_button' => true,
+                    'placeholder' => 'metarole.label.description',
+                ],
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => MetaRole::class,
+            'translation_domain' => 'validators',
+            'attr' => [
+                'novalidate' => 'novalidate',
+                'data-controller' => 'clear-button',
+            ],
+        ]);
+    }
+}

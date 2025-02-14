@@ -81,6 +81,7 @@
   {% endif %}
 {%- endblock -%}
 
+{# Custom collection changes to add button and javascript controller #}
 {% block collection_row %}
   {% set custom_row_attr = { 'data-controller': 'collec-field' } %}
   {% set row_attr = row_attr|merge(custom_row_attr) %}
@@ -101,4 +102,35 @@
     {% endfor %}
     <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash-fill"></span></button>
   </div>
+{% endblock %}
+
+{# Improve choice type form when expanded and multiple with group_by #}
+{%- block choice_widget_expanded -%}
+  {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
+  <div {{ block('widget_container_attributes') }}>
+    {%- set options = choices -%}
+    {{- block('choice_widget_expanded_options') -}}
+  </div>
+{%- endblock -%}
+
+{%- block choice_widget_expanded_options -%}
+  {%- for group_label, option in options -%}
+    {%- if option is iterable -%}
+      <fieldset>
+        <h6 class="fw-bold">
+          {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({ }, choice_translation_domain) }}
+        </h6>
+        {%- set options = option -%}
+        {{- block('choice_widget_expanded_options') -}}
+      </fieldset>
+    {%- else -%}
+      <div>
+        {%- set child = form.children|filter(child => child.vars.value == option.value)|first -%}
+        {{- form_widget(child) -}}
+        {{-
+          form_label(child, null, { translation_domain: choice_translation_domain, label_attr: label_attr|merge({ class: 'label-standard -ml-2 pl-2 pr-2' }), required: false })
+        -}}
+      </div>
+    {%- endif -%}
+  {% endfor %}
 {% endblock %}

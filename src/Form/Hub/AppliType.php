@@ -98,7 +98,6 @@ class AppliType extends AbstractType
                     'placeholder' => 'appli.label.linkText',
                 ],
             ])
-
             ->add('externalLinks', CollectionType::class, [
                 'required' => false,
                 'label' => 'appli.label.externalLinks',

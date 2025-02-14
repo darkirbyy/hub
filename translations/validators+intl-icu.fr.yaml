@@ -85,3 +85,15 @@ role:
     key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
   error:
     invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
+
+metarole:
+  name: Méta-rôles
+  label:
+    id: ID
+    key: Clé
+    description: Description
+    roles: Rôles
+  help:
+    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+  error:
+    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
