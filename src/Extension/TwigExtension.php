@@ -33,7 +33,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
             new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
             new TwigFilter('fmt_password', [$this, 'fmtPassword']),
-            new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass'], ['is_safe' => []]),
+            new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass']),
             new TwigFilter('fmt_image_file', [$this, 'fmtImageFile']),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
         ];
@@ -82,9 +82,9 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $input ? 'form.choice.yes' : 'form.choice.no';
     }
 
-    public function fmtCollec(PersistentCollection $input): string
+    public function fmtCollec(PersistentCollection $input, string $separator = ', '): string
     {
-        return implode(', ', $input->toArray());
+        return implode($separator, $input->toArray());
     }
 
     public function fmtPassword(string $input): string

@@ -35,14 +35,14 @@ final class RoleController extends CrudController
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'key'],
                 2 => ['getter' => 'appli.name', 'label' => 'appli'],
-                3 => ['getter' => 'description'],
+                3 => ['getter' => 'description', 'breakpoint' => 'md'],
             ],
             'backlink' => [
                 'text' => 'admin.backTo',
                 'route' => 'admin_index',
             ],
             'button' => [
-                'show' => false,
+                'show' => true,
             ],
             'repo_method' => 'findAndSort',
         ];

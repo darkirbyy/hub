@@ -45,7 +45,7 @@
           {% for object in objects %}
             <tr>
               {% for col in config_index.cols|ksort %}
-                <td class="align-middle py-1 {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
+                <td class="py-2 {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
                   {% set value = deep_attribute(object, col.getter) %}
                   {{ value is not null ? col.filters is defined ? value|apply_filters(col.filters) : value : '-' }}
                 </td>

@@ -43,7 +43,7 @@ final class ShortcutController extends CrudController
                 'route' => 'admin_index',
             ],
             'button' => [
-                'show' => false,
+                'show' => true,
             ],
             'repo_method' => 'findAndSort',
         ];
