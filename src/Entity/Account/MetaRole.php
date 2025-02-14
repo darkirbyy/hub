@@ -34,9 +34,13 @@ class MetaRole
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'metaRoles')]
     private Collection $roles;
 
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'metaRole')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -90,6 +94,36 @@ class MetaRole
     public function removeRole(Role $role): static
     {
         $this->roles->removeElement($role);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setMetaRole($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getMetaRole() === $this) {
+                $user->setMetaRole(null);
+            }
+        }
 
         return $this;
     }

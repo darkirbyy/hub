@@ -36,7 +36,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    // #[Assert\When(expression: 'this.getImageUpdatedAt() == null', constraints: [new Assert\NotBlank()])]
+    #[ORM\Column]
+    #[Assert\NotNull]
+    private ?bool $metaAdmin = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?MetaRole $metaRole = null;
+
     #[
         Vich\UploadableField(
             mapping: 'users',
@@ -67,6 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->metaAdmin = false;
         $this->imageMeta = new FileMeta();
     }
 
@@ -113,6 +120,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles[] = 'ROLE_USER';
+        if ($this->isMetaAdmin()) {
+            $roles[] = 'ROLE_ADMIN';
+        }
 
         return array_unique($roles);
     }
@@ -133,6 +143,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isMetaAdmin(): ?bool
+    {
+        return $this->metaAdmin;
+    }
+
+    public function setMetaAdmin(?bool $metaAdmin): static
+    {
+        $this->metaAdmin = $metaAdmin;
+
+        return $this;
     }
 
     public function setImageFile(?File $imageFile = null): void
@@ -198,6 +220,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateLastCo(?\DateTimeInterface $dateLastCo): static
     {
         $this->dateLastCo = $dateLastCo;
+
+        return $this;
+    }
+
+    public function getMetaRole(): ?MetaRole
+    {
+        return $this->metaRole;
+    }
+
+    public function setMetaRole(?MetaRole $metaRole): static
+    {
+        $this->metaRole = $metaRole;
 
         return $this;
     }

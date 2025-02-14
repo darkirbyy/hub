@@ -63,6 +63,8 @@ user:
     id: ID
     username: Nom d'utilisateur
     password: Mot de passe
+    metaAdmin: Méta-admin
+    metaRole: Méta-rôle
     dateAdd: Date création
     dateUpdate: Date modification
     dateLastCo: Date dernière connexion

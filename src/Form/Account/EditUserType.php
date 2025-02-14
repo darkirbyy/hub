@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Form\Account;
 
+use App\Entity\Account\MetaRole;
 use App\Entity\Account\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditUserType extends AbstractType
@@ -23,6 +27,33 @@ class EditUserType extends AbstractType
                 'attr' => [
                     'clear_button' => true,
                     'placeholder' => 'user.label.username',
+                ],
+            ])
+            ->add('metaAdmin', ChoiceType::class, [
+                'required' => true,
+                'choices' => [
+                    'form.choice.yes' => true,
+                    'form.choice.no' => false,
+                ],
+                'choice_translation_domain' => 'messages',
+                'label' => 'user.label.metaAdmin',
+                'label_attr' => [
+                    'class' => 'radio-inline',
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'row_attr' => [
+                    'class' => 'app-form-row-bordered',
+                ],
+            ])
+            ->add('metaRole', EntityType::class, [
+                'required' => false,
+                'class' => MetaRole::class,
+                'choice_label' => 'key',
+                'label' => 'user.label.metaRole',
+                'placeholder' => new TranslatableMessage('form.other.none'),
+                'attr' => [
+                    'placeholder' => 'user.label.metaRole',
                 ],
             ])
             ->add('imageFile', VichImageType::class, [
