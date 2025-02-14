@@ -24,7 +24,7 @@ final class ShortcutController extends CrudController
             'route_prefix' => 'admin_other_shortcut_',
             'entity_class' => Shortcut::class,
             'entity_key' => 'shortcut',
-            'main_title' => 'admin.others',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -39,7 +39,7 @@ final class ShortcutController extends CrudController
                 4 => ['getter' => 'url', 'breakpoint' => 'md'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [

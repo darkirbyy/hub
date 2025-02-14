@@ -2,34 +2,24 @@
 
 {% set title = 'admin.accounts'|trans %}
 
-{% block main %}
-  {{ parent() }}
-  <section>
-    <div class="container">
-      <div class="row mx-auto border-bottom mb-2 rounded bg-light">
-        <div class="col-4 col-md-3 py-2 text-end text-truncate">
-          {{ 'form.other.action'|trans }}
-        </div>
-        <div class="col-8 col-md-9 py-2 border-start">
-          <a href="{{ path('admin_account_user_edit', { id: object.id }) }}" class="btn btn-outline-primary btn-sm">
-            <span class="bi bi-pen-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
-          </a>
-          <a href="{{ path('admin_account_user_reset', { id: object.id }) }}" class="btn btn-outline-primary btn-sm">
-            <span class="bi bi-eraser-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.reset'|trans }}</span>
-          </a>
-          {% with {
-            path: path('admin_account_user_delete', { id: object.id }),
-            token: csrf_token('delete-' ~ object.id),
-            body_param: { object: object },
-            btn_class: 'btn-sm',
-            text_class: 'd-none d-md-inline ms-md-1',
-          }
-          %}
+{% block buttons_action %}
+  <div>
+    <a href="{{ path('admin_account_user_edit', { id: object.id }) }}" class="btn btn-outline-primary">
+      <span class="bi bi-pen-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
+    </a>
+    <a href="{{ path('admin_account_user_reset', { id: object.id }) }}" class="btn btn-outline-primary">
+      <span class="bi bi-eraser-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.reset'|trans }}</span>
+    </a>
+    {% with {
+      path: path('admin_account_user_delete', { id: object.id }),
+      token: csrf_token('delete-' ~ object.id),
+      body_param: { object: object },
+      btn_class: '',
+      text_class: 'd-none d-md-inline ms-md-1',
+    }
+    %}
 
-          {{ block('delete', 'theme/crud/_button.html.twig') }}
-          {% endwith %}
-        </div>
-      </div>
-    </div>
-  </section>
+    {{ block('delete', 'theme/crud/_button.html.twig') }}
+    {% endwith %}
+  </div>
 {% endblock %}

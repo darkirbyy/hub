@@ -24,7 +24,7 @@ final class RoleController extends CrudController
             'route_prefix' => 'admin_account_role_',
             'entity_class' => Role::class,
             'entity_key' => 'role',
-            'main_title' => 'admin.configs',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -38,7 +38,7 @@ final class RoleController extends CrudController
                 3 => ['getter' => 'description', 'breakpoint' => 'md'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [

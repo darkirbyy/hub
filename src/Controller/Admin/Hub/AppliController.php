@@ -24,7 +24,7 @@ final class AppliController extends CrudController
             'route_prefix' => 'admin_hub_appli_',
             'entity_class' => Appli::class,
             'entity_key' => 'appli',
-            'main_title' => 'admin.configs',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -41,7 +41,7 @@ final class AppliController extends CrudController
                 6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [

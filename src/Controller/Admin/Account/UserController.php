@@ -28,7 +28,7 @@ class UserController extends CrudController
             'route_prefix' => 'admin_account_user_',
             'entity_class' => User::class,
             'entity_key' => 'user',
-            'main_title' => 'admin.accounts',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -44,7 +44,7 @@ class UserController extends CrudController
                 5 => ['getter' => 'dateUpdate', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [

@@ -9,10 +9,10 @@
       <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
-            {{ 'admin.configs'|trans }}
+            {{ 'admin.subtitles.configs'|trans }}
           </h3>
           <div class="list-group">
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.accounts'|trans }}</span>
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.accounts'|trans }}</span>
             <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_user_index') }}">
               <span class="bi bi-arrow-right me-1"></span>{{ 'user.name'|trans({ }, 'validators') }}
             </a>
@@ -23,7 +23,7 @@
               <span class="bi bi-arrow-right me-1"></span>{{ 'role.name'|trans({ }, 'validators') }}
             </a>
 
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.hub'|trans }}</span>
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.hub'|trans }}</span>
             <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_appli_index') }}">
               <span class="bi bi-arrow-right me-1"></span> {{ 'appli.name'|trans({ }, 'validators') }}
             </a>
@@ -34,7 +34,7 @@
               <span class="bi bi-arrow-right me-1"></span> {{ 'icon.name'|trans({ }, 'validators') }}
             </a>
 
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.others'|trans }}</span>
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.others'|trans }}</span>
             <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_other_shortcut_index') }}">
               <span class="bi bi-arrow-right me-1"></span>{{ 'shortcut.name'|trans({ }, 'validators') }}
             </a>
@@ -43,7 +43,7 @@
 
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
-            {{ 'admin.shortcuts'|trans }}
+            {{ 'admin.subtitles.shortcuts'|trans }}
           </h3>
           <div class="list-group">
             {% for type, shortcuts in shortcuts_by_type %}

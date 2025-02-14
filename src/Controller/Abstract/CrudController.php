@@ -43,7 +43,7 @@ abstract class CrudController extends AbstractController
             [
                 'template' => 'theme/crud/index.html.twig',
                 'button' => ['new' => true, 'show' => true, 'edit' => true, 'delete' => true],
-                'backlink' => ['text' => 'form.other.back', 'route' => 'home_index'],
+                'backlink' => ['text' => 'form.link.back', 'route' => 'home_index'],
                 'repo_method' => 'findAll',
             ],
         );

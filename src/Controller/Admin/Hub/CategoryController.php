@@ -24,7 +24,7 @@ final class CategoryController extends CrudController
             'route_prefix' => 'admin_hub_category_',
             'entity_class' => Category::class,
             'entity_key' => 'category',
-            'main_title' => 'admin.configs',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -39,7 +39,7 @@ final class CategoryController extends CrudController
                 4 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [

@@ -24,7 +24,7 @@ final class MetaRoleController extends CrudController
             'route_prefix' => 'admin_account_metarole_',
             'entity_class' => MetaRole::class,
             'entity_key' => 'metarole',
-            'main_title' => 'admin.configs',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -38,7 +38,7 @@ final class MetaRoleController extends CrudController
                 3 => ['getter' => 'description', 'breakpoint' => 'md'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [

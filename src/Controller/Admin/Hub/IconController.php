@@ -24,7 +24,7 @@ final class IconController extends CrudController
             'route_prefix' => 'admin_hub_icon_',
             'entity_class' => Icon::class,
             'entity_key' => 'icon',
-            'main_title' => 'admin.configs',
+            'main_title' => 'admin.title',
         ];
     }
 
@@ -38,7 +38,7 @@ final class IconController extends CrudController
                 4 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
             ],
             'backlink' => [
-                'text' => 'admin.backTo',
+                'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
             ],
             'button' => [
