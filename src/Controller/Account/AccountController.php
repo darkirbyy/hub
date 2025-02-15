@@ -16,7 +16,7 @@ class AccountController extends AbstractController
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('account/profile.html.twig', []);
+        return $this->render('account/index.html.twig', []);
     }
 
     #[Route(path: '/login', name: 'login', methods: ['GET', 'POST'])]

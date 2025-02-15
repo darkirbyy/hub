@@ -19,6 +19,33 @@ class HomeController extends AbstractController
         $categories = $categoryRepo->findAndSort();
         $serverBaseUrl = $request->getSchemeAndHttpHost();
 
+        $allowedApplis = [];
+        if ($this->isGranted('IS_AUTHENTICATED')) {
+            $allowedApplis = array_unique(
+                $this->getUser()
+                    ->getMetaRole()
+                    ->getRoles()
+                    ->map(function ($role) {
+                        return $role->getAppli();
+                    })
+                    ->toArray(),
+            );
+        }
+
+        foreach ($categories as $category) {
+            foreach ($category->getApplis() as $appli) {
+                if (!$appli->isPublic() && !in_array($appli, $allowedApplis)) {
+                    $category->removeAppli($appli);
+                }
+            }
+        }
+
+        // foreach($categories as $category){
+        //     $category-> $category->getApplis()->filter(function($appli) use ($allowedApplis){
+        //         return $appli->isPublic() || in_array($appli, $allowedApplis);
+        //     });
+        // }
+
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
             'server_base_url' => $serverBaseUrl,
