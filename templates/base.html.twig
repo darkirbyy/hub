@@ -44,7 +44,7 @@
                 <span class="fa-solid fa-house me-2"></span>{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
-            {% if env.app.env == 'dev' %}
+            {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
               </li>

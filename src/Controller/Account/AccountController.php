@@ -6,22 +6,20 @@ use App\Form\Account\ConnectUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route(path: '/account', name: 'account_')]
 class AccountController extends AbstractController
 {
+    #[IsGranted('IS_AUTHENTICATED')]
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED')) {
-            return $this->redirectToRoute('account_login');
-        }
-
         return $this->render('account/profile.html.twig', []);
     }
 
-    #[Route(path: '/login', name: 'login',  methods: ['GET', 'POST'])]
+    #[Route(path: '/login', name: 'login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED')) {
@@ -51,5 +49,4 @@ class AccountController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-
 }
