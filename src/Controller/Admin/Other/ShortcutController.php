@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\Other;
 
-use App\Controller\Abstract\CrudController;
+use App\Controller\Theme\CrudController;
 use App\Entity\Other\Shortcut;
 use App\Form\Other\ShortcutType;
 use App\Repository\Other\ShortcutRepository;

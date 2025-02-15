@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Abstract;
+namespace App\Controller\Theme;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;

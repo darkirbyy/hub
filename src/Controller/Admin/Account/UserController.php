@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin\Account;
 
-use App\Controller\Abstract\CrudController;
+use App\Controller\Theme\CrudController;
 use App\Entity\Account\User;
 use App\Form\Account\EditUserType;
 use App\Form\Account\NewUserType;

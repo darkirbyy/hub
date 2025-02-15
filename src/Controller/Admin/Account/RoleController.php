@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\Account;
 
-use App\Controller\Abstract\CrudController;
+use App\Controller\Theme\CrudController;
 use App\Entity\Account\Role;
 use App\Form\Account\RoleType;
 use App\Repository\Account\RoleRepository;
