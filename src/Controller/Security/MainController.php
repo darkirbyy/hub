@@ -2,6 +2,7 @@
 
 namespace App\Controller\Security;
 
+use App\Form\Account\ConnectUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,14 +18,21 @@ class MainController extends AbstractController
         if ($this->isGranted('IS_AUTHENTICATED')) {
             return $this->redirectToRoute('security_profile');
         }
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // get the login error if there is one and last username entered by the user
+        $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // create the form and pre fill the username value
+        $form = $this->createForm(ConnectUserType::class);
+        $form->get('username')->setData($lastUsername);
+
+        if (!empty($error)) {
+            $this->addFlash('danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
+        }
+
         return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
+            'form' => $form,
             'error' => $error,
         ]);
     }

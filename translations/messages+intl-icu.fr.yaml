@@ -8,6 +8,11 @@ home:
 
 security:
   title: Compte personnel
+  subtitles:
+    login: Connexion
+  button:
+    login: Se connecter
+    logout: Se déconnecter
 
 admin:
   title: Administration
