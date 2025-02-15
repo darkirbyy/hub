@@ -54,14 +54,14 @@
           <ul class="navbar-nav">
             {% if is_granted('IS_AUTHENTICATED') %}
               <li class="nav-item">
-                <a {{ currentRoute starts with 'security' ? activeLink|raw : otherLink|raw }} href="{{ path('security_profile') }}">
+                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   {{ app.user|fmt_image_file('username', 'app-avatar-small')|raw }}
                   {{ app.user.username }}
                 </a>
               </li>
             {% else %}
               <li class="nav-item">
-                <a {{ currentRoute starts with 'security' ? activeLink|raw : otherLink|raw }} href="{{ path('security_login') }}">{{ 'layout.navbar.login'|trans }}</a>
+                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_login') }}">{{ 'layout.navbar.login'|trans }}</a>
               </li>
             {% endif %}
           </ul>

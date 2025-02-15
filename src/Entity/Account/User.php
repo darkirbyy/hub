@@ -119,10 +119,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        $roles[] = 'ROLE_USER';
-        if ($this->isMetaAdmin()) {
-            $roles[] = 'ROLE_ADMIN';
-        }
+        $roles[] = $this->isMetaAdmin() ? 'ROLE_ADMIN' : 'ROLE_USER';
 
         return array_unique($roles);
     }
