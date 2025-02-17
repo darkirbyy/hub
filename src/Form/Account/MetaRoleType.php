@@ -23,7 +23,7 @@ class MetaRoleType extends AbstractType
                 'label' => 'metarole.label.key',
                 'help' => 'metarole.help.key',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'metarole.label.key',
                 ],
             ])
@@ -48,7 +48,7 @@ class MetaRoleType extends AbstractType
                 'required' => true,
                 'label' => 'metarole.label.description',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'metarole.label.description',
                 ],
             ]);
@@ -61,7 +61,7 @@ class MetaRoleType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'clear-button',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

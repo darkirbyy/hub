@@ -178,11 +178,21 @@ legend.col-form-label.required::after {
   border-color: var(--bs-form-invalid-border-color) !important;
 }
 
-.app-btn-clear:not(.is-invalid) {
+.app-button-action {
+  width: 1.5rem;
+  height: 1rem;
+  background-image: none;
+}
+
+.app-button-action span {
+  vertical-align: ($spacer * 0.125);
+}
+
+.app-button-action:not(.is-invalid) {
   margin-right: ($spacer * 0.75) !important;
 }
 
-.app-btn-clear.is-invalid {
+.app-button-action.is-invalid {
   margin-right: ($spacer * 2) !important;
 }
 

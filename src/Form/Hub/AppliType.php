@@ -27,7 +27,7 @@ class AppliType extends AbstractType
                 'label' => 'appli.label.title',
                 'help' => 'appli.help.title',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.title',
                 ],
             ])
@@ -69,7 +69,7 @@ class AppliType extends AbstractType
                 'label' => 'appli.label.name',
                 'help' => 'appli.help.name',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.name',
                 ],
             ])
@@ -78,7 +78,7 @@ class AppliType extends AbstractType
                 'label' => 'appli.label.path',
                 'help' => 'appli.help.path',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.path',
                 ],
             ])
@@ -86,7 +86,7 @@ class AppliType extends AbstractType
                 'required' => true,
                 'label' => 'appli.label.description',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.description',
                 ],
             ])
@@ -94,7 +94,7 @@ class AppliType extends AbstractType
                 'required' => true,
                 'label' => 'appli.label.linkText',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.linkText',
                 ],
             ])
@@ -133,7 +133,7 @@ class AppliType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'clear-button',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

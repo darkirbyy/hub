@@ -25,14 +25,15 @@
     {% if form.vars.attr.placeholder is defined %}
       <div class="input-group">
         <div class="form-floating">
-          {{ form_widget(form, { attr: { class: form.vars.attr.clear_button|default(false) ? 'pe-5' : '' } }) }}
+          {{ form_widget(form, { attr: { class: form.vars.attr.button_action|default('') is not empty ? 'pe-5' } }) }}
           {{ form_label(form) }}
-          {% if (form.vars.attr.clear_button|default(false)) == true %}
+          {% if form.vars.attr.button_action|default('') is not empty %}
             <small>
               <button type="button"
-                data-app-clear-id="{{ form.vars.id }}"
-                class="app-btn-clear btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
-
+                data-button-action-target="{{ form.vars.attr.button_action }}"
+                data-button-action-id="{{ form.vars.id }}"
+                class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
+                <span class="fa-solid fa-xmark fa-lg"></span>
               </button>
             </small>
           {% endif %}
@@ -54,7 +55,7 @@
   {%- endif -%}
   <div class="input-group">
     {{- form_widget(form.file, { attr: attr }) -}}
-    {# {% if form.vars.attr.clear_button|default(true) == true %}
+    {# {% if form.vars.attr.button_action|default(true) == true %}
    <button class="btn btn-outline-secondary px-2 app-btn-border-light" type="button" data-app-clear-id="{{ form.vars.id }}"><span class="bi bi-x-lg"></span></button>
   {% endif %} #}
     {{ help_button|default('') }}

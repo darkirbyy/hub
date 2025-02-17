@@ -21,7 +21,7 @@ class ConnectUserType extends AbstractType
                 'required' => true,
                 'label' => 'user.label.username',
                 'attr' => [
-                    // 'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'user.label.username',
                     'autocomplete' => 'username',
                     'autofocus' => true,
@@ -32,7 +32,7 @@ class ConnectUserType extends AbstractType
                 'required' => true,
                 'label' => 'user.label.password',
                 'attr' => [
-                    // 'clear_button' => true,
+                    'button_action' => 'reveal',
                     'placeholder' => 'user.label.password',
                     'autocomplete' => 'current-password',
                 ],
@@ -47,7 +47,7 @@ class ConnectUserType extends AbstractType
             'csrf_token_id' => 'authenticate',
             'attr' => [
                 'novalidate' => 'novalidate',
-                // 'data-controller' => 'reveal-button',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

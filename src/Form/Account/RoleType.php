@@ -23,7 +23,7 @@ class RoleType extends AbstractType
                 'label' => 'role.label.key',
                 'help' => 'role.help.key',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'role.label.key',
                 ],
             ])
@@ -40,7 +40,7 @@ class RoleType extends AbstractType
                 'required' => true,
                 'label' => 'role.label.description',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'role.label.description',
                 ],
             ]);
@@ -53,7 +53,7 @@ class RoleType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'clear-button',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

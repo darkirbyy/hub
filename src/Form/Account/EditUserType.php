@@ -25,7 +25,7 @@ class EditUserType extends AbstractType
                 'label' => 'user.label.username',
                 'help' => 'user.help.username',
                 'attr' => [
-                    'clear_button' => true,
+                    'button_action' => 'clear',
                     'placeholder' => 'user.label.username',
                 ],
             ])
@@ -78,7 +78,7 @@ class EditUserType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'clear-button',
+                'data-controller' => 'button-action',
             ],
         ]);
     }
