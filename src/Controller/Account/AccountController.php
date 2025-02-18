@@ -4,10 +4,12 @@ namespace App\Controller\Account;
 
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
+use App\Form\Account\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -17,11 +19,9 @@ class AccountController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED')]
     #[Route(path: '', name: 'index', methods: ['GET'])]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    public function index(): Response
     {
-        return $this->render('account/index.html.twig', [
-            // 'form' => $form,
-        ]);
+        return $this->render('account/index.html.twig', []);
     }
 
     #[IsGranted('IS_AUTHENTICATED')]
@@ -37,13 +37,38 @@ class AccountController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            // do anything else you need here, like send an email
-            // $this->addFlash('success', ['message' => 'admin.user.flash.added', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
+            // $this->addFlash('success', ['message' => 'account.flash.avatarUpdated']);
 
             return $this->redirectToRoute('account_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('account/avatar.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[IsGranted('IS_AUTHENTICATED')]
+    #[Route(path: '/password', name: 'password', methods: ['GET', 'POST'])]
+    public function password(Request $request, EntityManagerInterface $em, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
+    {
+        /** @var \App\Entity\Account\User $user */
+        $user = $this->getUser();
+
+        $form = $this->createForm(PasswordUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPlainPassword()));
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', ['message' => 'account.flash.passwordUpdated']);
+
+            return $this->redirectToRoute('account_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('account/password.html.twig', [
             'form' => $form,
         ]);
     }

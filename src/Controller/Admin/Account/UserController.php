@@ -108,7 +108,7 @@ class UserController extends CrudController
             $em->flush();
 
             // do anything else you need here, like send an email
-            $this->addFlash('success', ['message' => 'admin.flash.added', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
+            $this->addFlash('success', ['message' => 'admin.flash.userAdded', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
             return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -131,7 +131,7 @@ class UserController extends CrudController
         $em->flush();
 
         // do anything else you need here, like send an email
-        $this->addFlash('success', ['message' => 'admin.flash.reset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
+        $this->addFlash('success', ['message' => 'admin.flash.userReset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
         return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }

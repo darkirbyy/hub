@@ -17,6 +17,7 @@
 
 {% block main %}
   <div class="container">
+    {# No flashes on the main home page #}
     {# {{ block('flash', 'theme/flash.html.twig') }} #}
     {% for category in categories %}
       {% if (category.applis|length) > 0 %}

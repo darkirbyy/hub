@@ -5,7 +5,9 @@
 {% block main %}
   <section>
     <div class="container">
+      {# Insert the flashes #}
       {{ block('flash', 'theme/flash.html.twig') }}
+
       <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
         <div class="flex-fill">
           <h3 class="mb-2 text-center">

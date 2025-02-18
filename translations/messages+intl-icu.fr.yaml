@@ -12,13 +12,19 @@ account:
     login: Connexion
     myProfile: Mon profil
     myActions: Actions
+    myPassword: Modifier le mot de passe
   button:
     login: Se connecter
     logout: Se déconnecter
-    changePassword: Modifier mon mot de passe
-    delete: Supprimer mon compte
+  link:
+    backToIndex: Retour au profil
+    updatePassword: Modifier le mot de passe
+    delete: Supprimer le compte
   modal:
-    changeAvatar: Choisir un nouvel avatar
+    updateAvatar: Choisir un nouvel avatar
+  flash:
+    avatarUpdated: Le nouvel avatar a été enregistré.
+    passwordUpdated: Le mot de passe a été mise à jour.
   other:
     dateLastCo: 'Dernière connexion : '
     dateAdd: 'Inscrit depuis : '
@@ -34,8 +40,8 @@ admin:
   link:
     backToMainPage: Retour à la page principale
   flash:
-    added: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
-    reset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
+    userAdded: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
+    userReset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
 
 ##################################
 # Common translations ############

@@ -63,6 +63,8 @@ user:
     id: ID
     username: Nom d'utilisateur
     password: Mot de passe
+    newPassword: Nouveau mot de passe
+    repeatPassword: Répéter le mot de passe
     metaAdmin: Méta-admin
     metaRole: Méta-rôle
     dateAdd: Date création

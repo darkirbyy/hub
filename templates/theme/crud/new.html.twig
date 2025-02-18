@@ -6,18 +6,20 @@
   <section>
     <div class="container">
       <div class="mx-auto w-100 w-md-75 py-2">
-        {# Insert the flashes in the same col size as the form #}
+        {# Insert the flashes #}
         {{ block('flash', 'theme/flash.html.twig') }}
 
-        {# Subtitle and back link #}
+        {# Subtitle #}
         <h2>
           {{ (config_main.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.new'|trans }}</span>
         </h2>
+
+        {# Backlink #}
         <div class="my-2">
           <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}</a>
         </div>
 
-        {# Actual form #}
+        {# Crud form #}
         {{ block('form', 'theme/crud/_form.html.twig') }}
       </div>
     </div>

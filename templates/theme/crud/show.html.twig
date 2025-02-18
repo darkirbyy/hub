@@ -7,14 +7,16 @@
 
   <section>
     <div class="container">
-      {# Redefine the flashes with the same width as the cards #}
       <div class="mx-auto">
+        {# Insert the flashes #}
         {{ block('flash', 'theme/flash.html.twig') }}
 
+        {# Subtitle #}
         <h2>
           {{ (config_main.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.show'|trans }}</span>
         </h2>
 
+        {# Backlink + action buttons #}
         <div class="my-2 d-flex justify-content-between align-items-center">
           <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}</a>
           {% block buttons_action %}
@@ -33,6 +35,7 @@
           {% endblock %}
         </div>
 
+        {# Cols displaying all the details of the given object #}
         {% for row in config_show.rows %}
           <div class="row mx-auto border-bottom mb-2 rounded bg-light">
             <div class="col-4 col-md-3 py-2 text-end text-truncate">
