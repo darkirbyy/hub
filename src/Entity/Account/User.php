@@ -20,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
 #[UniqueEntity(fields: ['username'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -95,23 +95,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         $this->dateUpdate = new \DateTime();
     }
 
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize([
+        return [
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'password' => $this->getPassword(),
-            'roles' => $this->getRoles(),
-        ]);
+            // 'roles' => $this->getRoles(),
+        ];
     }
 
-    public function unserialize($data): void
+    public function __unserialize(array $data): void
     {
-        $unserialized = unserialize($data);
-        $this->id = $unserialized['id'];
-        $this->username = $unserialized['username'];
-        $this->roles = $unserialized['roles'];
-        $this->password = $unserialized['password'];
+        $this->id = $data['id'];
+        $this->username = $data['username'];
+        // $this->roles = $data['roles'];
+        $this->password = $data['password'];
     }
 
     public function getId(): ?int

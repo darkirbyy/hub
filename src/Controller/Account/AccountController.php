@@ -19,8 +19,12 @@ class AccountController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED')]
     #[Route(path: '', name: 'index', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        if ($request->query->getBoolean('flash', false)) {
+            $this->addFlash('success', ['message' => 'account.flash.avatarUpdated']);
+        }
+
         return $this->render('account/index.html.twig', []);
     }
 
@@ -38,9 +42,10 @@ class AccountController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            // Don't work, why ? use a query param instead...
             // $this->addFlash('success', ['message' => 'account.flash.avatarUpdated']);
 
-            return $this->redirectToRoute('account_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('account_index', ['flash' => true], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('account/avatar.html.twig', [
