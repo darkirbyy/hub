@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="turbo-refresh-method" content="morph" />
-    <meta name="turbo-refresh-scroll" content="preserve" />
+    {# <meta name="turbo-refresh-scroll" content="preserve" /> #}
     <title>
       {{ title ~ ' - ' ~ ('layout.name'|trans) }}
     </title>
@@ -20,7 +20,7 @@
 
   <body class="d-flex flex-column min-vh-100" data-controller="load-popover">
     {# Skip to content link for screen reader #}
-    <a href="#mainContent" class="visually-hidden-focusable">{{ 'aria.other.skipToContent'|trans }}</a>
+    <a href="#mainContent" class="visually-hidden-focusable">{{ 'aria.skipToContent'|trans }}</a>
     {% if env.app.env == 'dev' %}
       <div class="container-fluid p-0 m-0 text-center fw-bold d-flex justify-content-around app-env-dev">
         {% for i in 1..10 %}
@@ -32,7 +32,7 @@
     {% endif %}
     {# The HEADER defines the navbar #}
     <header>
-      <nav class="navbar navbar-expand bg-body-secondary bg-primary-subtle" aria-label="{{ 'aria.label.mainNavigation'|trans }}">
+      <nav class="navbar navbar-expand bg-body-secondary bg-primary-subtle" aria-label="{{ 'aria.mainNavigation'|trans }}">
         {% set currentRoute = app.current_route %}
         {% set activeLink = 'class="nav-link active" aria-current="page" aria-selected="true"' %}
         {% set otherLink = 'class="nav-link"' %}
@@ -41,7 +41,7 @@
           <ul class="navbar-nav me-auto align-items-center">
             <li class="nav-item fs-5">
               <a {{ currentRoute starts with 'home' ? activeLink|raw : otherLink|raw }} href="{{ path('home_index') }}">
-                <span class="fa-solid fa-house me-2"></span>{{ 'layout.navbar.home'|trans }}
+                <span class="fa-solid fa-house me-2" aria-hidden="true"></span>{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
@@ -93,16 +93,16 @@
     </main>
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
-    <footer role="contentinfo" aria-label="{{ 'aria.label.footer'|trans }}">
+    <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
       <div class="container-fluid fw-light bg-body-secondary small mt-4 py-3">
         <div class="row gw-md-4">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">
             {{ 'layout.footer.madeWith'|trans }}
-            <span class="fa-brands fa-symfony"></span>
+            <span class="fa-brands fa-symfony" aria-hidden="true"></span>
             <span class="fst-italic">Symfony 7</span>
             <span class="mx-1">|</span>
-            <span class="fa-brands fa-bootstrap"></span>
+            <span class="fa-brands fa-bootstrap" aria-hidden="true"></span>
             <span class="fst-italic">Bootstrap 5</span>
           </div>
           {# Right part : version and update of the app #}

@@ -16,8 +16,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AccountController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED')]
-    #[Route(path: '', name: 'index', methods: ['GET', 'POST'])]
+    #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(Request $request, EntityManagerInterface $em): Response
+    {
+        return $this->render('account/index.html.twig', [
+            // 'form' => $form,
+        ]);
+    }
+
+    #[IsGranted('IS_AUTHENTICATED')]
+    #[Route(path: '/avatar', name: 'avatar', methods: ['GET', 'POST'])]
+    public function avatar(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
 
@@ -34,7 +43,7 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('account_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('account/index.html.twig', [
+        return $this->render('account/avatar.html.twig', [
             'form' => $form,
         ]);
     }

@@ -22,6 +22,7 @@ class CategoryType extends AbstractType
                 'required' => true,
                 'label' => 'category.label.label',
                 'attr' => [
+                    'button_action' => 'clear',
                     'placeholder' => 'category.label.label',
                 ],
             ])
@@ -50,6 +51,7 @@ class CategoryType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

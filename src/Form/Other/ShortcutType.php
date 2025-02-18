@@ -21,6 +21,7 @@ class ShortcutType extends AbstractType
                 'required' => true,
                 'label' => 'shortcut.label.label',
                 'attr' => [
+                    'button_action' => 'clear',
                     'placeholder' => 'shortcut.label.label',
                 ],
             ])
@@ -43,6 +44,7 @@ class ShortcutType extends AbstractType
                 'default_protocol' => 'http',
                 'label' => 'shortcut.label.url',
                 'attr' => [
+                    'button_action' => 'clear',
                     'placeholder' => 'shortcut.label.url',
                 ],
             ]);
@@ -55,6 +57,7 @@ class ShortcutType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

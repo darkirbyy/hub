@@ -1,0 +1,9 @@
+<turbo-frame id="edit-avatar">
+  {{ form_start(form, { action: path('account_avatar') }) }}
+  {{ form_row(form.imageFile) }}
+  <div class="text-start">
+    <button type="submit" class="btn btn-primary">Valider</button>
+    {# <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button> #}
+  </div>
+  {{ form_end(form) }}
+</turbo-frame>

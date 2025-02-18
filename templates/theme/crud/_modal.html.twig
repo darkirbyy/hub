@@ -7,7 +7,7 @@
           <h1 class="modal-title fs-5" id="delete-modal-label">
             {{ 'form.modal.title'|trans }}
           </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
         </div>
 
         {# Body with message #}
@@ -17,7 +17,7 @@
         <div class="modal-footer">
           <form method="post" data-delete-modal-target="form">
             <button type="submit" class="btn btn-danger">
-              <span class="bi bi-trash-fill me-1"></span>
+              <span class="bi bi-trash-fill me-1" aria-hidden="true"></span>
               {{ 'form.button.delete'|trans }}
             </button>
             {# <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button> #}

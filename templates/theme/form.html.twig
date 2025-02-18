@@ -5,11 +5,12 @@
   {% set help_button %}
     {% if form.vars.help is not empty %}
       <button type="button"
+        aria-label="{{ 'form.button.help'|trans }}"
         class="btn btn-outline-secondary py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
         data-bs-toggle="popover"
         {{ form.vars.help_html ? 'data-bs-html="true"' }}
         data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}">
-        <span class="fs-5 bi bi-info-circle"></span>
+        <span class="fs-5 bi bi-info-circle" aria-hidden="true"></span>
       </button>
     {% endif %}
   {% endset %}
@@ -30,10 +31,11 @@
           {% if form.vars.attr.button_action|default('') is not empty %}
             <small>
               <button type="button"
+                aria-label="{{ ('form.button.' ~ form.vars.attr.button_action)|trans }}"
                 data-button-action-target="{{ form.vars.attr.button_action }}"
                 data-button-action-id="{{ form.vars.id }}"
                 class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
-                <span class="fa-solid fa-lg"></span>
+                <span class="fa-solid fa-lg" aria-hidden="true"></span>
               </button>
             </small>
           {% endif %}
@@ -55,13 +57,11 @@
   {%- endif -%}
   <div class="input-group">
     {{- form_widget(form.file, { attr: attr }) -}}
-    {# {% if form.vars.attr.button_action|default(true) == true %}
-   <button class="btn btn-outline-secondary px-2 app-btn-border-light" type="button" data-app-clear-id="{{ form.vars.id }}"><span class="bi bi-x-lg"></span></button>
-  {% endif %} #}
+
     {{ help_button|default('') }}
   </div>
   {%- if form.delete is defined -%}
-    {{- form_row(form.delete, { label: 'form.other.deleteImage', translation_domain: 'messages', row_attr: { class: 'm-2' } }) -}}
+    {{- form_row(form.delete, { label: 'form.other.deleteImage', translation_domain: 'messages', row_attr: { class: 'my-2' } }) -}}
   {%- endif -%}
 
   {% if not errors|length > 0 %}
@@ -70,7 +70,7 @@
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
           <img class="{{ row_attr.image_class|default('img-fluid') }}"
             src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
-            alt="{{ 'aria.other.download'|trans }}" />
+            alt="{{ 'form.button.download'|trans }}" />
         </a>
       </div>
     {%- endif -%}
@@ -93,7 +93,9 @@
   {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
   {% set attr = attr|merge(custom_attr) %}
   {{- parent() -}}
-  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add"><span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}</button>
+  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add">
+    <span class="bi bi-plus-square-fill me-1" aria-hidden="true"></span>{{ 'form.button.new'|trans }}
+  </button>
 {% endblock %}
 
 {% block collection_entry_row %}
@@ -101,7 +103,9 @@
     {% for row in form.children %}
       {{ form_row(row) }}
     {% endfor %}
-    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash-fill"></span></button>
+    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove">
+      <span class="bi bi-trash-fill" aria-hidden="true"></span>
+    </button>
   </div>
 {% endblock %}
 

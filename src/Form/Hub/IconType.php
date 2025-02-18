@@ -19,6 +19,7 @@ class IconType extends AbstractType
                 'required' => true,
                 'label' => 'icon.label.label',
                 'attr' => [
+                    'button_action' => 'clear',
                     'placeholder' => 'icon.label.label',
                 ],
             ])
@@ -40,6 +41,7 @@ class IconType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
+                'data-controller' => 'button-action',
             ],
         ]);
     }

@@ -4,11 +4,11 @@
 
 {% block buttons_action %}
   <div>
-    <a href="{{ path('admin_account_user_edit', { id: object.id }) }}" class="btn btn-outline-primary">
-      <span class="bi bi-pen-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
+    <a href="{{ path('admin_account_user_edit', { id: object.id }) }}" class="btn btn-outline-primary" aria-label="{{ 'form.button.edit'|trans }}">
+      <span class="bi bi-pen-fill" aria-hidden="true"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.edit'|trans }}</span>
     </a>
-    <a href="{{ path('admin_account_user_reset', { id: object.id }) }}" class="btn btn-outline-primary">
-      <span class="bi bi-eraser-fill"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.reset'|trans }}</span>
+    <a href="{{ path('admin_account_user_reset', { id: object.id }) }}" class="btn btn-outline-primary" aria-label="{{ 'form.button.reset'|trans }}">
+      <span class="bi bi-eraser-fill" aria-hidden="true"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.reset'|trans }}</span>
     </a>
     {% with {
       path: path('admin_account_user_delete', { id: object.id }),

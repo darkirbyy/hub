@@ -16,7 +16,7 @@
         </h2>
 
         <div class="my-2 d-flex justify-content-between align-items-center">
-          <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1"></span> {{ 'form.link.backToList'|trans }}</a>
+          <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}</a>
           {% block buttons_action %}
             <div>
               {% if config_show.button.edit %}

@@ -22,7 +22,9 @@
       {% if (category.applis|length) > 0 %}
         <section class="mb-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
           <div class="d-flex justify-content-start gap-1 gap-md-3 mb-4">
-            <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev"><span class="fa-solid fa-chevron-left fa-xl"></span></button>
+            <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev" aria-label="{{ 'form.button.previous'|trans }}">
+              <span class="fa-solid fa-chevron-left fa-xl" aria-hidden="true"></span>
+            </button>
             <div class="swiper mx-0" id="swiper-{{ category.id }}-main">
               <h2 class="mb-3 text-center text-md-start">
                 {{ category.icon.faClass|fmt_fa_class('fa-fw me-2')|raw }} {{ category.label }}
@@ -58,7 +60,9 @@
                 {% endfor %}
               </div>
             </div>
-            <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-next"><span class="fa-solid fa-chevron-right fa-xl"></span></button>
+            <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-next" aria-label="{{ 'form.button.next'|trans }}">
+              <span class="fa-solid fa-chevron-right fa-xl" aria-hidden="true"></span>
+            </button>
           </div>
         </section>
       {% endif %}

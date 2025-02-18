@@ -11,26 +11,17 @@
         {# Header with title and dismiss button #}
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="avatar-modal-label">
-            Changer l'avatar
+            {{ 'account.modal.changeAvatar'|trans }}
           </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'aria.label.close'|trans }}"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
         </div>
 
         {# Body with message #}
         <div class="modal-body">
-          {{ form_start(form) }}
-          {{ form_row(form.imageFile) }}
-          <div class="text-start">
-            <button type="submit" class="btn btn-primary">Valider</button>
-            {# <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ 'form.button.cancel'|trans }}</button> #}
-          </div>
-          {{ form_end(form) }}
+          <turbo-frame id="edit-avatar" src="{{ path('account_avatar') }}" loading="lazy">
+            {{ block('spinner', 'theme/spinner.html.twig') }}
+          </turbo-frame>
         </div>
-
-        {# Footer with cancel or confirm buttons #}
-        {# <div class="modal-footer">
-
-      </div> #}
       </div>
     </div>
   </div>
@@ -38,37 +29,51 @@
   <section>
     <div class="container">
       <div class="mx-auto w-100 w-md-75">
-        {# Subtitle and back link #}
-        <h2 class="text-center text-md-start mb-4">
+        {# Subtitle for he profile section #}
+        <h2 class="text-center text-md-start mb-3">
           {{ 'account.subtitles.myProfile'|trans }}
         </h2>
 
         {# Insert the flashes in the same col size as the form #}
         {{ block('flash', 'theme/flash.html.twig') }}
-        <div class="row border rounded p-2 align-items-center bg-light">
-          <div class="col-12 text-center col-md-4">
-            <a href="#" class="app-avatar-link position-relative" data-bs-toggle="modal" data-bs-target="#avatar-modal">
+        <div class="d-flex flex-column gap-3 flex-md-row border rounded p-2 align-items-center bg-light">
+          <div class="px-2">
+            <a href="#" class="app-avatar-link position-relative" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
               {{ app.user|fmt_image_file('username', 'app-avatar-card')|raw }}
-              <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3"><span class="bi bi-pencil-fill"></span></span>
+              <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3">
+                <span class="bi bi-pencil-fill" aria-hidden="true"></span>
+              </span>
             </a>
           </div>
-          <div class="col-12 mt-2 text-center col-md-8 text-md-start">
-            <p>
-              <span class="fs-2">{{ app.user.username }}</span><br />
-              Dernière connexion : {{ app.user.dateLastCo|format_datetime('short', 'short') }}<br />
-              Inscrit depuis : {{ app.user.dateAdd|format_datetime('short', 'none') }}<br />
-              <a class="btn btn-sm mb-1 btn-outline-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">
-                {{ 'account.button.changePassword'|trans }} <span class="bi bi-arrow-right me-1"></span>
-              </a><br />
-
-              <div class="d-flex justify-content-between">
-                <a class="btn btn-sm mb-1 btn-outline-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a>
-                <a class="btn btn-sm mb-1 btn-outline-danger" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.delete'|trans }}</a>
-              </div>
+          <div class="text-center text-md-start flex-fill">
+            <h6 class="fs-2">
+              {{ app.user.username }}
+            </h6>
+            <p class="text-muted">
+              {{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo|format_datetime('short', 'short')) }}<br />
+              {{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}
             </p>
-          </div>
 
-          <div class="col-12"></div>
+            <div>
+              <a class="btn btn-sm btn-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a>
+            </div>
+          </div>
+        </div>
+        {# Subtitle for he profile section #}
+        <h2 class="text-center text-md-start mt-3 mb-3">
+          {{ 'account.subtitles.myActions'|trans }}
+        </h2>
+        <div class="d-flex flex-column justify-content-between gap-2">
+          <div>
+            <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">
+              {{ 'account.button.changePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div>
+            <a class="icon-link icon-link-hover link-danger" href="{{ path('account_logout') }}" data-turbo-prefetch="false">
+              {{ 'account.button.delete'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

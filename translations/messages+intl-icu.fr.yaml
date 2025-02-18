@@ -11,26 +11,31 @@ account:
   subtitles:
     login: Connexion
     myProfile: Mon profil
+    myActions: Actions
   button:
     login: Se connecter
-    changePassword: Modifier le mot de passe
     logout: Se déconnecter
+    changePassword: Modifier mon mot de passe
     delete: Supprimer mon compte
+  modal:
+    changeAvatar: Choisir un nouvel avatar
+  other:
+    dateLastCo: 'Dernière connexion : '
+    dateAdd: 'Inscrit depuis : '
 
 admin:
   title: Administration
-  link:
-    backToMainPage: Retour à la page principale
   subtitles:
     configs: Configurations
     accounts: Comptes
     hub: Hub
     others: Autres
     shortcuts: Raccourcis
-  user:
-    flash:
-      added: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
-      reset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
+  link:
+    backToMainPage: Retour à la page principale
+  flash:
+    added: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
+    reset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
 
 ##################################
 # Common translations ############
@@ -46,6 +51,11 @@ form:
     reset: Réinitialiser
     search: Chercher
     cancel: Annuler
+    help: Aide
+    close: Fermer
+    download: Télécharger
+    clear: Supprimer
+    reveal: Afficher
   title:
     index: Liste
     new: Ajout
@@ -60,9 +70,9 @@ form:
     body: Êtes-vous sûr de vouloir supprimer <strong>{object}</strong> ? Cette action est <strong>définitive</strong>.
   link:
     back: Retour
-    backToList: Retour à la liste 
+    backToList: Retour à la liste
     backToSee: Retour aux détails
-  other: 
+  other:
     deleteImage: Supprimer l'image
     action: Actions
     none: Aucun
@@ -82,13 +92,8 @@ layout:
     releaseDate: Mise à jour le
 
 aria:
-  label:
-    mainNavigation: Navigation principale
-    toggleNavigation: Basculer la navigation
-    avatar: Avatar
-    footer: Pied de page
-    search: Chercher
-    close: Fermer
-  other:
-    skipToContent: Aller au contenu
-    download: Télécharger
+  skipToContent: Aller au contenu
+  mainNavigation: Navigation principale
+  toggleNavigation: Basculer la navigation
+  footer: Pied de page
+  loading: Chargement...
