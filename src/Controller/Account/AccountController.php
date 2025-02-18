@@ -2,8 +2,11 @@
 
 namespace App\Controller\Account;
 
+use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -13,10 +16,27 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AccountController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED')]
-    #[Route(path: '', name: 'index', methods: ['GET'])]
-    public function index(): Response
+    #[Route(path: '', name: 'index', methods: ['GET', 'POST'])]
+    public function index(Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('account/index.html.twig', []);
+        $user = $this->getUser();
+
+        $form = $this->createForm(AvatarUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($user);
+            $em->flush();
+
+            // do anything else you need here, like send an email
+            // $this->addFlash('success', ['message' => 'admin.user.flash.added', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
+
+            return $this->redirectToRoute('account_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('account/index.html.twig', [
+            'form' => $form,
+        ]);
     }
 
     #[Route(path: '/login', name: 'login', methods: ['GET', 'POST'])]

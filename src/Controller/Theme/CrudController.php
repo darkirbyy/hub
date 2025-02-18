@@ -124,7 +124,7 @@ abstract class CrudController extends AbstractController
 
             $this->addFlash('success', ['message' => $isNewObject ? 'form.flash.added' : 'form.flash.updated', 'params' => ['object' => (string) $object]]);
 
-            return $this->redirectToRoute($this->configMain['route_prefix'] . 'index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute($this->configMain['route_prefix'] . 'show', ['id' => $object->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render($isNewObject ? $this->configNew['template'] : $this->configEdit['template'], [

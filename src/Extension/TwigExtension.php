@@ -19,7 +19,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return [];
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [new TwigFunction('deep_attribute', [$this, 'deepAttribute'])];
     }

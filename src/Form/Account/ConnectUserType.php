@@ -21,7 +21,7 @@ class ConnectUserType extends AbstractType
                 'required' => true,
                 'label' => 'user.label.username',
                 'attr' => [
-                    'button_action' => 'clear',
+                    // 'button_action' => 'clear',
                     'placeholder' => 'user.label.username',
                     'autocomplete' => 'username',
                     'autofocus' => true,

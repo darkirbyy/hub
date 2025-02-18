@@ -13,7 +13,9 @@ account:
     myProfile: Mon profil
   button:
     login: Se connecter
+    changePassword: Modifier le mot de passe
     logout: Se déconnecter
+    delete: Supprimer mon compte
 
 admin:
   title: Administration

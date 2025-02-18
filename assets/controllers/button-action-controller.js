@@ -5,6 +5,9 @@ export default class extends Controller {
 
   connect() {
     this.clearTargets.forEach((item) => {
+      const faSpan = item.querySelector('span');
+      faSpan.classList.add('fa-xmark');
+
       item.addEventListener('click', () => {
         const inputField = document.getElementById(
           item.getAttribute('data-button-action-id')
