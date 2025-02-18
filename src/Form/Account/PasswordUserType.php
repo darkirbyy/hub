@@ -15,30 +15,40 @@ use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 class PasswordUserType extends AbstractType
 {
+    private int $passwordStrength;
+
+    public function __construct(int $passwordStrength)
+    {
+        $this->passwordStrength = $passwordStrength;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $constraints = [new NotBlank()];
+        if ($this->passwordStrength > 0) {
+            $minScore = $this->passwordStrength >= 1 && $this->passwordStrength <= 4 ? $this->passwordStrength : PasswordStrength::STRENGTH_MEDIUM;
+            $constraints[] = new PasswordStrength(['minScore' => $minScore]);
+        }
+
         $builder->add('plainPassword', RepeatedType::class, [
             'mapped' => false,
             'required' => true,
             'type' => PasswordType::class,
-            'options' => [
-                'attr' => [
-                    'button_action' => 'reveal',
-                ],
-            ],
             'first_options' => [
                 'label' => 'user.label.newPassword',
                 'attr' => [
+                    'button_action' => 'reveal',
                     'placeholder' => 'user.label.newPassword',
                 ],
             ],
             'second_options' => [
                 'label' => 'user.label.repeatPassword',
                 'attr' => [
+                    'button_action' => 'reveal',
                     'placeholder' => 'user.label.repeatPassword',
                 ],
             ],
-            'constraints' => [new NotBlank(), new PasswordStrength(['minScore' => PasswordStrength::STRENGTH_MEDIUM])],
+            'constraints' => $constraints,
         ]);
     }
 
