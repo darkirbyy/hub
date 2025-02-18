@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\PasswordStrength;
 use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -33,10 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[Assert\Length(min: 2)]
     #[Assert\Regex('/^[a-zA-Z0-9\-_]+$/', 'user.error.invalidUsername')]
     private ?string $username = null;
-
-    #[Assert\NotBlank]
-    #[PasswordStrength(['minScore' => PasswordStrength::STRENGTH_MEDIUM])]
-    private ?string $plainPassword = null;
 
     #[ORM\Column]
     private ?string $password = null;
@@ -146,18 +141,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         $roles[] = $this->isMetaAdmin() ? 'ROLE_ADMIN' : 'ROLE_USER';
 
         return array_unique($roles);
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(?string $plainPassword): static
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
     }
 
     public function getPassword(): ?string

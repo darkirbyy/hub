@@ -74,7 +74,7 @@ class Appli
         ),
     ]
     #[Assert\When(expression: 'this.getImageUpdatedAt() == null', constraints: [new Assert\NotBlank()])]
-    #[Assert\Image(maxSize: '1Mi', minWidth: 128, maxWidth: 1024, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
+    #[Assert\Image(maxSize: '5Mi', minWidth: 128, maxWidth: 2048, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
     private ?File $imageFile = null;
 
     #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]

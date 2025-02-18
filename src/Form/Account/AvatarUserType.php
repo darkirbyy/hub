@@ -37,7 +37,7 @@ class AvatarUserType extends AbstractType
             'csrf_token_id' => 'authenticate',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'form-redirect',
+                'data-controller' => 'form-redirect load-popover',
             ],
         ]);
     }

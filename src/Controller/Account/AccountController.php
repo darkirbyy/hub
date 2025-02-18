@@ -28,6 +28,7 @@ class AccountController extends AbstractController
     #[Route(path: '/avatar', name: 'avatar', methods: ['GET', 'POST'])]
     public function avatar(Request $request, EntityManagerInterface $em): Response
     {
+        /** @var \App\Entity\Account\User $user */
         $user = $this->getUser();
 
         $form = $this->createForm(AvatarUserType::class, $user);
@@ -58,7 +59,8 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPlainPassword()));
+            $plainPassword = $form->get('plainPassword')->getData();
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $em->persist($user);
             $em->flush();

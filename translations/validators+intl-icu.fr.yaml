@@ -38,7 +38,7 @@ appli:
     title: Apparaît sur les cartes du HUB
     name: Doit être identique à la variable APP_NAME renseignée dans l'application cible
     path: Définit le chemin de l'application cible depuis la racine du serveur, en commençant par '/'
-    image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
 
 externalLink:
   name: Liens externes
@@ -74,7 +74,7 @@ user:
     imageMeta: Métadonnées de l'avatar
   help:
     username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'
-    image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 1024px<br>Poids maximum : 1Mio'
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 1024px<br>Poids : maximum 1Mio'
   error:
     invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
 

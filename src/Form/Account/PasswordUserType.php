@@ -10,12 +10,15 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 class PasswordUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('plainPassword', RepeatedType::class, [
+            'mapped' => false,
             'required' => true,
             'type' => PasswordType::class,
             'options' => [
@@ -35,6 +38,7 @@ class PasswordUserType extends AbstractType
                     'placeholder' => 'user.label.repeatPassword',
                 ],
             ],
+            'constraints' => [new NotBlank(), new PasswordStrength(['minScore' => PasswordStrength::STRENGTH_MEDIUM])],
         ]);
     }
 
