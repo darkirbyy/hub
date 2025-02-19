@@ -1,11 +1,12 @@
 {% block form %}
   {{ form_start(form) }}
 
+  {# Render each field #}
   {% for field in form.children %}
     {{ form_row(field) }}
   {% endfor %}
 
-  {# Buttons to submit #}
+  {# Button to submit #}
   <div class="text-start">
     <button type="submit" class="btn btn-primary">{{ 'form.button.save'|trans }}</button>
   </div>

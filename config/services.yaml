@@ -25,9 +25,12 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Extension\EventSubscriber:
+        tags: [kernel.event_subscriber]
+
     App\Form\Account\PasswordUserType:
         arguments:
-            $passwordStrength: '%env(int:APP_PASSWORD_STRENGTH)%'
+            $passwordMinStrength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -15,19 +15,18 @@ use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 class PasswordUserType extends AbstractType
 {
-    private int $passwordStrength;
+    private int $passwordMinStrength;
 
-    public function __construct(int $passwordStrength)
+    public function __construct(int $passwordMinStrength)
     {
-        $this->passwordStrength = $passwordStrength;
+        $this->passwordMinStrength = $passwordMinStrength >= 0 && $passwordMinStrength <= 4 ? $passwordMinStrength : PasswordStrength::STRENGTH_MEDIUM;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $constraints = [new NotBlank()];
-        if ($this->passwordStrength > 0) {
-            $minScore = $this->passwordStrength >= 1 && $this->passwordStrength <= 4 ? $this->passwordStrength : PasswordStrength::STRENGTH_MEDIUM;
-            $constraints[] = new PasswordStrength(['minScore' => $minScore]);
+        if ($this->passwordMinStrength > 0) {
+            $constraints[] = new PasswordStrength(['minScore' => $this->passwordMinStrength]);
         }
 
         $builder->add('plainPassword', RepeatedType::class, [
@@ -59,7 +58,8 @@ class PasswordUserType extends AbstractType
             'translation_domain' => 'validators',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'button-action',
+                'data-controller' => 'button-action password-strength',
+                'passwordMinStrength' => $this->passwordMinStrength,
             ],
         ]);
     }

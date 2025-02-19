@@ -82,7 +82,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
 
     public function fmtBool(bool $input): string
     {
-        return $input ? 'form.choice.yes' : 'form.choice.no';
+        return $input ? 'enum.choices.yes' : 'enum.choices.no';
     }
 
     public function fmtCollec(PersistentCollection $input, string $separator = ', '): string

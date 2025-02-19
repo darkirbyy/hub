@@ -50,8 +50,8 @@ class AppliType extends AbstractType
             ->add('public', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
-                    'form.choice.yes' => true,
-                    'form.choice.no' => false,
+                    'enum.choices.yes' => true,
+                    'enum.choices.no' => false,
                 ],
                 'choice_translation_domain' => 'messages',
                 'label' => 'appli.label.public',

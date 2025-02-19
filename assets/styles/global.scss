@@ -10,6 +10,7 @@
 @import '~bootstrap/scss/utilities';
 
 $border-color: $gray-500;
+$progress-bar-transition: width 0.3s ease;
 
 // Use bootstrap API to generate custom responsive classes
 $utilities: map.merge(
@@ -20,6 +21,7 @@ $utilities: map.merge(
       class: 'w',
       responsive: true,
       values: (
+        0: 1%,
         1: 1%,
         25: 25%,
         33: 33%,

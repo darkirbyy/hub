@@ -29,6 +29,8 @@ account:
   other:
     dateLastCo: 'Dernière connexion : '
     dateAdd: 'Inscrit depuis : '
+    passwordMinStrength: Par politique de sécurité, le mot de passe doit avoir une force au moins égale à 
+    passwordStrength: 'Force du mot de passe : '
     confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
 
 admin:
@@ -61,6 +63,7 @@ form:
     cancel: Annuler
     help: Aide
     close: Fermer
+    confirm: Valider
     download: Télécharger
     clear: Supprimer
     reveal: Afficher
@@ -84,9 +87,17 @@ form:
     deleteImage: Supprimer l'image
     action: Actions
     none: Aucun
-  choice:
+
+enum:
+  choices:
     yes: Oui
     no: Non
+  passwordStrengths:
+    veryWeak: Très faible
+    weak: Faible
+    medium: Moyen
+    strong: Fort
+    veryStrong: Très fort
 
 layout:
   name: Hub
