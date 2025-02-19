@@ -64,7 +64,7 @@ final class AppliController extends CrudController
                 6 => ['getter' => 'path'],
                 7 => ['getter' => 'description'],
                 8 => ['getter' => 'linkText'],
-                9 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'fmt_image_file("title","img-fluid")|raw'],
+                9 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'fmt_image_file("title")|raw'],
                 10 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
                 11 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec'],
             ],

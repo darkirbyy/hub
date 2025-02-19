@@ -38,56 +38,45 @@
         </h2>
 
         <div class="border rounded p-2 bg-light">
-          <div class="d-flex flex-column align-items-center gap-3 flex-md-row">
+          <div class="d-flex flex-column justify-content-start align-items-center gap-4 flex-md-row">
             <div class="px-2">
-              <a href="#" class="app-avatar-link position-relative" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
-                {{ app.user|fmt_image_file('username', 'app-avatar-card')|raw }}
-                <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3">
-                  <span class="bi bi-pencil-fill" aria-hidden="true"></span>
-                </span>
+              <a href="#" class="app-avatar-link" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
+                <div class="app-avatar-container-lg position-relative">
+                  {{ app.user|fmt_image_file('username', 'app-avatar-img')|raw }}
+
+                  <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3">
+                    <span class="bi bi-pencil-fill" aria-hidden="true"></span>
+                  </span>
+                </div>
               </a>
             </div>
-            <div class="text-center flex-fill text-md-start">
+            <div class="text-center text-md-start">
               <h6 class="fs-2">
                 {{ app.user.username }}
               </h6>
-              <p class="text-muted">
-                {{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo is not empty ? app.user.dateLastCo|format_datetime('short', 'short') : '-') }}<br />
-                {{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}
+              <p class="d-flex flex-column text-muted">
+                <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo is not empty ? app.user.dateLastCo|format_datetime('short', 'short') : '-') }}</span>
+                <span>{{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}</span><br />
               </p>
-              <div>
-                <a class="btn btn-sm btn-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a>
-              </div>
+              <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">
+                <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}">
+                  {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+                </a>
+
+                <a class="icon-link icon-link-hover link-danger" href="{{ path('account_delete') }}" data-turbo-prefetch="false">
+                  {{ 'account.link.deleteAccount'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+                </a>
+              </p>
+
+              <p class="d-flex flex-column">
+                <span><a class="btn btn-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a></span>
+              </p>
             </div>
           </div>
-          {# <div class="d-flex flex-column justify-content-between align-items-center align-items-md-start gap-2">
-            <div>
-              <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}">
-                {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
-              </a>
-            </div>
-            <div>
-              <a class="icon-link icon-link-hover link-danger" href="{{ path('account_logout') }}" data-turbo-prefetch="false">
-                {{ 'account.link.delete'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
-              </a>
-            </div>
+
+          {# <div>
+            <a class="btn btn-sm btn-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a>
           </div> #}
-        </div>
-        {# Subtitle for he profile section #}
-        <h2 class="text-center text-md-start mt-3 mb-3">
-          {{ 'account.subtitles.myActions'|trans }}
-        </h2>
-        <div class="d-flex flex-column justify-content-between align-items-center align-items-md-start gap-2">
-          <div>
-            <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}">
-              {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
-            </a>
-          </div>
-          <div>
-            <a class="icon-link icon-link-hover link-danger" href="{{ path('account_logout') }}" data-turbo-prefetch="false">
-              {{ 'account.link.delete'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
-            </a>
-          </div>
         </div>
       </div>
     </div>

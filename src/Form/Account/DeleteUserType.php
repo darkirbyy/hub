@@ -6,22 +6,20 @@ namespace App\Form\Account;
 
 use App\Entity\Account\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-class AvatarUserType extends AbstractType
+class DeleteUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('imageFile', VichImageType::class, [
-            'required' => false,
-            'label' => false,
-            'help' => 'user.help.image',
-            'help_html' => true,
-            'allow_delete' => true,
-            'download_uri' => false,
-            'image_uri' => false,
+        $builder->add('confirm', CheckboxType::class, [
+            'required' => true,
+            'mapped' => false,
+            'label' => 'user.label.confirmDeletion',
+            'constraints' => [new NotBlank()],
         ]);
     }
 
@@ -30,10 +28,8 @@ class AvatarUserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'translation_domain' => 'validators',
-            'csrf_token_id' => 'authenticate',
             'attr' => [
                 'novalidate' => 'novalidate',
-                'data-controller' => 'form-redirect load-popover',
             ],
         ]);
     }

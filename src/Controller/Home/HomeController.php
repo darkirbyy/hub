@@ -21,17 +21,22 @@ class HomeController extends AbstractController
 
         $allowedApplis = [];
         if ($this->isGranted('IS_AUTHENTICATED')) {
-            $allowedApplis = array_unique(
-                $this->getUser()
-                    ->getMetaRole()
-                    ->getRoles()
-                    ->map(function ($role) {
-                        return $role->getAppli();
-                    })
-                    ->toArray(),
-            );
+            // Check if the user has a metaRole and if it contains roles
+            $metaRole = $this->getUser()->getMetaRole();
+            if ($metaRole && $metaRole->getRoles()->count() > 0) {
+                // Map the roles to the associated applications
+                $allowedApplis = array_unique(
+                    $metaRole
+                        ->getRoles()
+                        ->map(function ($role) {
+                            return $role->getAppli();
+                        })
+                        ->toArray(),
+                );
+            }
         }
 
+        // Loop through categories and remove apps the user is not authorized for
         foreach ($categories as $category) {
             foreach ($category->getApplis() as $appli) {
                 if (!$appli->isPublic() && !in_array($appli, $allowedApplis)) {
@@ -39,12 +44,6 @@ class HomeController extends AbstractController
                 }
             }
         }
-
-        // foreach($categories as $category){
-        //     $category-> $category->getApplis()->filter(function($appli) use ($allowedApplis){
-        //         return $appli->isPublic() || in_array($appli, $allowedApplis);
-        //     });
-        // }
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,

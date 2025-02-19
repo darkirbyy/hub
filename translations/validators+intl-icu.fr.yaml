@@ -72,6 +72,7 @@ user:
     dateLastCo: Date dernière connexion
     imageFile: Avatar
     imageMeta: Métadonnées de l'avatar
+    confirmDeletion: Je confirme la suppression
   help:
     username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 1024px<br>Poids : maximum 1Mio'

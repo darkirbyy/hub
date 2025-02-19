@@ -11,7 +11,7 @@
 
         {# Subtitle #}
         <h2 class="text-center text-md-start mb-2">
-          {{ 'account.subtitles.updatePassword'|trans }}
+          {{ 'account.subtitles.deleteAccount'|trans }}
         </h2>
 
         {# Backlink #}
@@ -21,9 +21,13 @@
 
         {# Change password form #}
         {{ form_start(form) }}
-        {{ form_row(form.plainPassword) }}
+        <p class="mb-1">
+          {{ 'account.other.confirmDeletion'|trans|raw }}
+        </p>
+
+        {{ form_row(form.confirm) }}
         <div class="text-start">
-          <button type="submit" class="btn btn-primary">Valider</button>
+          <button type="submit" class="btn btn-danger">Supprimer</button>
         </div>
         {{ form_end(form) }}
       </div>

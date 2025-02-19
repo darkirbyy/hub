@@ -100,7 +100,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return '<span class="' . $input . ' ' . $custom . '"></span>';
     }
 
-    public function fmtImageFile(Environment $env, object $input, string $fieldAlt, string $customClasses = ''): string
+    public function fmtImageFile(Environment $env, object $input, string $fieldAlt, string $customClasses = 'img-fluid'): string
     {
         if (!empty($input->getImageMeta()->getName())) {
             $templateString = '<img src="{{ vich_uploader_asset(object, \'imageFile\') }}" class="' . $customClasses . '" alt="{{object.' . $fieldAlt . '}}">';

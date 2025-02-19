@@ -131,25 +131,39 @@ legend.col-form-label.required::after {
 // App-specific classes
 
 // Avatars
-@mixin app-avatar($size) {
+
+@mixin app-avatar-container($size) {
+  max-height: $size * $font-size-base;
+  max-width: $size * $font-size-base;
+}
+
+.app-avatar-container-xs {
+  @include app-avatar-container(1.5);
+}
+
+.app-avatar-container-sm {
+  @include app-avatar-container(3);
+}
+
+.app-avatar-container-md {
+  @include app-avatar-container(9);
+}
+
+.app-avatar-container-lg {
+  @include app-avatar-container(15);
+}
+
+.app-avatar-img {
   object-fit: cover;
   object-position: center;
-  height: $size * $font-size-base;
-  width: $size * $font-size-base;
+  width: 100%;
+  aspect-ratio: 1/1;
   box-shadow: $box-shadow-sm !important;
   border-radius: 50% !important;
 }
 
-.app-avatar-small {
-  @include app-avatar(1.5);
-}
-
-.app-avatar-card {
-  @include app-avatar(10);
-}
-
 .app-avatar-link {
-  .app-avatar-card {
+  .app-avatar-img {
     transition:
       opacity 0.3s ease,
       filter 0.3s ease;
@@ -160,7 +174,7 @@ legend.col-form-label.required::after {
   }
 
   &:hover {
-    .app-avatar-card {
+    .app-avatar-img {
       opacity: 0.7 !important;
       filter: blur(1px);
     }

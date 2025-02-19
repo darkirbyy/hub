@@ -11,23 +11,25 @@ account:
   subtitles:
     login: Connexion
     myProfile: Mon profil
-    myActions: Actions
-    myPassword: Modifier le mot de passe
+    updatePassword: Modifier mon mot de passe
+    deleteAccount: Supprimer mon compte
   button:
     login: Se connecter
     logout: Se déconnecter
   link:
     backToIndex: Retour au profil
-    updatePassword: Modifier le mot de passe
-    delete: Supprimer le compte
+    updatePassword: Modifier mon mot de passe
+    deleteAccount: Supprimer mon compte
   modal:
     updateAvatar: Choisir un nouvel avatar
   flash:
-    avatarUpdated: Le nouvel avatar a été enregistré.
-    passwordUpdated: Le mot de passe a été mise à jour.
+    avatarUpdated: Votre nouvel avatar a été enregistré.
+    passwordUpdated: Votre mot de passe a été mise à jour.
+    accountDeleted: Votre compte a été supprimé.
   other:
     dateLastCo: 'Dernière connexion : '
     dateAdd: 'Inscrit depuis : '
+    confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
 
 admin:
   title: Administration

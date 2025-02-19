@@ -4,20 +4,20 @@ namespace App\Controller\Account;
 
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
+use App\Form\Account\DeleteUserType;
 use App\Form\Account\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route(path: '/account', name: 'account_')]
 class AccountController extends AbstractController
 {
-    #[IsGranted('IS_AUTHENTICATED')]
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(Request $request): Response
     {
@@ -28,7 +28,6 @@ class AccountController extends AbstractController
         return $this->render('account/index.html.twig', []);
     }
 
-    #[IsGranted('IS_AUTHENTICATED')]
     #[Route(path: '/avatar', name: 'avatar', methods: ['GET', 'POST'])]
     public function avatar(Request $request, EntityManagerInterface $em): Response
     {
@@ -53,7 +52,6 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[IsGranted('IS_AUTHENTICATED')]
     #[Route(path: '/password', name: 'password', methods: ['GET', 'POST'])]
     public function password(Request $request, EntityManagerInterface $em, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
     {
@@ -76,6 +74,31 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/password.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route(path: '/delete', name: 'delete', methods: ['GET', 'POST'])]
+    public function delete(Request $request, EntityManagerInterface $em, Security $security): Response
+    {
+        /** @var \App\Entity\Account\User $user */
+        $user = $this->getUser();
+
+        $form = $this->createForm(DeleteUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $security->logout(false);
+
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('success', ['message' => 'account.flash.accountDeleted']);
+
+            return $this->redirectToRoute('account_login', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('account/delete.html.twig', [
             'form' => $form,
         ]);
     }

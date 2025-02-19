@@ -55,7 +55,9 @@
             {% if is_granted('IS_AUTHENTICATED') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
-                  {{ app.user|fmt_image_file('username', 'app-avatar-small')|raw }}
+                  <div class="app-avatar-container-xs d-inline-block">
+                    {{ app.user|fmt_image_file('username', 'app-avatar-img')|raw }}
+                  </div>
                   {{ app.user.username }}
                 </a>
               </li>
