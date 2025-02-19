@@ -67,6 +67,8 @@ form:
     download: Télécharger
     clear: Supprimer
     reveal: Afficher
+    previous: Précédent
+    next: Suivant
   title:
     index: Liste
     new: Ajout
@@ -76,6 +78,7 @@ form:
     added: '<strong>{object}</strong> ajouté !'
     updated: '<strong>{object}</strong> mis à jour !'
     deleted: '<strong>{object}</strong> supprimé !'
+    error: 'Une erreur est survenue. Veuillez réessayer plus tard.'
   modal:
     title: Confirmer la suppression
     body: Êtes-vous sûr de vouloir supprimer <strong>{object}</strong> ? Cette action est <strong>définitive</strong>.

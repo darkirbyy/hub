@@ -4,10 +4,10 @@ namespace App\Controller\Admin\Account;
 
 use App\Controller\Theme\CrudController;
 use App\Entity\Account\User;
+use App\Extension\FlushManager;
 use App\Form\Account\EditUserType;
 use App\Form\Account\NewUserType;
 use App\Repository\Account\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,7 +93,7 @@ class UserController extends CrudController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
+    public function new(Request $request, FlushManager $fm, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
     {
         $user = new User();
         $form = $this->createForm($this->configNew['form_class'], $user);
@@ -104,11 +104,7 @@ class UserController extends CrudController
             $plainPassword = $this->generatePassword();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            $em->persist($user);
-            $em->flush();
-
-            // do anything else you need here, like send an email
-            $this->addFlash('success', ['message' => 'admin.flash.userAdded', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
+            $fm->persist($user, ['message' => 'admin.flash.userAdded', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
             return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -121,17 +117,13 @@ class UserController extends CrudController
     }
 
     #[Route('/{id}/reset', name: 'reset', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function reset(User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
+    public function reset(User $user, UserPasswordHasherInterface $userPasswordHasher, FlushManager $fm): Response
     {
         // generate a random temporary password and encode it
         $plainPassword = $this->generatePassword();
         $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-        $em->persist($user);
-        $em->flush();
-
-        // do anything else you need here, like send an email
-        $this->addFlash('success', ['message' => 'admin.flash.userReset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
+        $fm->persist($user, ['message' => 'admin.flash.userReset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
         return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }

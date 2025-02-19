@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Theme;
 
+use App\Extension\FlushManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,9 +86,9 @@ abstract class CrudController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, FlushManager $fm): Response
     {
-        return $this->edit(null, $request, $em);
+        return $this->edit(null, $request, $fm);
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'], requirements: ['id' => '\d+'])]
@@ -105,7 +105,7 @@ abstract class CrudController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(?int $id, Request $request, EntityManagerInterface $em): Response
+    public function edit(?int $id, Request $request, FlushManager $fm): Response
     {
         $isNewObject = empty($id);
         if ($isNewObject) {
@@ -119,10 +119,7 @@ abstract class CrudController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($object);
-            $em->flush();
-
-            $this->addFlash('success', ['message' => $isNewObject ? 'form.flash.added' : 'form.flash.updated', 'params' => ['object' => (string) $object]]);
+            $fm->persist($object, ['message' => $isNewObject ? 'form.flash.added' : 'form.flash.updated', 'params' => ['object' => (string) $object]]);
 
             return $this->redirectToRoute($this->configMain['route_prefix'] . 'show', ['id' => $object->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -137,15 +134,12 @@ abstract class CrudController extends AbstractController
 
     #[IsCsrfTokenValid(new Expression('"delete-" ~ args["id"]'), tokenKey: 'delete_token')]
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function delete(int $id, EntityManagerInterface $em): Response
+    public function delete(int $id, FlushManager $fm): Response
     {
         $object = $this->repository->find($id);
         empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
 
-        $em->remove($object);
-        $em->flush();
-
-        $this->addFlash('success', ['message' => 'form.flash.deleted', 'params' => ['object' => (string) $object]]);
+        $fm->remove($object, ['message' => 'form.flash.deleted', 'params' => ['object' => (string) $object]]);
 
         return $this->redirectToRoute($this->configMain['route_prefix'] . 'index', [], Response::HTTP_SEE_OTHER);
     }

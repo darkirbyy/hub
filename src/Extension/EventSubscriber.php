@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Extension;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 class EventSubscriber implements EventSubscriberInterface
 {
-    private $em;
+    private $fm;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(FlushManager $fm)
     {
-        $this->em = $em;
+        $this->fm = $fm;
     }
 
     public static function getSubscribedEvents(): array
@@ -29,7 +28,6 @@ class EventSubscriber implements EventSubscriberInterface
         $user = $event->getUser();
         $user->setDateLastCo(new \DateTime());
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->fm->persist($user);
     }
 }

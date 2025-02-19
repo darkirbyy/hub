@@ -2,11 +2,11 @@
 
 namespace App\Controller\Account;
 
+use App\Extension\FlushManager;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
 use App\Form\Account\PasswordUserType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class AccountController extends AbstractController
     }
 
     #[Route(path: '/avatar', name: 'avatar', methods: ['GET', 'POST'])]
-    public function avatar(Request $request, EntityManagerInterface $em): Response
+    public function avatar(Request $request, FlushManager $fm): Response
     {
         /** @var \App\Entity\Account\User $user */
         $user = $this->getUser();
@@ -38,11 +38,8 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($user);
-            $em->flush();
-
-            // Don't work, why ? use a query param instead...
-            // $this->addFlash('success', ['message' => 'account.flash.avatarUpdated']);
+            // Flash don't work, why ? use a query param instead...
+            $fm->persist($user, ['message' => 'account.flash.avatarUpdated']);
 
             return $this->redirectToRoute('account_index', ['flash' => true], Response::HTTP_SEE_OTHER);
         }
@@ -53,7 +50,7 @@ class AccountController extends AbstractController
     }
 
     #[Route(path: '/password', name: 'password', methods: ['GET', 'POST'])]
-    public function password(Request $request, EntityManagerInterface $em, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
+    public function password(Request $request, FlushManager $fm, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
     {
         /** @var \App\Entity\Account\User $user */
         $user = $this->getUser();
@@ -65,10 +62,7 @@ class AccountController extends AbstractController
             $plainPassword = $form->get('plainPassword')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            $em->persist($user);
-            $em->flush();
-
-            $this->addFlash('success', ['message' => 'account.flash.passwordUpdated']);
+            $fm->persist($user, ['message' => 'account.flash.passwordUpdated']);
 
             return $this->redirectToRoute('account_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -79,7 +73,7 @@ class AccountController extends AbstractController
     }
 
     #[Route(path: '/delete', name: 'delete', methods: ['GET', 'POST'])]
-    public function delete(Request $request, EntityManagerInterface $em, Security $security): Response
+    public function delete(Request $request, FlushManager $fm, Security $security): Response
     {
         /** @var \App\Entity\Account\User $user */
         $user = $this->getUser();
@@ -90,10 +84,7 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $security->logout(false);
 
-            $em->remove($user);
-            $em->flush();
-
-            $this->addFlash('success', ['message' => 'account.flash.accountDeleted']);
+            $fm->remove($user, ['message' => 'account.flash.accountDeleted']);
 
             return $this->redirectToRoute('account_login', [], Response::HTTP_SEE_OTHER);
         }
