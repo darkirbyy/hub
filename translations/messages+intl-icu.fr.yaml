@@ -4,7 +4,8 @@
 home:
   title: Accueil
   h1: Bonjour
-  introText: <p>Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.</p><p>Bonne visite 😀</p>
+  introText: Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.
+  haveFun: Bonne visite 😀
 
 account:
   title: Compte

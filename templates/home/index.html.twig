@@ -3,13 +3,18 @@
 {% set title = 'home.title'|trans %}
 
 {% block h1 %}
-  <div class="container-fluid p-0 mb-3 bg-primary-subtle">
+  <div class="container-fluid p-0 mb-3 border-2 app-home-gradient bg-primary-subtle">
     <div class="container">
       <h1 class="text-center">
         {{ 'home.h1'|trans }}
       </h1>
       <div class="px-4 fs-5 text-center">
-        {{ 'home.introText'|trans|raw }}
+        <p class="mb-0">
+          {{ 'home.introText'|trans|raw }}
+        </p>
+        <p class="app-home-havefun mb-0">
+          <span class="px-4 py-1 fs-4 border border-1 rounded-5 bg-primary-subtle">{{ 'home.haveFun'|trans }}</span>
+        </p>
       </div>
     </div>
   </div>

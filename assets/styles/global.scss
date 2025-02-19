@@ -132,6 +132,23 @@ legend.col-form-label.required::after {
 
 // App-specific classes
 
+// Home intro
+
+.app-home-havefun {
+  transform: translateY(50%);
+}
+
+.app-home-gradient {
+  border-bottom: var(--bs-border-width) solid;
+  border-image: linear-gradient(
+      to right,
+      transparent,
+      var(--bs-border-color),
+      transparent
+    )
+    1;
+}
+
 // Avatars
 
 @mixin app-avatar-container($size) {
@@ -186,16 +203,6 @@ legend.col-form-label.required::after {
     }
   }
 }
-
-// a:hover .app-avatar-card {
-//   filter: blur(2px);
-//   opacity: 50%;
-// }
-
-// a:hover .app-avatar-card::before {
-//   content: "?";
-
-// }
 
 // Form rows
 .app-form-row {
