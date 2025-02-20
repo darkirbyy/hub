@@ -52,7 +52,7 @@
           </ul>
           {# Right part of the navbar #}
           <ul class="navbar-nav">
-            {% if is_granted('IS_AUTHENTICATED') %}
+            {% if is_granted('ROLE_USER') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   <div class="app-avatar-container-xs d-inline-block">

@@ -10,12 +10,16 @@ home:
 account:
   title: Compte
   subtitles:
-    login: Connexion
+    login: 
+      normal: Authentification
+      forced: Authentification forte
     myProfile: Mon profil
     updatePassword: Modifier mon mot de passe
     deleteAccount: Supprimer mon compte
   button:
-    login: Se connecter
+    login:
+      normal: Se connecter
+      forced: Confirmer
     logout: Se déconnecter
   link:
     backToIndex: Retour au profil
@@ -30,6 +34,9 @@ account:
   other:
     dateLastCo: 'Dernière connexion : '
     dateAdd: 'Inscrit depuis : '
+    login:
+      normal: Pour vous authentifier, veuillez indiquer vos identifiants. 
+      forced: L'accès à cette page nécessite une authentification <strong>forte</strong>. Pour poursuivre, veuillez confirmer vos identifiants.
     passwordMinStrength: Par politique de sécurité, le mot de passe doit avoir une force au moins égale à 
     passwordStrength: 'Force du mot de passe : '
     confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.

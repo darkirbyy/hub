@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route(path: '/account', name: 'account_')]
@@ -49,6 +50,7 @@ class AccountController extends AbstractController
         ]);
     }
 
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route(path: '/password', name: 'password', methods: ['GET', 'POST'])]
     public function password(Request $request, FlushManager $fm, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
     {
@@ -72,6 +74,7 @@ class AccountController extends AbstractController
         ]);
     }
 
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route(path: '/delete', name: 'delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, FlushManager $fm, Security $security): Response
     {
@@ -97,8 +100,10 @@ class AccountController extends AbstractController
     #[Route(path: '/login', name: 'login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED')) {
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('account_index');
+        } else {
+            $loginType = $this->isGranted('IS_REMEMBERED') ? 'forced' : 'normal';
         }
 
         // get the login error if there is one and last username entered by the user
@@ -108,6 +113,9 @@ class AccountController extends AbstractController
         // create the form and pre fill the username value
         $form = $this->createForm(ConnectUserType::class);
         $form->get('username')->setData($lastUsername);
+        if ('forced' == $loginType) {
+            $form->get('rememberMe')->setData(true);
+        }
 
         if (!empty($error)) {
             $this->addFlash('danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
@@ -116,12 +124,13 @@ class AccountController extends AbstractController
         return $this->render('account/login.html.twig', [
             'form' => $form,
             'error' => $error,
+            'loginType' => $loginType,
         ]);
     }
 
     #[Route(path: '/logout', name: 'logout', methods: ['GET', 'POST'])]
     public function logout(): void
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        // This method can be blank - it will be intercepted by the logout key on your firewall.
     }
 }

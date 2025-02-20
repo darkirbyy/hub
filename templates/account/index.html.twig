@@ -56,10 +56,10 @@
               </h6>
               <p class="d-flex flex-column text-muted">
                 <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo is not empty ? app.user.dateLastCo|format_datetime('short', 'short') : '-') }}</span>
-                <span>{{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}</span><br />
+                <span>{{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}</span>
               </p>
               <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">
-                <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}">
+                <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}" data-turbo-prefetch="false">
                   {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
                 </a>
 
@@ -77,10 +77,6 @@
               </p>
             </div>
           </div>
-
-          {# <div>
-            <a class="btn btn-sm btn-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a>
-          </div> #}
         </div>
       </div>
     </div>

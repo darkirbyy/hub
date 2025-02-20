@@ -11,17 +11,23 @@
 
         {# Subtitle #}
         <h2 class="text-center text-md-start mb-3">
-          {{ 'account.subtitles.login'|trans }}
+          {{ ('account.subtitles.login.' ~ (loginType|default('normal')))|trans }}
         </h2>
 
         {# Login form #}
         {{ form_start(form) }}
-        {% for field in form.children %}
-          {{ form_row(field) }}
-        {% endfor %}
+        <p>
+          {{ ('account.other.login.' ~ (loginType|default('normal')))|trans|raw }}
+        </p>
+        {# Use this variable to know the targeted page #}
+        {# {{app.session.get('_security.main.target_path')}} #}
+
+        {{ form_row(form.username) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.rememberMe, loginType == 'forced' ? { row_attr: { class: 'd-none' } } : { }) }}
 
         <div class="text-start">
-          <button type="submit" class="btn btn-primary">{{ 'account.button.login'|trans }}</button>
+          <button type="submit" class="btn btn-primary">{{ ('account.button.login.' ~ (loginType|default('normal')))|trans }}</button>
         </div>
         {{ form_end(form) }}
       </div>

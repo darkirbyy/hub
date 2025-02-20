@@ -20,7 +20,7 @@ class HomeController extends AbstractController
         $serverBaseUrl = $request->getSchemeAndHttpHost();
 
         $allowedApplis = [];
-        if ($this->isGranted('IS_AUTHENTICATED')) {
+        if ($this->isGranted('ROLE_USER')) {
             // Check if the user has a metaRole and if it contains roles
             $metaRole = $this->getUser()->getMetaRole();
             if ($metaRole && $metaRole->getRoles()->count() > 0) {
