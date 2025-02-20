@@ -63,8 +63,6 @@ user:
     id: ID
     username: Nom d'utilisateur
     password: Mot de passe
-    newPassword: Nouveau mot de passe
-    repeatPassword: Répéter le mot de passe
     metaAdmin: Méta-admin
     metaRole: Méta-rôle
     dateAdd: Date création
@@ -72,6 +70,9 @@ user:
     dateLastCo: Date dernière connexion
     imageFile: Avatar
     imageMeta: Métadonnées de l'avatar
+    newPassword: Nouveau mot de passe
+    repeatPassword: Répéter le mot de passe
+    rememberMe: Se souvenir de cet appareil pendant 30 jours
     confirmDeletion: Je confirme la suppression
   help:
     username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'

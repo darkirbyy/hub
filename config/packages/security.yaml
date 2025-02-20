@@ -36,12 +36,22 @@ security:
             login_throttling:
                 max_attempts: 5          
                 interval: '15 minutes'
+            remember_me:
+                signature_properties: ['password', 'dateUpdate']
+                remember_me_parameter: connect_user[rememberMe]
+                name: remember_me
+                secure: auto
+                samesite: lax
+                httponly: true
+                path: /
+                lifetime: 2592000 # 30 days in seconds
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+            
     role_hierarchy:
         ROLE_USER: ~
         ROLE_ADMIN: ROLE_USER
@@ -65,3 +75,10 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+
+when@prod:
+    security:
+        firewalls:
+            main:
+                remember_me:
+                    path: '/%app.name%'

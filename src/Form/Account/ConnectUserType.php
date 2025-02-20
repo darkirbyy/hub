@@ -6,6 +6,7 @@ namespace App\Form\Account;
 
 use App\Entity\Account\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,14 @@ class ConnectUserType extends AbstractType
                     'button_action' => 'reveal',
                     'placeholder' => 'user.label.password',
                     'autocomplete' => 'current-password',
+                ],
+            ])
+            ->add('rememberMe', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'user.label.rememberMe',
+                'attr' => [
+                    'placeholder' => 'user.label.rememberMe',
                 ],
             ]);
     }
