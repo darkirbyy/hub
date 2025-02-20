@@ -30,7 +30,6 @@ class AvatarUserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'translation_domain' => 'validators',
-            'csrf_token_id' => 'authenticate',
             'attr' => [
                 'novalidate' => 'novalidate',
                 'data-controller' => 'form-redirect load-popover',

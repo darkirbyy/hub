@@ -69,7 +69,11 @@
               </p>
 
               <p class="d-flex flex-column">
-                <span><a class="btn btn-primary" href="{{ path('account_logout') }}" data-turbo-prefetch="false">{{ 'account.button.logout'|trans }}</a></span>
+                <span>
+                  <a class="btn btn-primary" href="{{ path('account_logout', { 'disconnect_user[_token]': csrf_token('logout') }) }}" data-turbo-prefetch="false">
+                    {{ 'account.button.logout'|trans }}
+                  </a>
+                </span>
               </p>
             </div>
           </div>
