@@ -40,7 +40,7 @@ class Shortcut
 
     public function __toString(): string
     {
-        return $this->getLabel();
+        return $this->getLabel() ?? '';
     }
 
     public function getId(): ?int

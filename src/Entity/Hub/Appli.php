@@ -100,7 +100,7 @@ class Appli
 
     public function __toString(): string
     {
-        return $this->getTitle();
+        return $this->getTitle() ?? '';
     }
 
     public function getId(): ?int

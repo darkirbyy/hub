@@ -45,7 +45,7 @@ class MetaRole
 
     public function __toString(): string
     {
-        return $this->getKey();
+        return $this->getKey() ?? '';
     }
 
     public function getId(): ?int

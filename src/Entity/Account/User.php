@@ -79,7 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        return $this->getUsername();
+        return $this->getUsername() ?? '';
     }
 
     #[ORM\PrePersist]
@@ -132,7 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     public function getRoles(): array

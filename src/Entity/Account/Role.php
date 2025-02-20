@@ -47,7 +47,7 @@ class Role
     public function __toString(): string
     {
         // return $this->getKey();
-        return $this->getKey() . ' (' . $this->getAppli() . ')';
+        return $this->getKey() . ' (' . $this->getAppli() . ')' ?? '';
     }
 
     public function getId(): ?int
