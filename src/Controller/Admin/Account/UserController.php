@@ -2,12 +2,12 @@
 
 namespace App\Controller\Admin\Account;
 
-use App\Controller\Theme\CrudController;
+use App\Controller\CrudController;
 use App\Entity\Account\User;
-use App\Extension\FlushManager;
 use App\Form\Account\EditUserType;
 use App\Form\Account\NewUserType;
 use App\Repository\Account\UserRepository;
+use App\Service\FlushManager;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

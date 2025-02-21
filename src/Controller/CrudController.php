@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Theme;
+namespace App\Controller;
 
-use App\Extension\FlushManager;
+use App\Service\FlushManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\ExpressionLanguage\Expression;

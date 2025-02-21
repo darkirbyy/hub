@@ -2,11 +2,11 @@
 
 namespace App\Controller\Account;
 
-use App\Extension\FlushManager;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
 use App\Form\Account\PasswordUserType;
+use App\Service\FlushManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;

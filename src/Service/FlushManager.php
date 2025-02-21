@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Extension;
+namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;

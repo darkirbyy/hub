@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Extension;
 
+use App\Service\FlushManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
-class EventSubscriber implements EventSubscriberInterface
+class LoginExtension implements EventSubscriberInterface
 {
     private $fm;
 

@@ -25,7 +25,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Extension\EventSubscriber:
+    App\Extension\LoginExtension:
         tags: [kernel.event_subscriber]
 
     App\Form\:
@@ -36,6 +36,7 @@ services:
 
     App\Form\Account\PasswordUserType:
         arguments:
+            $htmlValidation: '%env(bool:APP_HTML_VALIDATION)%'
             $passwordMinStrength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'
 
     # add more service definitions when explicit configuration is needed

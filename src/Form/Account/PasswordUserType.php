@@ -17,8 +17,9 @@ class PasswordUserType extends DefaultType
 {
     private int $passwordMinStrength;
 
-    public function __construct(int $passwordMinStrength)
+    public function __construct(bool $htmlValidation, int $passwordMinStrength)
     {
+        parent::__construct($htmlValidation);
         $this->passwordMinStrength = $passwordMinStrength >= 0 && $passwordMinStrength <= 4 ? $passwordMinStrength : PasswordStrength::STRENGTH_MEDIUM;
     }
 

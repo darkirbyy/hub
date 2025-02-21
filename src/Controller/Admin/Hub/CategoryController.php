@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\Hub;
 
-use App\Controller\Theme\CrudController;
+use App\Controller\CrudController;
 use App\Entity\Hub\Category;
 use App\Form\Hub\CategoryType;
 use App\Repository\Hub\CategoryRepository;
