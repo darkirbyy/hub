@@ -6,8 +6,8 @@ namespace App\Form\Account;
 
 use App\Entity\Account\MetaRole;
 use App\Entity\Account\User;
+use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class EditUserType extends AbstractType
+class EditUserType extends DefaultType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -73,11 +73,11 @@ class EditUserType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => User::class,
-            'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate',
                 'data-controller' => 'button-action',
             ],
         ]);

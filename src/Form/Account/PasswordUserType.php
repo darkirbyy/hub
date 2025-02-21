@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Account;
 
 use App\Entity\Account\User;
-use Symfony\Component\Form\AbstractType;
+use App\Form\DefaultType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
-class PasswordUserType extends AbstractType
+class PasswordUserType extends DefaultType
 {
     private int $passwordMinStrength;
 
@@ -53,11 +53,11 @@ class PasswordUserType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => User::class,
-            'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate',
                 'data-controller' => 'button-action password-strength',
                 'passwordMinStrength' => $this->passwordMinStrength,
             ],

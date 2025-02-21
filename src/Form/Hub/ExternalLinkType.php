@@ -6,14 +6,14 @@ namespace App\Form\Hub;
 
 use App\Entity\Hub\ExternalLink;
 use App\Entity\Hub\Icon;
+use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ExternalLinkType extends AbstractType
+class ExternalLinkType extends DefaultType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -49,12 +49,11 @@ class ExternalLinkType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => ExternalLink::class,
-            'translation_domain' => 'validators',
-            'attr' => [
-                'novalidate' => 'novalidate',
-            ],
+            'attr' => [],
         ]);
     }
 }

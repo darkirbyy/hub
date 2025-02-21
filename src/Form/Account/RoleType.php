@@ -6,14 +6,14 @@ namespace App\Form\Account;
 
 use App\Entity\Account\Role;
 use App\Entity\Hub\Appli;
+use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RoleType extends AbstractType
+class RoleType extends DefaultType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -48,11 +48,11 @@ class RoleType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => Role::class,
-            'translation_domain' => 'validators',
             'attr' => [
-                'novalidate' => 'novalidate',
                 'data-controller' => 'button-action',
             ],
         ]);
