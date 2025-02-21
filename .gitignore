@@ -1,6 +1,6 @@
 docker/
 .vscode/
-public/images
+public/uploads
 
 ###> symfony/framework-bundle ###
 /.env.local

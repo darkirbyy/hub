@@ -87,9 +87,9 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $input;
     }
 
-    public function getImagePath(object $input, string $defaultPath, string $imageField = 'imageFile'): string
+    public function getImagePath(object $input, string $defaultImage, string $imageField = 'imageFile'): string
     {
-        return $this->imageResolver->getImagePath($input, $defaultPath, $imageField);
+        return $this->imageResolver->getImagePath($input, $defaultImage, $imageField);
     }
 
     public function fmtBool(bool $input): string
