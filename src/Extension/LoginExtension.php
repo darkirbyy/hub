@@ -10,11 +10,8 @@ use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 class LoginExtension implements EventSubscriberInterface
 {
-    private $fm;
-
-    public function __construct(FlushManager $fm)
+    public function __construct(private FlushManager $fm)
     {
-        $this->fm = $fm;
     }
 
     public static function getSubscribedEvents(): array

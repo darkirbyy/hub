@@ -109,8 +109,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->id = $data['id'];
         $this->username = $data['username'];
-        // $this->roles = $data['roles'];
         $this->password = $data['password'];
+        // $this->roles = $data['roles'];
     }
 
     public function getId(): ?int

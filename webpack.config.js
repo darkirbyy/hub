@@ -22,7 +22,7 @@ Encore
     .copyFiles({
         from: './assets/images',
         // target path, relative to the output dir (+ versioning in prod)
-        to: '[path][name]' + (Encore.isProduction() ? '.[hash:8]' : '') + '.[ext]',
+        to: 'images/[path][name]' + (Encore.isProduction() ? '-[hash:8]' : '') + '.[ext]',
         // only copy files matching this pattern
         pattern: /\.(png|jpg|jpeg|svg)$/
     })

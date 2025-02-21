@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Extension;
 
+use App\Service\ImageResolver;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -14,6 +16,10 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
 
 class TwigExtension extends AbstractExtension implements GlobalsInterface
 {
+    public function __construct(private ImageResolver $imageResolver, private TranslatorInterface $trans)
+    {
+    }
+
     public function getGlobals(): array
     {
         return [];
@@ -29,12 +35,13 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return [
             new TwigFilter('apply_filters', [$this, 'applyFilters'], ['needs_environment' => true, 'is_safe' => ['html']]),
             new TwigFilter('ksort', [$this, 'sortByKeys']),
+            new TwigFilter('get_image_path', [$this, 'getImagePath']),
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
             new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
             new TwigFilter('fmt_password', [$this, 'fmtPassword']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass']),
-            new TwigFilter('fmt_image_file', [$this, 'fmtImageFile'], ['needs_environment' => true]),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
+            new TwigFilter('fmt_image_path', [$this, 'fmtImagePath']),
         ];
     }
 
@@ -80,9 +87,14 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $input;
     }
 
+    public function getImagePath(object $input, string $defaultPath, string $imageField = 'imageFile'): string
+    {
+        return $this->imageResolver->getImagePath($input, $defaultPath, $imageField);
+    }
+
     public function fmtBool(bool $input): string
     {
-        return $input ? 'enum.choices.yes' : 'enum.choices.no';
+        return $this->trans->trans($input ? 'enum.choices.yes' : 'enum.choices.no', [], 'messages');
     }
 
     public function fmtCollec(PersistentCollection $input, string $separator = ', '): string
@@ -100,20 +112,17 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return '<span class="' . $input . ' ' . $custom . '"></span>';
     }
 
-    public function fmtImageFile(Environment $env, object $input, string $fieldAlt, string $customClasses = 'img-fluid'): string
+    public function fmtImageMeta(FileMeta $input): string
     {
-        if (!empty($input->getImageMeta()->getName())) {
-            $templateString = '<img src="{{ vich_uploader_asset(object, \'imageFile\') }}" class="' . $customClasses . '" alt="{{object.' . $fieldAlt . '}}">';
-            $template = $env->createTemplate($templateString);
-
-            return $template->render(['object' => $input]);
+        if (null !== $input->getName()) {
+            return $input->getMimeType() . ' ; ' . \round($input->getSize() / 1024, 0) . 'Kio ; ' . $input->getWidth() . 'x' . $input->getHeight();
         } else {
             return '-';
         }
     }
 
-    public function fmtImageMeta(FileMeta $input): string
+    public function fmtImagePath(string $input, string $customClasses = 'img-fluid', string $altText = '')
     {
-        return $input->getMimeType() . ' ; ' . \round($input->getSize() / 1024, 0) . 'Kio ; ' . $input->getWidth() . 'x' . $input->getHeight();
+        return '<img src="' . $input . '" class="' . $customClasses . '" alt="' . $altText . '"/>';
     }
 }

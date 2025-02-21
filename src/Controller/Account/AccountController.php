@@ -39,7 +39,7 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Flash don't work, why ? use a query param instead...
+            // Flash doesn't work, why ? use a query param instead...
             $fm->persist($user, ['message' => 'account.flash.avatarUpdated']);
 
             return $this->redirectToRoute('account_index', ['flash' => true], Response::HTTP_SEE_OTHER);

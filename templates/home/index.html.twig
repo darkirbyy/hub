@@ -33,14 +33,14 @@
             </button>
             <div class="swiper mx-0" id="swiper-{{ category.id }}-main">
               <h2 class="mb-3 text-center text-md-start">
-                {{ category.icon.faClass|fmt_fa_class('fa-fw me-2')|raw }} {{ category.label }}
+                <span class="{{ category.icon.faClass|e }} fa-fw me-2"></span> {{ category.label }}
               </h2>
               <div class="swiper-wrapper">
                 {% for appli in category.applis %}
                   {% set appli_url = server_base_url ~ appli.path %}
                   <div class="card swiper-slide">
-                    <a href="{{ appli_url }}" class="card-img rounded-bottom-0 d-flex align-items-center" data-turbo="false">
-                      {{ appli|fmt_image_file('title', 'card-img-top')|raw }}
+                    <a href="{{ appli_url }}" class="card-img rounded-bottom-0 d-flex align-items-center bg-primary-subtle" data-turbo="false">
+                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img-top" alt="{{ appli.title }}" />
                     </a>
                     <div class="card-body bg-light d-flex flex-column justify-content-between">
                       <h5 class="card-title">

@@ -42,8 +42,7 @@
             <div class="px-2">
               <a href="#" class="app-avatar-link" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
                 <div class="app-avatar-container-lg position-relative">
-                  {{ app.user|fmt_image_file('username', 'app-avatar-img')|raw }}
-
+                  <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
                   <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3">
                     <span class="bi bi-pencil-fill" aria-hidden="true"></span>
                   </span>
@@ -55,7 +54,7 @@
                 {{ app.user.username }}
               </h6>
               <p class="d-flex flex-column text-muted">
-                <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo is not empty ? app.user.dateLastCo|format_datetime('short', 'short') : '-') }}</span>
+                <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo|format_datetime('short', 'short')) }}</span>
                 <span>{{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}</span>
               </p>
               <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">

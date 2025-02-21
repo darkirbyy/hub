@@ -7,18 +7,11 @@ namespace App\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class FlushManager
 {
-    private EntityManagerInterface $entityManager;
-    private LoggerInterface $logger;
-    private FlashBagInterface $flashBag;
-
-    public function __construct(EntityManagerInterface $entityManager, LoggerInterface $logger, RequestStack $requestStack)
+    public function __construct(private EntityManagerInterface $entityManager, private LoggerInterface $logger, private RequestStack $requestStack)
     {
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
         $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 

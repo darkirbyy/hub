@@ -8,7 +8,7 @@
     <title>
       {{ title ~ ' - ' ~ ('layout.name'|trans) }}
     </title>
-    <link rel="icon" href=" {{ asset('build/favicon.png') }}" />
+    <link rel="icon" href="{{ asset('build/images/favicon.png') }}" />
     {% block stylesheets %}
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -56,7 +56,7 @@
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   <div class="app-avatar-container-xs d-inline-block">
-                    {{ app.user|fmt_image_file('username', 'app-avatar-img')|raw }}
+                    <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
                   </div>
                   {{ app.user.username }}
                 </a>
