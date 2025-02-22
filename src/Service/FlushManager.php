@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * Service to persist/remove any entity into/from the database, handling the flash messages and logging the errors.
+ */
 class FlushManager
 {
     public function __construct(private EntityManagerInterface $entityManager, private LoggerInterface $logger, private RequestStack $requestStack)
@@ -15,7 +19,14 @@ class FlushManager
         $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
-    public function persist(object $object, array $flashSuccess = [])
+    /**
+     * Persists an entity into the database, displaying a customizable success flash message upon success.
+     * Catches any ORM exception to log it and display a general error flash message otherwise.
+     *
+     * @param object $object       the entity to persist
+     * @param array  $flashSuccess an optional flash message to display if the transaction is successful
+     */
+    public function persist(object $object, array $flashSuccess = []): void
     {
         try {
             $this->entityManager->persist($object);
@@ -23,7 +34,7 @@ class FlushManager
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('success', $flashSuccess);
             }
-        } catch (\Exception $e) {
+        } catch (ORMException $e) {
             $this->logger->warning('Error while trying to persist the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('danger', ['message' => 'form.flash.error']);
@@ -31,7 +42,14 @@ class FlushManager
         }
     }
 
-    public function remove(object $object, array $flashSuccess = [])
+    /**
+     * Removes an entity from the database, displaying a customizable success flash message upon success.
+     * Catches any ORM exception to log it and display a general error flash message otherwise.
+     *
+     * @param object $object       the entity to remove
+     * @param array  $flashSuccess an optional flash message to display if the transaction is successful
+     */
+    public function remove(object $object, array $flashSuccess = []): void
     {
         try {
             $this->entityManager->remove($object);
@@ -39,7 +57,7 @@ class FlushManager
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('success', $flashSuccess);
             }
-        } catch (\Exception $e) {
+        } catch (ORMException $e) {
             $this->logger->warning('Error while trying to remove the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('danger', ['message' => 'form.flash.error']);

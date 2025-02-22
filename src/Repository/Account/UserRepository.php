@@ -18,9 +18,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -32,13 +29,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Finds all User entities and sorts them by the username.
+     *
+     * @return User[] the sorted list of User entities
+     */
     public function findAndSort(): array
     {
-        // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('u');
         $qb->orderBy('u.username', 'ASC');
 
-        // Execute and fetch the query
         return $qb->getQuery()->getResult();
     }
 }

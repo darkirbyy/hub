@@ -15,15 +15,18 @@ class AppliRepository extends ServiceEntityRepository
         parent::__construct($registry, Appli::class);
     }
 
+    /**
+     * Finds all Appli entities and sorts them, first by the number order of their category, second by their own number order.
+     *
+     * @return Appli[] the sorted list of Appli entities
+     */
     public function findAndSort(): array
     {
-        // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.category', 'c') // Explicitly join the category table
             ->orderBy('c.number', 'ASC')
             ->addOrderBy('a.number', 'ASC');
 
-        // Execute and fetch the query
         return $qb->getQuery()->getResult();
     }
 }

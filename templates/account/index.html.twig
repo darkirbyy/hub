@@ -3,8 +3,7 @@
 {% set title = 'account.title'|trans %}
 
 {% block main %}
-  {# Change avatar modal #}
-
+  {# Modal to change the avatar #}
   <div class="modal fade" id="avatar-modal" tabindex="-1" aria-labelledby="avatar-modal-label" aria-hidden="true" role="dialog" loading="lazy">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -26,6 +25,7 @@
     </div>
   </div>
 
+  {# Actual content of the page #}
   <section>
     <div class="container">
       <div class="mx-auto w-100 w-md-75">
@@ -37,8 +37,10 @@
           {{ 'account.subtitles.myProfile'|trans }}
         </h2>
 
+        {# The profile "card" as a flex with two parts #}
         <div class="border rounded p-2 bg-light">
           <div class="d-flex flex-column justify-content-start align-items-center gap-4 flex-md-row">
+            {# Part one : the avatar, with a link to open the modal to change it #}
             <div class="px-2">
               <a href="#" class="app-avatar-link" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
                 <div class="app-avatar-container-lg position-relative">
@@ -49,14 +51,18 @@
                 </div>
               </a>
             </div>
+            {# Part two : someinformation about the user and action links #}
             <div class="text-center text-md-start">
+              {# Username #}
               <h6 class="fs-2">
                 {{ app.user.username }}
               </h6>
+              {# Some useful dates #}
               <p class="d-flex flex-column text-muted">
                 <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo|format_datetime('short', 'short')) }}</span>
                 <span>{{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}</span>
               </p>
+              {# Links to change the password and delete the account #}
               <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">
                 <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}" data-turbo-prefetch="false">
                   {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
@@ -66,7 +72,7 @@
                   {{ 'account.link.deleteAccount'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
                 </a>
               </p>
-
+              {# Link to disconnect #}
               <p class="d-flex flex-column">
                 <span>
                   <a class="btn btn-primary" href="{{ path('account_logout', { 'disconnect_user[_token]': csrf_token('logout') }) }}" data-turbo-prefetch="false">

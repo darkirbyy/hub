@@ -8,7 +8,10 @@ use App\Service\FlushManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
-class LoginExtension implements EventSubscriberInterface
+/**
+ * Extension that subscribes to different events and add some logic.
+ */
+class EventExtension implements EventSubscriberInterface
 {
     public function __construct(private FlushManager $fm)
     {
@@ -16,16 +19,20 @@ class LoginExtension implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        // return the subscribed events, their methods and priorities
         return [LoginSuccessEvent::class => 'onLoginSucess'];
     }
 
+    /**
+     * Handles the login success event by updating the user's last connection date.
+     *
+     * @param LoginSuccessEvent $event the login success event
+     */
     public function onLoginSucess(LoginSuccessEvent $event): void
     {
         /** @var \App\Entity\Account\User $user */
         $user = $event->getUser();
-        $user->setDateLastCo(new \DateTime());
 
+        $user->setDateLastCo(new \DateTime());
         $this->fm->persist($user);
     }
 }

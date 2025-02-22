@@ -10,6 +10,12 @@ use App\Form\Account\RoleType;
 use App\Repository\Account\RoleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for managing roles in the admin panel.
+ * Roles must be associated with an appli, and are unique for a given appli.
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/account/role', name: 'admin_account_role_')]
 final class RoleController extends CrudController
 {

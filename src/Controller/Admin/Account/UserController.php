@@ -8,12 +8,19 @@ use App\Form\Account\EditUserType;
 use App\Form\Account\NewUserType;
 use App\Repository\Account\UserRepository;
 use App\Service\FlushManager;
-use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
+use App\Service\PasswordGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * Controller for managing users in the admin panel.
+ * Users can only be created by a meta-admin and are assigned a randomly generated temporary password.
+ * Additional functionalities include resetting a user's password.
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/account/user', name: 'admin_account_user_')]
 class UserController extends CrudController
 {
@@ -92,16 +99,26 @@ class UserController extends CrudController
         ];
     }
 
+    /**
+     * Creates a new user with a randomly generated temporary password.
+     *
+     * @param Request                          $request            the HTTP request instance
+     * @param FlushManager                     $fm                 handles database persistence
+     * @param UserPasswordHasherInterface|null $userPasswordHasher a password hasher (nullable for optional dependency injection)
+     * @param PasswordGenerator|null           $passwordGenerator  a password generator (nullable for optional dependency injection)
+     *
+     * @return Response redirects to the newly created user if successful, otherwise re-renders the form
+     */
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, FlushManager $fm, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
+    public function new(Request $request, FlushManager $fm, ?UserPasswordHasherInterface $userPasswordHasher = null, ?PasswordGenerator $passwordGenerator = null): Response
     {
         $user = new User();
         $form = $this->createForm($this->configNew['form_class'], $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // generate a random temporary password and encode it
-            $plainPassword = $this->generatePassword();
+            // Generates a random temporary password and hash it
+            $plainPassword = $passwordGenerator->generatePassword();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $fm->persist($user, ['message' => 'admin.flash.userAdded', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
@@ -116,24 +133,25 @@ class UserController extends CrudController
         ]);
     }
 
+    /**
+     * Resets a user's password and assigns a new randomly generated password.
+     *
+     * @param User                        $user               user whose password will be reset
+     * @param FlushManager                $fm                 handles database persistence
+     * @param UserPasswordHasherInterface $userPasswordHasher a password hasher
+     * @param PasswordGenerator           $passwordGenerator  a password generator
+     *
+     * @return Response redirects to the user details with a flash containing the password
+     */
     #[Route('/{id}/reset', name: 'reset', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function reset(User $user, UserPasswordHasherInterface $userPasswordHasher, FlushManager $fm): Response
+    public function reset(User $user, FlushManager $fm, UserPasswordHasherInterface $userPasswordHasher, PasswordGenerator $passwordGenerator): Response
     {
-        // generate a random temporary password and encode it
-        $plainPassword = $this->generatePassword();
+        // Generates a random temporary password and hash it
+        $plainPassword = $passwordGenerator->generatePassword();
         $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
         $fm->persist($user, ['message' => 'admin.flash.userReset', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
         return $this->redirectToRoute('admin_account_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
-    }
-
-    private function generatePassword()
-    {
-        $generator = new ComputerPasswordGenerator();
-        $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols()->setLength(20);
-        $plainPassword = $generator->generatePassword();
-
-        return $plainPassword;
     }
 }

@@ -15,13 +15,16 @@ class IconRepository extends ServiceEntityRepository
         parent::__construct($registry, Icon::class);
     }
 
+    /**
+     * Finds all Icon entities and sorts them by their label.
+     *
+     * @return Icon[] the sorted list of Icon entities
+     */
     public function findAndSort(): array
     {
-        // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('i');
         $qb->orderBy('i.label', 'ASC');
 
-        // Execute and fetch the query
         return $qb->getQuery()->getResult();
     }
 }

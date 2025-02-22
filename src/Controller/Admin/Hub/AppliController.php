@@ -10,6 +10,12 @@ use App\Form\Hub\AppliType;
 use App\Repository\Hub\AppliRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for managing applications in the admin panel.
+ * Applications are displayed on the homepage, and are associated with roles (see {@see \App\Controller\Admin\Account\RoleController}).
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/hub/appli', name: 'admin_hub_appli_')]
 final class AppliController extends CrudController
 {

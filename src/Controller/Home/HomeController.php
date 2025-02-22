@@ -10,21 +10,33 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * Controller for all the homepage of the server, that any visitor can see.
+ */
 #[Route('/', name: 'home_')]
 class HomeController extends AbstractController
 {
+    /**
+     * Displays the homepage with public applis for any visitor,
+     * adapting the visible applis for an authenticated user depending on its roles.
+     *
+     * @param Request            $request      the HTTP request instance
+     * @param CategoryRepository $categoryRepo $shortcutRepo the repository managing the categories
+     *
+     * @return Response the rendered homepage
+     */
     #[Route('', name: 'index', methods: ['GET'])]
-    public function index(CategoryRepository $categoryRepo, Request $request): Response
+    public function index(Request $request, CategoryRepository $categoryRepo): Response
     {
         $categories = $categoryRepo->findAndSort();
         $serverBaseUrl = $request->getSchemeAndHttpHost();
 
+        // Determines in which applis the user has at least one role
         $allowedApplis = [];
         if ($this->isGranted('ROLE_USER')) {
             // Check if the user has a metaRole and if it contains roles
             $metaRole = $this->getUser()->getMetaRole();
             if ($metaRole && $metaRole->getRoles()->count() > 0) {
-                // Map the roles to the associated applications
                 $allowedApplis = array_unique(
                     $metaRole
                         ->getRoles()
@@ -36,7 +48,7 @@ class HomeController extends AbstractController
             }
         }
 
-        // Loop through categories and remove apps the user is not authorized for
+        // Loop through categories and remove applis the user is not authorized for
         foreach ($categories as $category) {
             foreach ($category->getApplis() as $appli) {
                 if (!$appli->isPublic() && !in_array($appli, $allowedApplis)) {

@@ -10,6 +10,12 @@ use App\Form\Hub\CategoryType;
 use App\Repository\Hub\CategoryRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for managing categories in the admin panel.
+ * Categories are used to organize all applis in different sections on the homepage.
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/hub/category', name: 'admin_hub_category_')]
 final class CategoryController extends CrudController
 {
@@ -41,9 +47,6 @@ final class CategoryController extends CrudController
             'backlink' => [
                 'text' => 'admin.link.backToMainPage',
                 'route' => 'admin_index',
-            ],
-            'button' => [
-                'show' => true,
             ],
             'repo_method' => 'findAndSort',
         ];

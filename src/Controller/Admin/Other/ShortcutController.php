@@ -10,6 +10,12 @@ use App\Form\Other\ShortcutType;
 use App\Repository\Other\ShortcutRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for managing shortcuts in the admin panel.
+ * Shortcuts are only displayed in the admin panel, and should linked to other admin pages of the server.
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/other/shortcut', name: 'admin_other_shortcut_')]
 final class ShortcutController extends CrudController
 {

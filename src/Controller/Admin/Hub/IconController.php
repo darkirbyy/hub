@@ -10,6 +10,12 @@ use App\Form\Hub\IconType;
 use App\Repository\Hub\IconRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for managing icons in the admin panel.
+ * Icons are used decoratively in front of categories and for applis externals links.
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/hub/icon', name: 'admin_hub_icon_')]
 final class IconController extends CrudController
 {

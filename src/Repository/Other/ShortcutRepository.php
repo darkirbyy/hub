@@ -15,23 +15,28 @@ class ShortcutRepository extends ServiceEntityRepository
         parent::__construct($registry, Shortcut::class);
     }
 
+    /**
+     * Finds all Shortcut entities and sorts them, first by their type, second by their number order.
+     *
+     * @return Shortcut[] the sorted list of Shortcut entities
+     */
     public function findAndSort(): array
     {
-        // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('s');
         $qb->orderBy('s.type', 'ASC')->addOrderBy('s.number', 'ASC');
 
-        // Execute and fetch the query
-        $shortcuts = $qb->getQuery()->getResult();
-
-        return $shortcuts;
+        return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Finds, sorts, and groups Shortcut entities by type.
+     *
+     * @return array<string, Shortcut[]> an associative array where keys are shortcut types and values are arrays of Shortcut entities
+     */
     public function findAndSortAndGroup(): array
     {
         $shortcuts = $this->findAndSort();
 
-        // Group by type
         $shortcutsByType = [];
         foreach ($shortcuts as $shortcut) {
             $type = $shortcut->getType();

@@ -15,13 +15,16 @@ class MetaRoleRepository extends ServiceEntityRepository
         parent::__construct($registry, MetaRole::class);
     }
 
+    /**
+     * Finds all MetaRole entities and sorts them by their key.
+     *
+     * @return MetaRole[] the sorted list of MetaRole entities
+     */
     public function findAndSort(): array
     {
-        // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('m');
         $qb->orderBy('m.key', 'ASC');
 
-        // Execute and fetch the query
         return $qb->getQuery()->getResult();
     }
 }

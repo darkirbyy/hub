@@ -25,7 +25,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Extension\LoginExtension:
+    App\Extension\EventExtension:
         tags: [kernel.event_subscriber]
 
     App\Form\:

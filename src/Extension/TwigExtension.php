@@ -14,6 +14,9 @@ use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Vich\UploaderBundle\Entity\File as FileMeta;
 
+/**
+ * Extension that provides additional functions and filters for use in templates.
+ */
 class TwigExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(private ImageResolver $imageResolver, private TranslatorInterface $trans)
@@ -45,6 +48,14 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         ];
     }
 
+    /**
+     * Recursively retrieves a nested property using dot notation.
+     *
+     * @param object $object this object to traverse
+     * @param string $getter this dot-notated path to the attribute
+     *
+     * @return mixed|null this attribute value, or null if not found
+     */
     public function deepAttribute($object, $getter)
     {
         if ('self' == $getter) {
@@ -72,6 +83,15 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $object;
     }
 
+    /**
+     * Dynamically applies Twig filters to a value.
+     *
+     * @param Environment $env     the Twig environment
+     * @param mixed       $value   the value to filter
+     * @param string      $filters a string representing the filters to apply (e.g., `"upper|escape"`)
+     *
+     * @return string the filtered value
+     */
     public function applyFilters(Environment $env, $value, $filters)
     {
         $templateString = '{{ value|' . $filters . ' }}';
@@ -80,6 +100,9 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $template->render(['value' => $value]);
     }
 
+    /**
+     * Sorts an associative array by its keys.
+     */
     public function sortByKeys(array $input): array
     {
         ksort($input);
@@ -87,11 +110,17 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $input;
     }
 
+    /**
+     * Retrieves the image path of an entity (see {@see ImageResolver::getImagePath}).
+     */
     public function getImagePath(object $input, string $defaultImage, string $imageField = 'imageFile'): string
     {
         return $this->imageResolver->getImagePath($input, $defaultImage, $imageField);
     }
 
+    /**
+     * Formats a boolean value as a translated "Yes" or "No".
+     */
     public function fmtBool(bool $input): string
     {
         return $this->trans->trans($input ? 'enum.choices.yes' : 'enum.choices.no', [], 'messages');
@@ -102,25 +131,33 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return implode($separator, $input->toArray());
     }
 
+    /**
+     * Masks a password by replacing it with `"***"`.
+     */
     public function fmtPassword(string $input): string
     {
         return '***';
     }
 
+    /**
+     * Generates an HTML `<span>` element for a FontAwesome icon, adding the $custom classes.
+     */
     public function fmtFaClass(string $input, string $custom = ''): string
     {
         return '<span class="' . $input . ' ' . $custom . '"></span>';
     }
 
+    /**
+     * Formats metadata of an uploaded image file.
+     */
     public function fmtImageMeta(FileMeta $input): string
     {
-        if (null !== $input->getName()) {
-            return $input->getMimeType() . ' ; ' . \round($input->getSize() / 1024, 0) . 'Kio ; ' . $input->getWidth() . 'x' . $input->getHeight();
-        } else {
-            return '-';
-        }
+        return $input->getMimeType() . ' ; ' . \round($input->getSize() / 1024, 0) . 'Kio ; ' . $input->getWidth() . 'x' . $input->getHeight();
     }
 
+    /**
+     * Generates an HTML `<img>` tag with the given path, classes (default `img-fluid`) and alt text (default to empty).
+     */
     public function fmtImagePath(string $input, string $customClasses = 'img-fluid', string $altText = '')
     {
         return '<img src="' . $input . '" class="' . $customClasses . '" alt="' . $altText . '"/>';

@@ -16,9 +16,19 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Controller for all pages that any authenticated user can see to check and update its account.
+ */
 #[Route(path: '/account', name: 'account_')]
 class AccountController extends AbstractController
 {
+    /**
+     * Displays the account main page of an authenticated user.
+     *
+     * @param Request $request the HTTP request instance, necessary to get the flash parameter (see {@see self::avatar})
+     *
+     * @return Response the rendered account main page
+     */
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(Request $request): Response
     {
@@ -29,6 +39,14 @@ class AccountController extends AbstractController
         return $this->render('account/index.html.twig', []);
     }
 
+    /**
+     * Handles user avatar upload through a turbo-frame. Replace or delete the old avatar if successfull.
+     *
+     * @param Request      $request the HTTP request instance
+     * @param FlushManager $fm      handles database persistence
+     *
+     * @return Response redirects to the account page if successful (with flash param set to true), otherwise re-renders the form
+     */
     #[Route(path: '/avatar', name: 'avatar', methods: ['GET', 'POST'])]
     public function avatar(Request $request, FlushManager $fm): Response
     {
@@ -50,6 +68,15 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles user password update through a password (with password strength) form. Rehash the new password if successfull.
+     *
+     * @param Request                          $request            the HTTP request instance
+     * @param FlushManager                     $fm                 handles database persistence
+     * @param UserPasswordHasherInterface|null $userPasswordHasher service for hashing the user's new password
+     *
+     * @return Response redirects to the account page if successful, otherwise re-renders the form
+     */
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route(path: '/password', name: 'password', methods: ['GET', 'POST'])]
     public function password(Request $request, FlushManager $fm, ?UserPasswordHasherInterface $userPasswordHasher = null): Response
@@ -74,6 +101,15 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles user account deletion through a deletion confirmation form. Deletes the user account and logs them out if successfull.
+     *
+     * @param Request      $request  the HTTP request instance
+     * @param FlushManager $fm       handles entity removal
+     * @param Security     $security manages user logout
+     *
+     * @return Response redirects to the login page after account deletion
+     */
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route(path: '/delete', name: 'delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, FlushManager $fm, Security $security): Response
@@ -97,26 +133,35 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles user login or forced login (for sensitive actions).
+     *
+     * @param AuthenticationUtils $authenticationUtils provides authentication error messages and last username
+     *
+     * @return Response renders the login form or redirects if already authenticated
+     */
     #[Route(path: '/login', name: 'login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Redirects the user if fully authenticated, otherwise decides if it's a normal login or forced login for sensitive actions
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('account_index');
         } else {
             $loginType = $this->isGranted('IS_REMEMBERED') ? 'forced' : 'normal';
         }
 
-        // get the login error if there is one and last username entered by the user
+        // Get the login error if there is one and last username entered by the user
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // create the form and pre fill the username value
+        // Creates the form, pre fill the username value, and enable+hide the rememberme value if it's a forced login
         $form = $this->createForm(ConnectUserType::class);
         $form->get('username')->setData($lastUsername);
         if ('forced' == $loginType) {
             $form->get('rememberMe')->setData(true);
         }
 
+        // Transforms the authentication error into a flash message
         if (!empty($error)) {
             $this->addFlash('danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
         }
@@ -128,9 +173,13 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles user logout.
+     *
+     * This method is intercepted by the Symfony firewall configuration.
+     */
     #[Route(path: '/logout', name: 'logout', methods: ['GET', 'POST'])]
     public function logout(): void
     {
-        // This method can be blank - it will be intercepted by the logout key on your firewall.
     }
 }

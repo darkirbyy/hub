@@ -15,13 +15,16 @@ class RoleRepository extends ServiceEntityRepository
         parent::__construct($registry, Role::class);
     }
 
+    /**
+     * Finds all Role entities and sorts them, first by the name of the appli their are related to, second by their key.
+     *
+     * @return Role[] the sorted list of Role entities
+     */
     public function findAndSort(): array
     {
-        // Build the query (fetch one more result to determine is there are more to fetch)
         $qb = $this->createQueryBuilder('r');
         $qb->leftJoin('r.appli', 'a')->orderBy('a.name', 'ASC')->addOrderBy('r.key', 'ASC');
 
-        // Execute and fetch the query
         return $qb->getQuery()->getResult();
     }
 }

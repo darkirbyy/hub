@@ -10,6 +10,12 @@ use App\Form\Account\MetaRoleType;
 use App\Repository\Account\MetaRoleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for managing meta-roles in the admin panel.
+ * Meta-roles are just a collection of roles for each appli. Each user can have one meta-role (or none).
+ *
+ * This class extends `CrudController`, automatically handling common CRUD operations.
+ */
 #[Route('/admin/account/metarole', name: 'admin_account_metarole_')]
 final class MetaRoleController extends CrudController
 {
