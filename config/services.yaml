@@ -10,7 +10,6 @@ parameters:
 imports:
     - { resource: 'version.yaml' }
 
-
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -26,6 +25,16 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Extension\EventExtension:
+        tags: [kernel.event_subscriber]
 
+    App\Form\:
+        resource: '../src/Form'
+        tags: ['form.type']
+        arguments:
+            $htmlValidation: '%env(bool:APP_HTML_VALIDATION)%'
+
+    App\Form\Account\PasswordUserType:
+        arguments:
+            $htmlValidation: '%env(bool:APP_HTML_VALIDATION)%'
+            $passwordMinStrength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'

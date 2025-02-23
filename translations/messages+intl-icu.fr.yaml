@@ -1,64 +1,129 @@
-default:
+##################################
+# Page-specific translations #####
+##################################
+home:
   title: Accueil
   h1: Bonjour
-  text: <p>Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.</p><p>Bonne visite 😀</p>
+  introText: Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.
+  haveFun: Bonne visite 😀
+
+account:
+  title: Compte
+  subtitles:
+    login: 
+      normal: Authentification
+      forced: Authentification forte
+    myProfile: Mon profil
+    updatePassword: Modifier mon mot de passe
+    deleteAccount: Supprimer mon compte
+  button:
+    login:
+      normal: Se connecter
+      forced: Confirmer
+    logout: Se déconnecter
+  link:
+    backToIndex: Retour au profil
+    updatePassword: Modifier mon mot de passe
+    deleteAccount: Supprimer mon compte
+  modal:
+    updateAvatar: Choisir un nouvel avatar
+  flash:
+    avatarUpdated: Votre nouvel avatar a été enregistré.
+    passwordUpdated: Votre mot de passe a été mise à jour.
+    accountDeleted: Votre compte a été supprimé.
+  other:
+    dateLastCo: 'Dernière connexion : '
+    dateAdd: 'Inscrit depuis : '
+    login:
+      normal: Pour vous authentifier, veuillez indiquer vos identifiants. 
+      forced: L'accès à cette page nécessite une authentification <strong>forte</strong>. Pour poursuivre, veuillez confirmer vos identifiants.
+    passwordMinStrength: Par politique de sécurité, le mot de passe doit avoir une force au moins égale à 
+    passwordStrength: 'Force du mot de passe : '
+    confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
 
 admin:
   title: Administration
-  backTo: Retour à la page principale
-  users: Utilisateurs
-  tools: Outils
-  parameters: Paramètres
-  hub: Hub
-  global: Global
-  web: Web
+  subtitles:
+    configs: Configurations
+    accounts: Comptes
+    hub: Hub
+    others: Autres
+    shortcuts: Raccourcis
+  link:
+    backToMainPage: Retour à la page principale
+  flash:
+    userAdded: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
+    userReset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
+
+##################################
+# Common translations ############
+##################################
 
 form:
   button:
     new: Nouveau
-    edit: Modifier
-    add: Ajouter
-    update: Mettre à jour
+    show: Voir
+    edit: Editer
     delete: Supprimer
     save: Enregistrer
+    reset: Réinitialiser
     search: Chercher
     cancel: Annuler
+    help: Aide
+    close: Fermer
+    confirm: Valider
+    download: Télécharger
+    clear: Supprimer
+    reveal: Afficher
+    previous: Précédent
+    next: Suivant
   title:
     index: Liste
-    add: Ajout
-    update: Modification
+    new: Ajout
+    show: Détails
+    edit: Modification
   flash:
-    added: Objet ajouté !
-    updated: Objet mis à jour !
-    deleted: Objet supprimé !
+    added: '<strong>{object}</strong> ajouté !'
+    updated: '<strong>{object}</strong> mis à jour !'
+    deleted: '<strong>{object}</strong> supprimé !'
+    error: 'Une erreur est survenue. Veuillez réessayer plus tard.'
   modal:
     title: Confirmer la suppression
-    body: Êtes-vous sûr de vouloir supprimer l'objet ? Cette action est <strong>définitive</strong>.
-  other: 
-    backToList: Retour à la liste 
+    body: Êtes-vous sûr de vouloir supprimer <strong>{object}</strong> ? Cette action est <strong>définitive</strong>.
+  link:
+    back: Retour
+    backToList: Retour à la liste
+    backToSee: Retour aux détails
+  other:
+    deleteImage: Supprimer l'image
     action: Actions
     none: Aucun
+
+enum:
+  choices:
+    yes: Oui
+    no: Non
+  passwordStrengths:
+    veryWeak: Très faible
+    weak: Faible
+    medium: Moyen
+    strong: Fort
+    veryStrong: Très fort
 
 layout:
   name: Hub
   navbar:
     home: Hub
     admin: Admin
+    login: Se connecter
   footer:
     madeWith: Réalisé avec
     version: Version
     releaseDate: Mise à jour le
 
-enum:
-
 aria:
-  label:
-    mainNavigation: Navigation principale
-    toggleNavigation: Basculer la navigation
-    avatar: Avatar
-    footer: Pied de page
-    search: Chercher
-    close: Fermer
-  other:
-    skipToContent: Aller au contenu
-    download: Télécharger
+  skipToContent: Aller au contenu
+  mainNavigation: Navigation principale
+  toggleNavigation: Basculer la navigation
+  footer: Pied de page
+  loading: Chargement...

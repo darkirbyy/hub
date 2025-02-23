@@ -1,6 +1,9 @@
 @use 'sass:map';
 
-// Note :the ~ allows you to reference things in node_modules
+///////////////////////////////////
+// Imports ////////////////////////
+///////////////////////////////////
+
 // Import boostrap basics
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
@@ -10,6 +13,7 @@
 @import '~bootstrap/scss/utilities';
 
 $border-color: $gray-500;
+$progress-bar-transition: width 0.3s ease;
 
 // Use bootstrap API to generate custom responsive classes
 $utilities: map.merge(
@@ -20,6 +24,7 @@ $utilities: map.merge(
       class: 'w',
       responsive: true,
       values: (
+        0: 1%,
         1: 1%,
         25: 25%,
         33: 33%,
@@ -41,7 +46,12 @@ $utilities: map.merge(
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-// Improve bootstrap classes for form
+///////////////////////////////////
+// Framework improvements /////////
+///////////////////////////////////
+
+// bootstrap forms ////////////////
+
 .form-label {
   margin-bottom: 0 !important;
 }
@@ -56,6 +66,7 @@ $utilities: map.merge(
 }
 
 input + label.form-label.required::after,
+textarea + label.form-label.required::after,
 legend.col-form-label.required::after {
   content: ' *';
   color: $primary !important;
@@ -66,13 +77,11 @@ legend.col-form-label.required::after {
   padding-top: ($spacer * 0) !important;
 }
 
-// Home carousels and cards
+// bootstrap card and swiper //////
 
 .card {
   width: 22rem;
   height: 28rem;
-
-  // box-shadow: 0px 3px 5px 2px #595959;
 }
 
 .card-img {
@@ -81,10 +90,10 @@ legend.col-form-label.required::after {
 
 .card-img-top {
   transition: transform 0.3s ease;
-}
 
-.card-img-top:hover {
-  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .card-text {
@@ -127,7 +136,129 @@ legend.col-form-label.required::after {
 //   filter: opacity(1);
 // }
 
-// Others
+///////////////////////////////////
+// App-specific classes ///////////
+///////////////////////////////////
+
+// Home intro /////////////////////
+
+.app-home-havefun {
+  transform: translateY(50%);
+}
+
+.app-home-gradient {
+  border-bottom: var(--bs-border-width) solid;
+  border-image: linear-gradient(
+      to right,
+      transparent,
+      var(--bs-border-color),
+      transparent
+    )
+    1;
+}
+
+// Avatars ////////////////////////
+
+@mixin app-avatar-container($size) {
+  max-height: $size * $font-size-base;
+  max-width: $size * $font-size-base;
+}
+
+.app-avatar-container-xs {
+  @include app-avatar-container(1.5);
+}
+
+.app-avatar-container-sm {
+  @include app-avatar-container(3);
+}
+
+.app-avatar-container-md {
+  @include app-avatar-container(9);
+}
+
+.app-avatar-container-lg {
+  @include app-avatar-container(15);
+}
+
+.app-avatar-img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  box-shadow: $box-shadow-sm !important;
+  border-radius: 50% !important;
+}
+
+.app-avatar-link {
+  .app-avatar-img {
+    transition:
+      opacity 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .app-avatar-icon {
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    .app-avatar-img {
+      opacity: 0.7 !important;
+      filter: blur(1px);
+    }
+
+    .app-avatar-icon {
+      opacity: 1 !important;
+    }
+  }
+}
+
+// Form rows //////////////////////
+
+.app-form-row {
+  margin-bottom: ($spacer * 1);
+}
+
+.app-form-row-bordered {
+  border-radius: 5px;
+  border: var(--bs-border-color) var(--bs-border-style) var(--bs-border-width);
+  padding: ($spacer * 0.5);
+}
+
+.app-btn-border-light {
+  &:not(.is-invalid) {
+    border-color: var(--bs-border-color) !important;
+  }
+
+  &.is-invalid {
+    border-color: var(--bs-form-invalid-border-color) !important;
+  }
+}
+
+// Form buttons action ////////////
+
+.app-button-action {
+  width: 1.5rem;
+  height: 1rem;
+  background-image: none;
+
+  &:not(.is-invalid) {
+    margin-right: ($spacer * 0.75) !important;
+  }
+
+  &.is-invalid {
+    margin-right: ($spacer * 2) !important;
+  }
+
+  & .fa-solid {
+    vertical-align: ($spacer * 0.125);
+  }
+}
+
+.app-btn-max-height {
+  height: calc(3.5rem + calc(var(--bs-border-width) * 2));
+}
+
+// Others /////////////////////////
 .app-env-dev {
   background: repeating-linear-gradient(
     45deg,
@@ -137,34 +268,4 @@ legend.col-form-label.required::after {
     #ce994b 20px
   );
   color: #704300;
-}
-
-.app-form-row {
-  margin-bottom: ($spacer * 1) !important;
-}
-
-.app-form-row-bordered {
-  border-radius: 5px;
-  border: var(--bs-border-color) var(--bs-border-style) var(--bs-border-width);
-  padding: ($spacer * 0.5);
-}
-
-.app-btn-border-light:not(.is-invalid) {
-  border-color: var(--bs-border-color) !important;
-}
-
-.app-btn-border-light.is-invalid {
-  border-color: var(--bs-form-invalid-border-color) !important;
-}
-
-.app-btn-clear:not(.is-invalid) {
-  margin-right: ($spacer * 0.75) !important;
-}
-
-.app-btn-clear.is-invalid {
-  margin-right: ($spacer * 2) !important;
-}
-
-.app-btn-max-height {
-  height: calc(3.5rem + calc(var(--bs-border-width) * 2));
 }

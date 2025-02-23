@@ -1,0 +1,10 @@
+{# Turbo frame displayed into the modal in the user main account page #}
+
+<turbo-frame id="edit-avatar">
+  {{ form_start(form, { action: path('account_avatar') }) }}
+  {{ form_row(form.imageFile) }}
+  <div class="text-start">
+    <button type="submit" class="btn btn-primary">{{ 'form.button.confirm'|trans }}</button>
+  </div>
+  {{ form_end(form) }}
+</turbo-frame>

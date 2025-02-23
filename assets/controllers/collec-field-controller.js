@@ -1,5 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
 
+/**
+ * Stimulus controller that MUST be placed on the row of collection type field, to enable add/remove buttons.
+ */
 export default class extends Controller {
   static targets = ['add', 'remove', 'collec'];
 

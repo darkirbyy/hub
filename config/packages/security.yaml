@@ -4,26 +4,64 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Account\User
+                property: username
+
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: '%env(string:APP_DISABLE_AUTH_PATH)%'
             security: false
         main:
+            pattern: ^/
+            security: true
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            form_login:
+                login_path: account_login
+                check_path: account_login
+                username_parameter: connect_user[username]
+                password_parameter: connect_user[password]
+                csrf_parameter: connect_user[_token]
+                enable_csrf: true
+                form_only: true
+                post_only: true
+            logout:
+                path: account_logout
+                target: home_index
+                enable_csrf: true
+                csrf_parameter: disconnect_user[_token]
+            login_throttling:
+                max_attempts: 5          
+                interval: '15 minutes'
+            remember_me:
+                signature_properties: ['password', 'dateUpdate']
+                remember_me_parameter: connect_user[rememberMe]
+                name: remember_me
+                secure: auto
+                samesite: lax
+                httponly: true
+                path: /
+                lifetime: 2592000 # 30 days in seconds
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+            
+    role_hierarchy:
+        ROLE_USER: ~
+        ROLE_ADMIN: ROLE_USER
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/account/login$, roles: [PUBLIC_ACCESS] }
+        - { path: ^/account, roles: [ROLE_USER] }
+        - { path: ^/admin, roles: [ROLE_ADMIN] }
 
 when@test:
     security:
@@ -37,3 +75,10 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+
+when@prod:
+    security:
+        firewalls:
+            main:
+                remember_me:
+                    path: '/%app.name%'

@@ -1,0 +1,33 @@
+{# Render modals, currently only the delete one #}
+
+{# Delete modal, MUST be used with a delete button
+  Use a stimulus controller to adapt the content depending on the clicked button #}
+{% block delete %}
+  <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true" role="dialog" loading="lazy" data-controller="delete-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {# Header with title and dismiss button #}
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete-modal-label">
+            {{ 'form.modal.title'|trans }}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
+        </div>
+
+        {# Body with message #}
+        <div class="modal-body" data-delete-modal-target="body"></div>
+
+        {# Footer with cancel or confirm buttons #}
+        <div class="modal-footer">
+          <form method="post" data-delete-modal-target="form">
+            <button type="submit" class="btn btn-danger">
+              <span class="bi bi-trash-fill me-1" aria-hidden="true"></span>
+              {{ 'form.button.delete'|trans }}
+            </button>
+            <input type="hidden" name="delete_token" data-delete-modal-target="hidden" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

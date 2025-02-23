@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'account.title'|trans %}
+
+{% block main %}
+  {# Modal to change the avatar #}
+  <div class="modal fade" id="avatar-modal" tabindex="-1" aria-labelledby="avatar-modal-label" aria-hidden="true" role="dialog" loading="lazy">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {# Header with title and dismiss button #}
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="avatar-modal-label">
+            {{ 'account.modal.updateAvatar'|trans }}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
+        </div>
+
+        {# Body with message #}
+        <div class="modal-body">
+          <turbo-frame id="edit-avatar" src="{{ path('account_avatar') }}" loading="lazy">
+            {{ block('spinner', 'theme/spinner.html.twig') }}
+          </turbo-frame>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# Actual content of the page #}
+  <section>
+    <div class="container">
+      <div class="mx-auto w-100 w-md-75">
+        {# Insert the flashes #}
+        {{ block('flash', 'theme/flash.html.twig') }}
+
+        {# Subtitle #}
+        <h2 class="text-center text-md-start mb-3">
+          {{ 'account.subtitles.myProfile'|trans }}
+        </h2>
+
+        {# The profile "card" as a flex with two parts #}
+        <div class="border rounded p-2 bg-light">
+          <div class="d-flex flex-column justify-content-start align-items-center gap-4 flex-md-row">
+            {# Part one : the avatar, with a link to open the modal to change it #}
+            <div class="px-2">
+              <a href="#" class="app-avatar-link" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
+                <div class="app-avatar-container-lg position-relative">
+                  <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
+                  <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3">
+                    <span class="bi bi-pencil-fill" aria-hidden="true"></span>
+                  </span>
+                </div>
+              </a>
+            </div>
+            {# Part two : someinformation about the user and action links #}
+            <div class="text-center text-md-start">
+              {# Username #}
+              <h6 class="fs-2">
+                {{ app.user.username }}
+              </h6>
+              {# Some useful dates #}
+              <p class="d-flex flex-column text-muted">
+                <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo|format_datetime('short', 'short')) }}</span>
+                <span>{{ ('account.other.dateAdd'|trans) ~ ' ' ~ (app.user.dateAdd|format_datetime('short', 'none')) }}</span>
+              </p>
+              {# Links to change the password and delete the account #}
+              <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">
+                <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}" data-turbo-prefetch="false">
+                  {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+                </a>
+
+                <a class="icon-link icon-link-hover link-danger" href="{{ path('account_delete') }}" data-turbo-prefetch="false">
+                  {{ 'account.link.deleteAccount'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+                </a>
+              </p>
+              {# Link to disconnect #}
+              <p class="d-flex flex-column">
+                <span>
+                  <a class="btn btn-primary" href="{{ path('account_logout', { 'disconnect_user[_token]': csrf_token('logout') }) }}" data-turbo-prefetch="false">
+                    {{ 'account.button.logout'|trans }}
+                  </a>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

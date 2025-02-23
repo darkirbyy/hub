@@ -1,66 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% set title = config.main_title|trans %}
+{% set title = config_main.main_title|trans %}
 
 {% block main %}
   {# Modal to confirm delete #}
-  {{ block('delete_modal', 'theme/crud/_delete.html.twig') }}
+  {{ block('delete', 'theme/crud/_modal.html.twig') }}
 
   <section>
     <div class="container">
-      {# Redefine the flashes with the same width as the cards #}
+      {# Insert the flashes #}
       <div class="mx-auto">
         {{ block('flash', 'theme/flash.html.twig') }}
-      </div>
 
-      <h2>
-        {{ (config.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.index'|trans }}</span>
-      </h2>
+        {# Subtitle #}
+        <h2>
+          {{ (config_main.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.index'|trans }}</span>
+        </h2>
 
-      {# Back link and button to add new object #}
-      <div class="d-flex justify-content-between align-items-center">
-        <a href="{{ path(config.index_backlink.route) }}"><span class="bi bi-arrow-left me-1"></span>{{ config.index_backlink.text|trans }}</a>
-        <a href="{{ path(config.route_prefix ~ 'new') }}" class="btn btn-primary">
-          <span class="bi bi-plus-square-fill me-md-1"></span>
-          <span class="d-none d-md-inline">{{ 'form.button.new'|trans }}</span>
-        </a>
-      </div>
+        <div class="d-flex justify-content-between align-items-end">
+          {# Backlink #}
+          <a href="{{ path(config_index.backlink.route) }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span>{{ config_index.backlink.text|trans }}</a>
+          {# Buttons (new) #}
+          {% if config_index.button.new %}
+            {% with { path: path(config_main.route_prefix ~ 'new'), text_class: 'd-md-inline ms-md-1' } %}
+            {{ block('new', 'theme/crud/_button.html.twig') }}
+            {% endwith %}
+          {% endif %}
+        </div>
 
-      {# Table displaying all objects #}
-      <table class="mt-2 table table-striped">
-        <thead>
-          <tr class="">
-            {% for col in config.index_cols|ksort %}
-              <th class="text-nowrap align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
-                {{ (config.entity_key ~ '.label.' ~ col.getter)|trans({ }, 'validators') }}
-              </th>
-            {% endfor %}
-            <th class="w-1 text-nowrap text-end align-center" scope="col">
-              {{ 'form.other.action'|trans }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for object in objects %}
+        {# Table displaying all objects #}
+        <table class="mt-2 table table-striped">
+          {# Table header #}
+          <thead>
             <tr>
-              {% for col in config.index_cols|ksort %}
-                <td class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
-                  {% set value = attribute(object, col.getter) %}
-                  {{ col.raw|default(false) ? value|raw : value }}
-                </td>
+              {# Add head cell for each col defined, with corresponding breakpoint #}
+              {% for col in config_index.cols|ksort %}
+                <th class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
+                  {{ (config_main.entity_key ~ '.label.' ~ (col.label|default(col.getter)))|trans({ }, 'validators') }}
+                </th>
               {% endfor %}
-              <td class="w-1 text-nowrap text-end py-1 align-center">
-                <a class="btn btn-outline-primary btn-sm px-2 py-1" href="{{ path(config.route_prefix ~ 'edit', { id: object.id }) }}">
-                  <span class="bi bi-pen-fill"></span><span class="d-none">{{ 'form.button.edit'|trans }}</span>
-                </a>
-                {% with { path: path(config.route_prefix ~ 'delete', { id: object.id }), token: csrf_token('delete-' ~ object.id), btn_class: 'btn-sm px-2 py-1' } %}
-                {{ block('delete_button', 'theme/crud/_delete.html.twig') }}
-                {% endwith %}
-              </td>
+              {# Add one more mandatory head cell for the action text #}
+              <th class="w-1 text-nowrap text-end align-center" scope="col">
+                {{ 'form.other.action'|trans }}
+              </th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          {# Table body #}
+          <tbody class="table-group-divider">
+            {% for object in objects %}
+              <tr>
+                {# Add normal call for each col defined, with corresponding breakpoint #}
+                {% for col in config_index.cols|ksort %}
+                  <td class="py-2 {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
+                    {% set value = deep_attribute(object, col.getter) %}
+                    {{ value is not null ? col.filters is defined ? value|apply_filters(col.filters) : value : '-' }}
+                  </td>
+                {% endfor %}
+                {# Add one more mandatory normal cell with the action buttons #}
+                <td class="w-1 text-nowrap text-end py-1 align-center">
+                  {% if config_index.button.show %}
+                    {% with { path: path(config_main.route_prefix ~ 'show', { id: object.id }), btn_class: 'btn-sm px-2 py-1' } %}
+                    {{ block('show', 'theme/crud/_button.html.twig') }}
+                    {% endwith %}
+                  {% endif %}
+                  {% if config_index.button.edit %}
+                    {% with { path: path(config_main.route_prefix ~ 'edit', { id: object.id }), btn_class: 'btn-sm px-2 py-1' } %}
+                    {{ block('edit', 'theme/crud/_button.html.twig') }}
+                    {% endwith %}
+                  {% endif %}
+                  {% if config_index.button.delete %}
+                    {% with {
+                      path: path(config_main.route_prefix ~ 'delete', { id: object.id }),
+                      token: csrf_token('delete-' ~ object.id),
+                      body_param: { object: object },
+                      btn_class: 'btn-sm px-2 py-1',
+                    }
+                    %}
+                    {{ block('delete', 'theme/crud/_button.html.twig') }}
+                    {% endwith %}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 {% endblock %}

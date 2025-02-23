@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% set title = config_main.main_title|trans %}
+
+{% block main %}
+  {{ block('delete', 'theme/crud/_modal.html.twig') }}
+
+  <section>
+    <div class="container">
+      <div class="mx-auto">
+        {# Insert the flashes #}
+        {{ block('flash', 'theme/flash.html.twig') }}
+
+        {# Subtitle #}
+        <h2>
+          {{ (config_main.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.show'|trans }}</span>
+        </h2>
+
+        <div class="my-2 d-flex justify-content-between align-items-end">
+          {# Backlink #}
+          <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}</a>
+          {# Buttons #}
+          {% block buttons_action %}
+            <div>
+              {% if config_show.button.edit %}
+                {% with { path: path(config_main.route_prefix ~ 'edit', { id: object.id }), text_class: 'd-md-inline ms-md-1' } %}
+                {{ block('edit', 'theme/crud/_button.html.twig') }}
+                {% endwith %}
+              {% endif %}
+              {% if config_show.button.delete %}
+                {% with { path: path(config_main.route_prefix ~ 'delete', { id: object.id }), token: csrf_token('delete-' ~ object.id), body_param: { object: object } } %}
+                {{ block('delete', 'theme/crud/_button.html.twig') }}
+                {% endwith %}
+              {% endif %}
+            </div>
+          {% endblock %}
+        </div>
+
+        {# Cols displaying all the details of the given object #}
+        {% for row in config_show.rows %}
+          <div class="row mx-auto border-bottom mb-2 rounded bg-light">
+            <div class="col-4 col-md-3 py-2 text-end text-truncate">
+              {# Use the getter for the label identifier if not defined #}
+              {{ (config_main.entity_key ~ '.label.' ~ (row.label|default(row.getter)))|trans({ }, 'validators') }}
+            </div>
+            <div class="col-8 col-md-9 py-2 border-start">
+              {% set value = deep_attribute(object, row.getter) %}
+              {{ value is not null ? row.filters is defined ? value|apply_filters(row.filters) : value : '-' }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

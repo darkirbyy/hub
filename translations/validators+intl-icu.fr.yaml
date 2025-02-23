@@ -1,52 +1,109 @@
+##################################
+# Entities translations ##########
+##################################
+
 icon:
   name: Icônes
   label:
-    id: '#'
+    id: ID
     label: Libellé
     faClass: Classes CSS
     preview: Aperçu
   help:
-    faClass: Voir sur le site de <a href='https://fontawesome.com/icons' target='_blank'>Font Awesome</a>
+    faClass: Voir sur le site de <a href="https://fontawesome.com/icons" data-turbo="false" target="_blank">Font Awesome</a>
   error:
-    invalidFaClass: Ne doit contenir que des lettres, des chiffres, des espaces ainsi que les symboles - et _.
+    invalidFaClass: Ne doit contenir que des lettres, des chiffres, des espaces ou les symboles - et _.
 
 category:
   name: Catégories
   label:
-    id: '#'
+    id: ID
     label: Libellé
+    number: Ordre
     icon: Icône
+    applis: Applications
 
 appli:
   name: Applications
   label:
-    id: '#'
+    id: ID
+    title: Titre
+    category: Catégorie
+    number: Ordre
+    public: Publique
     name: Nom
     path: Chemin
-    category: Catégorie
     description: Description
     linkText: Texte du lien
     imageFile: Image
-    imageInfos: Métadonnées de l'image
+    imageMeta: Métadonnées de l'image
     externalLinks: Liens externes
   help:
-    image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 1024px<br>Poids maximum : 1Mio'
-    path: Sans '/' au début
+    title: Apparaît sur les cartes du HUB
+    name: Doit être identique à la variable APP_NAME renseignée dans l'application cible
+    path: Définit le chemin de l'application cible depuis la racine du serveur, en commençant par '/'
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
 
 externalLink:
   name: Liens externes
   label:
-    id: '#'
+    id: ID
     icon: Icône
     text: Texte
     url: URL
 
-tool:
-  name: Outils
+shortcut:
+  name: Raccourcis
   label:
-    id: '#'
-    number: Ordre
-    type: Type
-    icon: Icône
+    id: ID
     label: Libellé
-    url: URL de l'iframe
+    type: Type
+    number: Ordre
+    url: URL
+
+user:
+  name: Utilisateurs
+  label:
+    id: ID
+    username: Nom d'utilisateur
+    password: Mot de passe
+    metaAdmin: Méta-admin
+    metaRole: Méta-rôle
+    dateAdd: Date création
+    dateUpdate: Date modification
+    dateLastCo: Date dernière connexion
+    imageFile: Avatar
+    imageMeta: Métadonnées de l'avatar
+    newPassword: Nouveau mot de passe
+    repeatPassword: Répéter le mot de passe
+    rememberMe: Se souvenir de cet appareil pendant 30 jours
+    confirmDeletion: Je confirme la suppression
+  help:
+    username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'
+    image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 1024px<br>Poids : maximum 1Mio'
+  error:
+    invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
+
+role:
+  name: Rôles
+  label:
+    id: ID
+    key: Clé
+    description: Description
+    appli: Application
+  help:
+    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+  error:
+    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
+
+metarole:
+  name: Méta-rôles
+  label:
+    id: ID
+    key: Clé
+    description: Description
+    roles: Rôles
+  help:
+    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+  error:
+    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.

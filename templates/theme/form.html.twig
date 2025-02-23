@@ -1,19 +1,23 @@
+{# Extends and improve bootstrap form theme #}
 {% extends 'bootstrap_5_layout.html.twig' %}
 
-{# Customize form field with help button at the end, and floating labels if there is a placeholder defined #}
+{# Customizes form field with help button at the end, and floating labels if there is a placeholder defined #}
 {% block form_row %}
+  {# Creates the help button as a icon + help text in a popover #}
   {% set help_button %}
     {% if form.vars.help is not empty %}
       <button type="button"
+        aria-label="{{ 'form.button.help'|trans }}"
         class="btn btn-outline-secondary py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
         data-bs-toggle="popover"
         {{ form.vars.help_html ? 'data-bs-html="true"' }}
-        data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters, form.vars.translation_domain) }}">
-        <span class="fs-5 bi bi-info-circle"></span>
+        data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}">
+        <span class="fs-5 bi bi-info-circle" aria-hidden="true"></span>
       </button>
     {% endif %}
   {% endset %}
 
+  {# Calculates the row_attr with `app-form-row` + `has_validation` (if errors) + custom row attributes #}
   {% set custom_classes = 'app-form-row' ~ ' ' ~ (not compound or (force_error|default(false)) ? (errors|length) > 0 ? 'has-validation') %}
   {% set attributes %}
     {% with { attr: row_attr|merge({ class: ((row_attr.class|default('')) ~ ' ' ~ custom_classes)|trim }) } %}
@@ -21,28 +25,34 @@
     {% endwith %}
   {% endset %}
 
+  {# Creates the actaul div with its attributes #}
   <div {{ attributes }}>
+    {# If a placeholder attribute is declared: use the floating row with the label afterwards + add the help button is needed #}
     {% if form.vars.attr.placeholder is defined %}
       <div class="input-group">
         <div class="form-floating">
-          {{ form_widget(form) }}
+          {{ form_widget(form, { attr: { class: form.vars.attr.button_action|default('') is not empty ? 'pe-5' } }) }}
           {{ form_label(form) }}
-          {% if (form.vars.attr.clear_button|default(false)) == true %}
+          {% if form.vars.attr.button_action|default('') is not empty %}
             <small>
               <button type="button"
-                data-app-clear-id="{{ form.vars.id }}"
-                class="app-btn-clear btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
-
+                aria-label="{{ ('form.button.' ~ form.vars.attr.button_action)|trans }}"
+                data-button-action-target="{{ form.vars.attr.button_action }}"
+                data-button-action-id="{{ form.vars.id }}"
+                class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
+                <span class="fa-solid fa-lg" aria-hidden="true"></span>
               </button>
             </small>
           {% endif %}
         </div>
         {{ help_button }}
       </div>
+      {# Else: use the normal row with the label first, and pass the help button to the widget #}
     {% else %}
       {{ form_label(form) }}
       {{ form_widget(form, { help_button: help_button }) }}
     {% endif %}
+    {# In any case, write the errors underneath #}
     {{ form_errors(form) }}
   </div>
 {% endblock %}
@@ -54,20 +64,23 @@
   {%- endif -%}
   <div class="input-group">
     {{- form_widget(form.file, { attr: attr }) -}}
-    {# {% if form.vars.attr.clear_button|default(true) == true %}
-   <button class="btn btn-outline-secondary px-2 app-btn-border-light" type="button" data-app-clear-id="{{ form.vars.id }}"><span class="bi bi-x-lg"></span></button>
-  {% endif %} #}
+    {# Add the help button at the end of the row #}
     {{ help_button|default('') }}
   </div>
+
+  {# Button to delete if allowed #}
   {%- if form.delete is defined -%}
-    {{- form_row(form.delete) -}}
+    {{- form_row(form.delete, { label: 'form.other.deleteImage', translation_domain: 'messages', row_attr: { class: 'my-2' } }) -}}
   {%- endif -%}
 
+  {# Links (as text or image) to download the image if allowed #}
   {% if not errors|length > 0 %}
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img class="app-img-fit" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="{{ 'aria.other.download'|trans }}" />
+          <img class="{{ row_attr.image_class|default('img-fluid') }}"
+            src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
+            alt="{{ 'form.button.download'|trans }}" />
         </a>
       </div>
     {%- endif -%}
@@ -79,59 +92,61 @@
   {% endif %}
 {%- endblock -%}
 
+{# Custom collection changes to add button and javascript controller #}
+{# Add stimulus controller #}
 {% block collection_row %}
   {% set custom_row_attr = { 'data-controller': 'collec-field' } %}
   {% set row_attr = row_attr|merge(custom_row_attr) %}
   {{- form_row(form, { row_attr: row_attr }) -}}
 {% endblock %}
 
+{# Add two mandatory targets and the add button #}
 {% block collection_widget %}
   {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
   {% set attr = attr|merge(custom_attr) %}
   {{- parent() -}}
-  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add"><span class="bi bi-plus-square-fill me-1"></span>{{ 'form.button.new'|trans }}</button>
+  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add">
+    <span class="bi bi-plus-square-fill me-1" aria-hidden="true"></span>{{ 'form.button.new'|trans }}
+  </button>
 {% endblock %}
 
+{# Add one mandatory target and the delete button #}
 {% block collection_entry_row %}
   <div class="d-flex gap-2">
     {% for row in form.children %}
       {{ form_row(row) }}
     {% endfor %}
-    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash-fill"></span></button>
+    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove">
+      <span class="bi bi-trash-fill" aria-hidden="true"></span>
+    </button>
   </div>
 {% endblock %}
 
-{# <a class="text-muted position-absolute" href="#" style="top: 1rem;right: 1rem;z-index: 100;"><span class="bi bi-x-lg"></span></a> #}
+{# Improve choice type form when `expanded` and `multiple` are true, and group_by is defined #}
+{%- block choice_widget_expanded -%}
+  {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
+  <div {{ block('widget_container_attributes') }}>
+    {%- set options = choices -%}
+    {{- block('choice_widget_expanded_options') -}}
+  </div>
+{%- endblock -%}
 
-{# {% set label = form.vars.label|trans(form.vars.label_translation_parameters, form.vars.translation_domain) %}
-      <span class="input-group-text">{{ form.vars.label_html ? label|raw : label }}</span>
-      {{ form_widget(form) }} #}
-
-{#
-{% block form_row %}
-  {% if form.vars.attr.placeholder is defined %}
-    <div class="input-group app-form-row {% if not compound or force_error|default(false) %} {% for error in errors %} has-validation{% endfor %} {% endif %}">
-      <div class="form-floating">
-        {{ form_widget(form) }}
-        {{ form_label(form) }}
+{%- block choice_widget_expanded_options -%}
+  {%- for group_label, option in options -%}
+    {%- if option is iterable -%}
+      <fieldset>
+        <h6 class="fw-bold">
+          {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({ }, choice_translation_domain) }}
+        </h6>
+        {%- set options = option -%}
+        {{- block('choice_widget_expanded_options') -}}
+      </fieldset>
+    {%- else -%}
+      <div>
+        {%- set child = form.children|filter(child => child.vars.value == option.value)|first -%}
+        {{- form_widget(child) -}}
+        {{- form_label(child) -}}
       </div>
-      {% if form.vars.help is not empty %}
-        <button type="button"
-          class="input-group-text btn btn-outline-secondary app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
-          data-bs-toggle="popover"
-          {{ form.vars.help_html ? 'data-bs-html="true"' }}
-          data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters, form.vars.translation_domain) }}">
-          <span class="fs-5 bi bi-info-circle"></span>
-        </button>
-      {% endif %}
-      {{ form_errors(form) }}
-    </div>
-  {% else %}
-    <div class="app-form-row {% if not compound or force_error|default(false) %}{% for error in errors %} has-validation{% endfor %}{% endif %}">
-      {{ form_label(form) }}
-      {{ form_help(form) }}
-      {{ form_widget(form) }}
-      {{ form_errors(form) }}
-    </div>
-  {% endif %}
-{% endblock %} #}
+    {%- endif -%}
+  {% endfor %}
+{% endblock %}

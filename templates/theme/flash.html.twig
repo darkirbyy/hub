@@ -1,7 +1,14 @@
+{# A flash message MUST be an array with a mandatory key `message` (string)
+  and two options keys `params` (array, default to empty) and `domain` (string, default to `messages`) #}
+
+{# Macro to translate the flash message while escaping the parameters #}
 {% macro trans_flash(flash) %}
-  {{ flash.message|trans(flash.params|default([]), flash.domain|default('messages')) }}
+  {% set message = flash.message|trans(flash.params|default({ })|map(p => p|e), flash.domain|default('messages')) %}
+  {{ message|raw }}
 {% endmacro %}
 
+{# This block SHOULD be inserted on every page, at the top of the first section.
+  4 types of flashes: info, success, warning, danger #}
 {% block flash %}
   <div aria-live="polite">
     {% for flash in app.flashes('info') %}
@@ -9,7 +16,7 @@
         <div class="bi bi-info-square-fill">
           {{ _self.trans_flash(flash) }}
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'aria.label.close'|trans }}"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
       </div>
     {% endfor %}
     {% for flash in app.flashes('success') %}
@@ -17,7 +24,7 @@
         <div class="bi bi-check-circle-fill">
           {{ _self.trans_flash(flash) }}
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'aria.label.close'|trans }}"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
       </div>
     {% endfor %}
     {% for flash in app.flashes('warning') %}
@@ -25,7 +32,7 @@
         <div class="bi bi-exclamation-triangle-fill">
           {{ _self.trans_flash(flash) }}
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'aria.label.close'|trans }}"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
       </div>
     {% endfor %}
     {% for flash in app.flashes('danger') %}
@@ -33,7 +40,7 @@
         <div class="bi bi-x-square-fill">
           {{ _self.trans_flash(flash) }}
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'aria.label.close'|trans }}"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
       </div>
     {% endfor %}
   </div>

@@ -5,55 +5,60 @@
 {% block main %}
   <section>
     <div class="container">
+      {# Insert the flashes #}
       {{ block('flash', 'theme/flash.html.twig') }}
+
+      {# Flex block to divide the admin in two parts #}
       <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
+        {# First part : only crud links #}
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
-            {{ 'admin.users'|trans }}
+            {{ 'admin.subtitles.configs'|trans }}
           </h3>
           <div class="list-group">
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="#">Test</a>
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.accounts'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_user_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'user.name'|trans({ }, 'validators') }}
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_metarole_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'metarole.name'|trans({ }, 'validators') }}
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_role_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'role.name'|trans({ }, 'validators') }}
+            </a>
+
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.hub'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_appli_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span> {{ 'appli.name'|trans({ }, 'validators') }}
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_category_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span> {{ 'category.name'|trans({ }, 'validators') }}
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_icon_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span> {{ 'icon.name'|trans({ }, 'validators') }}
+            </a>
+
+            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.others'|trans }}</span>
+            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_other_shortcut_index') }}">
+              <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'shortcut.name'|trans({ }, 'validators') }}
+            </a>
           </div>
         </div>
 
+        {# Second part: all shortcuts #}
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
-            {{ 'admin.tools'|trans }}
+            {{ 'admin.subtitles.shortcuts'|trans }}
           </h3>
           <div class="list-group">
-            {% for type, tools in tools_by_type %}
+            {% for type, shortcuts in shortcuts_by_type %}
               <span class="list-group-item fw-bold list-group-item-primary">{{ type }}</span>
-              {% for tool in tools %}
-                <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_tool_show', { id: tool.id }) }}">
-                  <span class="{{ tool.icon.faClass|default('fa-solid fa-question') }} fa-fw me-1"></span>{{ tool.label }}
+              {% for shortcut in shortcuts %}
+                <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ shortcut.url }}" data-turbo="false">
+                  <span class="fa-solid fa-arrow-up-right-from-square fa-fw me-1" aria-hidden="true"></span>{{ shortcut.label }}
                 </a>
               {% endfor %}
             {% endfor %}
-          </div>
-        </div>
-
-        <div class="flex-fill">
-          <h3 class="mb-2 text-center">
-            {{ 'admin.parameters'|trans }}
-          </h3>
-          <div class="list-group">
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.hub'|trans }}</span>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_category_index') }}">
-              <span class="bi bi-arrow-right me-1"></span> {{ 'category.name'|trans({ }, 'validators') }}
-            </a>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_appli_index') }}">
-              <span class="bi bi-arrow-right me-1"></span> {{ 'appli.name'|trans({ }, 'validators') }}
-            </a>
-
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.tools'|trans }}</span>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_tool_index') }}">
-              <span class="bi bi-arrow-right me-1"></span>{{ 'tool.name'|trans({ }, 'validators') }}
-            </a>
-
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.global'|trans }}</span>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_param_icon_index') }}">
-              <span class="bi bi-arrow-right me-1"></span> {{ 'icon.name'|trans({ }, 'validators') }}
-            </a>
           </div>
         </div>
       </div>
