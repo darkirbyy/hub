@@ -2,6 +2,9 @@ import { Controller } from '@hotwired/stimulus';
 import { Swiper } from 'swiper';
 import { Navigation } from 'swiper/modules';
 
+/**
+ * Stimulus controller that enable and configure swiper for the homepage carousels
+ */
 export default class extends Controller {
   static values = {
     id: String,

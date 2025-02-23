@@ -1,5 +1,11 @@
 import { Controller } from '@hotwired/stimulus';
 
+/**
+ * Stimulus controller that SHOULD be placed on a form tag, to enable action buttons in form.
+ * Currently supported actions are :
+ * - clear: to empty a text/textarea field
+ * - reveal: to show/hide a password field
+ */
 export default class extends Controller {
   static targets = ['clear', 'reveal'];
 

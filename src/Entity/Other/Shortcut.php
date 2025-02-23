@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * A Shortcut is described by a label and a type. Shortcuts are regrouped by type.
+ * The number allows to decide in which order the shortcuts should appear and must be unique.
+ * The URL should redirect to protected page on the server domain.
+ */
 #[ORM\Entity(repositoryClass: ShortcutRepository::class)]
 #[UniqueEntity(fields: ['number'])]
 class Shortcut

@@ -1,5 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
 
+/**
+ * Stimulus controller that display live the password strength when modifying the password,
+ * using the same algorithm as the php symfony backend validation.
+ */
 export default class extends Controller {
   static targets = ['input', 'text', 'bar'];
   static values = {

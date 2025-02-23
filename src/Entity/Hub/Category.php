@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * A Category is described by a label and an Icon, and regroups several Appli.
+ * The number allows to decide in which order the categories should appear and must be unique.
+ */
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[UniqueEntity(fields: ['number'])]
 class Category

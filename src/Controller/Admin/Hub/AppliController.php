@@ -11,8 +11,8 @@ use App\Repository\Hub\AppliRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller for managing applications in the admin panel.
- * Applications are displayed on the homepage, and are associated with roles (see {@see \App\Controller\Admin\Account\RoleController}).
+ * Controller for managing applis in the admin panel.
+ * Applis are displayed on the homepage, and are associated with roles (see {@see \App\Controller\Admin\Account\RoleController}).
  *
  * This class extends `CrudController`, automatically handling common CRUD operations.
  */

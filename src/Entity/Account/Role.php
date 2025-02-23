@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * A Role is described by a key (name key_role in the db) and a description.
+ * It is always associated with an Appli, and for a given Appli, each role MUST have a unique key.
+ */
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 #[UniqueEntity(fields: ['appli', 'key'])]
 class Role

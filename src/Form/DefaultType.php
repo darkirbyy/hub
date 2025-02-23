@@ -8,7 +8,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DefaultType extends AbstractType
+/**
+ * Abstract FormType that use an environment variable to enable or not the HTML validation.
+ * Any other FormType CAN derived from it, but cannot override this parameter.
+ */
+abstract class DefaultType extends AbstractType
 {
     protected bool $htmlValidation;
 

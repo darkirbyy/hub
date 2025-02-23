@@ -1,5 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
 
+/**
+ * Stimulus controller that MUST be placed on a delete modal, to customize parts of it when displayed
+ * Customizable parts are: form action path, modal body text, form csrf token
+ */
 export default class extends Controller {
   static targets = ['form', 'body', 'hidden'];
 

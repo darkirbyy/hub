@@ -16,6 +16,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * An Appli is described by a title, a description, a link text and an image, displayed on the homepage.
+ * The number allows to decide in which order the applis should appear in a given Category and must be unique.
+ * The name is used to manage roles and must be unique.
+ * The path is relative to the root of the server and must be unique.
+ * Some external links can be added to redirect to other website.
+ */
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
 #[UniqueEntity(fields: ['name'])]
 #[UniqueEntity(fields: ['path'])]

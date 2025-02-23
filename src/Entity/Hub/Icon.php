@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * An Icon is described by a label, and defines some CSS classes, typically from FontAwesome.
+ * To prevent duplicate Icon, the faClass should be unique.
+ */
 #[ORM\Entity(repositoryClass: IconRepository::class)]
 #[UniqueEntity(fields: ['faClass'])]
 class Icon

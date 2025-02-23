@@ -8,6 +8,10 @@ use App\Repository\Hub\ExternalLinkRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * A External link is described by a text and an Icon, displayed along with an Appli.
+ * The URL should redirect to another domain.
+ */
 #[ORM\Entity(repositoryClass: ExternalLinkRepository::class)]
 class ExternalLink
 {

@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * A MetaRole is described by a key (name key_meta_role in the db) and a description.
+ * It regroups several roles so that each User CAN be granted one MetaRole.
+ */
 #[ORM\Entity(repositoryClass: MetaRoleRepository::class)]
 #[UniqueEntity(fields: ['key'])]
 class MetaRole

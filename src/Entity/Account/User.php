@@ -15,6 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * The User is described by a username, that must be unique. It can only be created by an meta-admin.
+ * The meta-admin boolean grants the admin role on this app and therefore, allows to manage roles of all other apps and users.
+ * The password and image are editable by the user.
+ */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[ORM\HasLifecycleCallbacks]
