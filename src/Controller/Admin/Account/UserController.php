@@ -79,7 +79,7 @@ class UserController extends CrudController
                 8 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-lg")|raw'],
                 9 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
             ],
-            'template' => 'admin/user_show.html.twig',
+            'template' => 'admin/show_user.html.twig',
             'button' => ['delete' => false, 'edit' => false],
         ];
     }

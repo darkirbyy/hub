@@ -8,7 +8,9 @@
       {# Insert the flashes #}
       {{ block('flash', 'theme/flash.html.twig') }}
 
+      {# Flex block to divide the admin in two parts #}
       <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
+        {# First part : only crud links #}
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
             {{ 'admin.subtitles.configs'|trans }}
@@ -43,6 +45,7 @@
           </div>
         </div>
 
+        {# Second part: all shortcuts #}
         <div class="flex-fill">
           <h3 class="mb-2 text-center">
             {{ 'admin.subtitles.shortcuts'|trans }}

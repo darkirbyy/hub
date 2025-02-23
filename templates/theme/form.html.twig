@@ -1,7 +1,9 @@
+{# Extends and improve bootstrap form theme #}
 {% extends 'bootstrap_5_layout.html.twig' %}
 
-{# Customize form field with help button at the end, and floating labels if there is a placeholder defined #}
+{# Customizes form field with help button at the end, and floating labels if there is a placeholder defined #}
 {% block form_row %}
+  {# Creates the help button as a icon + help text in a popover #}
   {% set help_button %}
     {% if form.vars.help is not empty %}
       <button type="button"
@@ -15,6 +17,7 @@
     {% endif %}
   {% endset %}
 
+  {# Calculates the row_attr with `app-form-row` + `has_validation` (if errors) + custom row attributes #}
   {% set custom_classes = 'app-form-row' ~ ' ' ~ (not compound or (force_error|default(false)) ? (errors|length) > 0 ? 'has-validation') %}
   {% set attributes %}
     {% with { attr: row_attr|merge({ class: ((row_attr.class|default('')) ~ ' ' ~ custom_classes)|trim }) } %}
@@ -22,7 +25,9 @@
     {% endwith %}
   {% endset %}
 
+  {# Creates the actaul div with its attributes #}
   <div {{ attributes }}>
+    {# If a placeholder attribute is declared: use the floating row with the label afterwards + add the help button is needed #}
     {% if form.vars.attr.placeholder is defined %}
       <div class="input-group">
         <div class="form-floating">
@@ -42,10 +47,12 @@
         </div>
         {{ help_button }}
       </div>
+      {# Else: use the normal row with the label first, and pass the help button to the widget #}
     {% else %}
       {{ form_label(form) }}
       {{ form_widget(form, { help_button: help_button }) }}
     {% endif %}
+    {# In any case, write the errors underneath #}
     {{ form_errors(form) }}
   </div>
 {% endblock %}
@@ -57,13 +64,16 @@
   {%- endif -%}
   <div class="input-group">
     {{- form_widget(form.file, { attr: attr }) -}}
-
+    {# Add the help button at the end of the row #}
     {{ help_button|default('') }}
   </div>
+
+  {# Button to delete if allowed #}
   {%- if form.delete is defined -%}
     {{- form_row(form.delete, { label: 'form.other.deleteImage', translation_domain: 'messages', row_attr: { class: 'my-2' } }) -}}
   {%- endif -%}
 
+  {# Links (as text or image) to download the image if allowed #}
   {% if not errors|length > 0 %}
     {%- if image_uri -%}
       <div class="text-center mt-2">
@@ -83,12 +93,14 @@
 {%- endblock -%}
 
 {# Custom collection changes to add button and javascript controller #}
+{# Add stimulus controller #}
 {% block collection_row %}
   {% set custom_row_attr = { 'data-controller': 'collec-field' } %}
   {% set row_attr = row_attr|merge(custom_row_attr) %}
   {{- form_row(form, { row_attr: row_attr }) -}}
 {% endblock %}
 
+{# Add two mandatory targets and the add button #}
 {% block collection_widget %}
   {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
   {% set attr = attr|merge(custom_attr) %}
@@ -98,6 +110,7 @@
   </button>
 {% endblock %}
 
+{# Add one mandatory target and the delete button #}
 {% block collection_entry_row %}
   <div class="d-flex gap-2">
     {% for row in form.children %}
@@ -109,7 +122,7 @@
   </div>
 {% endblock %}
 
-{# Improve choice type form when expanded and multiple with group_by #}
+{# Improve choice type form when `expanded` and `multiple` are true, and group_by is defined #}
 {%- block choice_widget_expanded -%}
   {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
   <div {{ block('widget_container_attributes') }}>
@@ -132,9 +145,7 @@
       <div>
         {%- set child = form.children|filter(child => child.vars.value == option.value)|first -%}
         {{- form_widget(child) -}}
-        {{-
-          form_label(child, null, { translation_domain: choice_translation_domain, label_attr: label_attr|merge({ class: 'label-standard -ml-2 pl-2 pr-2' }), required: false })
-        -}}
+        {{- form_label(child) -}}
       </div>
     {%- endif -%}
   {% endfor %}

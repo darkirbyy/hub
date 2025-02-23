@@ -63,7 +63,7 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('account_index', ['flash' => true], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('account/avatar.html.twig', [
+        return $this->render('account/_avatar.html.twig', [
             'form' => $form,
         ]);
     }

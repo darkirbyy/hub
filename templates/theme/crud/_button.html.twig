@@ -1,3 +1,5 @@
+{# 4 buttons to use in the crud, with `btn_class` and `text_class` available to cutomize #}
+
 {% block new %}
   <a href="{{ path }}" class="btn btn-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.new'|trans }}">
     <span class="bi bi-plus-square-fill" aria-hidden="true"></span>
@@ -19,6 +21,7 @@
   </a>
 {% endblock %}
 
+{# Delete button MUST be use with a modal #}
 {% block delete %}
   <button type="button"
     class="btn btn-outline-danger {{ btn_class|default('') }}"

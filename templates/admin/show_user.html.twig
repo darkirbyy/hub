@@ -1,7 +1,9 @@
+{# Extends the crud show page to override one block #}
 {% extends 'theme/crud/show.html.twig' %}
 
 {% set title = 'admin.accounts'|trans %}
 
+{# Override the corresponding block in the crud to add the reset button #}
 {% block buttons_action %}
   <div>
     <a href="{{ path('admin_account_user_edit', { id: object.id }) }}" class="btn btn-outline-primary" aria-label="{{ 'form.button.edit'|trans }}">
@@ -15,7 +17,7 @@
       token: csrf_token('delete-' ~ object.id),
       body_param: { object: object },
       btn_class: '',
-      text_class: 'd-none d-md-inline ms-md-1',
+      text_class: 'd-none d-md-inline ms-md-1'
     }
     %}
 

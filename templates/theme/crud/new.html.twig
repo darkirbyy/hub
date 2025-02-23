@@ -14,9 +14,13 @@
           {{ (config_main.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.new'|trans }}</span>
         </h2>
 
-        {# Backlink #}
-        <div class="my-2">
+        <div class="my-2 d-flex justify-content-between align-items-center">
+          {# Back link #}
           <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}</a>
+          {# Buttons (none) #}
+          {% block buttons_action %}
+            <div></div>
+          {% endblock %}
         </div>
 
         {# Crud form #}
