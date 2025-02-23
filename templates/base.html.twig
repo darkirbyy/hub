@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|default('fr') }}">
+<html lang="{{ app.request.locale|default('fr') }}" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,7 +32,7 @@
     {% endif %}
     {# The HEADER defines the navbar #}
     <header>
-      <nav class="navbar navbar-expand bg-body-secondary bg-primary-subtle" aria-label="{{ 'aria.mainNavigation'|trans }}">
+      <nav class="navbar navbar-expand bg-primary-subtle" aria-label="{{ 'aria.mainNavigation'|trans }}">
         {% set currentRoute = app.current_route %}
         {% set activeLink = 'class="nav-link active" aria-current="page" aria-selected="true"' %}
         {% set otherLink = 'class="nav-link"' %}
@@ -96,7 +96,7 @@
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
-      <div class="container-fluid fw-light bg-body-secondary small mt-4 py-3">
+      <div class="container-fluid fw-light bg-primary-subtle small mt-4 py-3">
         <div class="row gw-md-4">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">
