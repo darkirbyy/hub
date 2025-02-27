@@ -120,25 +120,16 @@ legend.col-form-label.required::after {
   opacity: 1;
 }
 
-// .grid-action a:hover {
-//   opacity: 1;
-//   border-color: white;
-//   padding-right: 2em;
-// }
-
-// .grid-action a:hover:after {
-//   transform: translateX(100%);
-//   opacity: 1;
-// }
-
-// .grid-icon img:hover {
-//   transform: scale(1.1);
-//   filter: opacity(1);
-// }
-
 ///////////////////////////////////
 // App-specific classes ///////////
 ///////////////////////////////////
+
+// Switch theme ///////////////////
+
+.app-switch-theme-radio {
+  min-height: 4rem;
+  align-content: center;
+}
 
 // Home intro /////////////////////
 
@@ -160,7 +151,7 @@ legend.col-form-label.required::after {
 // Avatars ////////////////////////
 
 @mixin app-avatar-container($size) {
-  max-height: $size * $font-size-base;
+  // max-height: $size * $font-size-base;
   max-width: $size * $font-size-base;
 }
 

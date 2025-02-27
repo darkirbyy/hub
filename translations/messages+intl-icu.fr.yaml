@@ -116,6 +116,12 @@ layout:
     home: Hub
     admin: Admin
     login: Se connecter
+  theme:
+    switch: Choisissez votre thème
+    light: Thème clair
+    dark: Thème sombre
+    auto: Auto <br /><small class="text-muted fst-italic">Utiliser les paramètres systèmes</small>
+
   footer:
     madeWith: Réalisé avec
     version: Version
@@ -125,5 +131,6 @@ aria:
   skipToContent: Aller au contenu
   mainNavigation: Navigation principale
   toggleNavigation: Basculer la navigation
+  switchTheme: Changer de thème
   footer: Pied de page
   loading: Chargement...

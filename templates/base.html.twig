@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|default('fr') }}" data-bs-theme="dark">
+<html lang="{{ app.request.locale|default('fr') }}" data-controller="switch-theme">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,36 @@
   <body class="d-flex flex-column min-vh-100" data-controller="load-popover">
     {# Skip to content link for screen reader #}
     <a href="#mainContent" class="visually-hidden-focusable">{{ 'aria.skipToContent'|trans }}</a>
+
+    {# Switch theme modal #}
+    <div class="modal fade" id="theme-modal" tabindex="-1" aria-labelledby="theme-modal-label" aria-hidden="true" data-switch-theme-target="modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="theme-modal-label">
+              {{ 'layout.theme.switch'|trans }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-column gap-2">
+            <input class="btn-check" type="radio" name="theme-modal" id="theme-modal-light" autocomplete="off" data-switch-theme-target="radio" />
+            <label class="btn btn-outline-secondary text-start app-switch-theme-radio" for="theme-modal-light">
+              <span class="bi bi-sun-fill me-2" aria-hidden="true"></span>{{ 'layout.theme.light'|trans }}
+            </label>
+            <input class="btn-check" type="radio" name="theme-modal" id="theme-modal-dark" autocomplete="off" data-switch-theme-target="radio" />
+            <label class="btn btn-outline-secondary text-start app-switch-theme-radio" for="theme-modal-dark">
+              <span class="bi bi-moon-fill me-2" aria-hidden="true"></span>{{ 'layout.theme.dark'|trans }}
+            </label>
+            <input class="btn-check" type="radio" name="theme-modal" id="theme-modal-auto" autocomplete="off" data-switch-theme-target="radio" />
+            <label class="btn btn-outline-secondary text-start app-switch-theme-radio" for="theme-modal-auto">
+              <span class="bi bi-gear-fill me-2" aria-hidden="true"></span>{{ 'layout.theme.auto'|trans|raw }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Bar only visible in dev env #}
     {% if env.app.env == 'dev' %}
       <div class="container-fluid p-0 m-0 text-center fw-bold d-flex justify-content-around app-env-dev">
         {% for i in 1..10 %}
@@ -51,14 +81,14 @@
             {% endif %}
           </ul>
           {# Right part of the navbar : connect or go to your account page #}
-          <ul class="navbar-nav">
+          <ul class="navbar-nav align-items-center">
             {% if is_granted('ROLE_USER') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
-                  <div class="app-avatar-container-xs d-inline-block">
+                  {{ app.user.username }}
+                  <div class="app-avatar-container-xs d-inline-block ms-1">
                     <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
                   </div>
-                  {{ app.user.username }}
                 </a>
               </li>
             {% else %}
@@ -66,6 +96,11 @@
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_login') }}">{{ 'layout.navbar.login'|trans }}</a>
               </li>
             {% endif %}
+            <li class="nav-item">
+              <button data-bs-toggle="modal" data-bs-target="#theme-modal" class="btn btn-sm" aria-label="{{ 'aria.switchTheme'|trans }}">
+                <span class="bi bi-palette-fill" aria-hidden="true"></span>
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
