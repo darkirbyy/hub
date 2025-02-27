@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|default('fr') }}" data-controller="switch-theme">
+<html lang="{{ app.request.locale|default('fr') }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,7 +23,7 @@
     <a href="#mainContent" class="visually-hidden-focusable">{{ 'aria.skipToContent'|trans }}</a>
 
     {# Switch theme modal #}
-    <div class="modal fade" id="theme-modal" tabindex="-1" aria-labelledby="theme-modal-label" aria-hidden="true" data-switch-theme-target="modal">
+    <div class="modal fade" id="theme-modal" tabindex="-1" aria-labelledby="theme-modal-label" aria-hidden="true" data-controller="switch-theme">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">

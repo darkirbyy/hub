@@ -1,17 +1,17 @@
 import { Controller } from '@hotwired/stimulus';
 
 /**
- * Stimulus controller that CAN be placed on a any take, to enable any popover nested inside it.
+ * Stimulus controller that MUST be placed on the switch theme modal
  */
 export default class extends Controller {
-  static targets = ['modal', 'radio'];
+  static targets = ['radio'];
 
   connect() {
     // Setting the preferred theme on page load
     this.setPreferredTheme(this.getPreferredTheme());
 
     // If there is a theme stored, selecting the corresponding radio button when opening the modal
-    this.modalTarget.addEventListener('show.bs.modal', () => {
+    this.element.addEventListener('show.bs.modal', () => {
       const storedTheme = localStorage.getItem('theme');
       if (storedTheme) {
         const radioId = 'theme-modal-' + storedTheme;
