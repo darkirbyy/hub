@@ -8,12 +8,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 /**
  * Service to persist/remove any entity into/from the database, handling the flash messages and logging the errors.
  */
 class FlushManager
 {
+    private FlashBagInterface $flashBag;
+
     public function __construct(private EntityManagerInterface $entityManager, private LoggerInterface $logger, private RequestStack $requestStack)
     {
         $this->flashBag = $requestStack->getSession()->getFlashBag();
