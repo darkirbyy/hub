@@ -4,16 +4,21 @@
 // Imports ////////////////////////
 ///////////////////////////////////
 
-// Import boostrap basics
+// Import Bootstrap core functions
 @import '~bootstrap/scss/functions';
+
+// Import custom theme
+$progress-bar-transition: width 0.3s ease;
+@import 'variables';
+
+// Import
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/variables-dark';
+
+// Import Bootstrap API
 @import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/utilities';
-
-$border-color: $gray-500;
-$progress-bar-transition: width 0.3s ease;
 
 // Use bootstrap API to generate custom responsive classes
 $utilities: map.merge(
@@ -38,9 +43,13 @@ $utilities: map.merge(
   )
 );
 
-// Import the rest of boostrap classes
+// Import Bootstrap utilities API (processes utility changes)
 @import '~bootstrap/scss/utilities/api';
+
+// Import Bootstrap (finalizes everything)
 @import '~bootstrap/scss/bootstrap';
+
+@import 'bootswatch';
 
 // Import icons packages
 @import '~bootstrap-icons/font/bootstrap-icons.css';

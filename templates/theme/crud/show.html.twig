@@ -38,7 +38,7 @@
 
         {# Cols displaying all the details of the given object #}
         {% for row in config_show.rows %}
-          <div class="row mx-auto border-bottom mb-2 rounded bg-body-tertiary">
+          <div class="row mx-auto border-bottom mb-2 rounded">
             <div class="col-4 col-md-3 py-2 text-end text-truncate">
               {# Use the getter for the label identifier if not defined #}
               {{ (config_main.entity_key ~ '.label.' ~ (row.label|default(row.getter)))|trans({ }, 'validators') }}

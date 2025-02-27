@@ -62,7 +62,7 @@
     {% endif %}
     {# The HEADER defines the navbar #}
     <header>
-      <nav class="navbar navbar-expand bg-primary-subtle" aria-label="{{ 'aria.mainNavigation'|trans }}">
+      <nav class="navbar navbar-expand bg-primary" aria-label="{{ 'aria.mainNavigation'|trans }}">
         {% set currentRoute = app.current_route %}
         {% set activeLink = 'class="nav-link active" aria-current="page" aria-selected="true"' %}
         {% set otherLink = 'class="nav-link"' %}
@@ -97,7 +97,7 @@
               </li>
             {% endif %}
             <li class="nav-item">
-              <button data-bs-toggle="modal" data-bs-target="#theme-modal" class="btn btn-sm" aria-label="{{ 'aria.switchTheme'|trans }}">
+              <button data-bs-toggle="modal" data-bs-target="#theme-modal" class="nav-link" aria-label="{{ 'aria.switchTheme'|trans }}">
                 <span class="bi bi-palette-fill" aria-hidden="true"></span>
               </button>
             </li>
@@ -131,8 +131,8 @@
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
-      <div class="container-fluid fw-light bg-primary-subtle small mt-4 py-3">
-        <div class="row gw-md-4">
+      <div class="container-fluid fw-light bg-primary small mt-4 py-3">
+        <div class="row gw-md-4 text-muted">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">
             {{ 'layout.footer.madeWith'|trans }}

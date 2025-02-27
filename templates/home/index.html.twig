@@ -4,7 +4,7 @@
 
 {# Redefines the h1 block to extend the navbar background with an intro text and custom borders #}
 {% block h1 %}
-  <div class="container-fluid p-0 mb-3 border-2 app-home-gradient bg-primary-subtle">
+  <div class="container-fluid p-0 mb-5 border-2 app-home-gradient bg-primary">
     <div class="container">
       <h1 class="text-center">
         {{ 'home.h1'|trans }}
@@ -14,7 +14,7 @@
           {{ 'home.introText'|trans|raw }}
         </p>
         <p class="app-home-havefun mb-0">
-          <span class="px-4 py-1 fs-4 border border-1 rounded-5 bg-primary-subtle">{{ 'home.haveFun'|trans }}</span>
+          <span class="px-4 py-1 fs-4 border border-1 rounded-5 bg-primary">{{ 'home.haveFun'|trans }}</span>
         </p>
       </div>
     </div>
@@ -30,7 +30,7 @@
     {# For each category, only display it if not empty #}
     {% for category in categories %}
       {% if (category.applis|length) > 0 %}
-        <section class="mb-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
+        <section class="mt-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
           <div class="d-flex justify-content-start gap-1 gap-md-3 mb-4">
             {# Previous swiper button #}
             <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev" aria-label="{{ 'form.button.previous'|trans }}">
@@ -53,7 +53,7 @@
                       <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img-top" alt="{{ appli.title }}" />
                     </a>
                     {# Card body in three vertical flex parts: appli title, description and buttons #}
-                    <div class="card-body bg-body-tertiary d-flex flex-column justify-content-between">
+                    <div class="card-body d-flex flex-column justify-content-between">
                       {# Appli title #}
                       <h5 class="card-title">
                         {{ appli.title }}

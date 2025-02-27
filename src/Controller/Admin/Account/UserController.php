@@ -45,7 +45,11 @@ class UserController extends CrudController
             'cols' => [
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'username'],
-                2 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-xs")|raw'],
+                2 => [
+                    'getter' => 'self',
+                    'label' => 'imageFile',
+                    'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-xs bg-primary-subtle")|raw',
+                ],
                 3 => ['getter' => 'metaRole'],
                 4 => ['getter' => 'dateLastCo', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
                 5 => ['getter' => 'dateUpdate', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
@@ -76,7 +80,11 @@ class UserController extends CrudController
                 5 => ['getter' => 'dateAdd', 'filters' => 'format_datetime("medium", "medium")'],
                 6 => ['getter' => 'dateUpdate', 'filters' => 'format_datetime("medium", "medium")'],
                 7 => ['getter' => 'dateLastCo', 'filters' => 'format_datetime("medium", "medium")'],
-                8 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-lg")|raw'],
+                8 => [
+                    'getter' => 'self',
+                    'label' => 'imageFile',
+                    'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-lg bg-primary-subtle")|raw',
+                ],
                 9 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
             ],
             'template' => 'admin/show_user.html.twig',
