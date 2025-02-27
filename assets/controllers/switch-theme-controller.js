@@ -6,13 +6,17 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
   static targets = ['radio'];
 
+  initialize() {
+    this.storagePath = 'hub/theme';
+  }
+
   connect() {
     // Setting the preferred theme on page load
     this.setPreferredTheme(this.getPreferredTheme());
 
     // If there is a theme stored, selecting the corresponding radio button when opening the modal
     this.element.addEventListener('show.bs.modal', () => {
-      const storedTheme = localStorage.getItem('theme');
+      const storedTheme = localStorage.getItem(this.storagePath);
       if (storedTheme) {
         const radioId = 'theme-modal-' + storedTheme;
         const activeRadio = document.getElementById(radioId);
@@ -31,13 +35,13 @@ export default class extends Controller {
 
   // Return the stored theme if exists, or auto otherwise
   getPreferredTheme() {
-    const storedTheme = localStorage.getItem('theme');
+    const storedTheme = localStorage.getItem(this.storagePath);
     return storedTheme ? storedTheme : 'auto';
   }
 
   // Set the theme using the system theme in auto, or directly the value for light/dark
   setPreferredTheme(theme) {
-    localStorage.setItem('theme', theme);
+    localStorage.setItem(this.storagePath, theme);
     if (theme === 'auto') {
       this.setCurrentTheme(this.getSystemTheme());
     } else {
