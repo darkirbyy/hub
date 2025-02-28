@@ -1,65 +1,14 @@
-// Vapor 5.3.3
-// Bootswatch
+// From vapor 5.3.3 (Bootswatch)
+
 @use 'sass:color';
 
-$theme: 'vapor' !default;
-
-// Color system
-
-$white: #ffffff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #f1f1f1 !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #d4d4d4 !default;
-$gray-500: #bbbbbb !default;
-$gray-600: #7a7a7a !default;
-$gray-700: #535353 !default;
-$gray-800: #424242 !default;
-$gray-900: #1d1d1d !default;
-$black: #000000 !default;
-$blue: #1ba2f6 !default;
-$indigo: #a71a08 !default;
-$purple: #530000 !default;
-$pink: #9e0505 !default;
-$red: #e44c55 !default;
-$orange: #f1b633 !default;
-$yellow: #ffc107 !default;
-$green: #3cf281 !default;
-$teal: #3f81a2 !default;
-$cyan: #bb124465 !default;
-$primary: $purple !default;
-$secondary: $pink !default;
-$success: $green !default;
-$info: $blue !default;
-$warning: $yellow !default;
-$danger: $red !default;
-$light: #44d9e8 !default;
-$dark: $gray-900 !default;
-$min-contrast-ratio: 1.2 !default;
-
-// Options
-
-// $enable-rounded:              false !default;
-
-// Body
-
-$body-bg: $gray-900 !default;
-$body-color: $gray-100 !default;
-
-// Links
-
-$link-color: $body-color !default;
-
-// Components
-
-$border-width: 0 !default;
-$border-radius: 0.15rem !default;
-$border-radius-sm: 0.05rem !default;
-$component-active-bg: $pink !default;
+///////////////////////////////////
+// Main configuration /////////////
+///////////////////////////////////
 
 // Fonts
-
 // stylelint-disable-next-line value-keyword-case
+
 $font-family-sans-serif:
   lato,
   -apple-system,
@@ -72,12 +21,53 @@ $font-family-sans-serif:
   'Apple Color Emoji',
   'Segoe UI Emoji',
   'Segoe UI Symbol' !default;
-$text-muted: rgba($body-color, 0.3) !default;
-$blockquote-footer-color: $text-muted !default;
+
+// Color system
+
+$white: white !default;
+$gray-100: #faf0e6 !default;
+$gray-200: #c5beba !default;
+$gray-300: #aba6a4 !default;
+$gray-400: #908d8e !default;
+$gray-500: #767578 !default;
+$gray-600: #5c5c62 !default;
+$gray-700: #41444c !default;
+$gray-800: #272b36 !default;
+$gray-900: #0d1321 !default;
+$black: black !default;
+$rosewood: #651518 !default;
+$feldgrau: #506c64 !default;
+$imperial: #ec4e20 !default;
+$green: #3cf281 !default;
+$blue: #1ba2f6 !default;
+$yellow: #ffc107 !default;
+$red: #e44c55 !default;
+$primary: $imperial !default;
+$secondary: $feldgrau !default;
+$success: $green !default;
+$info: $blue !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-200 !default;
+$dark: $gray-800 !default;
+$min-contrast-ratio: 1.2 !default;
+
+///////////////////////////////////
+// Variables //////////////////////
+///////////////////////////////////
+
+// Body
+
+$body-bg: $gray-100 !default;
+$body-color: $gray-900 !default;
+
+// Links
+
+$link-color: $body-color !default;
 
 // Tables
 
-$table-color: $white !default;
+$table-color: $gray-100 !default;
 $table-bg-scale: 0% !default;
 
 // Forms
@@ -95,35 +85,14 @@ $form-file-button-hover-bg: color.adjust(
   $form-file-button-bg,
   $lightness: -2%
 ) !default;
-$form-range-track-bg: $input-bg !default;
-$form-range-thumb-disabled-bg: $purple !default;
 
 // Navs
 
-$nav-link-disabled-color: $text-muted !default;
-$nav-tabs-link-active-color: $component-active-bg !default;
-
-// Dropdowns
-
-$dropdown-link-hover-bg: rgba($white, 0.15) !default;
-
-// Pagination
-
-$pagination-bg: transparent !default;
-$pagination-focus-bg: transparent !default;
-$pagination-hover-bg: transparent !default;
-$pagination-disabled-color: $text-muted !default;
-$pagination-disabled-bg: transparent !default;
+$nav-tabs-link-active-color: $gray-100 !default;
 
 // Cards
 
 $card-border-width: 2px !default;
-$card-cap-color: $white !default;
-$card-color: $white !default;
-
-// Tooltips
-
-$tooltip-opacity: 1 !default;
 
 // Popovers
 
@@ -131,17 +100,10 @@ $popover-bg: $primary !default;
 $popover-header-color: $white !default;
 $popover-body-color: $white !default;
 
-// Toasts
-
-$toast-color: $white !default;
-$toast-background-color: $primary !default;
-$toast-header-color: $toast-color !default;
-$toast-header-background-color: $toast-background-color !default;
-
 // Modals
 
 $modal-content-color: $white !default;
-$modal-content-bg: $primary !default;
+$modal-content-bg: $secondary !default;
 
 // Progress bars
 
@@ -151,13 +113,21 @@ $progress-bg: $input-disabled-bg !default;
 
 $list-group-color: $white !default;
 $list-group-bg: $input-disabled-bg !default;
-$list-group-hover-bg: $pink !default;
-$list-group-disabled-color: $text-muted !default;
+$list-group-hover-bg: $feldgrau !default;
+$list-group-disabled-color: $gray-500 !default;
 $list-group-action-color: $body-color !default;
 $list-group-action-hover-color: $white !default;
 $list-group-action-active-bg: $list-group-hover-bg !default;
 
-// Breadcrumbs
+///////////////////////////////////
+// Other //////////////////////////
+///////////////////////////////////
 
-$breadcrumb-divider-color: $text-muted !default;
-$breadcrumb-active-color: $component-active-bg !default;
+// $enable-rounded:              false !default;
+
+$component-active-bg: $feldgrau !default;
+$border-width: 0 !default;
+$border-radius: 0.15rem !default;
+$border-radius-sm: 0.05rem !default;
+$text-muted: rgba($body-color, 0.3) !default;
+$progress-bar-transition: width 0.3s ease;

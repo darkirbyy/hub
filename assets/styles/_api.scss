@@ -1,0 +1,31 @@
+// Import Bootstrap API
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
+// Use bootstrap API to generate custom responsive classes
+
+$utilities: map.merge(
+  $utilities,
+  (
+    'width': (
+      property: width,
+      class: 'w',
+      responsive: true,
+      values: (
+        0: 1%,
+        1: 1%,
+        25: 25%,
+        33: 33%,
+        50: 50%,
+        66: 66%,
+        75: 75%,
+        100: 100%,
+        auto: auto,
+      ),
+    ),
+  )
+);
+
+// Import Bootstrap utilities API (processes utility changes)
+@import '~bootstrap/scss/utilities/api';
