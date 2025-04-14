@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'error.title'|trans({ code: 403 }) %}
+
+{% block main %}
+  {# Actual content of the page #}
+  <section>
+    <div class="container">
+      <p class="text-center fs-4">
+        {{ 'error.message.forbidden'|trans }}
+      </p>
+      <p class="text-center">
+        <a href="{{ path('home_index') }}" class="btn btn-primary" aria-label="{{ 'form.button.edit'|trans }}">Retour à l'accueil</a>
+      </p>
+    </div>
+  </section>
+{% endblock %}

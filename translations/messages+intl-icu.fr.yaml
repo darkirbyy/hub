@@ -41,6 +41,13 @@ account:
     passwordStrength: 'Force du mot de passe : '
     confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
 
+error:
+  title: Erreur {code}
+  message:
+    notFound: Cette page n'existe pas.
+    forbidden: Cette page n'est pas accessible.
+    other: Le serveur a rencontré un problème, merci de réessayer plus tard.
+
 admin:
   title: Administration
   subtitles:
