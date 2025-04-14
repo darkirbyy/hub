@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -181,5 +182,33 @@ class AccountController extends AbstractController
     #[Route(path: '/logout', name: 'logout', methods: ['GET', 'POST'])]
     public function logout(): void
     {
+    }
+
+    /**
+     * Check if the user is connected and has the role described in the parameter.
+     *
+     * @param string $role the role to check (without the ROLE_ prefix)
+     *
+     * @return Response a http code (403, 401 or 200)
+     */
+    #[Route('/check/{role}', name: 'check')]
+    public function check(string $role, AuthorizationCheckerInterface $authChecker): Response
+    {
+        if (!$this->getUser()) {
+            return new Response('Unauthorized', Response::HTTP_UNAUTHORIZED);
+        }
+
+        $roleToCheck = 'ROLE_' . strtoupper($role);
+        $allRoles = array_keys($this->getParameter('security.role_hierarchy.roles'));
+
+        if (!in_array($roleToCheck, $allRoles)) {
+            return new Response('Bad Request', Response::HTTP_BAD_REQUEST);
+        }
+
+        if (!$authChecker->isGranted($roleToCheck)) {
+            return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+        }
+
+        return new Response('OK', Response::HTTP_OK);
     }
 }
