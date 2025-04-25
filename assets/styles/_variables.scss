@@ -1,4 +1,4 @@
-// From vapor 5.3.3 (Bootswatch)
+// Variables SCSS - Main Config + Light Theme
 
 @use 'sass:color';
 
@@ -7,117 +7,89 @@
 ///////////////////////////////////
 
 // Fonts
-// stylelint-disable-next-line value-keyword-case
 
-$font-family-sans-serif:
-  lato,
-  -apple-system,
-  blinkmacsystemfont,
-  'Segoe UI',
-  roboto,
-  'Helvetica Neue',
-  arial,
-  sans-serif,
-  'Apple Color Emoji',
-  'Segoe UI Emoji',
-  'Segoe UI Symbol' !default;
+$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', arial,
+  sans-serif;
+$headings-font-family: 'Montserrat', sans-serif;
+$headings-font-weight: 700;
 
 // Color system
 
-$white: white !default;
-$gray-100: #faf0e6 !default;
-$gray-200: #c5beba !default;
-$gray-300: #aba6a4 !default;
-$gray-400: #908d8e !default;
-$gray-500: #767578 !default;
-$gray-600: #5c5c62 !default;
-$gray-700: #41444c !default;
-$gray-800: #272b36 !default;
-$gray-900: #0d1321 !default;
-$black: black !default;
-$rosewood: #651518 !default;
-$feldgrau: #506c64 !default;
-$imperial: #ec4e20 !default;
-$green: #3cf281 !default;
-$blue: #1ba2f6 !default;
-$yellow: #ffc107 !default;
-$red: #e44c55 !default;
-$primary: $imperial !default;
-$secondary: $feldgrau !default;
-$success: $green !default;
-$info: $blue !default;
-$warning: $yellow !default;
-$danger: $red !default;
-$light: $gray-200 !default;
-$dark: $gray-800 !default;
-$min-contrast-ratio: 1.2 !default;
+$rosewood: #651518;
+$caramel: #c08552;
+$linen: #f3e6dc;
+$rich-black: #151a24;
+$linen-plus: color.adjust($linen, $lightness: 20%);
+$linen-minus: rgba($linen, 0.7);
+$rich-black-plus: rgba($rich-black, 0.7);
+$rich-black-minus: color.adjust($rich-black, $lightness: -20%);
+$primary: $rosewood;
+$secondary: $caramel;
+$success: #09d199;
+$info: #6a8caf;
+$warning: #ff5b44;
+$danger: #e2293f;
+$light: white;
+$dark: black;
 
 ///////////////////////////////////
-// Variables //////////////////////
+// Variables Light ////////////////
 ///////////////////////////////////
+
+// Navbar
+
+$navbar-light-bg-color: $primary;
+$navbar-light-color: $linen-minus;
+$navbar-light-muted-color: $linen-minus;
+$navbar-light-hover-color: $light;
+$navbar-light-active-color: $light;
 
 // Body
 
-$body-bg: $gray-100 !default;
-$body-color: $gray-900 !default;
+$body-color: $rich-black;
+$body-bg: $linen;
+$body-secondary-color: $rich-black-plus;
+$body-secondary-bg: $linen-minus;
+$body-tertiary-color: orange;
+$body-tertiary-bg: cyan;
+$body-emphasis-color: purple;
 
-// Links
+// Border
 
-$link-color: $body-color !default;
+$border-color: $rich-black-plus;
+$border-color-translucent: $rich-black-plus;
 
-// Tables
+// // Links
+// $link-color: darken($rosewood, 5%);
+// $link-hover-color: lighten($rosewood, 10%);
 
-$table-color: $gray-100 !default;
-$table-bg-scale: 0% !default;
+// // Shadows
+// $box-shadow: 0 0.5rem 1rem rgba($rosewood, 0.15);
+// $box-shadow-lg: 0 1rem 3rem rgba($rosewood, 0.175);
 
-// Forms
+// // Buttons
+// $btn-font-weight: 600;
+// $btn-border-width: 2px;
+// $btn-box-shadow: 0 0.125rem 0.25rem rgba($rosewood, 0.2);
+// $btn-focus-box-shadow: 0 0 0 0.25rem rgba($rosewood, 0.25);
 
-$input-bg: color.adjust($body-bg, $lightness: 10%) !default;
-$input-disabled-color: $gray-500 !default;
-$input-disabled-bg: color.adjust($body-bg, $lightness: 5%) !default;
-$input-color: $white !default;
-$input-placeholder-color: rgba($white, 0.4) !default;
-$input-group-addon-bg: $input-disabled-bg !default;
-$form-select-disabled-color: $input-placeholder-color !default;
-$form-select-disabled-bg: $input-disabled-bg !default;
-$form-file-button-bg: $input-group-addon-bg !default;
-$form-file-button-hover-bg: color.adjust(
-  $form-file-button-bg,
-  $lightness: -2%
-) !default;
+// // Cards
+// $card-border-width: 0;
+// $card-bg: lighten($linen, 2%);
+// $card-cap-bg: darken($linen, 5%);
+// $card-border-color: rgba($rosewood, 0.125);
 
-// Navs
+// // Table
+// $table-bg: lighten($linen, 1%);
+// $table-accent-bg: darken($linen, 3%);
+// $table-hover-bg: darken($linen, 5%);
+// $table-border-color: darken($linen, 10%);
 
-$nav-tabs-link-active-color: $gray-100 !default;
-
-// Cards
-
-$card-border-width: 2px !default;
-
-// Popovers
-
-$popover-bg: $primary !default;
-$popover-header-color: $white !default;
-$popover-body-color: $white !default;
-
-// Modals
-
-$modal-content-color: $white !default;
-$modal-content-bg: $secondary !default;
-
-// Progress bars
-
-$progress-bg: $input-disabled-bg !default;
-
-// List group
-
-$list-group-color: $white !default;
-$list-group-bg: $input-disabled-bg !default;
-$list-group-hover-bg: $feldgrau !default;
-$list-group-disabled-color: $gray-500 !default;
-$list-group-action-color: $body-color !default;
-$list-group-action-hover-color: $white !default;
-$list-group-action-active-bg: $list-group-hover-bg !default;
+// // Inputs
+// $input-bg: lighten($linen, 3%);
+// $input-border-color: darken($linen, 15%);
+// $input-focus-border-color: lighten($rosewood, 15%);
+// $input-focus-box-shadow: 0 0 0 0.25rem rgba($rosewood, 0.25);
 
 ///////////////////////////////////
 // Other //////////////////////////
@@ -125,9 +97,10 @@ $list-group-action-active-bg: $list-group-hover-bg !default;
 
 // $enable-rounded:              false !default;
 
-$component-active-bg: $feldgrau !default;
-$border-width: 0 !default;
-$border-radius: 0.15rem !default;
-$border-radius-sm: 0.05rem !default;
-$text-muted: rgba($body-color, 0.3) !default;
+// $component-active-bg: $feldgrau !default;
+// $border-width: 0 !default;
+// $border-radius: 0.15rem !default;
+// $border-radius-sm: 0.05rem !default;
+// $text-muted: rgba($body-color, 0.3) !default;
+
 $progress-bar-transition: width 0.3s ease;

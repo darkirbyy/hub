@@ -4,7 +4,7 @@
 
 {# Redefines the h1 block to extend the navbar background with an intro text and custom borders #}
 {% block h1 %}
-  <div class="container-fluid p-0 mb-5 border-2 app-home-gradient bg-primary">
+  <div class="container-fluid p-0 mb-5 border-2 app-home-neon app-home-gradient navbar-bg-color navbar-active-color">
     <div class="container">
       <h1 class="text-center">
         {{ 'home.h1'|trans }}
@@ -14,7 +14,7 @@
           {{ 'home.introText'|trans|raw }}
         </p>
         <p class="app-home-havefun mb-0">
-          <span class="px-4 py-1 fs-4 border border-1 rounded-5 bg-primary">{{ 'home.haveFun'|trans }}</span>
+          <span class="px-5 py-2 fs-4 border border-2 rounded-5 app-home-neon navbar-bg-color">{{ 'home.haveFun'|trans }}</span>
         </p>
       </div>
     </div>
@@ -23,7 +23,7 @@
 
 {# Actual content, displaying all available app by categories, with horizontal swiper #}
 {% block main %}
-  <div class="container">
+  <div class="container mt-3">
     {# No flashes on the main home page #}
     {# {{ block('flash', 'theme/flash.html.twig') }} #}
 

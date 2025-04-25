@@ -94,10 +94,55 @@ legend.col-form-label.required::after {
   border-image: linear-gradient(
       to right,
       transparent,
-      var(--bs-border-color),
+      $linen-minus,
       transparent
     )
     1;
+}
+
+.app-home-neon {
+  border-color: $linen-minus !important;
+  box-shadow:
+    0 0 0.2rem $linen,
+    0 0 1rem $rosewood,
+    0 0 2rem $rosewood,
+    0 0 3rem $rosewood;
+}
+
+@keyframes flicker {
+  // animation: flicker 8s infinite alternate;
+  0%,
+  19%,
+  21%,
+  54%,
+  56%,
+  100% {
+    box-shadow:
+      0 0 0.2rem $linen,
+      0 0 1rem $rosewood,
+      0 0 2rem $rosewood,
+      0 0 3rem $rosewood;
+  }
+
+  20%,
+  24%,
+  55% {
+    box-shadow:
+      0 0 0.2rem $linen,
+      0 0 0.8rem $rosewood,
+      0 0 1.8rem $rosewood,
+      0 0 2.8rem $rosewood;
+  }
+}
+
+// Effects ////////////////////////
+
+.app-border-neon {
+  border-color: transparent !important;
+  box-shadow:
+    0 0 0.2rem $linen,
+    0 0 1rem $rosewood,
+    0 0 2rem $rosewood;
 }
 
 // Avatars ////////////////////////
@@ -199,6 +244,36 @@ legend.col-form-label.required::after {
 
 .app-btn-max-height {
   height: calc(3.5rem + calc(var(--bs-border-width) * 2));
+}
+
+// Light/Dark /////////////////////
+
+@include color-mode(light) {
+  .navbar-bg-color {
+    background-color: $navbar-light-bg-color;
+  }
+
+  .navbar-active-color {
+    color: $navbar-light-active-color !important;
+  }
+
+  .navbar-active-color .text-muted {
+    color: $navbar-light-muted-color !important;
+  }
+}
+
+@include color-mode(dark) {
+  .navbar-bg-color {
+    background-color: $navbar-dark-bg-color;
+  }
+
+  .navbar-active-color {
+    color: $navbar-dark-active-color !important;
+  }
+
+  .navbar-active-color .text-muted {
+    color: $navbar-dark-muted-color !important;
+  }
 }
 
 // Others /////////////////////////

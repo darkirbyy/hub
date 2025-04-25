@@ -1,62 +1,71 @@
-// Body
+// Variables SCSS - Dark Theme
 
 @use 'sass:color';
 
-// Texts
+///////////////////////////////////
+// Variables Dark /////////////////
+///////////////////////////////////
 
-$primary-text-emphasis-dark: tint-color($primary, 40%);
-$secondary-text-emphasis-dark: tint-color($secondary, 40%);
-$success-text-emphasis-dark: tint-color($success, 40%);
-$info-text-emphasis-dark: tint-color($info, 40%);
-$warning-text-emphasis-dark: tint-color($warning, 40%);
-$danger-text-emphasis-dark: tint-color($danger, 40%);
+// Navbar
 
-// Backgrounds
-
-$primary-bg-subtle-dark: shade-color($primary, 80%);
-$secondary-bg-subtle-dark: shade-color($secondary, 80%);
-$success-bg-subtle-dark: shade-color($success, 80%);
-$info-bg-subtle-dark: shade-color($info, 80%);
-$warning-bg-subtle-dark: shade-color($warning, 80%);
-$danger-bg-subtle-dark: shade-color($danger, 80%);
-
-// Borders
-
-$border-color-dark: $gray-700;
-$border-color-translucent-dark: rgba($white, 0.15);
-$primary-border-subtle-dark: shade-color($primary, 40%);
-$secondary-border-subtle-dark: shade-color($secondary, 40%);
-$success-border-subtle-dark: shade-color($success, 40%);
-$info-border-subtle-dark: shade-color($info, 40%);
-$warning-border-subtle-dark: shade-color($warning, 40%);
-$danger-border-subtle-dark: shade-color($danger, 40%);
+$navbar-dark-bg-color: $primary;
+$navbar-dark-color: $linen-minus;
+$navbar-dark-muted-color: $linen-minus;
+$navbar-dark-hover-color: $light;
+$navbar-dark-active-color: $light;
 
 // Body
 
-$body-bg-dark: $gray-900;
-$body-color-dark: $gray-100;
-$body-secondary-color-dark: rgba($body-color-dark, 0.75);
-$body-secondary-bg-dark: $gray-800;
-$body-tertiary-color-dark: rgba($body-color-dark, 0.5);
-$body-tertiary-bg-dark: color.mix($gray-800, $gray-900, 50%);
-$body-emphasis-color-dark: $white;
+$body-color-dark: $linen;
+$body-bg-dark: $rich-black;
+$body-secondary-color-dark: $linen-minus;
+$body-secondary-bg-dark: $rich-black-plus;
+$body-tertiary-color-dark: orange;
+$body-tertiary-bg-dark: cyan;
+$body-emphasis-color-dark: purple;
 
-// Links
+// Border
 
-$link-color-dark: tint-color($primary, 40%);
-$link-hover-color-dark: shift-color($link-color-dark, -10%);
+$border-color-dark: $linen-minus;
+$border-color-translucent: $linen-minus;
 
-// Forms
+// // Couleurs des liens
+// $link-color: lighten($rosewood, 15%);
+// $link-hover-color: lighten($rosewood, 25%);
 
-$form-select-indicator-color-dark: $body-color-dark;
+// // Ombres
+// $box-shadow: 0 0.5rem 1rem rgba(darken($rosewood, 10%), 0.35);
+// $box-shadow-lg: 0 1rem 3rem rgba(darken($rosewood, 10%), 0.45);
 
-// $form-select-indicator-dark:        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color-dark}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>");
+// // Boutons
+// $btn-font-weight: 600;
+// $btn-border-width: 2px;
+// $btn-box-shadow: 0 0.125rem 0.25rem rgba(black, 0.3);
+// $btn-focus-box-shadow: 0 0 0 0.25rem rgba(lighten($rosewood, 10%), 0.35);
 
-$form-switch-color-dark: rgba($white, 0.25);
+// // Cards
+// $card-border-width: 0;
+// $card-bg: lighten($rich-black, 5%);
+// $card-cap-bg: lighten($rich-black, 10%);
+// $card-border-color: rgba(lighten($rosewood, 10%), 0.2);
 
-// $form-switch-bg-image-dark:         url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color-dark}'/></svg>");
+// // Navbar
+// $navbar-dark-color: rgba($linen, 0.8);
+// $navbar-dark-hover-color: $linen;
+// $navbar-dark-active-color: lighten($rosewood, 20%);
+// $navbar-dark-brand-color: lighten($rosewood, 15%);
+// $navbar-dark-brand-hover-color: lighten($rosewood, 25%);
 
-// $form-valid-color-dark:             $green-300;
-// $form-valid-border-color-dark:      $green-300;
-// $form-invalid-color-dark:           $red-300;
-// $form-invalid-border-color-dark:    $red-300;
+// // Table
+// $table-bg: lighten($rich-black, 3%);
+// $table-accent-bg: lighten($rich-black, 5%);
+// $table-hover-bg: lighten($rich-black, 8%);
+// $table-border-color: lighten($rich-black, 12%);
+
+// // Inputs
+// $input-bg: lighten($rich-black, 7%);
+// $input-color: $linen;
+// $input-border-color: lighten($rich-black, 15%);
+// $input-focus-border-color: lighten($rosewood, 20%);
+// $input-focus-box-shadow: 0 0 0 0.25rem rgba(lighten($rosewood, 15%), 0.25);
+// $input-placeholder-color: darken($linen, 30%);
