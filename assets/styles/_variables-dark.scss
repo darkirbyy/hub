@@ -6,28 +6,41 @@
 // Variables Dark /////////////////
 ///////////////////////////////////
 
+/// Custom
+
+$app-colors-dark: (
+  'app-navbar-text-color': $light,
+  'app-navbar-bg-color': $rosewood,
+  'app-navbar-border-color': rgba($linen, 0.7),
+);
+
 // Navbar
 
-$navbar-dark-bg-color: $primary;
-$navbar-dark-color: $linen-minus;
-$navbar-dark-muted-color: $linen-minus;
-$navbar-dark-hover-color: $light;
-$navbar-dark-active-color: $light;
+$navbar-light-color: rgba($linen, 0.7);
+$navbar-light-hover-color: $light;
+$navbar-light-active-color: $light;
 
 // Body
 
 $body-color-dark: $linen;
-$body-bg-dark: $rich-black;
-$body-secondary-color-dark: $linen-minus;
-$body-secondary-bg-dark: $rich-black-plus;
+$body-bg-dark: $night;
+$body-secondary-color-dark: rgba($linen, 0.7);
+$body-secondary-bg-dark: rgba($night, 0.7);
 $body-tertiary-color-dark: orange;
 $body-tertiary-bg-dark: cyan;
 $body-emphasis-color-dark: purple;
 
 // Border
 
-$border-color-dark: $linen-minus;
-$border-color-translucent: $linen-minus;
+// $border-color-dark: rgba($linen, 0.7);
+// $border-color-translucent: rgba($linen, 0.7);
+
+// Cards
+
+$primary-bg-subtle-dark: color.adjust($night, $lightness: 3%);
+$primary-border-subtle-dark: rgba($grey, 0.3);
+$secondary-bg-subtle-dark: color.adjust($night, $lightness: 8%);
+$secondary-border-subtle-dark: $rosewood;
 
 // // Couleurs des liens
 // $link-color: lighten($rosewood, 15%);
@@ -43,12 +56,6 @@ $border-color-translucent: $linen-minus;
 // $btn-box-shadow: 0 0.125rem 0.25rem rgba(black, 0.3);
 // $btn-focus-box-shadow: 0 0 0 0.25rem rgba(lighten($rosewood, 10%), 0.35);
 
-// // Cards
-// $card-border-width: 0;
-// $card-bg: lighten($rich-black, 5%);
-// $card-cap-bg: lighten($rich-black, 10%);
-// $card-border-color: rgba(lighten($rosewood, 10%), 0.2);
-
 // // Navbar
 // $navbar-dark-color: rgba($linen, 0.8);
 // $navbar-dark-hover-color: $linen;
@@ -57,15 +64,15 @@ $border-color-translucent: $linen-minus;
 // $navbar-dark-brand-hover-color: lighten($rosewood, 25%);
 
 // // Table
-// $table-bg: lighten($rich-black, 3%);
-// $table-accent-bg: lighten($rich-black, 5%);
-// $table-hover-bg: lighten($rich-black, 8%);
-// $table-border-color: lighten($rich-black, 12%);
+// $table-bg: lighten($night, 3%);
+// $table-accent-bg: lighten($night, 5%);
+// $table-hover-bg: lighten($night, 8%);
+// $table-border-color: lighten($night, 12%);
 
 // // Inputs
-// $input-bg: lighten($rich-black, 7%);
+// $input-bg: lighten($night, 7%);
 // $input-color: $linen;
-// $input-border-color: lighten($rich-black, 15%);
+// $input-border-color: lighten($night, 15%);
 // $input-focus-border-color: lighten($rosewood, 20%);
 // $input-focus-box-shadow: 0 0 0 0.25rem rgba(lighten($rosewood, 15%), 0.25);
 // $input-placeholder-color: darken($linen, 30%);

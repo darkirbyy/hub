@@ -29,3 +29,16 @@ $utilities: map.merge(
 
 // Import Bootstrap utilities API (processes utility changes)
 @import '~bootstrap/scss/utilities/api';
+
+// Generate light/dark variables
+:root {
+  @each $key, $value in $app-colors {
+    --#{$key}: #{$value};
+  }
+}
+
+@include color-mode(dark) {
+  @each $key, $value in $app-colors-dark {
+    --#{$key}: #{$value};
+  }
+}

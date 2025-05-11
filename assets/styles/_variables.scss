@@ -15,49 +15,63 @@ $headings-font-weight: 700;
 
 // Color system
 
+$fire: #cb2a2f;
 $rosewood: #651518;
 $caramel: #c08552;
 $linen: #f3e6dc;
-$rich-black: #151a24;
-$linen-plus: color.adjust($linen, $lightness: 20%);
-$linen-minus: rgba($linen, 0.7);
-$rich-black-plus: rgba($rich-black, 0.7);
-$rich-black-minus: color.adjust($rich-black, $lightness: -20%);
-$primary: $rosewood;
-$secondary: $caramel;
-$success: #09d199;
-$info: #6a8caf;
-$warning: #ff5b44;
-$danger: #e2293f;
+$night: #121417;
 $light: white;
+$grey: #5a5a5a;
 $dark: black;
+
+// $primary: $rosewood;
+// $secondary: $caramel;
+// $success: #09d199;
+// $info: #6a8caf;
+// $warning: #ff5b44;
+// $danger: #e2293f;
+// $light: white;
+// $dark: black;
 
 ///////////////////////////////////
 // Variables Light ////////////////
 ///////////////////////////////////
 
+// Custom
+
+$app-colors: (
+  'app-navbar-text-color': $light,
+  'app-navbar-bg-color': $fire,
+  'app-navbar-border-color': $night,
+);
+
 // Navbar
 
-$navbar-light-bg-color: $primary;
-$navbar-light-color: $linen-minus;
-$navbar-light-muted-color: $linen-minus;
+$navbar-light-color: rgba($linen, 0.7);
 $navbar-light-hover-color: $light;
 $navbar-light-active-color: $light;
 
 // Body
 
-$body-color: $rich-black;
+$body-color: $night;
 $body-bg: $linen;
-$body-secondary-color: $rich-black-plus;
-$body-secondary-bg: $linen-minus;
+$body-secondary-color: rgba($night, 0.7);
+$body-secondary-bg: rgba($linen, 0.7);
 $body-tertiary-color: orange;
 $body-tertiary-bg: cyan;
 $body-emphasis-color: purple;
 
 // Border
 
-$border-color: $rich-black-plus;
-$border-color-translucent: $rich-black-plus;
+// $border-color: rgba($night, 0.7);
+// $border-color-translucent: rgba($night, 0.7);
+
+// Cards
+
+$primary-bg-subtle: color.adjust($linen, $lightness: -3%);
+$primary-border-subtle: rgba($grey, 0.3);
+$secondary-bg-subtle: color.adjust($linen, $lightness: -8%);
+$secondary-border-subtle: $fire;
 
 // // Links
 // $link-color: darken($rosewood, 5%);
@@ -72,12 +86,6 @@ $border-color-translucent: $rich-black-plus;
 // $btn-border-width: 2px;
 // $btn-box-shadow: 0 0.125rem 0.25rem rgba($rosewood, 0.2);
 // $btn-focus-box-shadow: 0 0 0 0.25rem rgba($rosewood, 0.25);
-
-// // Cards
-// $card-border-width: 0;
-// $card-bg: lighten($linen, 2%);
-// $card-cap-bg: darken($linen, 5%);
-// $card-border-color: rgba($rosewood, 0.125);
 
 // // Table
 // $table-bg: lighten($linen, 1%);

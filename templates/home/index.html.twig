@@ -4,7 +4,7 @@
 
 {# Redefines the h1 block to extend the navbar background with an intro text and custom borders #}
 {% block h1 %}
-  <div class="container-fluid p-0 mb-5 border-2 app-home-neon app-home-gradient navbar-bg-color navbar-active-color">
+  <div class="container-fluid p-0 mb-5 border-2 app-home-neon app-home-gradient app-navbar-text-color app-navbar-bg-color">
     <div class="container">
       <h1 class="text-center">
         {{ 'home.h1'|trans }}
@@ -13,8 +13,8 @@
         <p class="mb-0">
           {{ 'home.introText'|trans|raw }}
         </p>
-        <p class="app-home-havefun mb-0">
-          <span class="px-5 py-2 fs-4 border border-2 rounded-5 app-home-neon navbar-bg-color">{{ 'home.haveFun'|trans }}</span>
+        <p class="mb-0 app-home-havefun">
+          <span class="px-5 py-2 fs-4 border border-2 rounded-5 app-home-neon app-navbar-bg-color">{{ 'home.haveFun'|trans }}</span>
         </p>
       </div>
     </div>
@@ -39,18 +39,20 @@
             {# Swiper content as two parts: the category title, and all corresponding applis #}
             <div class="swiper mx-0" id="swiper-{{ category.id }}-main">
               {# Category title #}
-              <h2 class="mb-3 text-center text-md-start">
+              <h2 class="m-3 text-center text-md-start">
                 <span class="{{ category.icon.faClass|e }} fa-fw me-2"></span> {{ category.label }}
               </h2>
               {# All corresponding applis #}
-              <div class="swiper-wrapper">
+              <div class="swiper-wrapper m-3">
                 {# For each appli, calculate the full url and use a card to display it #}
                 {% for appli in category.applis %}
                   {% set appli_url = server_base_url ~ appli.path %}
-                  <div class="card swiper-slide">
+                  <div class="card app-home-card swiper-slide border-2 bg-primary-subtle border-primary-subtle">
                     {# Card top with a clickable image #}
-                    <a href="{{ appli_url }}" class="card-img rounded-bottom-0 d-flex align-items-center bg-primary-subtle" data-turbo="false">
-                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img-top" alt="{{ appli.title }}" />
+                    <a href="{{ appli_url }}"
+                      class="app-card-top-container border-bottom border-2 border-primary-subtle rounded-bottom-0 d-flex align-items-center bg-secondary-subtle"
+                      data-turbo="false">
+                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-card-top-img" alt="{{ appli.title }}" />
                     </a>
                     {# Card body in three vertical flex parts: appli title, description and buttons #}
                     <div class="card-body d-flex flex-column justify-content-between">
@@ -59,7 +61,7 @@
                         {{ appli.title }}
                       </h5>
                       {# Appli description #}
-                      <p class="card-text flex-grow-1">
+                      <p class="app-card-text flex-grow-1">
                         {{ appli.description }}
                       </p>
                       {# Appli buttons as two parts: main button and external links #}

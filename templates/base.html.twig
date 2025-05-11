@@ -60,12 +60,14 @@
         {% endfor %}
       </div>
     {% endif %}
+
     {# The HEADER defines the navbar #}
     <header>
       {% set currentRoute = app.current_route %}
       {% set activeLink = 'class="nav-link active" aria-current="page" aria-selected="true"' %}
       {% set otherLink = 'class="nav-link"' %}
-      <nav class="navbar navbar-expand navbar-bg-color {{ currentRoute starts with 'home' ? '' : 'border-bottom app-border-neon' }}" aria-label="{{ 'aria.mainNavigation'|trans }}">
+      <nav class="navbar navbar-expand app-navbar-bg-color {{ currentRoute starts with 'home' ? '' : 'border-bottom app-navbar-neon' }}"
+        aria-label="{{ 'aria.mainNavigation'|trans }}">
         <div class="container-fluid">
           {# Left part of the navbar #}
           <ul class="navbar-nav me-auto align-items-center">
@@ -87,6 +89,7 @@
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   {{ app.user.username }}
                   <div class="app-avatar-container-xs d-inline-block ms-1">
+                    {# TODO : fond de l'avatar quand absent dans navbar #}
                     <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
                   </div>
                 </a>
@@ -131,7 +134,7 @@
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
-      <div class="container-fluid fw-light navbar-bg-color navbar-active-color border-top app-border-neon small mt-4 py-3">
+      <div class="container-fluid fw-light app-navbar-bg-color app-navbar-text-color app-navbar-neon border-top small mt-4 py-3">
         <div class="row gw-md-4 text-muted">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">

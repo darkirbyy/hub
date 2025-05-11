@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 ///////////////////////////////////
 // Framework improvements /////////
 ///////////////////////////////////
@@ -31,33 +33,6 @@ legend.col-form-label.required::after {
 
 // bootstrap card and swiper //////
 
-.card {
-  width: 22rem;
-  height: 28rem;
-}
-
-.card-img {
-  overflow: hidden;
-}
-
-.card-img-top {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-.card-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  line-clamp: 5;
-  height: 5lh;
-}
-
 .btn-swiper {
   padding: 0;
   border: 0;
@@ -83,6 +58,39 @@ legend.col-form-label.required::after {
   align-content: center;
 }
 
+// Navbar /////////////////////////
+
+@mixin app-neon-large($border-color, $shadow-color) {
+  border-color: $border-color !important;
+  box-shadow:
+    0 0 0.2rem $border-color,
+    0 0 1rem $shadow-color,
+    0 0 2rem $shadow-color,
+    0 0 3rem $shadow-color;
+}
+
+@mixin app-neon-small($border-color, $shadow-color) {
+  border-color: $border-color !important;
+  box-shadow:
+    inset 0 0 1em 0.2rem $shadow-color,
+    0 0 1em 0.2rem $shadow-color;
+}
+
+.app-navbar-text-color {
+  background-color: var(--app-navbar-text-color);
+}
+
+.app-navbar-bg-color {
+  background-color: var(--app-navbar-bg-color);
+}
+
+.app-navbar-neon {
+  @include app-neon-large(
+    var(--app-navbar-border-color),
+    var(--app-navbar-bg-color)
+  );
+}
+
 // Home intro /////////////////////
 
 .app-home-havefun {
@@ -94,46 +102,83 @@ legend.col-form-label.required::after {
   border-image: linear-gradient(
       to right,
       transparent,
-      $linen-minus,
+      $navbar-light-color,
       transparent
     )
     1;
 }
 
 .app-home-neon {
-  border-color: $linen-minus !important;
-  box-shadow:
-    0 0 0.2rem $linen,
-    0 0 1rem $rosewood,
-    0 0 2rem $rosewood,
-    0 0 3rem $rosewood;
+  @include app-neon-large(
+    var(--app-navbar-border-color),
+    var(--app-navbar-bg-color)
+  );
 }
 
-@keyframes flicker {
-  // animation: flicker 8s infinite alternate;
-  0%,
-  19%,
-  21%,
-  54%,
-  56%,
-  100% {
+.app-home-card {
+  width: 22rem;
+  height: 28rem;
+  box-shadow: inset 0 0 1em 0.2rem rgba($grey, 0.1);
+  transition:
+    box-shadow 0.05s ease,
+    border-color 0.05s ease;
+
+  &:hover {
+    // transform: scale(1.05);
     box-shadow:
-      0 0 0.2rem $linen,
-      0 0 1rem $rosewood,
-      0 0 2rem $rosewood,
-      0 0 3rem $rosewood;
+      inset 0 0 1em 0.2rem var(--bs-secondary-border-subtle),
+      0 0 1em 0.2rem var(--bs-secondary-border-subtle);
+    border-color: var(--bs-secondary-border-subtle) !important;
   }
 
-  20%,
-  24%,
-  55% {
-    box-shadow:
-      0 0 0.2rem $linen,
-      0 0 0.8rem $rosewood,
-      0 0 1.8rem $rosewood,
-      0 0 2.8rem $rosewood;
+  .app-card-top-container {
+    overflow: hidden;
+  }
+
+  .app-card-top-img {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .app-card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    line-clamp: 5;
+    height: 5lh;
   }
 }
+
+// @keyframes flicker {
+//   // animation: flicker 8s infinite alternate;
+//   0%,
+//   19%,
+//   21%,
+//   54%,
+//   56%,
+//   100% {
+//     box-shadow:
+//       0 0 0.2rem $linen,
+//       0 0 1rem $rosewood,
+//       0 0 2rem $rosewood,
+//       0 0 3rem $rosewood;
+//   }
+
+//   20%,
+//   24%,
+//   55% {
+//     box-shadow:
+//       0 0 0.2rem $linen,
+//       0 0 0.8rem $rosewood,
+//       0 0 1.8rem $rosewood,
+//       0 0 2.8rem $rosewood;
+//   }
+// }
 
 // Effects ////////////////////////
 
@@ -244,36 +289,6 @@ legend.col-form-label.required::after {
 
 .app-btn-max-height {
   height: calc(3.5rem + calc(var(--bs-border-width) * 2));
-}
-
-// Light/Dark /////////////////////
-
-@include color-mode(light) {
-  .navbar-bg-color {
-    background-color: $navbar-light-bg-color;
-  }
-
-  .navbar-active-color {
-    color: $navbar-light-active-color !important;
-  }
-
-  .navbar-active-color .text-muted {
-    color: $navbar-light-muted-color !important;
-  }
-}
-
-@include color-mode(dark) {
-  .navbar-bg-color {
-    background-color: $navbar-dark-bg-color;
-  }
-
-  .navbar-active-color {
-    color: $navbar-dark-active-color !important;
-  }
-
-  .navbar-active-color .text-muted {
-    color: $navbar-dark-muted-color !important;
-  }
 }
 
 // Others /////////////////////////
