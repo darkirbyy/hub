@@ -42,3 +42,69 @@ $utilities: map.merge(
     --#{$key}: #{$value};
   }
 }
+
+// Mixins
+
+@mixin app-avatar-container($size) {
+  // max-height: $size * $font-size-base;
+  max-width: $size * $font-size-base;
+}
+
+@mixin app-neon-large($border-color, $shadow-color1, $shadow-color2, $shadow-intensity) {
+  border-color: $border-color !important;
+  box-shadow:
+    0 0 $shadow-intensity * 0.2rem $shadow-color1,
+    0 0 $shadow-intensity * 1rem $shadow-color2,
+    0 0 $shadow-intensity * 2rem $shadow-color2,
+    0 0 $shadow-intensity * 3rem $shadow-color2;
+}
+
+@mixin app-neon-small($border-width, $border-color, $shadow-color, $shadow-intensity) {
+  border-radius: 1rem;
+  border: $border-width solid transparent;
+  transition:
+    border-color 0.05s ease,
+    box-shadow 0.05s ease,
+    text-shadow 0.05s ease;
+
+  &:hover {
+    border-color: $border-color !important;
+    box-shadow:
+      inset 0 0 $shadow-intensity * 1em $shadow-color,
+      0 0 $shadow-intensity * 1em $shadow-color;
+    text-shadow: 0 0 $shadow-intensity * 0.5rem gray;
+  }
+
+  &:active,
+  &[aria-current='page'] {
+    text-shadow: 0 0 $shadow-intensity * 0.5rem $border-color;
+  }
+}
+
+// Animations
+
+// @keyframes flicker {
+//   // animation: flicker 8s infinite alternate;
+//   0%,
+//   19%,
+//   21%,
+//   54%,
+//   56%,
+//   100% {
+//     box-shadow:
+//       0 0 0.2rem $linen,
+//       0 0 1rem $rosewood,
+//       0 0 2rem $rosewood,
+//       0 0 3rem $rosewood;
+//   }
+
+//   20%,
+//   24%,
+//   55% {
+//     box-shadow:
+//       0 0 0.2rem $linen,
+//       0 0 0.8rem $rosewood,
+//       0 0 1.8rem $rosewood,
+//       0 0 2.8rem $rosewood;
+//   }
+// }

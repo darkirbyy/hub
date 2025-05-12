@@ -8,8 +8,7 @@
 
 // Fonts
 
-$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', arial,
-  sans-serif;
+$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', arial, sans-serif;
 $headings-font-family: 'Montserrat', sans-serif;
 $headings-font-weight: 700;
 
@@ -40,16 +39,19 @@ $dark: black;
 // Custom
 
 $app-colors: (
-  'app-navbar-text-color': $light,
+  'app-navbar-text-color': $night,
+  'app-navbar-muted-color': rgba($night, 0.5),
   'app-navbar-bg-color': $fire,
-  'app-navbar-border-color': $night,
+  'app-navbar-border-color': rgba($night, 0.7),
 );
 
 // Navbar
 
-$navbar-light-color: rgba($linen, 0.7);
-$navbar-light-hover-color: $light;
-$navbar-light-active-color: $light;
+$navbar-light-color: rgba($night, 0.7);
+$navbar-light-hover-color: $night;
+$navbar-light-active-color: $night;
+$navbar-light-brand-color: $navbar-light-color;
+$navbar-light-brand-hover-color: $navbar-light-hover-color;
 
 // Body
 
@@ -103,12 +105,13 @@ $secondary-border-subtle: $fire;
 // Other //////////////////////////
 ///////////////////////////////////
 
-// $enable-rounded:              false !default;
-
 // $component-active-bg: $feldgrau !default;
-// $border-width: 0 !default;
+
+$border-width: 2px !default;
+
 // $border-radius: 0.15rem !default;
 // $border-radius-sm: 0.05rem !default;
-// $text-muted: rgba($body-color, 0.3) !default;
+
+// $enable-rounded:              false !default;
 
 $progress-bar-transition: width 0.3s ease;

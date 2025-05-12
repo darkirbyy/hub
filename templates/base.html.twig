@@ -64,13 +64,13 @@
     {# The HEADER defines the navbar #}
     <header>
       {% set currentRoute = app.current_route %}
-      {% set activeLink = 'class="nav-link active" aria-current="page" aria-selected="true"' %}
-      {% set otherLink = 'class="nav-link"' %}
+      {% set activeLink = 'class="nav-link app-navbar-btn py-1 active" aria-current="page" aria-selected="true"' %}
+      {% set otherLink = 'class="nav-link app-navbar-btn py-1"' %}
       <nav class="navbar navbar-expand app-navbar-bg-color {{ currentRoute starts with 'home' ? '' : 'border-bottom app-navbar-neon' }}"
         aria-label="{{ 'aria.mainNavigation'|trans }}">
         <div class="container-fluid">
           {# Left part of the navbar #}
-          <ul class="navbar-nav me-auto align-items-center">
+          <ul class="navbar-nav me-auto align-items-center gap-1">
             <li class="nav-item fs-5">
               <a {{ currentRoute starts with 'home' ? activeLink|raw : otherLink|raw }} href="{{ path('home_index') }}">
                 <span class="fa-solid fa-house me-2" aria-hidden="true"></span>{{ 'layout.navbar.home'|trans }}
@@ -100,7 +100,7 @@
               </li>
             {% endif %}
             <li class="nav-item">
-              <button data-bs-toggle="modal" data-bs-target="#theme-modal" class="nav-link" aria-label="{{ 'aria.switchTheme'|trans }}">
+              <button data-bs-toggle="modal" data-bs-target="#theme-modal" class="nav-link app-navbar-btn py-1" aria-label="{{ 'aria.switchTheme'|trans }}">
                 <span class="bi bi-palette-fill" aria-hidden="true"></span>
               </button>
             </li>
@@ -135,7 +135,7 @@
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
       <div class="container-fluid fw-light app-navbar-bg-color app-navbar-text-color app-navbar-neon border-top small mt-4 py-3">
-        <div class="row gw-md-4 text-muted">
+        <div class="row gw-md-4 app-navbar-muted-color">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">
             {{ 'layout.footer.madeWith'|trans }}

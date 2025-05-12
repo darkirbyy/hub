@@ -9,16 +9,19 @@
 /// Custom
 
 $app-colors-dark: (
-  'app-navbar-text-color': $light,
+  'app-navbar-text-color': $linen,
+  'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $rosewood,
   'app-navbar-border-color': rgba($linen, 0.7),
 );
 
 // Navbar
 
-$navbar-light-color: rgba($linen, 0.7);
-$navbar-light-hover-color: $light;
-$navbar-light-active-color: $light;
+$navbar-dark-color: rgba($linen, 0.7);
+$navbar-dark-hover-color: $linen;
+$navbar-dark-active-color: $linen;
+$navbar-dark-brand-color: $navbar-dark-color;
+$navbar-dark-brand-hover-color: $navbar-dark-hover-color;
 
 // Body
 

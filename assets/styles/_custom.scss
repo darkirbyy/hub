@@ -60,24 +60,12 @@ legend.col-form-label.required::after {
 
 // Navbar /////////////////////////
 
-@mixin app-neon-large($border-color, $shadow-color) {
-  border-color: $border-color !important;
-  box-shadow:
-    0 0 0.2rem $border-color,
-    0 0 1rem $shadow-color,
-    0 0 2rem $shadow-color,
-    0 0 3rem $shadow-color;
-}
-
-@mixin app-neon-small($border-color, $shadow-color) {
-  border-color: $border-color !important;
-  box-shadow:
-    inset 0 0 1em 0.2rem $shadow-color,
-    0 0 1em 0.2rem $shadow-color;
-}
-
 .app-navbar-text-color {
-  background-color: var(--app-navbar-text-color);
+  color: var(--app-navbar-text-color) !important;
+}
+
+.app-navbar-muted-color {
+  color: var(--app-navbar-muted-color) !important;
 }
 
 .app-navbar-bg-color {
@@ -85,10 +73,11 @@ legend.col-form-label.required::after {
 }
 
 .app-navbar-neon {
-  @include app-neon-large(
-    var(--app-navbar-border-color),
-    var(--app-navbar-bg-color)
-  );
+  @include app-neon-large(transparent, var(--app-navbar-border-color), var(--app-navbar-bg-color), 1);
+}
+
+.app-navbar-btn {
+  @include app-neon-small(var(--bs-border-width), var(--app-navbar-text-color), var(--app-navbar-text-color), 0.2);
 }
 
 // Home intro /////////////////////
@@ -99,19 +88,15 @@ legend.col-form-label.required::after {
 
 .app-home-gradient {
   border-bottom: var(--bs-border-width) solid;
-  border-image: linear-gradient(
-      to right,
-      transparent,
-      $navbar-light-color,
-      transparent
-    )
-    1;
+  border-image: linear-gradient(to right, transparent, var(--app-navbar-border-color), transparent) 1;
 }
 
 .app-home-neon {
   @include app-neon-large(
     var(--app-navbar-border-color),
-    var(--app-navbar-bg-color)
+    var(--app-navbar-border-color),
+    var(--app-navbar-bg-color),
+    1
   );
 }
 
@@ -154,48 +139,7 @@ legend.col-form-label.required::after {
   }
 }
 
-// @keyframes flicker {
-//   // animation: flicker 8s infinite alternate;
-//   0%,
-//   19%,
-//   21%,
-//   54%,
-//   56%,
-//   100% {
-//     box-shadow:
-//       0 0 0.2rem $linen,
-//       0 0 1rem $rosewood,
-//       0 0 2rem $rosewood,
-//       0 0 3rem $rosewood;
-//   }
-
-//   20%,
-//   24%,
-//   55% {
-//     box-shadow:
-//       0 0 0.2rem $linen,
-//       0 0 0.8rem $rosewood,
-//       0 0 1.8rem $rosewood,
-//       0 0 2.8rem $rosewood;
-//   }
-// }
-
-// Effects ////////////////////////
-
-.app-border-neon {
-  border-color: transparent !important;
-  box-shadow:
-    0 0 0.2rem $linen,
-    0 0 1rem $rosewood,
-    0 0 2rem $rosewood;
-}
-
 // Avatars ////////////////////////
-
-@mixin app-avatar-container($size) {
-  // max-height: $size * $font-size-base;
-  max-width: $size * $font-size-base;
-}
 
 .app-avatar-container-xs {
   @include app-avatar-container(1.5);
@@ -294,12 +238,6 @@ legend.col-form-label.required::after {
 // Others /////////////////////////
 
 .app-env-dev {
-  background: repeating-linear-gradient(
-    45deg,
-    #e7b871,
-    #e7b871 10px,
-    #ce994b 10px,
-    #ce994b 20px
-  );
+  background: repeating-linear-gradient(45deg, #e7b871, #e7b871 10px, #ce994b 10px, #ce994b 20px);
   color: #704300;
 }
