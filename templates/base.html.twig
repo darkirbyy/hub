@@ -76,14 +76,14 @@
                 <span class="fa-solid fa-house me-2" aria-hidden="true"></span>{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
+          </ul>
+          {# Right part of the navbar : connect or go to your account page #}
+          <ul class="navbar-nav align-items-center gap-1">
             {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
               </li>
             {% endif %}
-          </ul>
-          {# Right part of the navbar : connect or go to your account page #}
-          <ul class="navbar-nav align-items-center">
             {% if is_granted('ROLE_USER') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
@@ -134,7 +134,7 @@
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
-      <div class="container-fluid fw-light app-navbar-bg-color app-navbar-text-color app-navbar-neon border-top small mt-4 py-3">
+      <div class="container-fluid fw-light app-navbar-bg-color app-navbar-text-color app-navbar-neon border-top small mt-5 py-3">
         <div class="row gw-md-4 app-navbar-muted-color">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">

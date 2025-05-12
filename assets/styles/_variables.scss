@@ -14,8 +14,8 @@ $headings-font-weight: 700;
 
 // Color system
 
-$fire: #cb2a2f;
-$rosewood: #651518;
+$carmine: #9b1b1f;
+$rosewood: #650406;
 $caramel: #c08552;
 $linen: #f3e6dc;
 $night: #121417;
@@ -39,17 +39,17 @@ $dark: black;
 // Custom
 
 $app-colors: (
-  'app-navbar-text-color': $night,
-  'app-navbar-muted-color': rgba($night, 0.5),
-  'app-navbar-bg-color': $fire,
-  'app-navbar-border-color': rgba($night, 0.7),
+  'app-navbar-text-color': $linen,
+  'app-navbar-muted-color': rgba($linen, 0.5),
+  'app-navbar-bg-color': $carmine,
+  'app-navbar-border-color': rgba($linen, 0.7),
 );
 
 // Navbar
 
-$navbar-light-color: rgba($night, 0.7);
-$navbar-light-hover-color: $night;
-$navbar-light-active-color: $night;
+$navbar-light-color: rgba($linen, 0.7);
+$navbar-light-hover-color: $linen;
+$navbar-light-active-color: $linen;
 $navbar-light-brand-color: $navbar-light-color;
 $navbar-light-brand-hover-color: $navbar-light-hover-color;
 
@@ -73,7 +73,7 @@ $body-emphasis-color: purple;
 $primary-bg-subtle: color.adjust($linen, $lightness: -3%);
 $primary-border-subtle: rgba($grey, 0.3);
 $secondary-bg-subtle: color.adjust($linen, $lightness: -8%);
-$secondary-border-subtle: $fire;
+$secondary-border-subtle: $carmine;
 
 // // Links
 // $link-color: darken($rosewood, 5%);
@@ -115,3 +115,5 @@ $border-width: 2px !default;
 // $enable-rounded:              false !default;
 
 $progress-bar-transition: width 0.3s ease;
+$modal-transition: transform 0.15s ease-out;
+$modal-fade-transform: translate(0, -50px);
