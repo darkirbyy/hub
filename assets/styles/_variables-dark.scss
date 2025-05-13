@@ -13,6 +13,9 @@ $app-colors-dark: (
   'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $rosewood,
   'app-navbar-border-color': rgba($linen, 0.7),
+  'app-avatar-icon-color': $greyl,
+  'app-home-card-shadow-color': rgba($greym, 0.1),
+  'app-home-card-hover-color': $rosewood,
 );
 
 // Body
@@ -22,28 +25,25 @@ $body-bg-dark: $night;
 $body-secondary-color-dark: rgba($linen, 0.7);
 $body-secondary-bg-dark: rgba($night, 0.7);
 $body-tertiary-color-dark: orange;
-$body-tertiary-bg-dark: cyan;
-$body-emphasis-color-dark: purple;
+$body-tertiary-bg-dark: color.adjust($greyd, $lightness: -10%);
+
+// $body-emphasis-color-dark: purple;
+
+// Subtle
+
+$primary-bg-subtle-dark: color.adjust($night, $lightness: 3%);
+$secondary-bg-subtle-dark: color.adjust($night, $lightness: 8%);
 
 // Border
 
-// $border-color-dark: rgba($linen, 0.7);
+$border-color-dark: rgba($greyd, 1);
+
 // $border-color-translucent: rgba($linen, 0.7);
 
-// Cards
+// Links
 
-$primary-bg-subtle-dark: color.adjust($night, $lightness: 3%);
-$primary-border-subtle-dark: rgba($grey, 0.3);
-$secondary-bg-subtle-dark: color.adjust($night, $lightness: 8%);
-$secondary-border-subtle-dark: $rosewood;
-
-// // Couleurs des liens
-// $link-color: lighten($rosewood, 15%);
-// $link-hover-color: lighten($rosewood, 25%);
-
-// // Ombres
-// $box-shadow: 0 0.5rem 1rem rgba(darken($rosewood, 10%), 0.35);
-// $box-shadow-lg: 0 1rem 3rem rgba(darken($rosewood, 10%), 0.45);
+$link-color-dark: color.adjust($linen, $lightness: -15%, $saturation: -20%);
+$link-hover-color-dark: $linen;
 
 // // Boutons
 // $btn-font-weight: 600;

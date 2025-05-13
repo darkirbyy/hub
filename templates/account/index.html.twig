@@ -38,16 +38,14 @@
         </h2>
 
         {# The profile "card" as a flex with two parts #}
-        <div class="border rounded p-3 bg-primary-subtle border-primary-subtle">
+        <div class="border rounded p-3 bg-primary-subtle">
           <div class="d-flex flex-column justify-content-start align-items-center gap-4 flex-md-row">
             {# Part one : the avatar, with a link to open the modal to change it #}
             <div class="px-2">
               <a href="#" class="app-avatar-link" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
                 <div class="app-avatar-container-lg position-relative">
                   <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img bg-secondary-subtle" alt="" />
-                  <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 text-white fs-3">
-                    <span class="bi bi-pencil-fill" aria-hidden="true"></span>
-                  </span>
+                  <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 fs-1"><span class="bi bi-pencil-fill" aria-hidden="true"></span></span>
                 </div>
               </a>
             </div>
@@ -64,7 +62,7 @@
               </p>
               {# Links to change the password and delete the account #}
               <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">
-                <a class="icon-link icon-link-hover link-secondary" href="{{ path('account_password') }}" data-turbo-prefetch="false">
+                <a class="icon-link icon-link-hover" href="{{ path('account_password') }}" data-turbo-prefetch="false">
                   {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
                 </a>
 

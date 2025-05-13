@@ -76,20 +76,19 @@
                 <span class="fa-solid fa-house me-2" aria-hidden="true"></span>{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
-          </ul>
-          {# Right part of the navbar : connect or go to your account page #}
-          <ul class="navbar-nav align-items-center gap-1">
             {% if is_granted('ROLE_ADMIN') %}
-              <li class="nav-item">
+              <li class="nav-item fs-5">
                 <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
               </li>
             {% endif %}
+          </ul>
+          {# Right part of the navbar : connect or go to your account page #}
+          <ul class="navbar-nav align-items-center gap-1">
             {% if is_granted('ROLE_USER') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   {{ app.user.username }}
                   <div class="app-avatar-container-xs d-inline-block ms-1">
-                    {# TODO : fond de l'avatar quand absent dans navbar #}
                     <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
                   </div>
                 </a>

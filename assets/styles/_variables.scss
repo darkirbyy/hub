@@ -20,17 +20,22 @@ $caramel: #c08552;
 $linen: #f3e6dc;
 $night: #121417;
 $light: white;
-$grey: #5a5a5a;
+$greyl: #a0a0a0;
+$greym: #646464;
+$greyd: #3d3d3d;
 $dark: black;
 
 // $primary: $rosewood;
-// $secondary: $caramel;
+
+$secondary: $greym;
+
 // $success: #09d199;
 // $info: #6a8caf;
 // $warning: #ff5b44;
 // $danger: #e2293f;
-// $light: white;
-// $dark: black;
+
+$light: white;
+$dark: black;
 
 ///////////////////////////////////
 // Variables Light ////////////////
@@ -43,15 +48,10 @@ $app-colors: (
   'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $carmine,
   'app-navbar-border-color': rgba($linen, 0.7),
+  'app-avatar-icon-color': $greyd,
+  'app-home-card-shadow-color': rgba($greym, 0.1),
+  'app-home-card-hover-color': $carmine,
 );
-
-// Navbar
-
-$navbar-light-color: rgba($linen, 0.7);
-$navbar-light-hover-color: $linen;
-$navbar-light-active-color: $linen;
-$navbar-light-brand-color: $navbar-light-color;
-$navbar-light-brand-hover-color: $navbar-light-hover-color;
 
 // Body
 
@@ -60,24 +60,24 @@ $body-bg: $linen;
 $body-secondary-color: rgba($night, 0.7);
 $body-secondary-bg: rgba($linen, 0.7);
 $body-tertiary-color: orange;
-$body-tertiary-bg: cyan;
+$body-tertiary-bg: color.adjust($greyl, $lightness: +10%);
 $body-emphasis-color: purple;
+
+// Subtle
+
+$primary-bg-subtle: color.adjust($linen, $lightness: -3%);
+$secondary-bg-subtle: color.adjust($linen, $lightness: -10%, $saturation: -20%);
 
 // Border
 
-// $border-color: rgba($night, 0.7);
+$border-color: rgba($greyl, 1);
+
 // $border-color-translucent: rgba($night, 0.7);
 
-// Cards
-
-$primary-bg-subtle: color.adjust($linen, $lightness: -3%);
-$primary-border-subtle: rgba($grey, 0.3);
-$secondary-bg-subtle: color.adjust($linen, $lightness: -8%);
-$secondary-border-subtle: $carmine;
-
 // // Links
-// $link-color: darken($rosewood, 5%);
-// $link-hover-color: lighten($rosewood, 10%);
+
+$link-color: color.adjust($night, $lightness: +15%);
+$link-hover-color: $night;
 
 // // Shadows
 // $box-shadow: 0 0.5rem 1rem rgba($rosewood, 0.15);
@@ -106,14 +106,15 @@ $secondary-border-subtle: $carmine;
 ///////////////////////////////////
 
 // $component-active-bg: $feldgrau !default;
-
-$border-width: 2px !default;
-
-// $border-radius: 0.15rem !default;
-// $border-radius-sm: 0.05rem !default;
-
 // $enable-rounded:              false !default;
 
+$navbar-light-color: rgba($linen, 0.7);
+$navbar-light-hover-color: $linen;
+$navbar-light-active-color: $linen;
+$navbar-light-brand-color: $navbar-light-color;
+$navbar-light-brand-hover-color: $navbar-light-hover-color;
+$border-width: 2px !default;
+$border-radius: 1rem !default;
 $progress-bar-transition: width 0.3s ease;
 $modal-transition: transform 0.15s ease-out;
 $modal-fade-transform: translate(0, -50px);
