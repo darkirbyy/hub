@@ -9,13 +9,16 @@
 /// Custom
 
 $app-colors-dark: (
+  'app-avatar-icon-color': $greyl,
+  'app-img-bg-color': color.adjust($night, $lightness: 8%),
   'app-navbar-text-color': $linen,
   'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $rosewood,
   'app-navbar-border-color': rgba($linen, 0.7),
-  'app-avatar-icon-color': $greyl,
   'app-home-card-shadow-color': rgba($greym, 0.1),
   'app-home-card-hover-color': $rosewood,
+  'app-home-card-bg-color': color.adjust($night, $lightness: 3%),
+  'app-account-card-bg-color': color.adjust($night, $lightness: 3%),
 );
 
 // Body
@@ -24,21 +27,15 @@ $body-color-dark: $linen;
 $body-bg-dark: $night;
 $body-secondary-color-dark: rgba($linen, 0.7);
 $body-secondary-bg-dark: rgba($night, 0.7);
-$body-tertiary-color-dark: orange;
+$body-tertiary-color-dark: cyan;
 $body-tertiary-bg-dark: color.adjust($greyd, $lightness: -10%);
-
-// $body-emphasis-color-dark: purple;
-
-// Subtle
-
-$primary-bg-subtle-dark: color.adjust($night, $lightness: 3%);
-$secondary-bg-subtle-dark: color.adjust($night, $lightness: 8%);
+$body-emphasis-color-dark: purple;
 
 // Border
 
-$border-color-dark: rgba($greyd, 1);
-
-// $border-color-translucent: rgba($linen, 0.7);
+$border-color-dark: rgba($greyd, 0.7);
+$secondary-border-subtle-dark: rgba($greyd, 0.7);
+$secondary-bg-subtle-dark: rgba($greyd, 0.3);
 
 // Links
 

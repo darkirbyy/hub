@@ -47,12 +47,10 @@
                 {# For each appli, calculate the full url and use a card to display it #}
                 {% for appli in category.applis %}
                   {% set appli_url = server_base_url ~ appli.path %}
-                  <div class="card app-home-card swiper-slide border-2 bg-primary-subtle">
+                  <div class="card swiper-slide app-home-card">
                     {# Card top with a clickable image #}
-                    <a href="{{ appli_url }}"
-                      class="app-card-top-container border-bottom border-2 rounded-bottom-0 d-flex align-items-center bg-secondary-subtle"
-                      data-turbo="false">
-                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-card-top-img" alt="{{ appli.title }}" />
+                    <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center app-home-card-header app-img-bg-color" data-turbo="false">
+                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-home-card-img" alt="{{ appli.title }}" />
                     </a>
                     {# Card body in three vertical flex parts: appli title, description and buttons #}
                     <div class="card-body d-flex flex-column justify-content-between">
@@ -61,7 +59,7 @@
                         {{ appli.title }}
                       </h5>
                       {# Appli description #}
-                      <p class="app-card-text flex-grow-1">
+                      <p class="app-home-card-text flex-grow-1">
                         {{ appli.description }}
                       </p>
                       {# Appli buttons as two parts: main button and external links #}

@@ -44,13 +44,16 @@ $dark: black;
 // Custom
 
 $app-colors: (
+  'app-avatar-icon-color': $greyd,
+  'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
   'app-navbar-text-color': $linen,
   'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $carmine,
   'app-navbar-border-color': rgba($linen, 0.7),
-  'app-avatar-icon-color': $greyd,
   'app-home-card-shadow-color': rgba($greym, 0.1),
   'app-home-card-hover-color': $carmine,
+  'app-home-card-bg-color': color.adjust($linen, $lightness: -3%),
+  'app-account-card-bg-color': color.adjust($linen, $lightness: -3%),
 );
 
 // Body
@@ -63,18 +66,15 @@ $body-tertiary-color: orange;
 $body-tertiary-bg: color.adjust($greyl, $lightness: +10%);
 $body-emphasis-color: purple;
 
-// Subtle
-
-$primary-bg-subtle: color.adjust($linen, $lightness: -3%);
-$secondary-bg-subtle: color.adjust($linen, $lightness: -10%, $saturation: -20%);
-
 // Border
 
-$border-color: rgba($greyl, 1);
+$border-color: rgba($greyl, 0.7);
+$secondary-border-subtle: rgba($greyl, 0.7);
+$secondary-bg-subtle: rgba($greyl, 0.5);
 
-// $border-color-translucent: rgba($night, 0.7);
+// $secondary-bg-subtle: transparent;
 
-// // Links
+// Links
 
 $link-color: color.adjust($night, $lightness: +15%);
 $link-hover-color: $night;
@@ -118,3 +118,4 @@ $border-radius: 1rem !default;
 $progress-bar-transition: width 0.3s ease;
 $modal-transition: transform 0.15s ease-out;
 $modal-fade-transform: translate(0, -50px);
+$modal-content-border-color: $greym;

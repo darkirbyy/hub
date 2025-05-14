@@ -53,99 +53,11 @@ legend.col-form-label.required::after {
 // App-specific classes ///////////
 ///////////////////////////////////
 
-// Switch theme ///////////////////
+// Switch modale ///////////////////
 
 .app-switch-theme-radio {
   min-height: 4rem;
   align-content: center;
-}
-
-// Navbar /////////////////////////
-
-.app-navbar-text-color {
-  color: var(--app-navbar-text-color) !important;
-}
-
-.app-navbar-muted-color {
-  color: var(--app-navbar-muted-color) !important;
-}
-
-.app-navbar-bg-color {
-  background-color: var(--app-navbar-bg-color);
-}
-
-.app-navbar-neon {
-  @include app-neon-large(transparent, var(--app-navbar-border-color), var(--app-navbar-bg-color), 1);
-}
-
-.app-navbar-btn {
-  @include app-neon-small(2px, var(--app-navbar-text-color), var(--app-navbar-text-color), 0.2);
-
-  border-radius: var(--bs-border-radius);
-}
-
-// Home intro /////////////////////
-
-.app-home-havefun {
-  transform: translateY(50%);
-}
-
-.app-home-havefun span {
-  @include app-neon-large(
-    var(--app-navbar-border-color),
-    var(--app-navbar-border-color),
-    var(--app-navbar-bg-color),
-    1
-  );
-
-  border-radius: var(--bs-border-radius);
-  border-radius: calc(2 * var(--bs-border-radius));
-}
-
-.app-home-gradient {
-  @include app-neon-large(transparent, var(--app-navbar-border-color), var(--app-navbar-bg-color), 1);
-
-  border-bottom: 3px solid;
-  border-image: linear-gradient(to right, transparent, var(--app-navbar-border-color), transparent) 1;
-}
-
-.app-home-card {
-  width: 22rem;
-  height: 28rem;
-  box-shadow: inset 0 0 1em 0.2rem var(--app-home-card-shadow-color);
-  transition:
-    box-shadow 0.05s ease,
-    border-color 0.05s ease;
-
-  &:hover {
-    // transform: scale(1.05);
-    box-shadow:
-      inset 0 0 1em 0.2rem var(--app-home-card-hover-color),
-      0 0 1em 0.2rem var(--app-home-card-hover-color);
-    border-color: var(--app-home-card-hover-color) !important;
-  }
-
-  .app-card-top-container {
-    overflow: hidden;
-  }
-
-  .app-card-top-img {
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-
-  .app-card-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    line-clamp: 5;
-    height: 5lh;
-  }
 }
 
 // Avatars ////////////////////////
@@ -199,6 +111,124 @@ legend.col-form-label.required::after {
       opacity: 1 !important;
     }
   }
+}
+
+// Images /////////////////////////
+
+.app-img-bg-color {
+  background-color: var(--app-img-bg-color);
+}
+
+// Navbar /////////////////////////
+
+.app-navbar-text-color {
+  color: var(--app-navbar-text-color) !important;
+}
+
+.app-navbar-muted-color {
+  color: var(--app-navbar-muted-color) !important;
+}
+
+.app-navbar-bg-color {
+  background-color: var(--app-navbar-bg-color);
+}
+
+.app-navbar-neon {
+  @include app-neon-line(transparent, var(--app-navbar-border-color), var(--app-navbar-bg-color), 1);
+}
+
+.app-navbar-btn {
+  transition: all 0s ease;
+  border: 2px solid transparent;
+  border-radius: var(--bs-border-radius);
+
+  &:hover {
+    border-color: var(--app-navbar-text-color);
+    box-shadow:
+      inset 0 0 0.2rem var(--app-navbar-text-color),
+      0 0 0.2rem var(--app-navbar-text-color);
+    text-shadow: 0 0 0.1rem var(--app-navbar-text-color);
+    animation: border-flicker alternate 3s;
+  }
+
+  &:active,
+  &[aria-current='page'] {
+    border-color: var(--app-navbar-text-color);
+    box-shadow:
+      inset 0 0 0.2rem var(--app-navbar-text-color),
+      0 0 0.2rem var(--app-navbar-text-color);
+    text-shadow: 0 0 0.1rem var(--app-navbar-text-color);
+    animation: none;
+  }
+}
+
+// Home ///////////////////////////////
+
+.app-home-havefun {
+  transform: translateY(50%);
+}
+
+.app-home-havefun span {
+  @include app-neon-line(var(--app-navbar-border-color), var(--app-navbar-border-color), var(--app-navbar-bg-color), 1);
+
+  border-radius: var(--bs-border-radius);
+  border-radius: calc(2 * var(--bs-border-radius));
+}
+
+.app-home-gradient {
+  @include app-neon-line(transparent, var(--app-navbar-border-color), var(--app-navbar-bg-color), 1);
+
+  border-bottom: 3px solid;
+  border-image: linear-gradient(to right, transparent, var(--app-navbar-border-color), transparent) 1;
+}
+
+.app-home-card {
+  width: 22rem;
+  height: 28rem;
+  border-radius: var(--bs-border-radius);
+  background-color: var(--app-home-card-bg-color);
+  box-shadow: inset 0 0 1em 0.2rem var(--app-home-card-shadow-color);
+
+  .app-home-card-header {
+    border-radius: var(--bs-border-radius) var(--bs-border-radius) 0 0;
+    overflow: hidden;
+  }
+
+  .app-home-card-img {
+    border-radius: 0;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .app-home-card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    line-clamp: 5;
+    height: 5lh;
+  }
+
+  &:hover {
+    border-color: var(--app-home-card-hover-color);
+    box-shadow: 0 0 1.25rem var(--app-home-card-hover-color);
+
+    .app-home-card-header {
+      border-color: var(--app-home-card-hover-color) !important;
+
+      // box-shadow: 0 0 1.25rem var(--app-home-card-hover-color);
+    }
+  }
+}
+
+// Account ////////////////////////
+
+.app-account-card {
+  background-color: var(--app-account-card-bg-color);
 }
 
 // Form rows //////////////////////
