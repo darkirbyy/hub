@@ -27,7 +27,7 @@
         {{ form_row(form.rememberMe, loginType == 'forced' ? { row_attr: { class: 'd-none' } } : { }) }}
 
         <div class="text-start">
-          <button type="submit" class="btn btn-primary">{{ ('account.button.login.' ~ (loginType|default('normal')))|trans }}</button>
+          <button type="submit" class="btn btn-outline-primary">{{ ('account.button.login.' ~ (loginType|default('normal')))|trans }}</button>
         </div>
         {{ form_end(form) }}
       </div>

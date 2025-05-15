@@ -10,7 +10,7 @@
 
   {# Button to submit with `btn_class` to customize #}
   <div class="text-start">
-    <button type="submit" class="btn btn-primary {{ btn_class|default('') }}">{{ 'form.button.save'|trans }}</button>
+    <button type="submit" class="btn btn-outline-primary {{ btn_class|default('') }}">{{ 'form.button.save'|trans }}</button>
   </div>
   {{ form_end(form) }}
 {% endblock %}

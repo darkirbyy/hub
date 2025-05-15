@@ -4,7 +4,7 @@
   {{ form_start(form, { action: path('account_avatar'), attr: { 'data-form-redirect-action-value': 'replace' } }) }}
   {{ form_row(form.imageFile) }}
   <div class="text-start">
-    <button type="submit" class="btn btn-primary">{{ 'form.button.confirm'|trans }}</button>
+    <button type="submit" class="btn btn-outline-primary">{{ 'form.button.confirm'|trans }}</button>
   </div>
   {{ form_end(form) }}
 </turbo-frame>

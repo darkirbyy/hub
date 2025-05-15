@@ -44,7 +44,18 @@ $dark: black;
 // Custom
 
 $app-colors: (
+  'app-btn-primary-text-color': $linen,
+  'app-btn-primary-bg-color': rgba($carmine, 0.8),
+  'app-btn-primary-bg-color-hover': rgba($carmine, 1),
+  'app-btn-primary-border-color': rgba($carmine, 1),
+  'app-btn-primary-border-color-hover': rgba($carmine, 1),
+  'app-btn-secondary-text-color': color.adjust($greym, $lightness: -10%),
+  'app-btn-secondary-bg-color': rgba($greym, 0.1),
+  'app-btn-secondary-bg-color-hover': rgba($greym, 0.5),
+  'app-btn-secondary-border-color': rgba($greyl, 0.7),
+  'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +10%),
   'app-avatar-icon-color': $greyd,
+  'app-avatar-shadow-color': rgba($greyd, 0.5),
   'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
   'app-navbar-text-color': $linen,
   'app-navbar-muted-color': rgba($linen, 0.5),
@@ -54,6 +65,7 @@ $app-colors: (
   'app-home-card-hover-color': $carmine,
   'app-home-card-bg-color': color.adjust($linen, $lightness: -3%),
   'app-account-card-bg-color': color.adjust($linen, $lightness: -3%),
+  'app-admin-list-bg-color-hover': rgba($greyl, 0.3),
 );
 
 // Body
@@ -64,7 +76,6 @@ $body-secondary-color: rgba($night, 0.7);
 $body-secondary-bg: rgba($linen, 0.7);
 $body-tertiary-color: orange;
 $body-tertiary-bg: color.adjust($greyl, $lightness: +10%);
-$body-emphasis-color: purple;
 
 // Border
 
@@ -72,16 +83,10 @@ $border-color: rgba($greyl, 0.7);
 $secondary-border-subtle: rgba($greyl, 0.7);
 $secondary-bg-subtle: rgba($greyl, 0.5);
 
-// $secondary-bg-subtle: transparent;
-
 // Links
 
-$link-color: color.adjust($night, $lightness: +15%);
-$link-hover-color: $night;
-
-// // Shadows
-// $box-shadow: 0 0.5rem 1rem rgba($rosewood, 0.15);
-// $box-shadow-lg: 0 1rem 3rem rgba($rosewood, 0.175);
+$link-color: $night;
+$link-hover-color: color.adjust($night, $lightness: +20%);
 
 // // Buttons
 // $btn-font-weight: 600;
