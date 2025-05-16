@@ -48,7 +48,7 @@ class UserController extends CrudController
                 2 => [
                     'getter' => 'self',
                     'label' => 'imageFile',
-                    'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-xs app-img-bg-color")|raw',
+                    'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-img-fluid app-avatar-img app-avatar-container-xs")|raw',
                 ],
                 3 => ['getter' => 'metaRole'],
                 4 => ['getter' => 'dateLastCo', 'breakpoint' => 'md', 'filters' => 'format_datetime("short", "short")'],
@@ -83,7 +83,7 @@ class UserController extends CrudController
                 8 => [
                     'getter' => 'self',
                     'label' => 'imageFile',
-                    'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-avatar-img app-avatar-container-lg app-img-bg-color")|raw',
+                    'filters' => 'get_image_path("default-avatar.png")|fmt_image_path("app-img-fluid app-avatar-img app-avatar-container-lg")|raw',
                 ],
                 9 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
             ],

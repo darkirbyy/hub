@@ -49,8 +49,8 @@
                   {% set appli_url = server_base_url ~ appli.path %}
                   <div class="card swiper-slide app-home-card">
                     {# Card top with a clickable image #}
-                    <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center app-home-card-header app-img-bg-color" data-turbo="false">
-                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-home-card-img" alt="{{ appli.title }}" />
+                    <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center app-home-card-header" data-turbo="false">
+                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-img-fluid app-home-card-img" alt="{{ appli.title }}" />
                     </a>
                     {# Card body in three vertical flex parts: appli title, description and buttons #}
                     <div class="card-body d-flex flex-column justify-content-between">

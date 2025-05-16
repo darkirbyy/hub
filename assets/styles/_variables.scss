@@ -26,14 +26,12 @@ $greyd: #3d3d3d;
 $dark: black;
 $primary: purple;
 $secondary: cyan;
-
-// $success: #09d199;
-// $info: #6a8caf;
-// $warning: #ff5b44;
-// $danger: #e2293f;
-
+$info: #2d82b7;
+$success: #659b5e;
+$warning: #ff6f59;
+$danger: #c71826;
 $light: white;
-$dark: black;
+$dark: rgb(73 64 64);
 
 ///////////////////////////////////
 // Variables Light ////////////////
@@ -54,6 +52,13 @@ $app-colors: (
   'app-btn-secondary-bg-color-active': rgba($greym, 0.5),
   'app-btn-secondary-border-color': color.adjust($greym, $lightness: 0%),
   'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: 0%),
+  'app-btn-danger-text-color': #aa3131,
+  'app-btn-danger-text-color-active': color.adjust($greym, $lightness: -20%),
+  'app-btn-danger-bg-color': rgba($greym, 0.1),
+  'app-btn-danger-bg-color-hover': rgba($greym, 0.3),
+  'app-btn-danger-bg-color-active': rgba($greym, 0.5),
+  'app-btn-danger-border-color': $carmine,
+  'app-btn-danger-border-color-hover': color.adjust($greym, $lightness: 0%),
   'app-avatar-icon-color': $greyd,
   'app-avatar-shadow-color': rgba($greyd, 0.5),
   'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),

@@ -78,7 +78,7 @@
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img class="{{ row_attr.image_class|default('img-fluid') }}"
+          <img class="{{ row_attr.image_class|default('app-img-fluid') }}"
             src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
             alt="{{ 'form.button.download'|trans }}" />
         </a>
@@ -105,7 +105,7 @@
   {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
   {% set attr = attr|merge(custom_attr) %}
   {{- parent() -}}
-  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add">
+  <button class="btn btn-outline-secondary" type="button" data-collec-field-target="add">
     <span class="bi bi-plus-square me-1" aria-hidden="true"></span>{{ 'form.button.new'|trans }}
   </button>
 {% endblock %}

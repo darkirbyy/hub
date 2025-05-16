@@ -53,8 +53,8 @@ $secondary-bg-subtle-dark: rgba($greyd, 0.4);
 
 // Links
 
-$link-color-dark: $linen;
-$link-hover-color-dark: color.adjust($linen, $lightness: +20%);
+$link-color-dark: color.adjust($linen, $lightness: -15%, $saturation: -10%);
+$link-hover-color-dark: color.adjust($linen, $lightness: +10%);
 
 // // Boutons
 // $btn-font-weight: 600;

@@ -12,8 +12,8 @@
 {% block flash %}
   <div aria-live="polite">
     {% for flash in app.flashes('info') %}
-      <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <div class="bi bi-info-square-fill">
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <div class="bi bi-info-square">
           {{ _self.trans_flash(flash) }}
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
@@ -21,7 +21,7 @@
     {% endfor %}
     {% for flash in app.flashes('success') %}
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <div class="bi bi-check-circle-fill">
+        <div class="bi bi-check-circle">
           {{ _self.trans_flash(flash) }}
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
@@ -29,7 +29,7 @@
     {% endfor %}
     {% for flash in app.flashes('warning') %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <div class="bi bi-exclamation-triangle-fill">
+        <div class="bi bi-exclamation-triangle">
           {{ _self.trans_flash(flash) }}
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
@@ -37,7 +37,7 @@
     {% endfor %}
     {% for flash in app.flashes('danger') %}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <div class="bi bi-x-square-fill">
+        <div class="bi bi-x-square">
           {{ _self.trans_flash(flash) }}
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'form.button.close'|trans }}"></button>
