@@ -24,10 +24,8 @@ $greyl: #a0a0a0;
 $greym: #646464;
 $greyd: #3d3d3d;
 $dark: black;
-
-// $primary: $rosewood;
-
-$secondary: $greym;
+$primary: purple;
+$secondary: cyan;
 
 // $success: #09d199;
 // $info: #6a8caf;
@@ -50,10 +48,12 @@ $app-colors: (
   'app-btn-primary-border-color': rgba($carmine, 1),
   'app-btn-primary-border-color-hover': rgba($carmine, 1),
   'app-btn-secondary-text-color': color.adjust($greym, $lightness: -10%),
+  'app-btn-secondary-text-color-active': color.adjust($greym, $lightness: -20%),
   'app-btn-secondary-bg-color': rgba($greym, 0.1),
-  'app-btn-secondary-bg-color-hover': rgba($greym, 0.5),
-  'app-btn-secondary-border-color': rgba($greyl, 0.7),
-  'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +10%),
+  'app-btn-secondary-bg-color-hover': rgba($greym, 0.3),
+  'app-btn-secondary-bg-color-active': rgba($greym, 0.5),
+  'app-btn-secondary-border-color': color.adjust($greym, $lightness: 0%),
+  'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: 0%),
   'app-avatar-icon-color': $greyd,
   'app-avatar-shadow-color': rgba($greyd, 0.5),
   'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
@@ -66,6 +66,7 @@ $app-colors: (
   'app-home-card-bg-color': color.adjust($linen, $lightness: -3%),
   'app-account-card-bg-color': color.adjust($linen, $lightness: -3%),
   'app-admin-list-bg-color-hover': rgba($greyl, 0.3),
+  'app-admin-list-secondary-color': color.adjust($night, $lightness: +10%),
 );
 
 // Body
@@ -75,7 +76,7 @@ $body-bg: $linen;
 $body-secondary-color: rgba($night, 0.7);
 $body-secondary-bg: rgba($linen, 0.7);
 $body-tertiary-color: orange;
-$body-tertiary-bg: color.adjust($greyl, $lightness: +10%);
+$body-tertiary-bg: rgba($greym, 0.1);
 
 // Border
 

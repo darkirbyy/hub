@@ -4,7 +4,7 @@ import { Controller } from '@hotwired/stimulus';
  * Stimulus controller that MUST be placed on the switch theme modal
  */
 export default class extends Controller {
-  static targets = ['radio'];
+  static targets = ['button'];
 
   initialize() {
     this.storagePath = 'hub/theme';
@@ -14,23 +14,31 @@ export default class extends Controller {
     // Setting the preferred theme on page load
     this.setPreferredTheme(this.getPreferredTheme());
 
-    // If there is a theme stored, selecting the corresponding radio button when opening the modal
+    // If there is a theme stored, activate the corresponding button when opening the modal
     this.element.addEventListener('show.bs.modal', () => {
       const storedTheme = localStorage.getItem(this.storagePath);
       if (storedTheme) {
-        const radioId = 'theme-modal-' + storedTheme;
-        const activeRadio = document.getElementById(radioId);
-        activeRadio.checked = true;
+        const buttonId = 'theme-modal-' + storedTheme;
+        const button = document.getElementById(buttonId);
+        this.activateButton(button);
       }
     });
 
-    // Changing theme and storing it when selecting a radio button
-    this.radioTargets.forEach((radio) => {
-      radio.addEventListener('change', (event) => {
+    // Changing theme and storing it when selecting a button
+    this.buttonTargets.forEach((button) => {
+      button.addEventListener('click', (event) => {
         const newTheme = event.target.id.split('-').pop();
         this.setPreferredTheme(newTheme);
+        this.activateButton(event.target);
       });
     });
+  }
+
+  activateButton(button) {
+    this.buttonTargets.forEach((button) => {
+      button.classList.remove('active');
+    });
+    button.classList.add('active');
   }
 
   // Return the stored theme if exists, or auto otherwise
@@ -51,9 +59,7 @@ export default class extends Controller {
 
   // WILL return light/dark from the user preferences
   getSystemTheme() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
   // WILL return light/dark from the html tag
