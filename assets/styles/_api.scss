@@ -45,6 +45,30 @@ $utilities: map.merge(
 
 // Mixins
 
+@mixin app-btn($text, $border, $bg, $text-hover, $border-hover, $bg-hover, $text-active, $border-active, $bg-active) {
+  color: $text;
+  border-color: $border;
+  background-color: $bg;
+  transition: all 0.05s ease;
+
+  &:hover {
+    color: $text-hover;
+    border-color: $border-hover;
+    background-color: $bg-hover;
+    text-shadow: 0 0 0.1rem $text-hover;
+    box-shadow:
+      inset 0 0 0.2rem $border-hover,
+      0 0 0.2rem $border-hover;
+  }
+
+  &.active,
+  &:active {
+    color: $text-active !important;
+    border-color: $border-active !important;
+    background-color: $bg-active !important;
+  }
+}
+
 @mixin app-avatar-container($size) {
   // max-height: $size * $font-size-base;
   max-width: $size * $font-size-base;

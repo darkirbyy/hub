@@ -7,79 +7,45 @@
 // bootstrap buttons //////////////
 
 .btn-outline-primary {
-  color: var(--app-btn-primary-text-color);
-  border-color: var(--app-btn-primary-border-color);
-  background-color: var(--app-btn-primary-bg-color);
-  transition: all 0.05s ease;
-
-  &:hover {
-    color: var(--app-btn-primary-text-color);
-    text-shadow: 0 0 0.1rem var(--app-btn-primary-text-color);
-    border-color: var(--app-btn-primary-border-color-hover);
-    background-color: var(--app-btn-primary-bg-color-hover);
-    box-shadow:
-      inset 0 0 0.2rem var(--app-btn-primary-border-color-hover),
-      0 0 0.2rem var(--app-btn-primary-border-color-hover);
-  }
-
-  &:active {
-    color: var(--app-btn-primary-text-color) !important;
-    border-color: var(--app-btn-primary-border-color-hover) !important;
-    background-color: var(--app-btn-primary-bg-color-hover) !important;
-  }
+  @include app-btn(
+    var(--app-btn-primary-text-color),
+    var(--app-btn-primary-border-color),
+    var(--app-btn-primary-bg-color),
+    var(--app-btn-primary-text-color),
+    var(--app-btn-primary-border-color-hover),
+    var(--app-btn-primary-bg-color-hover),
+    var(--app-btn-primary-text-color),
+    var(--app-btn-primary-border-color-hover),
+    var(--app-btn-primary-bg-color-hover)
+  );
 }
 
 .btn-outline-secondary {
-  color: var(--app-btn-secondary-text-color);
-  border-color: var(--app-btn-secondary-border-color);
-  background-color: var(--app-btn-secondary-bg-color);
-  transition: all 0.05s ease;
-
-  &:hover {
-    color: var(--app-btn-secondary-text-color);
-    text-shadow: 0 0 0.1rem var(--app-btn-secondary-text-color);
-    border-color: var(--app-btn-secondary-border-color-hover);
-    background-color: var(--app-btn-secondary-bg-color-hover);
-    box-shadow:
-      inset 0 0 0.2rem var(--app-btn-secondary-border-color-hover),
-      0 0 0.2rem var(--app-btn-secondary-border-color-hover);
-  }
-
-  &.active,
-  &:active {
-    color: var(--app-btn-secondary-text-color-active) !important;
-    border-color: var(--app-btn-secondary-border-color-hover) !important;
-    background-color: var(--app-btn-secondary-bg-color-active) !important;
-  }
+  @include app-btn(
+    var(--app-btn-secondary-text-color),
+    var(--app-btn-secondary-border-color),
+    var(--app-btn-secondary-bg-color),
+    var(--app-btn-secondary-text-color),
+    var(--app-btn-secondary-border-color-hover),
+    var(--app-btn-secondary-bg-color-hover),
+    var(--app-btn-secondary-text-color-active),
+    var(--app-btn-secondary-border-color-hover),
+    var(--app-btn-secondary-bg-color-active)
+  );
 }
 
 .btn-outline-danger {
-  color: var(--app-btn-danger-text-color);
-  border-color: var(--app-btn-danger-border-color);
-  background-color: var(--app-btn-danger-bg-color);
-  transition: all 0.05s ease;
-
-  &:hover {
-    color: var(--app-btn-danger-text-color);
-    text-shadow: 0 0 0.1rem var(--app-btn-danger-text-color);
-    border-color: var(--app-btn-danger-border-color-hover);
-    background-color: var(--app-btn-danger-bg-color-hover);
-    box-shadow:
-      inset 0 0 0.2rem var(--app-btn-danger-border-color-hover),
-      0 0 0.2rem var(--app-btn-danger-border-color-hover);
-  }
-
-  &.active,
-  &:active {
-    color: var(--app-btn-danger-text-color-active) !important;
-    border-color: var(--app-btn-danger-border-color-hover) !important;
-    background-color: var(--app-btn-danger-bg-color-active) !important;
-  }
-}
-
-.app-btn-danger {
-  color: #aa3131 !important;
-  border-color: #aa3131 !important;
+  @include app-btn(
+    var(--app-btn-danger-text-color),
+    var(--app-btn-danger-border-color),
+    var(--app-btn-danger-bg-color),
+    var(--app-btn-danger-text-color),
+    var(--app-btn-danger-border-color-hover),
+    var(--app-btn-danger-bg-color-hover),
+    var(--app-btn-danger-text-color-active),
+    var(--app-btn-danger-border-color-hover),
+    var(--app-btn-danger-bg-color-active)
+  );
 }
 
 // bootstrap forms ////////////////

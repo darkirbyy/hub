@@ -14,11 +14,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
         </div>
 
-        {# Body with message #}
-        <div class="modal-body" data-delete-modal-target="body"></div>
-
-        {# Footer with cancel or confirm buttons #}
-        <div class="modal-footer">
+        {# Body with custom message and button #}
+        <div class="modal-body d-flex flex-column gap-3">
+          <div data-delete-modal-target="body"></div>
           <form method="post" data-delete-modal-target="form">
             <button type="submit" class="btn btn-outline-danger">
               <span class="bi bi-trash me-1" aria-hidden="true"></span>
