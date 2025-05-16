@@ -43,14 +43,14 @@
                 <span class="{{ category.icon.faClass|e }} fa-fw me-2"></span> {{ category.label }}
               </h2>
               {# All corresponding applis #}
-              <div class="swiper-wrapper m-3">
+              <div class="swiper-wrapper">
                 {# For each appli, calculate the full url and use a card to display it #}
                 {% for appli in category.applis %}
                   {% set appli_url = server_base_url ~ appli.path %}
                   <div class="card swiper-slide app-home-card">
                     {# Card top with a clickable image #}
-                    <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center app-home-card-header" data-turbo="false">
-                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-img-fluid app-home-card-img" alt="{{ appli.title }}" />
+                    <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center" data-turbo="false">
+                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-img-fluid" alt="{{ appli.title }}" />
                     </a>
                     {# Card body in three vertical flex parts: appli title, description and buttons #}
                     <div class="card-body d-flex flex-column justify-content-between">
@@ -59,7 +59,7 @@
                         {{ appli.title }}
                       </h5>
                       {# Appli description #}
-                      <p class="app-home-card-text flex-grow-1">
+                      <p class="flex-grow-1">
                         {{ appli.description }}
                       </p>
                       {# Appli buttons as two parts: main button and external links #}

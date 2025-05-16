@@ -8,7 +8,7 @@
     {% if form.vars.help is not empty %}
       <button type="button"
         aria-label="{{ 'form.button.help'|trans }}"
-        class="btn btn-outline-info py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
+        class="btn btn-outline-info py-0 {{ form.vars.valid == false ? 'is-invalid' }}"
         data-bs-toggle="popover"
         {{ form.vars.help_html ? 'data-bs-html="true"' }}
         data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}">
@@ -39,7 +39,7 @@
                 aria-label="{{ ('form.button.' ~ form.vars.attr.button_action)|trans }}"
                 data-button-action-target="{{ form.vars.attr.button_action }}"
                 data-button-action-id="{{ form.vars.id }}"
-                class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}"
+                class="app-btn-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}"
                 tabindex="-1">
                 <span class="fa-solid fa-lg" aria-hidden="true"></span>
               </button>

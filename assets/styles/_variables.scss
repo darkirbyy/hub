@@ -17,21 +17,15 @@ $headings-font-weight: 700;
 $carmine: #9b1b1f;
 $rosewood: #650406;
 $caramel: #c08552;
-$linen: #f3e6dc;
+$linen: #f3e9dc;
 $night: #121417;
 $light: white;
 $greyl: #a0a0a0;
 $greym: #646464;
 $greyd: #3d3d3d;
 $dark: black;
-$primary: purple;
-
-// $primary: $rosewood;
-
-$secondary: cyan;
-
-// $secondary: $greym;
-
+$primary: #770d11;
+$secondary: $greym;
 $info: #2d82b7;
 $success: #509447;
 $warning: #ff6f59;
@@ -41,21 +35,37 @@ $danger: #c71826;
 // Variables Common ///////////////
 ///////////////////////////////////
 
+// Navbar
+
 $navbar-light-color: rgba($linen, 0.7);
 $navbar-light-hover-color: $linen;
 $navbar-light-active-color: $linen;
 $navbar-light-brand-color: $navbar-light-color;
 $navbar-light-brand-hover-color: $navbar-light-hover-color;
+
+// Border
+
 $border-width: 2px !default;
 $border-radius: 1rem !default;
+
+// Progress bar
+
 $progress-bar-transition: width 0.3s ease;
 $progress-height: 0.75rem;
 $progress-bg: rgba($greym, 0.2);
+
+// Modal
+
 $modal-transition: transform 0.15s ease-out;
 $modal-fade-transform: translate(0, -50px);
 $modal-content-border-color: $greym;
+
+// Form
+
 $input-focus-border-color: rgba($greym, 0.8);
 $input-focus-box-shadow: 0 0 0.2rem 0.1rem rgba($greym, 0.8);
+$input-transition: all 0.05s ease;
+$form-select-focus-box-shadow: $input-focus-box-shadow;
 
 ///////////////////////////////////
 // Variables Light ////////////////
@@ -76,6 +86,9 @@ $app-colors: (
   'app-btn-secondary-bg-color-active': rgba($greym, 0.4),
   'app-btn-secondary-border-color': color.adjust($greym, $lightness: 0%),
   'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +5%),
+  'app-btn-info-text-color': $greym,
+  'app-btn-info-border-color-hover': rgba($greym, 0.8),
+  'app-btn-info-bg-color-active': rgba($greym, 0.2),
   'app-btn-danger-text-color': $danger,
   'app-btn-danger-text-color-active': color.adjust($danger, $lightness: 5%),
   'app-btn-danger-bg-color': rgba($greym, 0.1),
@@ -117,9 +130,10 @@ $secondary-bg-subtle: rgba($greyl, 0.5);
 // Links
 
 $link-color: $night;
-$link-hover-color: color.adjust($night, $lightness: +20%);
+$link-hover-color: color.adjust($night, $lightness: +20%, $saturation: -10%);
 
 // Forms
 
 $form-invalid-color: color.adjust($danger, $lightness: +0%);
 $form-invalid-border-color: color.adjust($danger, $lightness: +0%);
+$form-select-indicator-color: rgba($greym, 0.8);
