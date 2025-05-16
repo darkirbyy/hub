@@ -48,6 +48,10 @@
   );
 }
 
+// .btn:focus-visible{
+//   box-shadow: none !important;
+// }
+
 // bootstrap forms ////////////////
 
 .form-label {
@@ -67,9 +71,7 @@ input + label.form-label.required::after,
 textarea + label.form-label.required::after,
 legend.col-form-label.required::after {
   content: ' *';
-
-  // todo : change primary
-  color: $primary !important;
+  color: var(--app-form-required) !important;
 }
 
 .col-form-label {
@@ -118,6 +120,21 @@ legend.col-form-label.required::after {
 
 :not(.modal) .popover {
   z-index: 10 !important;
+}
+
+// progress bar ///////////////////
+
+.progress {
+  margin: 0 0.2rem;
+  overflow: visible;
+
+  &-bar {
+    @each $color, $value in $theme-colors {
+      &.bg-#{$color} {
+        @include app-neon-line(transparent, $value, $value, 0.2);
+      }
+    }
+  }
 }
 
 ///////////////////////////////////

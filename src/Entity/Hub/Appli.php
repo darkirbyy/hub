@@ -40,7 +40,8 @@ class Appli
     #[Assert\Length(min: 2)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
     private ?string $name = null;
 

@@ -8,7 +8,7 @@
     {% if form.vars.help is not empty %}
       <button type="button"
         aria-label="{{ 'form.button.help'|trans }}"
-        class="btn btn-outline-secondary py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
+        class="btn btn-outline-info py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
         data-bs-toggle="popover"
         {{ form.vars.help_html ? 'data-bs-html="true"' }}
         data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}">
@@ -25,7 +25,7 @@
     {% endwith %}
   {% endset %}
 
-  {# Creates the actaul div with its attributes #}
+  {# Creates the actual div with its attributes #}
   <div {{ attributes }}>
     {# If a placeholder attribute is declared: use the floating row with the label afterwards + add the help button is needed #}
     {% if form.vars.attr.placeholder is defined %}
@@ -39,7 +39,8 @@
                 aria-label="{{ ('form.button.' ~ form.vars.attr.button_action)|trans }}"
                 data-button-action-target="{{ form.vars.attr.button_action }}"
                 data-button-action-id="{{ form.vars.id }}"
-                class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
+                class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}"
+                tabindex="-1">
                 <span class="fa-solid fa-lg" aria-hidden="true"></span>
               </button>
             </small>
@@ -77,7 +78,7 @@
   {% if not errors|length > 0 %}
     {%- if image_uri -%}
       <div class="text-center mt-2">
-        <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
+        <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download tabindex="-1">
           <img class="{{ row_attr.image_class|default('app-img-fluid') }}"
             src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
             alt="{{ 'form.button.download'|trans }}" />

@@ -83,7 +83,7 @@ class AppliType extends DefaultType
                 ],
             ])
             ->add('description', TextareaType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'appli.label.description',
                 'attr' => [
                     'button_action' => 'clear',

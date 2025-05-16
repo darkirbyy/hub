@@ -51,7 +51,8 @@ $utilities: map.merge(
   background-color: $bg;
   transition: all 0.05s ease;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $text-hover;
     border-color: $border-hover;
     background-color: $bg-hover;

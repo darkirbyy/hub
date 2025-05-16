@@ -27,9 +27,9 @@ export default class extends Controller {
     // Changing theme and storing it when selecting a button
     this.buttonTargets.forEach((button) => {
       button.addEventListener('click', (event) => {
-        const newTheme = event.target.id.split('-').pop();
+        const newTheme = event.currentTarget.id.split('-').pop();
         this.setPreferredTheme(newTheme);
-        this.activateButton(event.target);
+        this.activateButton(event.currentTarget);
       });
     });
   }

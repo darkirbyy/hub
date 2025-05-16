@@ -21,13 +21,14 @@ $app-colors-dark: (
   'app-btn-secondary-bg-color-active': rgba($greym, 0.5),
   'app-btn-secondary-border-color': rgba($greym, 0.9),
   'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +5%),
-  'app-btn-danger-text-color': color.adjust($danger, $lightness: -10%),
-  'app-btn-danger-text-color-active': color.adjust($danger, $lightness: 0%),
+  'app-btn-danger-text-color': color.adjust($danger, $lightness: 0%),
+  'app-btn-danger-text-color-active': color.adjust($danger, $lightness: 5%),
   'app-btn-danger-bg-color': rgba($greym, 0.1),
   'app-btn-danger-bg-color-hover': rgba($greym, 0.3),
   'app-btn-danger-bg-color-active': rgba($greym, 0.5),
-  'app-btn-danger-border-color': color.adjust($danger, $lightness: -20%),
-  'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: -10%),
+  'app-btn-danger-border-color': color.adjust($danger, $lightness: -5%),
+  'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: 0%),
+  'app-form-required': color.adjust($rosewood, $lightness: +15%),
   'app-avatar-icon-color': $greyl,
   'app-avatar-shadow-color': rgba($night, 0.5),
   'app-img-bg-color': color.adjust($night, $lightness: 8%),
@@ -49,7 +50,7 @@ $body-color-dark: $linen;
 $body-bg-dark: $night;
 $body-secondary-color-dark: rgba($linen, 0.7);
 $body-secondary-bg-dark: rgba($night, 0.7);
-$body-tertiary-color-dark: cyan;
+$body-tertiary-color-dark: transparent;
 $body-tertiary-bg-dark: rgba($greym, 0.1);
 
 // Border
@@ -63,16 +64,7 @@ $secondary-bg-subtle-dark: rgba($greyd, 0.4);
 $link-color-dark: color.adjust($linen, $lightness: -15%, $saturation: -10%);
 $link-hover-color-dark: color.adjust($linen, $lightness: +10%);
 
-// // Boutons
-// $btn-font-weight: 600;
-// $btn-border-width: 2px;
-// $btn-box-shadow: 0 0.125rem 0.25rem rgba(black, 0.3);
-// $btn-focus-box-shadow: 0 0 0 0.25rem rgba(lighten($rosewood, 10%), 0.35);
+// Forms
 
-// // Inputs
-// $input-bg: lighten($night, 7%);
-// $input-color: $linen;
-// $input-border-color: lighten($night, 15%);
-// $input-focus-border-color: lighten($rosewood, 20%);
-// $input-focus-box-shadow: 0 0 0 0.25rem rgba(lighten($rosewood, 15%), 0.25);
-// $input-placeholder-color: darken($linen, 30%);
+$form-invalid-color-dark: color.adjust($danger, $lightness: 0%);
+$form-invalid-border-color-dark: color.adjust($danger, $lightness: -5%);

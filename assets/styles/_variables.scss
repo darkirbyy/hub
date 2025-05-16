@@ -25,13 +25,37 @@ $greym: #646464;
 $greyd: #3d3d3d;
 $dark: black;
 $primary: purple;
+
+// $primary: $rosewood;
+
 $secondary: cyan;
+
+// $secondary: $greym;
+
 $info: #2d82b7;
-$success: #659b5e;
+$success: #509447;
 $warning: #ff6f59;
 $danger: #c71826;
-$light: white;
-$dark: rgb(73 64 64);
+
+///////////////////////////////////
+// Variables Common ///////////////
+///////////////////////////////////
+
+$navbar-light-color: rgba($linen, 0.7);
+$navbar-light-hover-color: $linen;
+$navbar-light-active-color: $linen;
+$navbar-light-brand-color: $navbar-light-color;
+$navbar-light-brand-hover-color: $navbar-light-hover-color;
+$border-width: 2px !default;
+$border-radius: 1rem !default;
+$progress-bar-transition: width 0.3s ease;
+$progress-height: 0.75rem;
+$progress-bg: rgba($greym, 0.2);
+$modal-transition: transform 0.15s ease-out;
+$modal-fade-transform: translate(0, -50px);
+$modal-content-border-color: $greym;
+$input-focus-border-color: rgba($greym, 0.8);
+$input-focus-box-shadow: 0 0 0.2rem 0.1rem rgba($greym, 0.8);
 
 ///////////////////////////////////
 // Variables Light ////////////////
@@ -48,17 +72,18 @@ $app-colors: (
   'app-btn-secondary-text-color': color.adjust($greym, $lightness: -10%),
   'app-btn-secondary-text-color-active': color.adjust($greym, $lightness: -20%),
   'app-btn-secondary-bg-color': rgba($greym, 0.1),
-  'app-btn-secondary-bg-color-hover': rgba($greym, 0.3),
-  'app-btn-secondary-bg-color-active': rgba($greym, 0.5),
+  'app-btn-secondary-bg-color-hover': rgba($greym, 0.2),
+  'app-btn-secondary-bg-color-active': rgba($greym, 0.4),
   'app-btn-secondary-border-color': color.adjust($greym, $lightness: 0%),
   'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +5%),
   'app-btn-danger-text-color': $danger,
   'app-btn-danger-text-color-active': color.adjust($danger, $lightness: 5%),
   'app-btn-danger-bg-color': rgba($greym, 0.1),
-  'app-btn-danger-bg-color-hover': rgba($greym, 0.3),
-  'app-btn-danger-bg-color-active': rgba($greym, 0.5),
+  'app-btn-danger-bg-color-hover': rgba($greym, 0.2),
+  'app-btn-danger-bg-color-active': rgba($greym, 0.4),
   'app-btn-danger-border-color': $danger,
   'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: 5%),
+  'app-form-required': color.adjust($carmine, $lightness: 10%),
   'app-avatar-icon-color': $greyd,
   'app-avatar-shadow-color': rgba($greyd, 0.5),
   'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
@@ -80,7 +105,7 @@ $body-color: $night;
 $body-bg: $linen;
 $body-secondary-color: rgba($night, 0.7);
 $body-secondary-bg: rgba($linen, 0.7);
-$body-tertiary-color: orange;
+$body-tertiary-color: transparent;
 $body-tertiary-bg: rgba($greym, 0.1);
 
 // Border
@@ -94,39 +119,7 @@ $secondary-bg-subtle: rgba($greyl, 0.5);
 $link-color: $night;
 $link-hover-color: color.adjust($night, $lightness: +20%);
 
-// // Buttons
-// $btn-font-weight: 600;
-// $btn-border-width: 2px;
-// $btn-box-shadow: 0 0.125rem 0.25rem rgba($rosewood, 0.2);
-// $btn-focus-box-shadow: 0 0 0 0.25rem rgba($rosewood, 0.25);
+// Forms
 
-// // Table
-// $table-bg: lighten($linen, 1%);
-// $table-accent-bg: darken($linen, 3%);
-// $table-hover-bg: darken($linen, 5%);
-// $table-border-color: darken($linen, 10%);
-
-// // Inputs
-// $input-bg: lighten($linen, 3%);
-// $input-border-color: darken($linen, 15%);
-// $input-focus-border-color: lighten($rosewood, 15%);
-// $input-focus-box-shadow: 0 0 0 0.25rem rgba($rosewood, 0.25);
-
-///////////////////////////////////
-// Other //////////////////////////
-///////////////////////////////////
-
-// $component-active-bg: $feldgrau !default;
-// $enable-rounded:              false !default;
-
-$navbar-light-color: rgba($linen, 0.7);
-$navbar-light-hover-color: $linen;
-$navbar-light-active-color: $linen;
-$navbar-light-brand-color: $navbar-light-color;
-$navbar-light-brand-hover-color: $navbar-light-hover-color;
-$border-width: 2px !default;
-$border-radius: 1rem !default;
-$progress-bar-transition: width 0.3s ease;
-$modal-transition: transform 0.15s ease-out;
-$modal-fade-transform: translate(0, -50px);
-$modal-content-border-color: $greym;
+$form-invalid-color: color.adjust($danger, $lightness: +0%);
+$form-invalid-border-color: color.adjust($danger, $lightness: +0%);
