@@ -4,10 +4,10 @@
 
 {# Redefines the h1 block to extend the navbar background with an intro text and custom borders #}
 {% block h1 %}
-  <div class="container-fluid p-0 mb-5 app-home-gradient app-navbar-text-color app-navbar-bg-color">
+  <div class="container-fluid p-0 pt-4 pt-md-0 mb-5 app-home-gradient app-navbar-text-color app-navbar-bg-color">
     <div class="container">
-      <h1 class="text-center">
-        {{ 'home.h1'|trans }}
+      <h1 class="text-center pb-2 app-home-title">
+        {{ 'home.h1'|trans|raw }}
       </h1>
       <div class="px-4 fs-5 text-center">
         <p class="mb-0">

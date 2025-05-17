@@ -39,6 +39,8 @@ $app-colors-dark: (
   'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $rosewood,
   'app-navbar-border-color': rgba($linen, 0.7),
+  'app-home-title-shadow-color': rgba(color.adjust($linen, $lightness: -10%), 0.8),
+  'app-home-tag-shadow-color': rgba(color.adjust($linen, $lightness: 0%), 0.8),
   'app-home-card-shadow-color': rgba($greym, 0.1),
   'app-home-card-hover-color': $rosewood,
   'app-home-card-bg-color': color.adjust($night, $lightness: 3%),

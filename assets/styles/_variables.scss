@@ -8,9 +8,19 @@
 
 // Fonts
 
-$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', arial, sans-serif;
-$headings-font-family: 'Montserrat', sans-serif;
-$headings-font-weight: 700;
+@font-face {
+  font-family: Neonsans;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/neonsans.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Aaaiight;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/aaaiight.ttf') format('truetype');
+}
 
 // Color system
 
@@ -34,6 +44,11 @@ $danger: #c71826;
 ///////////////////////////////////
 // Variables Common ///////////////
 ///////////////////////////////////
+
+// Fonts
+
+$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', arial, sans-serif;
+$headings-font-weight: 600;
 
 // Navbar
 
@@ -104,6 +119,8 @@ $app-colors: (
   'app-navbar-muted-color': rgba($linen, 0.5),
   'app-navbar-bg-color': $carmine,
   'app-navbar-border-color': rgba($linen, 0.7),
+  'app-home-title-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),
+  'app-home-tag-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),
   'app-home-card-shadow-color': rgba($greym, 0.1),
   'app-home-card-hover-color': $carmine,
   'app-home-card-bg-color': color.adjust($linen, $lightness: -3%),
