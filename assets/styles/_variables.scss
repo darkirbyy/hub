@@ -74,6 +74,7 @@ $progress-bg: rgba($greym, 0.2);
 $modal-transition: transform 0.15s ease-out;
 $modal-fade-transform: translate(0, -50px);
 $modal-content-border-color: $greym;
+$modal-content-border-radius: $border-radius;
 
 // Form
 
@@ -94,13 +95,13 @@ $app-colors: (
   'app-btn-primary-bg-color-hover': rgba($carmine, 1),
   'app-btn-primary-border-color': rgba($carmine, 1),
   'app-btn-primary-border-color-hover': rgba($carmine, 1),
-  'app-btn-secondary-text-color': color.adjust($greym, $lightness: -10%),
-  'app-btn-secondary-text-color-active': color.adjust($greym, $lightness: -20%),
+  'app-btn-secondary-text-color': color.adjust($greym, $lightness: 0%),
+  'app-btn-secondary-text-color-active': color.adjust($greym, $lightness: -10%),
   'app-btn-secondary-bg-color': rgba($greym, 0.1),
   'app-btn-secondary-bg-color-hover': rgba($greym, 0.2),
   'app-btn-secondary-bg-color-active': rgba($greym, 0.4),
-  'app-btn-secondary-border-color': color.adjust($greym, $lightness: 0%),
-  'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +5%),
+  'app-btn-secondary-border-color': rgba($greym, 0.8),
+  'app-btn-secondary-border-color-hover': rgba($greym, 1),
   'app-btn-info-text-color': $greym,
   'app-btn-info-border-color-hover': rgba($greym, 0.8),
   'app-btn-info-bg-color-active': rgba($greym, 0.2),
@@ -121,9 +122,11 @@ $app-colors: (
   'app-navbar-border-color': rgba($linen, 0.7),
   'app-home-title-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),
   'app-home-tag-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),
-  'app-home-card-shadow-color': rgba($greym, 0.1),
-  'app-home-card-hover-color': $carmine,
-  'app-home-card-bg-color': color.adjust($linen, $lightness: -3%),
+  'app-home-card-border-color-hover': $carmine,
+  'app-home-card-bg-color': color.adjust($linen, $lightness: -5%, $saturation: -10%),
+  'app-home-card-bg-color-hover': $carmine,
+  'app-home-card-shadow-color': rgba($greym, 0.2),
+  'app-home-card-shadow-color-hover': rgba($carmine, 0.3),
   'app-account-card-bg-color': color.adjust($linen, $lightness: -3%),
   'app-admin-list-bg-color-hover': rgba($greyl, 0.3),
   'app-admin-list-secondary-color': color.adjust($night, $lightness: +10%),
