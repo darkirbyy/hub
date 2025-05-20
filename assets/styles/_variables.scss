@@ -52,7 +52,7 @@ $headings-font-weight: 600;
 
 // Navbar
 
-$navbar-light-color: rgba($linen, 0.7);
+$navbar-light-color: rgba($linen, 0.8);
 $navbar-light-hover-color: $linen;
 $navbar-light-active-color: $linen;
 $navbar-light-brand-color: $navbar-light-color;
@@ -71,7 +71,7 @@ $progress-bg: rgba($greym, 0.2);
 
 // Modal
 
-$modal-transition: transform 0.15s ease-out;
+$modal-transition: transform 0.2s ease-out;
 $modal-fade-transform: translate(0, -50px);
 $modal-content-border-color: $greym;
 $modal-content-border-radius: $border-radius;
@@ -95,7 +95,7 @@ $app-colors: (
   'app-btn-primary-bg-color-hover': rgba($carmine, 1),
   'app-btn-primary-border-color': rgba($carmine, 1),
   'app-btn-primary-border-color-hover': rgba($carmine, 1),
-  'app-btn-secondary-text-color': color.adjust($greym, $lightness: 0%),
+  'app-btn-secondary-text-color': color.adjust($greym, $lightness: -10%),
   'app-btn-secondary-text-color-active': color.adjust($greym, $lightness: -10%),
   'app-btn-secondary-bg-color': rgba($greym, 0.1),
   'app-btn-secondary-bg-color-hover': rgba($greym, 0.2),
@@ -112,12 +112,14 @@ $app-colors: (
   'app-btn-danger-bg-color-active': rgba($greym, 0.4),
   'app-btn-danger-border-color': $danger,
   'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: 5%),
+  'app-link-shadow-color-hover': rgba(color.adjust($night, $lightness: +20%, $saturation: -10%), 0.5),
   'app-form-required': color.adjust($carmine, $lightness: 10%),
-  'app-avatar-icon-color': $greyd,
+  'app-avatar-icon-color': color.adjust($greyd, $lightness: -10%),
   'app-avatar-shadow-color': rgba($greyd, 0.5),
+  'app-avatar-shadow-color-hover': rgba($greyl, 0.5),
   'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
   'app-navbar-text-color': $linen,
-  'app-navbar-muted-color': rgba($linen, 0.5),
+  'app-navbar-muted-color': rgba($linen, 0.8),
   'app-navbar-bg-color': $carmine,
   'app-navbar-border-color': rgba($linen, 0.7),
   'app-home-title-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),

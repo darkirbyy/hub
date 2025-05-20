@@ -18,7 +18,9 @@
 
         <div class="my-2 d-flex justify-content-between align-items-end">
           {# Backlink #}
-          <a href="{{ path(config_main.route_prefix ~ 'index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}</a>
+          <a class="icon-link icon-link-hover icon-link-left" href="{{ path(config_main.route_prefix ~ 'index') }}">
+            <span class="bi bi-arrow-left mb-1" aria-hidden="true"></span> {{ 'form.link.backToList'|trans }}
+          </a>
           {# Buttons #}
           {% block buttons_action %}
             <div>

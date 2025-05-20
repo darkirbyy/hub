@@ -16,7 +16,9 @@
 
         {# Backlink #}
         <div class="mb-2">
-          <a href="{{ path('account_index') }}"><span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'account.link.backToIndex'|trans }}</a>
+          <a class="icon-link icon-link-hover icon-link-left" href="{{ path('account_index') }}">
+            <span class="bi bi-arrow-left mb-1" aria-hidden="true"></span> {{ 'account.link.backToIndex'|trans }}
+          </a>
         </div>
 
         {# Change password form #}

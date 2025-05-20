@@ -19,8 +19,8 @@
 
         <div class="my-2 d-flex justify-content-between align-items-end">
           {# Back link #}
-          <a href="{{ path(config_main.route_prefix ~ 'show', { id: object.id }) }}">
-            <span class="bi bi-arrow-left me-1" aria-hidden="true"></span> {{ 'form.link.backToSee'|trans }}
+          <a class="icon-link icon-link-hover icon-link-left" href="{{ path(config_main.route_prefix ~ 'show', { id: object.id }) }}">
+            <span class="bi bi-arrow-left mb-1" aria-hidden="true"></span> {{ 'form.link.backToSee'|trans }}
           </a>
           {# Buttons (delete) #}
           {% block buttons_action %}

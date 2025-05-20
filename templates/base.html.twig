@@ -19,44 +19,21 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100" data-controller="load-popover">
-    {# Skip to content link for screen reader #}
-    <a href="#mainContent" class="visually-hidden-focusable">{{ 'aria.skipToContent'|trans }}</a>
-
-    {# Switch theme modal #}
-    <div class="modal fade" id="theme-modal" tabindex="-1" aria-labelledby="theme-modal-label" aria-hidden="true" data-controller="switch-theme">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="theme-modal-label">
-              {{ 'layout.theme.switch'|trans }}
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body d-flex flex-column gap-2">
-            <button class="btn btn-outline-secondary text-start app-switch-theme-btn" data-switch-theme-target="button" id="theme-modal-light">
-              <span class="bi bi-sun me-2" aria-hidden="true"></span>{{ 'layout.theme.light'|trans }}
-            </button>
-            <button class="btn btn-outline-secondary text-start app-switch-theme-btn" data-switch-theme-target="button" id="theme-modal-dark">
-              <span class="bi bi-moon me-2" aria-hidden="true"></span>{{ 'layout.theme.dark'|trans }}
-            </button>
-            <button class="btn btn-outline-secondary text-start app-switch-theme-btn" data-switch-theme-target="button" id="theme-modal-auto">
-              <span class="bi bi-gear me-2" aria-hidden="true"></span>{{ 'layout.theme.auto'|trans|raw }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {# Bar only visible in dev env #}
-    {% if env.app.env == 'dev' %}
+    {# Bar not visible in prod env #}
+    {% if env.app.env != 'prod' %}
       <div class="container-fluid p-0 m-0 text-center fw-bold d-flex justify-content-around app-env-dev">
         {% for i in 1..10 %}
           <div>
-            DEV
+            {{ env.app.env|upper }}
           </div>
         {% endfor %}
       </div>
     {% endif %}
+
+    {# Skip to content link for screen reader #}
+    <div class="app-navbar-bg-color ps-3 app-skip-link">
+      <a class="icon-link visually-hidden-focusable" href="#mainContent">{{ 'aria.skipToContent'|trans }}</a>
+    </div>
 
     {# The HEADER defines the navbar #}
     <header>
@@ -149,5 +126,30 @@
         </div>
       </div>
     </footer>
+
+    {# Switch theme modal #}
+    <div class="modal fade" id="theme-modal" tabindex="-1" aria-labelledby="theme-modal-label" aria-hidden="true" data-controller="switch-theme">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="theme-modal-label">
+              {{ 'layout.theme.switch'|trans }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-column gap-2">
+            <button class="btn btn-outline-secondary text-start app-switch-theme-btn" data-switch-theme-target="button" id="theme-modal-light">
+              <span class="bi bi-sun me-2" aria-hidden="true"></span>{{ 'layout.theme.light'|trans }}
+            </button>
+            <button class="btn btn-outline-secondary text-start app-switch-theme-btn" data-switch-theme-target="button" id="theme-modal-dark">
+              <span class="bi bi-moon me-2" aria-hidden="true"></span>{{ 'layout.theme.dark'|trans }}
+            </button>
+            <button class="btn btn-outline-secondary text-start app-switch-theme-btn" data-switch-theme-target="button" id="theme-modal-auto">
+              <span class="bi bi-gear me-2" aria-hidden="true"></span>{{ 'layout.theme.auto'|trans|raw }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

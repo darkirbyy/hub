@@ -45,11 +45,12 @@
               <a href="#" class="app-avatar-link" data-bs-toggle="modal" data-bs-target="#avatar-modal" aria-label="{{ 'form.button.edit'|trans }}">
                 <div class="app-avatar-container-lg position-relative">
                   <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img app-img-fluid" alt="" />
-                  <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle opacity-0 fs-1"><span class="bi bi-pencil" aria-hidden="true"></span></span>
+                  <span class="app-avatar-icon position-absolute top-50 start-50 translate-middle fs-1"><span class="bi bi-pencil" aria-hidden="true"></span></span>
                 </div>
               </a>
             </div>
-            {# Part two : someinformation about the user and action links #}
+
+            {# Part two : some information about the user and action links #}
             <div class="text-center text-md-start">
               {# Username #}
               <h6 class="fs-2">
@@ -62,12 +63,12 @@
               </p>
               {# Links to change the password and delete the account #}
               <p class="d-flex flex-column gap-1 align-items-center align-items-md-start">
-                <a class="icon-link icon-link-hover" href="{{ path('account_password') }}" data-turbo-prefetch="false">
-                  {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+                <a class="icon-link icon-link-right icon-link-hover" href="{{ path('account_password') }}" data-turbo-prefetch="false">
+                  {{ 'account.link.updatePassword'|trans }} <span class="bi bi-arrow-right mb-1" aria-hidden="true"></span>
                 </a>
 
-                <a class="icon-link icon-link-hover" href="{{ path('account_delete') }}" data-turbo-prefetch="false">
-                  {{ 'account.link.deleteAccount'|trans }} <span class="bi bi-arrow-right" aria-hidden="true"></span>
+                <a class="icon-link icon-link-right icon-link-hover" href="{{ path('account_delete') }}" data-turbo-prefetch="false">
+                  {{ 'account.link.deleteAccount'|trans }} <span class="bi bi-arrow-right mb-1" aria-hidden="true"></span>
                 </a>
               </p>
               {# Link to disconnect #}
