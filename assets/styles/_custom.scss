@@ -281,6 +281,8 @@ legend.col-form-label.required::after {
 
 .app-navbar-bg-color {
   background-color: var(--app-navbar-bg-color);
+
+  // background-image: url('../images/texture.png');
 }
 
 .app-navbar-neon {
@@ -292,6 +294,13 @@ legend.col-form-label.required::after {
   border: 2px solid transparent;
   border-radius: var(--bs-border-radius);
 
+  .app-navbar-logo {
+    max-height: 1.4 * $font-size-base;
+    margin-bottom: $spacer * 0.25;
+    margin-right: $spacer * 0.25;
+    opacity: 0.7;
+  }
+
   &:hover,
   &:focus,
   &:focus-visible {
@@ -301,12 +310,20 @@ legend.col-form-label.required::after {
       0 0 0.2rem var(--app-navbar-text-color);
     text-shadow: 0 0 0.1rem var(--app-navbar-text-color);
     animation: border-flicker alternate 3s;
+
+    .app-navbar-logo {
+      opacity: 1;
+    }
   }
 
   &:active,
   &[aria-current='page'] {
     border-color: var(--app-navbar-text-color);
     animation: none;
+
+    .app-navbar-logo {
+      opacity: 1;
+    }
   }
 }
 
@@ -349,6 +366,7 @@ legend.col-form-label.required::after {
 
   border-radius: var(--bs-border-radius);
   border-radius: calc(2 * var(--bs-border-radius));
+  background-image: none !important;
 }
 
 .app-home-gradient {

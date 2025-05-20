@@ -8,7 +8,7 @@
     <title>
       {{ title ~ ' - ' ~ ('layout.name'|trans) }}
     </title>
-    <link rel="icon" href="{{ asset('build/images/favicon.png') }}" />
+    <link rel="icon" href="{{ asset('build/images/darkirby-logo-square.png') }}" />
     {% block stylesheets %}
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -47,7 +47,7 @@
           <ul class="navbar-nav me-auto align-items-center gap-1">
             <li class="nav-item fs-5">
               <a {{ currentRoute starts with 'home' ? activeLink|raw : otherLink|raw }} href="{{ path('home_index') }}">
-                <span class="fa-solid fa-house me-2" aria-hidden="true"></span>{{ 'layout.navbar.home'|trans }}
+                <img class="app-navbar-logo" src="{{ asset('build/images/darkirby-logo-crop.png') }}" alt="Logo" />{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
@@ -84,7 +84,7 @@
 
     {# The main block MUST be redefined on each page, including the flash block in the right place
        The h1 block CAN be redefined on a page, to customize the h1 title #}
-    <main class="flex-grow-1" role="main" id="mainContent">
+    <main class="flex-grow-1 pb-4" role="main" id="mainContent">
       {% block h1 %}
         <div class="container-fluid p-0 py-2 mt-4 mb-2">
           <h1 class="text-center">
@@ -107,7 +107,7 @@
 
     {# The FOOTER divided in two part : left/right on large screen / on the top of each other on small screen #}
     <footer role="contentinfo" aria-label="{{ 'aria.footer'|trans }}">
-      <div class="container-fluid fw-light app-navbar-bg-color app-navbar-text-color app-navbar-neon border-top small mt-5 py-3">
+      <div class="container-fluid fw-light app-navbar-bg-color app-navbar-text-color app-navbar-neon border-top small py-3">
         <div class="row gw-md-4 app-navbar-muted-color">
           {# Left part : references to frameworks #}
           <div class="col-12 col-md-6 text-center text-md-end">

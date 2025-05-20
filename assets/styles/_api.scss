@@ -45,6 +45,10 @@ $utilities: map.merge(
 
 // Mixins
 
+@mixin app-avatar-container($size) {
+  max-width: $size * $font-size-base;
+}
+
 @mixin app-btn($text, $border, $bg, $text-hover, $border-hover, $bg-hover, $text-active, $border-active, $bg-active) {
   color: $text;
   border-color: $border;
@@ -69,10 +73,6 @@ $utilities: map.merge(
     border-color: $border-active !important;
     background-color: $bg-active !important;
   }
-}
-
-@mixin app-avatar-container($size) {
-  max-width: $size * $font-size-base;
 }
 
 @mixin app-neon-line($border-color, $shadow-color1, $shadow-color2, $shadow-intensity) {
