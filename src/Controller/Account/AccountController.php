@@ -2,6 +2,7 @@
 
 namespace App\Controller\Account;
 
+use App\Entity\Account\Role;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
@@ -187,26 +188,46 @@ class AccountController extends AbstractController
     /**
      * Check if the user is connected and has the role described in the parameter.
      *
-     * @param string $role the role to check (without the ROLE_ prefix)
-     *
-     * @return Response a http code (403, 401 or 200)
+     * @return Response a http code (403, 401, 400 or 200)
      */
-    #[Route('/check/{role}', name: 'check')]
-    public function check(string $role, AuthorizationCheckerInterface $authChecker): Response
+    #[Route('/check', name: 'check')]
+    public function check(Request $request, AuthorizationCheckerInterface $authChecker): Response
     {
-        if (!$this->getUser()) {
+        // User MUST be connected
+        /** @var \App\Entity\Account\User $user */
+        $user = $this->getUser();
+        if (!$user) {
             return new Response('Unauthorized', Response::HTTP_UNAUTHORIZED);
         }
 
-        $roleToCheck = 'ROLE_' . strtoupper($role);
-        $allRoles = array_keys($this->getParameter('security.role_hierarchy.roles'));
+        // Parameters ARE mandatory and MUST be valid
+        $appliParam = $request->query->get('a');
+        $roleParam = $request->query->get('r');
 
-        if (!in_array($roleToCheck, $allRoles)) {
-            return new Response('Bad Request', Response::HTTP_BAD_REQUEST);
+        if (!$appliParam || !preg_match('/^\w+$/', $appliParam)) {
+            return new Response('Application parameter (a) is missing or invalid', Response::HTTP_BAD_REQUEST);
         }
 
-        if (!$authChecker->isGranted($roleToCheck)) {
-            return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+        if (!$roleParam || !preg_match('/^\w+$/', $roleParam)) {
+            return new Response('Role parameter (r) is missing or invalid', Response::HTTP_BAD_REQUEST);
+        }
+
+        $appliToCheck = strtolower($appliParam);
+        $roleToCheck = 'ROLE_' . strtoupper($roleParam);
+
+        // Different method depending on the app
+        if ('hub' === $appliToCheck) {
+            // For this app, use the the Symfony system
+            if (!$authChecker->isGranted($roleToCheck)) {
+                return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+            }
+        } else {
+            // For the others apps, check the roles in the metarole
+            $userRoles = $user?->getMetaRole()?->getRoles()->toArray() ?? [];
+            $check = array_filter($userRoles, fn (Role $role) => $role->getKey() === $roleToCheck && $role->getAppli()->getName() === $appliToCheck);
+            if (empty($check)) {
+                return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+            }
         }
 
         return new Response('OK', Response::HTTP_OK);

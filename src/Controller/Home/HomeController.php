@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Home;
 
+use App\Entity\Account\Role;
 use App\Repository\Hub\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,14 +38,7 @@ class HomeController extends AbstractController
             // Check if the user has a metaRole and if it contains roles
             $metaRole = $this->getUser()->getMetaRole();
             if ($metaRole && $metaRole->getRoles()->count() > 0) {
-                $allowedApplis = array_unique(
-                    $metaRole
-                        ->getRoles()
-                        ->map(function ($role) {
-                            return $role->getAppli();
-                        })
-                        ->toArray(),
-                );
+                $allowedApplis = array_unique($metaRole->getRoles()->map(fn (Role $role) => $role->getAppli())->toArray());
             }
         }
 
