@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'error.title'|trans({ code: 500 }) %}
+
+{% block main %}
+  {% with { error_key: 'other' } %}
+  {{ block('error', 'theme/error.html.twig') }}
+  {% endwith %}
+{% endblock %}

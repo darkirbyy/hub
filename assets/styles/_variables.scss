@@ -1,0 +1,161 @@
+// Variables SCSS - Main Config + Light Theme
+
+@use 'sass:color';
+
+///////////////////////////////////
+// Main configuration /////////////
+///////////////////////////////////
+
+// Fonts
+
+@font-face {
+  font-family: Neonsans;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/neonsans.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Aaaiight;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/aaaiight.ttf') format('truetype');
+}
+
+// Color system
+
+$carmine: #9b1b1f;
+$rosewood: #650406;
+$caramel: #c08552;
+$linen: #f3e9dc;
+$night: #121417;
+$light: white;
+$greyl: #a0a0a0;
+$greym: #646464;
+$greyd: #3d3d3d;
+$dark: black;
+$primary: #770d11;
+$secondary: $greym;
+$info: #2d82b7;
+$success: #509447;
+$warning: #ff6f59;
+$danger: #c71826;
+
+///////////////////////////////////
+// Variables Common ///////////////
+///////////////////////////////////
+
+// Fonts
+
+$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', arial, sans-serif;
+$headings-font-weight: 600;
+
+// Navbar
+
+$navbar-light-color: rgba($linen, 0.8);
+$navbar-light-hover-color: $linen;
+$navbar-light-active-color: $linen;
+$navbar-light-brand-color: $navbar-light-color;
+$navbar-light-brand-hover-color: $navbar-light-hover-color;
+
+// Border
+
+$border-width: 2px !default;
+$border-radius: 1rem !default;
+
+// Progress bar
+
+$progress-bar-transition: width 0.3s ease;
+$progress-height: 0.75rem;
+$progress-bg: rgba($greym, 0.2);
+
+// Modal
+
+$modal-transition: transform 0.2s ease-out;
+$modal-fade-transform: translate(0, -50px);
+$modal-content-border-color: $greym;
+$modal-content-border-radius: $border-radius;
+
+// Form
+
+$input-focus-border-color: rgba($greym, 0.8);
+$input-focus-box-shadow: 0 0 0.2rem 0.1rem rgba($greym, 0.8);
+$input-transition: all 0.05s ease;
+$form-select-focus-box-shadow: $input-focus-box-shadow;
+
+///////////////////////////////////
+// Variables Light ////////////////
+///////////////////////////////////
+
+// Custom
+
+$app-colors: (
+  'app-btn-primary-text-color': $linen,
+  'app-btn-primary-bg-color': rgba($carmine, 0.8),
+  'app-btn-primary-bg-color-hover': rgba($carmine, 1),
+  'app-btn-primary-border-color': rgba($carmine, 1),
+  'app-btn-primary-border-color-hover': rgba($carmine, 1),
+  'app-btn-secondary-text-color': color.adjust($greym, $lightness: -10%),
+  'app-btn-secondary-text-color-active': color.adjust($greym, $lightness: -10%),
+  'app-btn-secondary-bg-color': rgba($greym, 0.1),
+  'app-btn-secondary-bg-color-hover': rgba($greym, 0.2),
+  'app-btn-secondary-bg-color-active': rgba($greym, 0.4),
+  'app-btn-secondary-border-color': rgba($greym, 0.8),
+  'app-btn-secondary-border-color-hover': rgba($greym, 1),
+  'app-btn-info-text-color': $greym,
+  'app-btn-info-border-color-hover': rgba($greym, 0.8),
+  'app-btn-info-bg-color-active': rgba($greym, 0.2),
+  'app-btn-danger-text-color': $danger,
+  'app-btn-danger-text-color-active': color.adjust($danger, $lightness: 5%),
+  'app-btn-danger-bg-color': rgba($greym, 0.1),
+  'app-btn-danger-bg-color-hover': rgba($greym, 0.2),
+  'app-btn-danger-bg-color-active': rgba($greym, 0.4),
+  'app-btn-danger-border-color': $danger,
+  'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: 5%),
+  'app-link-shadow-color-hover': rgba(color.adjust($night, $lightness: +20%, $saturation: -10%), 0.5),
+  'app-form-required': color.adjust($carmine, $lightness: 10%),
+  'app-avatar-icon-color': color.adjust($greyd, $lightness: -10%),
+  'app-avatar-shadow-color': rgba($greyd, 0.5),
+  'app-avatar-shadow-color-hover': rgba($greyl, 0.5),
+  'app-img-bg-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
+  'app-navbar-text-color': $linen,
+  'app-navbar-muted-color': rgba($linen, 0.8),
+  'app-navbar-bg-color': $carmine,
+  'app-navbar-border-color': rgba($linen, 0.7),
+  'app-home-title-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),
+  'app-home-tag-shadow-color': rgba(color.adjust($linen, $lightness: -15%), 0.6),
+  'app-home-card-border-color-hover': $carmine,
+  'app-home-card-bg-color': color.adjust($linen, $lightness: -5%, $saturation: -10%),
+  'app-home-card-bg-color-hover': $carmine,
+  'app-home-card-shadow-color': rgba($greym, 0.2),
+  'app-home-card-shadow-color-hover': rgba($carmine, 0.3),
+  'app-account-card-bg-color': color.adjust($linen, $lightness: -3%),
+  'app-admin-list-bg-color-hover': rgba($greyl, 0.3),
+  'app-admin-list-secondary-color': color.adjust($night, $lightness: +10%),
+);
+
+// Body
+
+$body-color: $night;
+$body-bg: $linen;
+$body-secondary-color: rgba($night, 0.7);
+$body-secondary-bg: rgba($linen, 0.7);
+$body-tertiary-color: transparent;
+$body-tertiary-bg: rgba($greym, 0.1);
+
+// Border
+
+$border-color: rgba($greyl, 0.7);
+$secondary-border-subtle: rgba($greyl, 0.7);
+$secondary-bg-subtle: rgba($greyl, 0.5);
+
+// Links
+
+$link-color: $night;
+$link-hover-color: color.adjust($night, $lightness: +20%, $saturation: -10%);
+
+// Forms
+
+$form-invalid-color: color.adjust($danger, $lightness: +0%);
+$form-invalid-border-color: color.adjust($danger, $lightness: +0%);
+$form-select-indicator-color: rgba($greym, 0.8);

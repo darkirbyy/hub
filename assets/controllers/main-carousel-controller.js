@@ -11,37 +11,35 @@ export default class extends Controller {
   };
 
   getBreakpoint(breakpoint) {
-    return parseFloat(
-      getComputedStyle(document.documentElement).getPropertyValue(
-        '--bs-breakpoint-' + breakpoint
-      )
-    );
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bs-breakpoint-' + breakpoint));
   }
 
   connect() {
+    const buttonPrevId = '#swiper-' + this.idValue + '-button-prev';
+    const buttonNextId = '#swiper-' + this.idValue + '-button-next';
+
     new Swiper('#swiper-' + this.idValue + '-main', {
       modules: [Navigation],
       direction: 'horizontal',
       loop: false,
-      spaceBetween: 15,
+      spaceBetween: 25,
       slidesPerView: 1,
+      speed: 300,
 
       // when window width is >= 768px (md in boostrap)
       breakpoints: {
         [this.getBreakpoint('md')]: {
           slidesPerView: 'auto',
-          spaceBetween: 15,
+          spaceBetween: 25,
         },
       },
 
       // Navigation arrows
       navigation: {
         enabled: true,
-        prevEl: '#swiper-' + this.idValue + '-button-prev',
-        nextEl: '#swiper-' + this.idValue + '-button-next',
+        prevEl: buttonPrevId,
+        nextEl: buttonNextId,
         disabledClass: 'opacity-0',
-        // hiddenClass: 'd-none',
-        // lockClass: 'd-none',
       },
     });
   }

@@ -156,9 +156,9 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     }
 
     /**
-     * Generates an HTML `<img>` tag with the given path, classes (default `img-fluid`) and alt text (default to empty).
+     * Generates an HTML `<img>` tag with the given path, classes (default `app-img-fluid`) and alt text (default to empty).
      */
-    public function fmtImagePath(string $input, string $customClasses = 'img-fluid', string $altText = '')
+    public function fmtImagePath(string $input, string $customClasses = 'app-img-fluid', string $altText = '')
     {
         return '<img src="' . $input . '" class="' . $customClasses . '" alt="' . $altText . '"/>';
     }

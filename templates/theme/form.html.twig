@@ -8,7 +8,7 @@
     {% if form.vars.help is not empty %}
       <button type="button"
         aria-label="{{ 'form.button.help'|trans }}"
-        class="btn btn-outline-secondary py-0 app-btn-border-light {{ form.vars.valid == false ? 'is-invalid' }}"
+        class="btn btn-outline-info py-0 {{ form.vars.valid == false ? 'is-invalid' }}"
         data-bs-toggle="popover"
         {{ form.vars.help_html ? 'data-bs-html="true"' }}
         data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}">
@@ -25,7 +25,7 @@
     {% endwith %}
   {% endset %}
 
-  {# Creates the actaul div with its attributes #}
+  {# Creates the actual div with its attributes #}
   <div {{ attributes }}>
     {# If a placeholder attribute is declared: use the floating row with the label afterwards + add the help button is needed #}
     {% if form.vars.attr.placeholder is defined %}
@@ -39,7 +39,8 @@
                 aria-label="{{ ('form.button.' ~ form.vars.attr.button_action)|trans }}"
                 data-button-action-target="{{ form.vars.attr.button_action }}"
                 data-button-action-id="{{ form.vars.id }}"
-                class="app-button-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}">
+                class="app-btn-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}"
+                tabindex="-1">
                 <span class="fa-solid fa-lg" aria-hidden="true"></span>
               </button>
             </small>
@@ -77,8 +78,8 @@
   {% if not errors|length > 0 %}
     {%- if image_uri -%}
       <div class="text-center mt-2">
-        <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-          <img class="{{ row_attr.image_class|default('img-fluid') }}"
+        <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download tabindex="-1">
+          <img class="{{ row_attr.image_class|default('app-img-fluid') }}"
             src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
             alt="{{ 'form.button.download'|trans }}" />
         </a>
@@ -105,8 +106,8 @@
   {% set custom_attr = { 'data-collec-field-target': 'collec' } %}
   {% set attr = attr|merge(custom_attr) %}
   {{- parent() -}}
-  <button class="btn btn-outline-primary" type="button" data-collec-field-target="add">
-    <span class="bi bi-plus-square-fill me-1" aria-hidden="true"></span>{{ 'form.button.new'|trans }}
+  <button class="btn btn-outline-secondary" type="button" data-collec-field-target="add">
+    <span class="bi bi-plus-square me-1" aria-hidden="true"></span>{{ 'form.button.new'|trans }}
   </button>
 {% endblock %}
 
@@ -116,9 +117,7 @@
     {% for row in form.children %}
       {{ form_row(row) }}
     {% endfor %}
-    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove">
-      <span class="bi bi-trash-fill" aria-hidden="true"></span>
-    </button>
+    <button class="btn btn-outline-danger app-btn-max-height mb-3" type="button" data-collec-field-target="remove"><span class="bi bi-trash" aria-hidden="true"></span></button>
   </div>
 {% endblock %}
 

@@ -1,0 +1,80 @@
+// Variables SCSS - Dark Theme
+
+@use 'sass:color';
+
+///////////////////////////////////
+// Variables Dark /////////////////
+///////////////////////////////////
+
+/// Custom
+
+$app-colors-dark: (
+  'app-btn-primary-text-color': $linen,
+  'app-btn-primary-bg-color': rgba($rosewood, 0.2),
+  'app-btn-primary-bg-color-hover': rgba($rosewood, 0.7),
+  'app-btn-primary-border-color': rgba($rosewood, 0.9),
+  'app-btn-primary-border-color-hover': color.adjust($rosewood, $lightness: +10%),
+  'app-btn-secondary-text-color': color.adjust($greyl, $lightness: +10%),
+  'app-btn-secondary-text-color-active': color.adjust($greyl, $lightness: +20%),
+  'app-btn-secondary-bg-color': rgba($greym, 0.1),
+  'app-btn-secondary-bg-color-hover': rgba($greym, 0.3),
+  'app-btn-secondary-bg-color-active': rgba($greym, 0.5),
+  'app-btn-secondary-border-color': rgba($greym, 0.9),
+  'app-btn-secondary-border-color-hover': color.adjust($greym, $lightness: +5%),
+  'app-btn-info-text-color': $greym,
+  'app-btn-info-border-color-hover': rgba($greym, 0.8),
+  'app-btn-info-bg-color-active': rgba($greym, 0.3),
+  'app-btn-danger-text-color': color.adjust($danger, $lightness: +10%),
+  'app-btn-danger-text-color-active': color.adjust($danger, $lightness: 5%),
+  'app-btn-danger-bg-color': rgba($greym, 0.1),
+  'app-btn-danger-bg-color-hover': rgba($greym, 0.3),
+  'app-btn-danger-bg-color-active': rgba($greym, 0.5),
+  'app-btn-danger-border-color': color.adjust($danger, $lightness: 0%),
+  'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: +5%),
+  'app-link-shadow-color-hover': rgba(color.adjust($linen, $lightness: +10%), 0.5),
+  'app-form-required': color.adjust($rosewood, $lightness: +40%),
+  'app-avatar-icon-color': color.adjust($greyl, $lightness: 10%),
+  'app-avatar-shadow-color': rgba($night, 0.5),
+  'app-avatar-shadow-color-hover': rgba($greyd, 0.5),
+  'app-img-bg-color': color.adjust($night, $lightness: 8%),
+  'app-navbar-text-color': $linen,
+  'app-navbar-muted-color': rgba($linen, 0.7),
+  'app-navbar-bg-color': $rosewood,
+  'app-navbar-border-color': rgba($linen, 0.7),
+  'app-home-title-shadow-color': rgba(color.adjust($linen, $lightness: -10%), 0.8),
+  'app-home-tag-shadow-color': rgba(color.adjust($linen, $lightness: 0%), 0.8),
+  'app-home-card-border-color-hover': $rosewood,
+  'app-home-card-bg-color': color.adjust($night, $lightness: 3%),
+  'app-home-card-bg-color-hover': $rosewood,
+  'app-home-card-shadow-color': rgba($greym, 0.2),
+  'app-home-card-shadow-color-hover': rgba($rosewood, 0.2),
+  'app-account-card-bg-color': color.adjust($night, $lightness: 3%),
+  'app-admin-list-bg-color-hover': rgba($greyd, 0.2),
+  'app-admin-list-secondary-color': color.adjust($linen, $lightness: -10%, $saturation: -20%),
+);
+
+// Body
+
+$body-color-dark: $linen;
+$body-bg-dark: $night;
+$body-secondary-color-dark: rgba($linen, 0.7);
+$body-secondary-bg-dark: rgba($night, 0.7);
+$body-tertiary-color-dark: transparent;
+$body-tertiary-bg-dark: rgba($greym, 0.1);
+
+// Border
+
+$border-color-dark: rgba($greyd, 0.7);
+$secondary-border-subtle-dark: rgba($greyd, 0.7);
+$secondary-bg-subtle-dark: rgba($greyd, 0.4);
+
+// Links
+
+$link-color-dark: color.adjust($linen, $lightness: -15%, $saturation: -20%);
+$link-hover-color-dark: color.adjust($linen, $lightness: +10%);
+
+// Forms
+
+$form-invalid-color-dark: color.adjust($danger, $lightness: 0%);
+$form-invalid-border-color-dark: color.adjust($danger, $lightness: -5%);
+$form-select-indicator-color-dark: rgba($greym, 0.8);

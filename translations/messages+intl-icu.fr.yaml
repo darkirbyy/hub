@@ -3,8 +3,8 @@
 ##################################
 home:
   title: Accueil
-  h1: Bonjour
-  introText: Bienvenue sur le serveur de <span class="fst-italic">Darkirby</span> ! <small class="text-muted">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.
+  h1: <span class="part-1">Bon</span><span class="part-2">jour</span>
+  introText: Bienvenue sur le serveur de <span class="app-home-tag">Darkirby</span> ! <small class="app-navbar-muted-color">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.
   haveFun: Bonne visite 😀
 
 account:
@@ -40,6 +40,13 @@ account:
     passwordMinStrength: Par politique de sécurité, le mot de passe doit avoir une force au moins égale à 
     passwordStrength: 'Force du mot de passe : '
     confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
+
+error:
+  title: Erreur {code}
+  message:
+    notFound: Cette page n'existe pas.
+    forbidden: Cette page n'est pas accessible.
+    other: Le serveur a rencontré un problème, merci de réessayer plus tard.
 
 admin:
   title: Administration
@@ -116,6 +123,12 @@ layout:
     home: Hub
     admin: Admin
     login: Se connecter
+  theme:
+    switch: Choisissez votre thème
+    light: Thème clair
+    dark: Thème sombre
+    auto: Auto <br /><small class="text-muted fst-italic">Utiliser les paramètres systèmes</small>
+
   footer:
     madeWith: Réalisé avec
     version: Version
@@ -125,5 +138,6 @@ aria:
   skipToContent: Aller au contenu
   mainNavigation: Navigation principale
   toggleNavigation: Basculer la navigation
+  switchTheme: Changer de thème
   footer: Pied de page
   loading: Chargement...

@@ -4,18 +4,21 @@
 
 {# Redefines the h1 block to extend the navbar background with an intro text and custom borders #}
 {% block h1 %}
-  <div class="container-fluid p-0 mb-3 border-2 app-home-gradient bg-primary-subtle">
+  <div class="container-fluid p-0 pt-4 pt-md-0 mb-5 app-home-gradient app-navbar-text-color app-navbar-bg-color">
     <div class="container">
-      <h1 class="text-center">
-        {{ 'home.h1'|trans }}
+      <h1 class="text-center pb-2 app-home-title">
+        {{ 'home.h1'|trans|raw }}
       </h1>
       <div class="px-4 fs-5 text-center">
         <p class="mb-0">
           {{ 'home.introText'|trans|raw }}
         </p>
-        <p class="app-home-havefun mb-0">
-          <span class="px-4 py-1 fs-4 border border-1 rounded-5 bg-primary-subtle">{{ 'home.haveFun'|trans }}</span>
+        <p class="mb-0 app-home-havefun">
+          <span class="px-3 px-md-5 py-2 fs-4 border border-3 app-navbar-bg-color">{{ 'home.haveFun'|trans }}</span>
         </p>
+        <div class="app-home-egg">
+          <img src="{{ asset('build/images/darkirby-logo-crop.png') }}" alt="Logo" />
+        </div>
       </div>
     </div>
   </div>
@@ -23,14 +26,14 @@
 
 {# Actual content, displaying all available app by categories, with horizontal swiper #}
 {% block main %}
-  <div class="container">
+  <div class="container mt-3">
     {# No flashes on the main home page #}
     {# {{ block('flash', 'theme/flash.html.twig') }} #}
 
     {# For each category, only display it if not empty #}
     {% for category in categories %}
       {% if (category.applis|length) > 0 %}
-        <section class="mb-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
+        <section class="mt-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
           <div class="d-flex justify-content-start gap-1 gap-md-3 mb-4">
             {# Previous swiper button #}
             <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev" aria-label="{{ 'form.button.previous'|trans }}">
@@ -39,7 +42,7 @@
             {# Swiper content as two parts: the category title, and all corresponding applis #}
             <div class="swiper mx-0" id="swiper-{{ category.id }}-main">
               {# Category title #}
-              <h2 class="mb-3 text-center text-md-start">
+              <h2 class="m-3 text-center text-md-start">
                 <span class="{{ category.icon.faClass|e }} fa-fw me-2"></span> {{ category.label }}
               </h2>
               {# All corresponding applis #}
@@ -47,26 +50,26 @@
                 {# For each appli, calculate the full url and use a card to display it #}
                 {% for appli in category.applis %}
                   {% set appli_url = server_base_url ~ appli.path %}
-                  <div class="card swiper-slide">
+                  <div class="card swiper-slide app-home-card">
                     {# Card top with a clickable image #}
-                    <a href="{{ appli_url }}" class="card-img rounded-bottom-0 d-flex align-items-center bg-primary-subtle" data-turbo="false">
-                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img-top" alt="{{ appli.title }}" />
+                    <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center" data-turbo="false">
+                      <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-img-fluid" alt="{{ appli.title }}" />
                     </a>
                     {# Card body in three vertical flex parts: appli title, description and buttons #}
-                    <div class="card-body bg-light d-flex flex-column justify-content-between">
+                    <div class="card-body d-flex flex-column justify-content-between">
                       {# Appli title #}
                       <h5 class="card-title">
                         {{ appli.title }}
                       </h5>
                       {# Appli description #}
-                      <p class="card-text flex-grow-1">
+                      <p class="flex-grow-1">
                         {{ appli.description }}
                       </p>
                       {# Appli buttons as two parts: main button and external links #}
                       <div class="d-flex flex-row gap-2 justify-content-start align-items-end">
                         {# Main button #}
                         <div class="flex-fill text-start">
-                          <a href="{{ appli_url }}" class="btn btn-primary" data-turbo="false">{{ appli.linkText }}</a>
+                          <a href="{{ appli_url }}" class="btn btn-outline-primary" data-turbo="false">{{ appli.linkText }}</a>
                         </div>
                         {# All externals links #}
                         {% for externalLink in appli.externalLinks %}

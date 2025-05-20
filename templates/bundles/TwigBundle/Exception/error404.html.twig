@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'error.title'|trans({ code: 404 }) %}
+
+{% block main %}
+  {% with { error_key: 'notFound' } %}
+  {{ block('error', 'theme/error.html.twig') }}
+  {% endwith %}
+{% endblock %}

@@ -24,6 +24,7 @@ class ExternalLinkType extends DefaultType
                 'choice_label' => 'label',
                 'label' => 'externalLink.label.icon',
                 'attr' => [
+                    'data-collec-field-target' => 'focus',
                     'placeholder' => 'externalLink.label.icon',
                 ],
             ])

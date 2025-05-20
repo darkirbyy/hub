@@ -16,30 +16,30 @@
             {{ 'admin.subtitles.configs'|trans }}
           </h3>
           <div class="list-group">
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.accounts'|trans }}</span>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_user_index') }}">
+            <span class="list-group-item fw-bold list-group-item-secondary">{{ 'admin.subtitles.accounts'|trans }}</span>
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_account_user_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'user.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_metarole_index') }}">
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_account_metarole_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'metarole.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_account_role_index') }}">
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_account_role_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'role.name'|trans({ }, 'validators') }}
             </a>
 
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.hub'|trans }}</span>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_appli_index') }}">
+            <span class="list-group-item fw-bold list-group-item-secondary">{{ 'admin.subtitles.hub'|trans }}</span>
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_hub_appli_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span> {{ 'appli.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_category_index') }}">
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_hub_category_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span> {{ 'category.name'|trans({ }, 'validators') }}
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_hub_icon_index') }}">
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_hub_icon_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span> {{ 'icon.name'|trans({ }, 'validators') }}
             </a>
 
-            <span class="list-group-item fw-bold list-group-item-primary">{{ 'admin.subtitles.others'|trans }}</span>
-            <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ path('admin_other_shortcut_index') }}">
+            <span class="list-group-item fw-bold list-group-item-secondary">{{ 'admin.subtitles.others'|trans }}</span>
+            <a class="list-group-item list-group-item-action" href="{{ path('admin_other_shortcut_index') }}">
               <span class="bi bi-arrow-right me-1" aria-hidden="true"></span>{{ 'shortcut.name'|trans({ }, 'validators') }}
             </a>
           </div>
@@ -52,9 +52,9 @@
           </h3>
           <div class="list-group">
             {% for type, shortcuts in shortcuts_by_type %}
-              <span class="list-group-item fw-bold list-group-item-primary">{{ type }}</span>
+              <span class="list-group-item fw-bold list-group-item-secondary">{{ type }}</span>
               {% for shortcut in shortcuts %}
-                <a class="list-group-item list-group-item-action list-group-item-lol" href="{{ shortcut.url }}" data-turbo="false">
+                <a class="list-group-item list-group-item-action" href="{{ shortcut.url }}" data-turbo="false">
                   <span class="fa-solid fa-arrow-up-right-from-square fa-fw me-1" aria-hidden="true"></span>{{ shortcut.label }}
                 </a>
               {% endfor %}

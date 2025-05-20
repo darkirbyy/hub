@@ -43,7 +43,7 @@ export default class extends Controller {
     this.barInner.classList = '';
 
     let barColor = '';
-    if (this.currentStrength < 1) {
+    if (this.currentStrength <= 1) {
       barColor = 'bg-danger';
     } else if (this.currentStrength <= 2) {
       barColor = 'bg-warning';

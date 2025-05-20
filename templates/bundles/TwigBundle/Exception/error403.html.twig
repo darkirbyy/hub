@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'error.title'|trans({ code: 403 }) %}
+
+{% block main %}
+  {% with { error_key: 'forbidden' } %}
+  {{ block('error', 'theme/error.html.twig') }}
+  {% endwith %}
+{% endblock %}

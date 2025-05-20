@@ -1,22 +1,22 @@
 {# 4 buttons to use in the crud, with `btn_class` and `text_class` available to cutomize #}
 
 {% block new %}
-  <a href="{{ path }}" class="btn btn-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.new'|trans }}">
-    <span class="bi bi-plus-square-fill" aria-hidden="true"></span>
+  <a href="{{ path }}" class="btn btn-outline-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.new'|trans }}">
+    <span class="bi bi-plus-square" aria-hidden="true"></span>
     <span class="d-none {{ text_class|default('') }}">{{ 'form.button.new'|trans }}</span>
   </a>
 {% endblock %}
 
 {% block show %}
-  <a href="{{ path }}" class="btn btn-outline-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.show'|trans }}">
-    <span class="bi bi-eye-fill" aria-hidden="true"></span>
+  <a href="{{ path }}" class="btn btn-outline-secondary {{ btn_class|default('') }}" aria-label="{{ 'form.button.show'|trans }}">
+    <span class="bi bi-eye" aria-hidden="true"></span>
     <span class="d-none {{ text_class|default('') }}">{{ 'form.button.show'|trans }}</span>
   </a>
 {% endblock %}
 
 {% block edit %}
-  <a href="{{ path }}" class="btn btn-outline-primary {{ btn_class|default('') }}" aria-label="{{ 'form.button.edit'|trans }}">
-    <span class="bi bi-pen-fill" aria-hidden="true"></span>
+  <a href="{{ path }}" class="btn btn-outline-secondary {{ btn_class|default('') }}" aria-label="{{ 'form.button.edit'|trans }}">
+    <span class="bi bi-pen" aria-hidden="true"></span>
     <span class="d-none {{ text_class|default('') }}">{{ 'form.button.edit'|trans }}</span>
   </a>
 {% endblock %}
@@ -31,7 +31,7 @@
     data-bs-body="{{ body|default('form.modal.body')|trans(body_param|default({ object: '' })|map(p => p|e), body_domain|default('messages')) }}"
     data-bs-token="{{ token }}"
     aria-label="{{ 'form.button.delete'|trans }}">
-    <span class="bi bi-trash-fill" aria-hidden="true"></span>
+    <span class="bi bi-trash" aria-hidden="true"></span>
     <span class="d-none {{ text_class|default('') }}">{{ 'form.button.delete'|trans }}</span>
   </button>
 {% endblock %}
