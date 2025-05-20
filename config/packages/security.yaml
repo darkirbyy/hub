@@ -39,7 +39,7 @@ security:
             remember_me:
                 signature_properties: ['password', 'dateUpdate']
                 remember_me_parameter: connect_user[rememberMe]
-                name: remember_me
+                name: hub_rememberme
                 secure: auto
                 samesite: lax
                 httponly: true
