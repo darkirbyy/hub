@@ -161,3 +161,17 @@ $utilities: map.merge(
     @include flicker(0.6, 0.4);
   }
 }
+
+@keyframes egg {
+  0% {
+    transform: translateY(100%);
+  }
+
+  95% {
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}

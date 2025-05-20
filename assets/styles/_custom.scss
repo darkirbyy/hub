@@ -376,6 +376,22 @@ legend.col-form-label.required::after {
   border-image: linear-gradient(to right, transparent, var(--app-navbar-border-color), transparent) 1;
 }
 
+.app-home-egg {
+  width: 20%;
+  max-width: 10rem;
+  position: absolute;
+  right: 2rem;
+  transform: translateY(-100%);
+  mask-image: linear-gradient(black, black 50%, transparent);
+
+  img {
+    width: 100%;
+    transform: translateY(100%);
+    opacity: 0.8;
+    animation: egg 6s forwards 300s;
+  }
+}
+
 .app-home-card {
   width: 22rem;
   height: 28rem;
@@ -549,7 +565,7 @@ legend.col-form-label.required::after {
 // Others /////////////////////////
 
 .app-skip-link {
-  z-index: 500;
+  z-index: 900;
 }
 
 .app-env-dev {
