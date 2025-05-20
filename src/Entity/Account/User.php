@@ -21,10 +21,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * The password and image are editable by the user.
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
+#[ORM\UniqueConstraint(fields: ['username'])]
 #[ORM\HasLifecycleCallbacks]
-#[Vich\Uploadable]
 #[UniqueEntity(fields: ['username'])]
+#[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]

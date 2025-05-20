@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * To prevent duplicate Icon, the faClass should be unique.
  */
 #[ORM\Entity(repositoryClass: IconRepository::class)]
+#[ORM\UniqueConstraint(fields: ['faClass'])]
 #[UniqueEntity(fields: ['faClass'])]
 class Icon
 {

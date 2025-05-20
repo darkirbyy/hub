@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * The number allows to decide in which order the categories should appear and must be unique.
  */
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\UniqueConstraint(fields: ['number'])]
 #[UniqueEntity(fields: ['number'])]
 class Category
 {

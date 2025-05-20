@@ -15,7 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * The URL should redirect to protected page on the server domain.
  */
 #[ORM\Entity(repositoryClass: ShortcutRepository::class)]
-#[UniqueEntity(fields: ['number'])]
+#[ORM\UniqueConstraint(fields: ['number', 'type'])]
+#[UniqueEntity(fields: ['number', 'type'])]
 class Shortcut
 {
     #[ORM\Id]

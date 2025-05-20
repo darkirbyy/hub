@@ -24,9 +24,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Some external links can be added to redirect to other website.
  */
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
+#[ORM\UniqueConstraint(fields: ['name'])]
+#[ORM\UniqueConstraint(fields: ['path'])]
+#[ORM\UniqueConstraint(fields: ['number', 'category'])]
 #[UniqueEntity(fields: ['name'])]
 #[UniqueEntity(fields: ['path'])]
-#[UniqueEntity(fields: ['number'])]
+#[UniqueEntity(fields: ['number', 'category'])]
 #[Vich\Uploadable]
 class Appli
 {

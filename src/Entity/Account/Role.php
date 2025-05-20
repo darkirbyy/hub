@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 #[UniqueEntity(fields: ['appli', 'key'])]
+#[ORM\UniqueConstraint(fields: ['appli', 'key'])]
 class Role
 {
     #[ORM\Id]

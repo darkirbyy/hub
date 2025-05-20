@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * It regroups several roles so that each User CAN be granted one MetaRole.
  */
 #[ORM\Entity(repositoryClass: MetaRoleRepository::class)]
+#[ORM\UniqueConstraint(fields: ['key'])]
 #[UniqueEntity(fields: ['key'])]
 class MetaRole
 {
