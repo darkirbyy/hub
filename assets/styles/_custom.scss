@@ -298,7 +298,8 @@ legend.col-form-label.required::after {
     max-height: 1.4 * $font-size-base;
     margin-bottom: $spacer * 0.25;
     margin-right: $spacer * 0.25;
-    opacity: 0.7;
+    opacity: 0.8;
+    filter: invert(1) invert(99%) sepia(21%) saturate(916%) hue-rotate(307deg) brightness(100%) contrast(91%);
   }
 
   &:hover,
@@ -313,6 +314,8 @@ legend.col-form-label.required::after {
 
     .app-navbar-logo {
       opacity: 1;
+      filter: drop-shadow(0 0 0.1rem var(--app-navbar-text-color));
+      filter: drop-shadow(0 0 0.1rem var(--app-navbar-text-color));
     }
   }
 
