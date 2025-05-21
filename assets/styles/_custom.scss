@@ -76,10 +76,6 @@
 }
 
 // links //////////////////////////
-a {
-  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
-}
-
 .icon-link {
   text-decoration-color: rgba(var(--bs-link-color-rgb), 1);
 
@@ -89,6 +85,7 @@ a {
     outline: none;
     color: var(--bs-link-hover-color);
     text-shadow: 0 0 0.1rem var(--app-link-shadow-color-hover);
+    text-decoration-color: rgba(var(--bs-link-hover-color-rgb), 1);
   }
 }
 

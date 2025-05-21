@@ -112,7 +112,7 @@ $app-colors: (
   'app-btn-danger-bg-color-active': rgba($greym, 0.4),
   'app-btn-danger-border-color': $danger,
   'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: 5%),
-  'app-link-shadow-color-hover': rgba(color.adjust($night, $lightness: +20%, $saturation: -10%), 0.5),
+  'app-link-shadow-color-hover': rgba(color.adjust($night, $lightness: 0%), 0.4),
   'app-form-required': color.adjust($carmine, $lightness: 10%),
   'app-avatar-icon-color': color.adjust($greyd, $lightness: -10%),
   'app-avatar-shadow-color': rgba($greyd, 0.5),
@@ -151,8 +151,8 @@ $secondary-bg-subtle: rgba($greyl, 0.5);
 
 // Links
 
-$link-color: $night;
-$link-hover-color: color.adjust($night, $lightness: +20%, $saturation: -10%);
+$link-color: color.adjust($night, $lightness: +15%, $saturation: -10%);
+$link-hover-color: color.adjust($night, $lightness: 0%, $saturation: -10%);
 
 // Forms
 
