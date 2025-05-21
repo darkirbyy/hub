@@ -40,7 +40,7 @@ final class IconController extends CrudController
             'cols' => [
                 // 0 => ['getter' => 'id'],
                 2 => ['getter' => 'label'],
-                3 => ['getter' => 'faClass'],
+                3 => ['getter' => 'faClass', 'breakpoint' => 'md'],
                 4 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
             ],
             'backlink' => [
@@ -60,8 +60,8 @@ final class IconController extends CrudController
             'rows' => [
                 0 => ['getter' => 'id'],
                 1 => ['getter' => 'label'],
-                2 => ['getter' => 'faClass'],
-                3 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
+                2 => ['getter' => 'faClass', 'label' => 'preview', 'filters' => 'fmt_fa_class|raw'],
+                3 => ['getter' => 'faClass'],
             ],
         ];
     }

@@ -40,13 +40,6 @@ class AppliType extends DefaultType
                     'placeholder' => 'appli.label.category',
                 ],
             ])
-            ->add('number', IntegerType::class, [
-                'required' => true,
-                'label' => 'appli.label.number',
-                'attr' => [
-                    'placeholder' => 'appli.label.number',
-                ],
-            ])
             ->add('public', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
@@ -62,6 +55,13 @@ class AppliType extends DefaultType
                 'multiple' => false,
                 'row_attr' => [
                     'class' => 'app-form-row-bordered',
+                ],
+            ])
+            ->add('number', IntegerType::class, [
+                'required' => true,
+                'label' => 'appli.label.number',
+                'attr' => [
+                    'placeholder' => 'appli.label.number',
                 ],
             ])
             ->add('name', TextType::class, [

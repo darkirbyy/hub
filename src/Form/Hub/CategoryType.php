@@ -26,13 +26,6 @@ class CategoryType extends DefaultType
                     'placeholder' => 'category.label.label',
                 ],
             ])
-            ->add('number', IntegerType::class, [
-                'required' => true,
-                'label' => 'category.label.number',
-                'attr' => [
-                    'placeholder' => 'category.label.number',
-                ],
-            ])
             ->add('icon', EntityType::class, [
                 'required' => true,
                 'class' => Icon::class,
@@ -40,6 +33,13 @@ class CategoryType extends DefaultType
                 'label' => 'category.label.icon',
                 'attr' => [
                     'placeholder' => 'category.label.icon',
+                ],
+            ])
+            ->add('number', IntegerType::class, [
+                'required' => true,
+                'label' => 'category.label.number',
+                'attr' => [
+                    'placeholder' => 'category.label.number',
                 ],
             ]);
     }

@@ -31,61 +31,63 @@
         </div>
 
         {# Table displaying all objects #}
-        <table class="mt-2 table table-striped">
-          {# Table header #}
-          <thead>
-            <tr>
-              {# Add head cell for each col defined, with corresponding breakpoint #}
-              {% for col in config_index.cols|ksort %}
-                <th class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
-                  {{ (config_main.entity_key ~ '.label.' ~ (col.label|default(col.getter)))|trans({ }, 'validators') }}
-                </th>
-              {% endfor %}
-              {# Add one more mandatory head cell for the action text #}
-              <th class="w-1 text-nowrap text-end align-center" scope="col">
-                {{ 'form.other.action'|trans }}
-              </th>
-            </tr>
-          </thead>
-          {# Table body #}
-          <tbody class="table-group-divider">
-            {% for object in objects %}
+        <div class="table-responsive-md">
+          <table class="mt-2 table table-striped">
+            {# Table header #}
+            <thead>
               <tr>
-                {# Add normal call for each col defined, with corresponding breakpoint #}
+                {# Add head cell for each col defined, with corresponding breakpoint #}
                 {% for col in config_index.cols|ksort %}
-                  <td class="py-2 {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
-                    {% set value = deep_attribute(object, col.getter) %}
-                    {{ value is not null ? col.filters is defined ? value|apply_filters(col.filters) : value : '-' }}
-                  </td>
+                  <th class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
+                    {{ (config_main.entity_key ~ '.label.' ~ (col.label|default(col.getter)))|trans({ }, 'validators') }}
+                  </th>
                 {% endfor %}
-                {# Add one more mandatory normal cell with the action buttons #}
-                <td class="w-1 text-nowrap text-end py-1 align-center">
-                  {% if config_index.button.show %}
-                    {% with { path: path(config_main.route_prefix ~ 'show', { id: object.id }), btn_class: 'btn-sm px-2 py-1' } %}
-                    {{ block('show', 'theme/crud/_button.html.twig') }}
-                    {% endwith %}
-                  {% endif %}
-                  {% if config_index.button.edit %}
-                    {% with { path: path(config_main.route_prefix ~ 'edit', { id: object.id }), btn_class: 'btn-sm px-2 py-1' } %}
-                    {{ block('edit', 'theme/crud/_button.html.twig') }}
-                    {% endwith %}
-                  {% endif %}
-                  {% if config_index.button.delete %}
-                    {% with {
-                      path: path(config_main.route_prefix ~ 'delete', { id: object.id }),
-                      token: csrf_token('delete-' ~ object.id),
-                      body_param: { object: object },
-                      btn_class: 'btn-sm px-2 py-1',
-                    }
-                    %}
-                    {{ block('delete', 'theme/crud/_button.html.twig') }}
-                    {% endwith %}
-                  {% endif %}
-                </td>
+                {# Add one more mandatory head cell for the action text #}
+                <th class="w-1 text-nowrap text-end align-center" scope="col">
+                  {{ 'form.other.action'|trans }}
+                </th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            {# Table body #}
+            <tbody class="table-group-divider">
+              {% for object in objects %}
+                <tr>
+                  {# Add normal call for each col defined, with corresponding breakpoint #}
+                  {% for col in config_index.cols|ksort %}
+                    <td class="py-2 {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
+                      {% set value = deep_attribute(object, col.getter) %}
+                      {{ value is not null ? col.filters is defined ? value|apply_filters(col.filters) : value : '-' }}
+                    </td>
+                  {% endfor %}
+                  {# Add one more mandatory normal cell with the action buttons #}
+                  <td class="w-1 text-nowrap text-end py-1 align-center">
+                    {% if config_index.button.show %}
+                      {% with { path: path(config_main.route_prefix ~ 'show', { id: object.id }), btn_class: 'btn-sm px-2 py-1' } %}
+                      {{ block('show', 'theme/crud/_button.html.twig') }}
+                      {% endwith %}
+                    {% endif %}
+                    {% if config_index.button.edit %}
+                      {% with { path: path(config_main.route_prefix ~ 'edit', { id: object.id }), btn_class: 'btn-sm px-2 py-1' } %}
+                      {{ block('edit', 'theme/crud/_button.html.twig') }}
+                      {% endwith %}
+                    {% endif %}
+                    {% if config_index.button.delete %}
+                      {% with {
+                        path: path(config_main.route_prefix ~ 'delete', { id: object.id }),
+                        token: csrf_token('delete-' ~ object.id),
+                        body_param: { object: object },
+                        btn_class: 'btn-sm px-2 py-1',
+                      }
+                      %}
+                      {{ block('delete', 'theme/crud/_button.html.twig') }}
+                      {% endwith %}
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>

@@ -40,7 +40,7 @@ final class MetaRoleController extends CrudController
             'cols' => [
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'key'],
-                2 => ['getter' => 'roles', 'filters' => 'fmt_collec("<br>")|raw'],
+                2 => ['getter' => 'roles', 'filters' => 'fmt_collec("<br>")|raw', 'breakpoint' => 'md'],
                 3 => ['getter' => 'description', 'breakpoint' => 'md'],
             ],
             'backlink' => [

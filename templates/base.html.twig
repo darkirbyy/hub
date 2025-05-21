@@ -62,7 +62,7 @@
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   {{ app.user.username }}
-                  <div class="app-avatar-container-xs d-inline-block ms-1">
+                  <div class="app-avatar-container-xs app-navbar-avatar d-inline-block ms-1">
                     <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
                   </div>
                 </a>
@@ -84,7 +84,7 @@
 
     {# The main block MUST be redefined on each page, including the flash block in the right place
        The h1 block CAN be redefined on a page, to customize the h1 title #}
-    <main class="flex-grow-1 pb-4" role="main" id="mainContent">
+    <main class="flex-grow-1 pb-5" role="main" id="mainContent">
       {% block h1 %}
         <div class="container-fluid p-0 py-2 mt-4 mb-2">
           <h1 class="text-center">

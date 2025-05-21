@@ -41,7 +41,7 @@ final class ShortcutController extends CrudController
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'label'],
                 2 => ['getter' => 'type'],
-                3 => ['getter' => 'number'],
+                3 => ['getter' => 'number', 'breakpoint' => 'md'],
                 4 => ['getter' => 'url', 'breakpoint' => 'md'],
             ],
             'backlink' => [
@@ -63,7 +63,7 @@ final class ShortcutController extends CrudController
                 1 => ['getter' => 'label'],
                 2 => ['getter' => 'type'],
                 3 => ['getter' => 'number'],
-                4 => ['getter' => 'url', 'breakpoint' => 'md'],
+                4 => ['getter' => 'url'],
             ],
         ];
     }

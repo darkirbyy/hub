@@ -32,8 +32,6 @@
     var(--app-btn-secondary-border-color-hover),
     var(--app-btn-secondary-bg-color-active)
   );
-
-  border-radius: calc(0.5 * var(--bs-border-radius));
 }
 
 .btn-outline-info {
@@ -216,7 +214,7 @@ legend.col-form-label.required::after {
 // Avatars ////////////////////////
 
 .app-avatar-container-xs {
-  @include app-avatar-container(1.3);
+  @include app-avatar-container(1.5);
 }
 
 .app-avatar-container-sm {
@@ -283,6 +281,11 @@ legend.col-form-label.required::after {
   background-color: var(--app-navbar-bg-color);
 
   // background-image: url('../images/texture.png');
+}
+
+.app-navbar-avatar {
+  position: relative;
+  top: -0.1rem;
 }
 
 .app-navbar-neon {
