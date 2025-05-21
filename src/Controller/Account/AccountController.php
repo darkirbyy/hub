@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -191,7 +190,7 @@ class AccountController extends AbstractController
      * @return Response a http code (403, 401, 400 or 200)
      */
     #[Route('/check', name: 'check')]
-    public function check(Request $request, AuthorizationCheckerInterface $authChecker): Response
+    public function check(Request $request): Response
     {
         // User MUST be connected
         /** @var \App\Entity\Account\User $user */
@@ -218,7 +217,7 @@ class AccountController extends AbstractController
         // Different method depending on the app
         if ('hub' === $appliToCheck) {
             // For this app, use the the Symfony system
-            if (!$authChecker->isGranted($roleToCheck)) {
+            if (!$this->isGranted($roleToCheck)) {
                 return new Response('Forbidden', Response::HTTP_FORBIDDEN);
             }
         } else {
