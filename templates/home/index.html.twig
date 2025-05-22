@@ -36,7 +36,7 @@
         <section class="mt-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
           <div class="d-flex justify-content-start gap-1 gap-md-3 mb-4">
             {# Previous swiper button #}
-            <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-prev" aria-label="{{ 'form.button.previous'|trans }}">
+            <button type="button" class="btn btn-swiper btn-swiper-prev mt-5" id="swiper-{{ category.id }}-button-prev" aria-label="{{ 'form.button.previous'|trans }}">
               <span class="fa-solid fa-chevron-left fa-xl" aria-hidden="true"></span>
             </button>
             {# Swiper content as two parts: the category title, and all corresponding applis #}
@@ -87,7 +87,7 @@
             </div>
 
             {# Next swiper button #}
-            <button type="button" class="btn btn-swiper mt-5" id="swiper-{{ category.id }}-button-next" aria-label="{{ 'form.button.next'|trans }}">
+            <button type="button" class="btn btn-swiper btn-swiper-next mt-5" id="swiper-{{ category.id }}-button-next" aria-label="{{ 'form.button.next'|trans }}">
               <span class="fa-solid fa-chevron-right fa-xl" aria-hidden="true"></span>
             </button>
           </div>

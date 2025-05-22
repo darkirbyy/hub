@@ -31,6 +31,8 @@ $app-colors-dark: (
   'app-btn-danger-bg-color-active': rgba($greym, 0.5),
   'app-btn-danger-border-color': color.adjust($danger, $lightness: 0%),
   'app-btn-danger-border-color-hover': color.adjust($danger, $lightness: +5%),
+  'app-btn-swiper-color': rgba($linen, 0.5),
+  'app-btn-swiper-hover-color': $linen,
   'app-link-shadow-color-hover': rgba(color.adjust($linen, $lightness: +10%), 0.5),
   'app-form-required': color.adjust($rosewood, $lightness: +40%),
   'app-avatar-icon-color': color.adjust($greyl, $lightness: 10%),

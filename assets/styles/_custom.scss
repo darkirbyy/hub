@@ -134,14 +134,24 @@ legend.col-form-label.required::after {
   padding: 0;
   border: 0;
   font-size: 2rem;
-  color: var(--bs-text-body);
-  opacity: 0.5;
-  transition: opacity 0.05s ease-in;
+  color: var(--app-btn-swiper-color);
+  transition: color 0.05s ease-in;
+  z-index: 100;
 }
 
 .btn-swiper:hover,
 .btn-swiper:active {
-  opacity: 1;
+  color: var(--app-btn-swiper-hover-color);
+}
+
+.btn-swiper-prev {
+  background-image: linear-gradient(to right, var(--bs-body-bg), transparent);
+  margin-right: -1rem;
+}
+
+.btn-swiper-next {
+  background-image: linear-gradient(to left, var(--bs-body-bg), transparent);
+  margin-left: -1rem;
 }
 
 .swiper {
@@ -315,7 +325,6 @@ legend.col-form-label.required::after {
     .app-navbar-logo {
       opacity: 1;
       filter: drop-shadow(0 0 0.1rem var(--app-navbar-text-color));
-      filter: drop-shadow(0 0 0.1rem var(--app-navbar-text-color));
     }
   }
 
@@ -406,7 +415,10 @@ legend.col-form-label.required::after {
     border-radius: var(--bs-border-radius) var(--bs-border-radius) 0 0;
     overflow: hidden;
     filter: brightness(90%);
-    transition: all 0.2s ease;
+    transition:
+      border-color 0.05s ease,
+      filter 0.2s ease,
+      box-shadow 0.2s ease;
 
     &:hover,
     &:focus,
@@ -424,11 +436,12 @@ legend.col-form-label.required::after {
   p {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    line-clamp: 5;
     height: 5lh;
+
+    // display: -webkit-box;
+    // -webkit-line-clamp: 5;
+    // -webkit-box-orient: vertical;
+    // line-clamp: 5;
   }
 
   .btn-outline-primary {
