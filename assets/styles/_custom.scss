@@ -405,7 +405,7 @@ legend.col-form-label.required::after {
 }
 
 .app-home-card {
-  width: 22rem;
+  width: 20rem;
   height: 28rem;
   border-radius: var(--bs-border-radius);
   background-color: var(--app-home-card-bg-color);
@@ -436,7 +436,10 @@ legend.col-form-label.required::after {
   p {
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 5lh;
+    line-height: 1.4rem;
+    height: 5.6rem;
+
+    // height: 5lh;
 
     // display: -webkit-box;
     // -webkit-line-clamp: 5;

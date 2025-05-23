@@ -22,7 +22,7 @@ export default class extends Controller {
       modules: [Navigation],
       direction: 'horizontal',
       loop: false,
-      spaceBetween: 25,
+      spaceBetween: 50,
       slidesPerView: 1,
       speed: 300,
 
@@ -30,7 +30,7 @@ export default class extends Controller {
       breakpoints: {
         [this.getBreakpoint('md')]: {
           slidesPerView: 'auto',
-          spaceBetween: 25,
+          spaceBetween: 30,
         },
       },
 
