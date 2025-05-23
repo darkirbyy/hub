@@ -113,7 +113,7 @@ class AppliType extends DefaultType
                 ],
             ])
             ->add('imageFile', VichImageType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'appli.label.imageFile',
                 'help' => 'appli.help.image',
                 'help_html' => true,

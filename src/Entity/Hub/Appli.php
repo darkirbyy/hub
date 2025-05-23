@@ -84,7 +84,6 @@ class Appli
             dimensions: 'imageMeta.dimensions',
         ),
     ]
-    #[Assert\When(expression: 'this.getImageUpdatedAt() == null', constraints: [new Assert\NotBlank()])]
     #[Assert\Image(maxSize: '5Mi', minWidth: 128, maxWidth: 2048, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
     private ?File $imageFile = null;
 
