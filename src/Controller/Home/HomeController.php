@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Home;
 
-use App\Entity\Account\Role;
+use App\Entity\Hub\Role;
 use App\Enum\AppliStatusEnum;
 use App\Repository\Hub\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

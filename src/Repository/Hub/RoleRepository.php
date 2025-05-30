@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Account;
+namespace App\Repository\Hub;
 
-use App\Entity\Account\Role;
+use App\Entity\Hub\Role;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

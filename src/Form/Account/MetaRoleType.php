@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Account;
 
 use App\Entity\Account\MetaRole;
-use App\Entity\Account\Role;
+use App\Entity\Hub\Role;
 use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Account;
 
+use App\Entity\Hub\Role;
 use App\Repository\Account\MetaRoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

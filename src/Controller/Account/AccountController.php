@@ -2,7 +2,7 @@
 
 namespace App\Controller\Account;
 
-use App\Entity\Account\Role;
+use App\Entity\Hub\Role;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;

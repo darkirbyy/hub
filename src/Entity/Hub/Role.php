@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Account;
+namespace App\Entity\Hub;
 
+use App\Entity\Account\MetaRole;
 use App\Entity\Hub\Appli;
-use App\Repository\Account\RoleRepository;
+use App\Repository\Hub\RoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -51,8 +52,7 @@ class Role
 
     public function __toString(): string
     {
-        // return $this->getKey();
-        return $this->getKey() . ' (' . $this->getAppli() . ')' ?? '';
+        return $this->getKey() . ' : ' . $this->getDescription()  ?? '';
     }
 
     public function getId(): ?int

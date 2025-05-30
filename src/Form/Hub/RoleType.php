@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Account;
+namespace App\Form\Hub;
 
-use App\Entity\Account\Role;
-use App\Entity\Hub\Appli;
+use App\Entity\Hub\Role;
 use App\Form\DefaultType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,25 +20,20 @@ class RoleType extends DefaultType
                 'label' => 'role.label.key',
                 'help' => 'role.help.key',
                 'attr' => [
+                    'data-collec-field-target' => 'focus',
                     'button_action' => 'clear',
                     'placeholder' => 'role.label.key',
                 ],
             ])
-            ->add('appli', EntityType::class, [
-                'required' => true,
-                'class' => Appli::class,
-                'choice_label' => 'name',
-                'label' => 'role.label.appli',
-                'attr' => [
-                    'placeholder' => 'role.label.appli',
-                ],
-            ])
-            ->add('description', TextareaType::class, [
+            ->add('description', TextType::class, [
                 'required' => true,
                 'label' => 'role.label.description',
                 'attr' => [
                     'button_action' => 'clear',
                     'placeholder' => 'role.label.description',
+                ],
+                'row_attr' => [
+                    'class' => 'flex-grow-1',
                 ],
             ]);
     }
@@ -52,9 +44,7 @@ class RoleType extends DefaultType
 
         $resolver->setDefaults([
             'data_class' => Role::class,
-            'attr' => [
-                'data-controller' => 'button-action',
-            ],
+            'attr' => [],
         ]);
     }
 }

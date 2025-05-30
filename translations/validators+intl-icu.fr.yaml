@@ -33,6 +33,7 @@ appli:
     status: Statut
     name: Nom
     path: Chemin
+    roles: Rôles
     description: Description
     linkText: Texte du lien
     imageFile: Image

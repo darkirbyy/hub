@@ -79,6 +79,20 @@ class AppliType extends DefaultType
                     'placeholder' => 'appli.label.path',
                 ],
             ])
+            ->add('roles', CollectionType::class, [
+                'required' => false,
+                'label' => 'appli.label.roles',
+                'entry_type' => RoleType::class,
+                'entry_options' => [
+                    'label' => false,
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'row_attr' => [
+                    'class' => 'app-form-row-bordered',
+                ],
+            ])
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'appli.label.description',

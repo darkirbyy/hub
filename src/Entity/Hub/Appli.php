@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity\Hub;
 
-use App\Entity\Account\Role;
 use App\Enum\AppliStatusEnum;
 use App\Repository\Hub\AppliRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,6 +21,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * The number allows to decide in which order the applis should appear in a given Category and must be unique.
  * The name is used to manage roles and must be unique.
  * The path is relative to the root of the server and must be unique.
+ * The required roles are defined here and can be then associated with users.
  * Some external links can be added to redirect to other website.
  */
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
@@ -99,7 +99,7 @@ class Appli
     #[Assert\Valid]
     private Collection $externalLinks;
 
-    #[ORM\OneToMany(targetEntity: Role::class, mappedBy: 'appli')]
+    #[ORM\OneToMany(targetEntity: Role::class, mappedBy: 'appli', cascade: ['persist'])]
     private Collection $roles;
 
     public function __construct()
