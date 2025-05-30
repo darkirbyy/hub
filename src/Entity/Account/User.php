@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity\Account;
 
+use App\Entity\Hub\Right;
 use App\Repository\Account\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * The User is described by a username, that must be unique. It can only be created by an meta-admin.
- * The meta-admin boolean grants the admin role on this app and therefore, allows to manage roles of all other apps and users.
+ * The meta-admin boolean grants the admin role on this app and therefore, allows to manage rights of all other apps and users.
  * The password and image are editable by the user.
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -44,6 +47,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Assert\NotNull]
     private ?bool $metaAdmin = null;
+
+    /**
+     * @var Collection<int, Right>
+     */
+    #[ORM\ManyToMany(targetEntity: Right::class, inversedBy: 'users')]
+    private Collection $rights;
 
     #[
         Vich\UploadableField(
@@ -77,6 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->metaAdmin = false;
         $this->imageMeta = new FileMeta();
+        $this->rights = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -170,6 +180,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMetaAdmin(?bool $metaAdmin): static
     {
         $this->metaAdmin = $metaAdmin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Right>
+     */
+    public function getRights(): Collection
+    {
+        return $this->rights;
+    }
+
+    public function addRight(Right $right): static
+    {
+        if (!$this->rights->contains($right)) {
+            $this->rights->add($right);
+        }
+
+        return $this;
+    }
+
+    public function removeRight(Right $right): static
+    {
+        $this->rights->removeElement($right);
 
         return $this;
     }

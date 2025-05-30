@@ -19,9 +19,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * An Appli is described by a title, a description, a link text and an image, displayed on the homepage.
  * The number allows to decide in which order the applis should appear in a given Category and must be unique.
- * The name is used to manage roles and must be unique.
+ * The name is used to manage rights and must be unique.
  * The path is relative to the root of the server and must be unique.
- * The required roles are defined here and can be then associated with users.
+ * The required rights are defined here and can be then associated with users.
  * Some external links can be added to redirect to other website.
  */
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
@@ -64,6 +64,10 @@ class Appli
     #[Assert\GreaterThanOrEqual(0)]
     private ?int $number = null;
 
+    #[ORM\OneToMany(targetEntity: Right::class, mappedBy: 'appli', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
+    private Collection $rights;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -99,15 +103,12 @@ class Appli
     #[Assert\Valid]
     private Collection $externalLinks;
 
-    #[ORM\OneToMany(targetEntity: Role::class, mappedBy: 'appli', cascade: ['persist'])]
-    private Collection $roles;
-
     public function __construct()
     {
         $this->status = AppliStatusEnum::PRIVATE;
         $this->imageMeta = new FileMeta();
         $this->externalLinks = new ArrayCollection();
-        $this->roles = new ArrayCollection();
+        $this->rights = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -274,27 +275,27 @@ class Appli
         return $this;
     }
 
-    public function getRoles(): Collection
+    public function getRights(): Collection
     {
-        return $this->roles;
+        return $this->rights;
     }
 
-    public function addRole(Role $role): static
+    public function addRight(Right $right): static
     {
-        if (!$this->roles->contains($role)) {
-            $this->roles->add($role);
-            $role->setAppli($this);
+        if (!$this->rights->contains($right)) {
+            $this->rights->add($right);
+            $right->setAppli($this);
         }
 
         return $this;
     }
 
-    public function removeRole(Role $role): static
+    public function removeRight(Right $right): static
     {
-        if ($this->roles->removeElement($role)) {
+        if ($this->rights->removeElement($right)) {
             // set the owning side to null (unless already changed)
-            if ($role->getAppli() === $this) {
-                $role->setAppli(null);
+            if ($right->getAppli() === $this) {
+                $right->setAppli(null);
             }
         }
 

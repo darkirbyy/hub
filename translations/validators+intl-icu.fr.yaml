@@ -33,7 +33,7 @@ appli:
     status: Statut
     name: Nom
     path: Chemin
-    roles: Rôles
+    rights: Droits
     description: Description
     linkText: Texte du lien
     imageFile: Image
@@ -69,6 +69,7 @@ user:
     username: Nom d'utilisateur
     password: Mot de passe
     metaAdmin: Méta-admin
+    rights: Droits
     dateAdd: Date création
     dateUpdate: Date modification
     dateLastCo: Date dernière connexion
@@ -84,15 +85,15 @@ user:
   error:
     invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
 
-role:
-  name: Rôles
+right:
+  name: Droits
   label:
     id: ID
-    key: Clé
+    role: Rôle
     description: Description
     appli: Application
   help:
-    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+    role: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
   error:
-    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
+    invalidRole: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
   

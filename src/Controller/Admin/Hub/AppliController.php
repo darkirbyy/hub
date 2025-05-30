@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Controller for managing applis in the admin panel.
- * Applis are displayed on the homepage, and are associated with roles.
+ * Applis are displayed on the homepage, and are associated with rights.
  *
  * This class extends `CrudController`, automatically handling common CRUD operations.
  */
@@ -68,12 +68,12 @@ final class AppliController extends CrudController
                 4 => ['getter' => 'number'],
                 5 => ['getter' => 'name'],
                 6 => ['getter' => 'path'],
-                6 => ['getter' => 'roles', 'filters' => 'fmt_collec("<br>")|raw'],
-                7 => ['getter' => 'description'],
-                8 => ['getter' => 'linkText'],
-                9 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-appli.png")|fmt_image_path("app-img-fluid")|raw'],
-                10 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
-                11 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec'],
+                7 => ['getter' => 'rights', 'filters' => 'fmt_collec("<br>")|default("-")|raw'],
+                8 => ['getter' => 'description'],
+                9 => ['getter' => 'linkText'],
+                10 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-appli.png")|fmt_image_path("app-img-fluid")|raw'],
+                11 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
+                12 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec'],
             ],
         ];
     }

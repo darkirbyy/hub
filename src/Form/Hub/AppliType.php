@@ -79,10 +79,10 @@ class AppliType extends DefaultType
                     'placeholder' => 'appli.label.path',
                 ],
             ])
-            ->add('roles', CollectionType::class, [
+            ->add('rights', CollectionType::class, [
                 'required' => false,
-                'label' => 'appli.label.roles',
-                'entry_type' => RoleType::class,
+                'label' => 'appli.label.rights',
+                'entry_type' => RightType::class,
                 'entry_options' => [
                     'label' => false,
                 ],

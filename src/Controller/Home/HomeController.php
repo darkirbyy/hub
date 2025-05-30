@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Home;
 
-use App\Entity\Hub\Role;
 use App\Enum\AppliStatusEnum;
 use App\Repository\Hub\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +19,7 @@ class HomeController extends AbstractController
 {
     /**
      * Displays the homepage with public applis for any visitor,
-     * adapting the visible applis for an authenticated user depending on its roles.
+     * adapting the visible applis for an authenticated user depending on its rights.
      *
      * @param Request            $request      the HTTP request instance
      * @param CategoryRepository $categoryRepo $shortcutRepo the repository managing the categories
