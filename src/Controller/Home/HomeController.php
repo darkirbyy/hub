@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Home;
 
 use App\Entity\Account\Role;
+use App\Enum\AppliStatusEnum;
 use App\Repository\Hub\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ class HomeController extends AbstractController
         // Loop through categories and remove applis the user is not authorized for
         foreach ($categories as $category) {
             foreach ($category->getApplis() as $appli) {
-                if (!$appli->isPublic() && !in_array($appli, $allowedApplis)) {
+                if (AppliStatusEnum::PRIVATE === $appli->getStatus() || (AppliStatusEnum::USERONLY === $appli->getStatus() && !in_array($appli, $allowedApplis))) {
                     $category->removeAppli($appli);
                 }
             }

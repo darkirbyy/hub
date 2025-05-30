@@ -41,7 +41,7 @@ final class AppliController extends CrudController
                 // 0 => ['getter' => 'id'],
                 1 => ['getter' => 'title'],
                 2 => ['getter' => 'category'],
-                3 => ['getter' => 'public', 'filters' => 'fmt_bool'],
+                3 => ['getter' => 'status', 'filters' => 'fmt_enum'],
                 4 => ['getter' => 'number', 'breakpoint' => 'md'],
                 5 => ['getter' => 'name', 'breakpoint' => 'md'],
                 6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
@@ -64,8 +64,7 @@ final class AppliController extends CrudController
                 0 => ['getter' => 'id'],
                 1 => ['getter' => 'title'],
                 2 => ['getter' => 'category'],
-
-                3 => ['getter' => 'public', 'filters' => 'fmt_bool'],
+                3 => ['getter' => 'status', 'filters' => 'fmt_enum'],
                 4 => ['getter' => 'number'],
                 5 => ['getter' => 'name'],
                 6 => ['getter' => 'path'],

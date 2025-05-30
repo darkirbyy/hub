@@ -6,10 +6,11 @@ namespace App\Form\Hub;
 
 use App\Entity\Hub\Appli;
 use App\Entity\Hub\Category;
+use App\Enum\AppliStatusEnum;
 use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,14 +41,10 @@ class AppliType extends DefaultType
                     'placeholder' => 'appli.label.category',
                 ],
             ])
-            ->add('public', ChoiceType::class, [
+            ->add('status', EnumType::class, [
                 'required' => true,
-                'choices' => [
-                    'enum.choices.yes' => true,
-                    'enum.choices.no' => false,
-                ],
-                'choice_translation_domain' => 'messages',
-                'label' => 'appli.label.public',
+                'class' => AppliStatusEnum::class,
+                'label' => 'appli.label.status',
                 'label_attr' => [
                     'class' => 'radio-inline',
                 ],

@@ -40,6 +40,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('ksort', [$this, 'sortByKeys']),
             new TwigFilter('get_image_path', [$this, 'getImagePath']),
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
+            new TwigFilter('fmt_enum', [$this, 'fmtEnum']),
             new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
             new TwigFilter('fmt_password', [$this, 'fmtPassword']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass']),
@@ -119,6 +120,14 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     }
 
     /**
+     * Formats a enum using the translator interface.
+     */
+    public function fmtEnum(mixed $input): string
+    {
+        return $input->trans($this->trans);
+    }
+
+    /**
      * Formats a boolean value as a translated "Yes" or "No".
      */
     public function fmtBool(bool $input): string
@@ -126,6 +135,9 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
         return $this->trans->trans($input ? 'enum.choices.yes' : 'enum.choices.no', [], 'messages');
     }
 
+    /**
+     * Format a collection by using the __toString value on each element, then combining them with a comma.
+     */
     public function fmtCollec(PersistentCollection $input, string $separator = ', '): string
     {
         return implode($separator, $input->toArray());

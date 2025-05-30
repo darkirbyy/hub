@@ -30,7 +30,7 @@ appli:
     title: Titre
     category: Catégorie
     number: Ordre
-    public: Publique
+    status: Statut
     name: Nom
     path: Chemin
     description: Description

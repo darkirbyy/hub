@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Hub;
 
 use App\Entity\Account\Role;
+use App\Enum\AppliStatusEnum;
 use App\Repository\Hub\AppliRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -70,9 +71,10 @@ class Appli
     #[Assert\NotBlank]
     private ?string $linkText = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull]
-    private ?bool $public = null;
+    #[ORM\Column(enumType: AppliStatusEnum::class)]
+    #[Assert\Type(AppliStatusEnum::class)]
+    #[Assert\NotBlank]
+    private ?AppliStatusEnum $status = null;
 
     #[
         Vich\UploadableField(
@@ -102,7 +104,7 @@ class Appli
 
     public function __construct()
     {
-        $this->public = false;
+        $this->status = AppliStatusEnum::PRIVATE;
         $this->imageMeta = new FileMeta();
         $this->externalLinks = new ArrayCollection();
         $this->roles = new ArrayCollection();
@@ -178,14 +180,14 @@ class Appli
         return $this;
     }
 
-    public function isPublic(): ?bool
+    public function getStatus(): ?AppliStatusEnum
     {
-        return $this->public;
+        return $this->status;
     }
 
-    public function setPublic(?bool $public): static
+    public function setStatus(?AppliStatusEnum $status): static
     {
-        $this->public = $public;
+        $this->status = $status;
 
         return $this;
     }

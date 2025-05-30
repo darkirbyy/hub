@@ -116,6 +116,10 @@ enum:
     medium: Moyen
     strong: Fort
     veryStrong: Très fort
+  appliStatus:
+    public: Publique
+    userOnly: Utilisateur uniquement
+    private: Privée
 
 layout:
   name: Hub
