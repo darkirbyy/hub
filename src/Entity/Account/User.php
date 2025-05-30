@@ -45,9 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull]
     private ?bool $metaAdmin = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?MetaRole $metaRole = null;
-
     #[
         Vich\UploadableField(
             mapping: 'users',
@@ -240,18 +237,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateLastCo(?\DateTimeInterface $dateLastCo): static
     {
         $this->dateLastCo = $dateLastCo;
-
-        return $this;
-    }
-
-    public function getMetaRole(): ?MetaRole
-    {
-        return $this->metaRole;
-    }
-
-    public function setMetaRole(?MetaRole $metaRole): static
-    {
-        $this->metaRole = $metaRole;
 
         return $this;
     }

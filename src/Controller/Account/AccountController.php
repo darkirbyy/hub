@@ -222,8 +222,8 @@ class AccountController extends AbstractController
             }
         } else {
             // For the others apps, check the roles in the metarole
-            $userRoles = $user?->getMetaRole()?->getRoles()->toArray() ?? [];
-            $check = array_filter($userRoles, fn (Role $role) => $role->getKey() === $roleToCheck && $role->getAppli()->getName() === $appliToCheck);
+            // $userRoles = $user?->getMetaRole()?->getRoles()->toArray() ?? [];
+            // $check = array_filter($userRoles, fn (Role $role) => $role->getKey() === $roleToCheck && $role->getAppli()->getName() === $appliToCheck);
             if (empty($check)) {
                 return new Response('Forbidden', Response::HTTP_FORBIDDEN);
             }

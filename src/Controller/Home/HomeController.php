@@ -36,11 +36,11 @@ class HomeController extends AbstractController
         // Determines in which applis the user has at least one role
         $allowedApplis = [];
         if ($this->isGranted('ROLE_USER')) {
-            // Check if the user has a metaRole and if it contains roles
-            $metaRole = $this->getUser()->getMetaRole();
-            if ($metaRole && $metaRole->getRoles()->count() > 0) {
-                $allowedApplis = array_unique($metaRole->getRoles()->map(fn (Role $role) => $role->getAppli())->toArray());
-            }
+            // // Check if the user has a metaRole and if it contains roles
+            // $metaRole = $this->getUser()->getMetaRole();
+            // if ($metaRole && $metaRole->getRoles()->count() > 0) {
+            //     $allowedApplis = array_unique($metaRole->getRoles()->map(fn (Role $role) => $role->getAppli())->toArray());
+            // }
         }
 
         // Loop through categories and remove applis the user is not authorized for

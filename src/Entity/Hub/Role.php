@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Hub;
 
-use App\Entity\Account\MetaRole;
-use App\Entity\Hub\Appli;
 use App\Repository\Hub\RoleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -42,17 +38,13 @@ class Role
     #[ORM\JoinColumn(nullable: false)]
     private ?Appli $appli = null;
 
-    #[ORM\ManyToMany(targetEntity: MetaRole::class, mappedBy: 'roles')]
-    private Collection $metaRoles;
-
     public function __construct()
     {
-        $this->metaRoles = new ArrayCollection();
     }
 
     public function __toString(): string
     {
-        return $this->getKey() . ' : ' . $this->getDescription()  ?? '';
+        return $this->getKey() . ' : ' . $this->getDescription() ?? '';
     }
 
     public function getId(): ?int
@@ -92,30 +84,6 @@ class Role
     public function setAppli(?Appli $appli): static
     {
         $this->appli = $appli;
-
-        return $this;
-    }
-
-    public function getMetaRoles(): Collection
-    {
-        return $this->metaRoles;
-    }
-
-    public function addMetaRole(MetaRole $metaRole): static
-    {
-        if (!$this->metaRoles->contains($metaRole)) {
-            $this->metaRoles->add($metaRole);
-            $metaRole->addRole($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMetaRole(MetaRole $metaRole): static
-    {
-        if ($this->metaRoles->removeElement($metaRole)) {
-            $metaRole->removeRole($this);
-        }
 
         return $this;
     }
