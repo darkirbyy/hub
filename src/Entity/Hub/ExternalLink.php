@@ -40,7 +40,7 @@ class ExternalLink
 
     public function __toString(): string
     {
-        return $this->getText() ?? '';
+        return $this->getText() . ' - ' . $this->getUrl() ?? '';
     }
 
     public function getId(): ?int

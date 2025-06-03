@@ -58,6 +58,11 @@ class Right
         return $this->getRole() . ' : ' . $this->getDescription() ?? '';
     }
 
+    public function fullString(): string
+    {
+        return '<strong>' . $this->getAppli()->getTitle() . '</strong> - ' . $this->__toString();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

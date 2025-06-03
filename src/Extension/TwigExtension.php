@@ -138,9 +138,9 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     /**
      * Format a collection by using the __toString value on each element, then combining them with a comma.
      */
-    public function fmtCollec(PersistentCollection $input, string $separator = ', '): string
+    public function fmtCollec(PersistentCollection $input, string $separator = ', ', string $getter = '__toString'): string
     {
-        return implode($separator, $input->toArray());
+        return implode($separator, array_map(fn ($object) => $object->$getter(), $input->toArray()));
     }
 
     /**

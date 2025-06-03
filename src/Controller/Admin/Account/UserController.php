@@ -75,7 +75,7 @@ class UserController extends CrudController
                 0 => ['getter' => 'id'],
                 1 => ['getter' => 'username'],
                 2 => ['getter' => 'password', 'filters' => 'fmt_password'],
-                4 => ['getter' => 'rights', 'filters' => 'fmt_collec("<br>")|default("-")|raw'],
+                4 => ['getter' => 'rights', 'filters' => 'fmt_collec("<br>","fullString")|default("-")|raw'],
                 5 => ['getter' => 'dateLastCo', 'filters' => 'format_datetime("medium", "medium")'],
                 6 => ['getter' => 'dateUpdate', 'filters' => 'format_datetime("medium", "medium")'],
                 7 => ['getter' => 'dateAdd', 'filters' => 'format_datetime("medium", "medium")'],

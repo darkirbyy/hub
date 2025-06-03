@@ -2,6 +2,7 @@
 
 namespace App\Controller\Account;
 
+use App\Entity\Hub\Right;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
@@ -213,19 +214,10 @@ class AccountController extends AbstractController
         $appliToCheck = strtolower($appliParam);
         $roleToCheck = 'ROLE_' . strtoupper($roleParam);
 
-        // Different method depending on the app
-        if ('hub' === $appliToCheck) {
-            // For this app, use the the Symfony system
-            if (!$this->isGranted($roleToCheck)) {
-                return new Response('Forbidden', Response::HTTP_FORBIDDEN);
-            }
-        } else {
-            // For the others apps, check the roles in the metarole
-            // $userRoles = $user?->getMetaRole()?->getRoles()->toArray() ?? [];
-            // $check = array_filter($userRoles, fn (Role $role) => $role->getKey() === $roleToCheck && $role->getAppli()->getName() === $appliToCheck);
-            if (empty($check)) {
-                return new Response('Forbidden', Response::HTTP_FORBIDDEN);
-            }
+        // Search for any right with the good appli name and role
+        $check = array_filter($user->getRights()->toArray(), fn (Right $r) => $r->getRole() === $roleToCheck && $r->getAppli()->getName() === $appliToCheck);
+        if (empty($check)) {
+            return new Response('Forbidden', Response::HTTP_FORBIDDEN);
         }
 
         return new Response('OK', Response::HTTP_OK);
