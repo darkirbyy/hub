@@ -44,15 +44,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull]
-    private ?bool $metaAdmin = null;
-
     /**
      * @var Collection<int, Right>
      */
     #[ORM\ManyToMany(targetEntity: Right::class, inversedBy: 'users')]
     private Collection $rights;
+
+    private ?array $roles = null;
 
     #[
         Vich\UploadableField(
@@ -84,7 +82,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->metaAdmin = false;
         $this->imageMeta = new FileMeta();
         $this->rights = new ArrayCollection();
     }
@@ -113,7 +110,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'password' => $this->getPassword(),
-            // 'roles' => $this->getRoles(),
+            'roles' => $this->getRoles(),
         ];
     }
 
@@ -122,7 +119,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = $data['id'];
         $this->username = $data['username'];
         $this->password = $data['password'];
-        // $this->roles = $data['roles'];
+        $this->roles = $data['roles'];
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getId(): ?int
@@ -142,18 +150,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUserIdentifier(): string
-    {
-        return $this->username;
-    }
-
-    public function getRoles(): array
-    {
-        $roles[] = $this->isMetaAdmin() ? 'ROLE_ADMIN' : 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -166,20 +162,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function eraseCredentials(): void
+    public function getRoles(): array
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        return $this->roles;
     }
 
-    public function isMetaAdmin(): ?bool
+    public function setRoles(?array $roles): static
     {
-        return $this->metaAdmin;
-    }
-
-    public function setMetaAdmin(?bool $metaAdmin): static
-    {
-        $this->metaAdmin = $metaAdmin;
+        $this->roles = $roles;
 
         return $this;
     }

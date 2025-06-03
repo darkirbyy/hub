@@ -22,6 +22,14 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Security\ExtendedEntityUserProvider:
+        arguments:
+            $registry: '@doctrine'
+            $classOrAlias: 'App\Entity\Account\User'
+            $property: 'username'
+            $managerName: null
+            $appName: '%env(string:APP_NAME)%'
+
     App\Extension\EventExtension:
         tags: [kernel.event_subscriber]
 

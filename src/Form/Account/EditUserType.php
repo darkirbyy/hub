@@ -8,7 +8,6 @@ use App\Entity\Account\User;
 use App\Entity\Hub\Right;
 use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,23 +25,6 @@ class EditUserType extends DefaultType
                 'attr' => [
                     'button_action' => 'clear',
                     'placeholder' => 'user.label.username',
-                ],
-            ])
-            ->add('metaAdmin', ChoiceType::class, [
-                'required' => true,
-                'choices' => [
-                    'enum.choices.yes' => true,
-                    'enum.choices.no' => false,
-                ],
-                'choice_translation_domain' => 'messages',
-                'label' => 'user.label.metaAdmin',
-                'label_attr' => [
-                    'class' => 'radio-inline',
-                ],
-                'expanded' => true,
-                'multiple' => false,
-                'row_attr' => [
-                    'class' => 'app-form-row-bordered',
                 ],
             ])
             ->add('rights', EntityType::class, [

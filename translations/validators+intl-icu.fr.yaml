@@ -68,7 +68,6 @@ user:
     id: ID
     username: Nom d'utilisateur
     password: Mot de passe
-    metaAdmin: Méta-admin
     rights: Droits
     dateAdd: Date création
     dateUpdate: Date modification

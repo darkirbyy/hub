@@ -5,10 +5,8 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: App\Entity\Account\User
-                property: username
+        extended_user_provider:
+            id: App\Security\ExtendedEntityUserProvider
 
     firewalls:
         dev:
@@ -18,7 +16,7 @@ security:
             pattern: ^/
             security: true
             lazy: true
-            provider: app_user_provider
+            provider: extended_user_provider
             form_login:
                 login_path: account_login
                 check_path: account_login
@@ -39,7 +37,7 @@ security:
             remember_me:
                 signature_properties: ['password', 'dateUpdate']
                 remember_me_parameter: connect_user[rememberMe]
-                name: hub_rememberme
+                name: symfony_remember_me
                 secure: auto
                 samesite: lax
                 httponly: true
@@ -77,9 +75,9 @@ when@test:
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
 
-when@prod:
-    security:
-        firewalls:
-            main:
-                remember_me:
-                    path: '/%app.name%'
+# when@prod:
+#     security:
+#         firewalls:
+#             main:
+#                 remember_me:
+#                     path: '/%app.name%'
