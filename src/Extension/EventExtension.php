@@ -6,6 +6,7 @@ namespace App\Extension;
 
 use App\Service\FlushManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 /**
@@ -23,7 +24,7 @@ class EventExtension implements EventSubscriberInterface
     }
 
     /**
-     * Handles the login success event by updating the user's last connection date.
+     * Handles the login success event by updating the user's last connection date and redirecting it.
      *
      * @param LoginSuccessEvent $event the login success event
      */
@@ -34,5 +35,13 @@ class EventExtension implements EventSubscriberInterface
 
         $user->setDateLastCo(new \DateTime());
         $this->fm->persist($user);
+
+        // $request = $event->getRequest();
+        $targetPath = $event->getRequest()->getSession()->get('_login_target_path');
+
+        if ($targetPath) {
+            $event->getRequest()->getSession()->remove('_login_target_path');
+            $event->setResponse(new RedirectResponse($targetPath));
+        }
     }
 }

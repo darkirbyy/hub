@@ -20,9 +20,10 @@ use Doctrine\ORM\Events;
 #[AsEntityListener(event: Events::postRemove, method: 'postRemoveRight', entity: Right::class)]
 class FormEventExtension
 {
+    public array $pendingUsers;
+
     public function __construct(private EntityManagerInterface $entityManager)
     {
-        $this->pendingUsers = [];
     }
 
     public function preUpdateUser(User $user, PreUpdateEventArgs $event): void

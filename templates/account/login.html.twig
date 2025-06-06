@@ -13,11 +13,9 @@
         <h2 class="text-center text-md-start mb-3">
           {{ ('account.subtitles.login.' ~ (loginType|default('normal')))|trans }}
         </h2>
-        {# Use this variable to know the targeted page #}
-        {# {{ dump(app.session.get('_security.main.target_path'))}} #}
 
         {# Login form #}
-        {{ form_start(form) }}
+        {{ form_start(form, { attr: { 'data-turbo': 'false' } }) }}
         <p>
           {{ ('account.other.login.' ~ (loginType|default('normal')))|trans|raw }}
         </p>
@@ -25,7 +23,6 @@
         {{ form_row(form.username) }}
         {{ form_row(form.password) }}
         {{ form_row(form.rememberMe, loginType == 'forced' ? { row_attr: { class: 'd-none' } } : { }) }}
-
         <div class="text-start">
           <button type="submit" class="btn btn-outline-primary">{{ ('account.button.login.' ~ (loginType|default('normal')))|trans }}</button>
         </div>
