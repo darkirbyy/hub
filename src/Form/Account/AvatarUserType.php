@@ -33,6 +33,7 @@ class AvatarUserType extends DefaultType
             'data_class' => User::class,
             'attr' => [
                 'data-controller' => 'form-redirect load-popover',
+                'data-form-redirect-action-value' => 'replace',
             ],
         ]);
     }

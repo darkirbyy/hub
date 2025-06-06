@@ -1,7 +1,7 @@
 {# Turbo frame displayed into the modal in the user main account page #}
 
 <turbo-frame id="edit-avatar">
-  {{ form_start(form, { action: path('account_avatar'), attr: { 'data-form-redirect-action-value': 'replace' } }) }}
+  {{ form_start(form, { action: path('account_avatar') }) }}
   {{ form_row(form.imageFile) }}
   <div class="text-start">
     <button type="submit" class="btn btn-outline-primary">{{ 'form.button.confirm'|trans }}</button>
