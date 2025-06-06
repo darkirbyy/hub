@@ -19,8 +19,7 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * The User is described by a username, that must be unique. It can only be created by an meta-admin.
- * The meta-admin boolean grants the admin role on this app and therefore, allows to manage rights of all other apps and users.
+ * The User is described by a username, that must be unique.
  * The password and image are editable by the user.
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -44,13 +43,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(type: Types::JSON)]
+    private ?array $roles = null;
+
     /**
      * @var Collection<int, Right>
      */
     #[ORM\ManyToMany(targetEntity: Right::class, inversedBy: 'users')]
     private Collection $rights;
-
-    private ?array $roles = null;
 
     #[
         Vich\UploadableField(
@@ -129,8 +129,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     public function getId(): ?int

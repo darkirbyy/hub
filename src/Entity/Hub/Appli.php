@@ -47,6 +47,7 @@ class Appli
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
+    #[Assert\Regex('/^[a-z]+$/', 'appli.error.invalidName')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]

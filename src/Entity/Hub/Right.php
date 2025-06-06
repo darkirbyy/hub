@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * A Right is described by a role and a description.
  * It is always associated with an Appli, and for a given Appli, each right MUST have a unique role.
  */
+// #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: RightRepository::class)]
 #[UniqueEntity(fields: ['appli', 'role'])]
 #[ORM\UniqueConstraint(fields: ['appli', 'role'])]
@@ -30,7 +31,7 @@ class Right
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255)]
-    #[Assert\Regex('/^[A-Z0-9_]+$/', 'right.error.invalidRole')]
+    #[Assert\Regex('/^[a-z_]+$/', 'right.error.invalidRole')]
     private ?string $role = null;
 
     #[ORM\Column(length: 2048)]
@@ -55,12 +56,17 @@ class Right
 
     public function __toString(): string
     {
-        return $this->getRole() . ' : ' . $this->getDescription() ?? '';
+        return '<strong>' . $this->getRole() . '</strong> : ' . $this->getDescription() ?? '';
     }
 
     public function fullString(): string
     {
-        return '<strong>' . $this->getAppli()->getTitle() . '</strong> - ' . $this->__toString();
+        return '<strong>' . $this->getAppli()->getName() . '</strong> - ' . $this->__toString();
+    }
+
+    public function fullRole(): string
+    {
+        return 'ROLE_' . strtoupper($this->getAppli()->getName()) . '_' . strtoupper($this->getRole());
     }
 
     public function getId(): ?int

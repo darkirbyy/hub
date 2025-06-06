@@ -13,14 +13,14 @@
         <h2 class="text-center text-md-start mb-3">
           {{ ('account.subtitles.login.' ~ (loginType|default('normal')))|trans }}
         </h2>
+        {# Use this variable to know the targeted page #}
+        {# {{ dump(app.session.get('_security.main.target_path'))}} #}
 
         {# Login form #}
         {{ form_start(form) }}
         <p>
           {{ ('account.other.login.' ~ (loginType|default('normal')))|trans|raw }}
         </p>
-        {# Use this variable to know the targeted page #}
-        {# {{app.session.get('_security.main.target_path')}} #}
 
         {{ form_row(form.username) }}
         {{ form_row(form.password) }}

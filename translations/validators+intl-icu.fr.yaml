@@ -41,9 +41,11 @@ appli:
     externalLinks: Liens externes
   help:
     title: Apparaît sur les cartes du HUB
-    name: Doit être identique à la variable APP_NAME renseignée dans l'application cible
+    name: "Doit être identique à la variable APP_NAME renseignée dans l'application cible<br>Caractères autorisés : lettres minuscules"
     path: Définit le chemin de l'application cible depuis la racine du serveur, en commençant par '/'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
+  error:
+    invalidName: Ne doit contenir que des lettres minuscules.
 
 externalLink:
   name: Liens externes
@@ -92,7 +94,7 @@ right:
     description: Description
     appli: Application
   help:
-    role: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+    role: 'Caractères autorisés : lettres minuscules et underscore'
   error:
-    invalidRole: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
+    invalidRole: Ne doit contenir que des lettres minuscules ou le symbole _.
   

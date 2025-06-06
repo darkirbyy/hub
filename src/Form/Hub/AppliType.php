@@ -65,6 +65,7 @@ class AppliType extends DefaultType
                 'required' => true,
                 'label' => 'appli.label.name',
                 'help' => 'appli.help.name',
+                'help_html' => true,
                 'attr' => [
                     'button_action' => 'clear',
                     'placeholder' => 'appli.label.name',

@@ -50,7 +50,7 @@
                 <img class="app-navbar-logo" src="{{ asset('build/images/darkirby-logo-crop.png') }}" alt="Logo" />{{ 'layout.navbar.home'|trans }}
               </a>
             </li>
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_HUB_ADMIN') %}
               <li class="nav-item fs-5">
                 <a {{ currentRoute starts with 'admin' ? activeLink|raw : otherLink|raw }} href="{{ path('admin_index') }}">{{ 'layout.navbar.admin'|trans }}</a>
               </li>
@@ -58,7 +58,7 @@
           </ul>
           {# Right part of the navbar : connect or go to your account page #}
           <ul class="navbar-nav align-items-center gap-1">
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_HUB_USER') %}
               <li class="nav-item">
                 <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
                   {{ app.user.username }}

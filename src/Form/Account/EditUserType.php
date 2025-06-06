@@ -34,6 +34,7 @@ class EditUserType extends DefaultType
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'user.label.rights',
+                'label_html' => true,
                 'attr' => [
                     'class' => 'd-flex flex-column justify-content-start flex-nowrap gap-2',
                 ],

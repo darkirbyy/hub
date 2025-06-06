@@ -2,7 +2,6 @@
 
 namespace App\Controller\Account;
 
-use App\Entity\Hub\Right;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
@@ -211,12 +210,8 @@ class AccountController extends AbstractController
             return new Response('Role parameter (r) is missing or invalid', Response::HTTP_BAD_REQUEST);
         }
 
-        $appliToCheck = strtolower($appliParam);
-        $roleToCheck = 'ROLE_' . strtoupper($roleParam);
-
-        // Search for any right with the good appli name and role
-        $check = array_filter($user->getRights()->toArray(), fn (Right $r) => $r->getRole() === $roleToCheck && $r->getAppli()->getName() === $appliToCheck);
-        if (empty($check)) {
+        $roleToCheck = 'ROLE_' . strtoupper($appliParam) . '_' . strtoupper($roleParam);
+        if (!in_array($roleToCheck, $user->getRoles())) {
             return new Response('Forbidden', Response::HTTP_FORBIDDEN);
         }
 
