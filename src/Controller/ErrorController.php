@@ -10,8 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
+/**
+ * Controller for managing the error page.
+ */
 class ErrorController extends AbstractController
 {
+    /**
+     * Render and return the response page + add header for turbo not to replace but reload if the status  code is not 422.
+     */
     public function show(Request $request, FlattenException $exception, ?DebugLoggerInterface $logger = null): Response
     {
         $statusCode = $exception->getStatusCode();

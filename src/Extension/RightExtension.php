@@ -14,17 +14,18 @@ use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
+/**
+ * Update user flatten roles every time the user is changed or a right is changed
+ */
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdateUser', entity: User::class)]
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdateRight', entity: Right::class)]
 #[AsEntityListener(event: Events::preRemove, method: 'preRemoveRight', entity: Right::class)]
 #[AsEntityListener(event: Events::postRemove, method: 'postRemoveRight', entity: Right::class)]
-class FormEventExtension
+class RightExtension
 {
     public array $pendingUsers;
 
-    public function __construct(private EntityManagerInterface $entityManager)
-    {
-    }
+    public function __construct(private EntityManagerInterface $entityManager) {}
 
     public function preUpdateUser(User $user, PreUpdateEventArgs $event): void
     {
@@ -58,7 +59,7 @@ class FormEventExtension
     private function updateUser(User $user)
     {
         $rights = $user->getRights()->toArray();
-        $roles = array_map(fn (Right $r) => $r->fullRole(), $rights);
+        $roles = array_map(fn(Right $r) => $r->fullRole(), $rights);
         $user->setRoles($roles);
     }
 }
