@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Form\Account;
 
-use App\Entity\Account\MetaRole;
 use App\Entity\Account\User;
+use App\Entity\Hub\Right;
 use App\Form\DefaultType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatableMessage;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditUserType extends DefaultType
@@ -29,32 +27,23 @@ class EditUserType extends DefaultType
                     'placeholder' => 'user.label.username',
                 ],
             ])
-            ->add('metaAdmin', ChoiceType::class, [
-                'required' => true,
-                'choices' => [
-                    'enum.choices.yes' => true,
-                    'enum.choices.no' => false,
-                ],
-                'choice_translation_domain' => 'messages',
-                'label' => 'user.label.metaAdmin',
-                'label_attr' => [
-                    'class' => 'radio-inline',
-                ],
+            ->add('rights', EntityType::class, [
+                'required' => false,
+                'class' => Right::class,
+                'choice_label' => fn (Right $right) => $right->__toString(),
+                'multiple' => true,
                 'expanded' => true,
-                'multiple' => false,
+                'label' => 'user.label.rights',
+                'label_html' => true,
+                'attr' => [
+                    'class' => 'd-flex flex-column justify-content-start flex-nowrap gap-2',
+                ],
                 'row_attr' => [
                     'class' => 'app-form-row-bordered',
                 ],
-            ])
-            ->add('metaRole', EntityType::class, [
-                'required' => false,
-                'class' => MetaRole::class,
-                'choice_label' => 'key',
-                'label' => 'user.label.metaRole',
-                'placeholder' => new TranslatableMessage('form.other.none'),
-                'attr' => [
-                    'placeholder' => 'user.label.metaRole',
-                ],
+                'group_by' => function ($choice, $key, $value) {
+                    return (string) $choice->getAppli();
+                },
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false,

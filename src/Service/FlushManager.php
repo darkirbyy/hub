@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use Doctrine\DBAL\Exception\ConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -37,7 +37,7 @@ class FlushManager
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('success', $flashSuccess);
             }
-        } catch (ORMException $e) {
+        } catch (ConstraintViolationException $e) {
             $this->logger->warning('Error while trying to persist the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('danger', ['message' => 'form.flash.error']);
@@ -60,7 +60,7 @@ class FlushManager
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('success', $flashSuccess);
             }
-        } catch (ORMException $e) {
+        } catch (ConstraintViolationException $e) {
             $this->logger->warning('Error while trying to remove the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
             if (!empty($flashSuccess)) {
                 $this->flashBag->add('danger', ['message' => 'form.flash.error']);

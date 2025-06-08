@@ -2,7 +2,6 @@
 
 namespace App\Controller\Account;
 
-use App\Entity\Account\Role;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
@@ -211,22 +210,9 @@ class AccountController extends AbstractController
             return new Response('Role parameter (r) is missing or invalid', Response::HTTP_BAD_REQUEST);
         }
 
-        $appliToCheck = strtolower($appliParam);
-        $roleToCheck = 'ROLE_' . strtoupper($roleParam);
-
-        // Different method depending on the app
-        if ('hub' === $appliToCheck) {
-            // For this app, use the the Symfony system
-            if (!$this->isGranted($roleToCheck)) {
-                return new Response('Forbidden', Response::HTTP_FORBIDDEN);
-            }
-        } else {
-            // For the others apps, check the roles in the metarole
-            $userRoles = $user?->getMetaRole()?->getRoles()->toArray() ?? [];
-            $check = array_filter($userRoles, fn (Role $role) => $role->getKey() === $roleToCheck && $role->getAppli()->getName() === $appliToCheck);
-            if (empty($check)) {
-                return new Response('Forbidden', Response::HTTP_FORBIDDEN);
-            }
+        $roleToCheck = 'ROLE_' . strtoupper($appliParam) . '_' . strtoupper($roleParam);
+        if (!in_array($roleToCheck, $user->getRoles())) {
+            return new Response('Forbidden', Response::HTTP_FORBIDDEN);
         }
 
         return new Response('OK', Response::HTTP_OK);

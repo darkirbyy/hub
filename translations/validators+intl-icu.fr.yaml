@@ -30,9 +30,10 @@ appli:
     title: Titre
     category: Catégorie
     number: Ordre
-    public: Publique
+    status: Statut
     name: Nom
     path: Chemin
+    rights: Droits
     description: Description
     linkText: Texte du lien
     imageFile: Image
@@ -40,9 +41,11 @@ appli:
     externalLinks: Liens externes
   help:
     title: Apparaît sur les cartes du HUB
-    name: Doit être identique à la variable APP_NAME renseignée dans l'application cible
+    name: "Doit être identique à la variable APP_NAME renseignée dans l'application cible<br>Caractères autorisés : lettres minuscules"
     path: Définit le chemin de l'application cible depuis la racine du serveur, en commençant par '/'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
+  error:
+    invalidName: Ne doit contenir que des lettres minuscules.
 
 externalLink:
   name: Liens externes
@@ -67,8 +70,7 @@ user:
     id: ID
     username: Nom d'utilisateur
     password: Mot de passe
-    metaAdmin: Méta-admin
-    metaRole: Méta-rôle
+    rights: Droits
     dateAdd: Date création
     dateUpdate: Date modification
     dateLastCo: Date dernière connexion
@@ -84,26 +86,15 @@ user:
   error:
     invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
 
-role:
-  name: Rôles
+right:
+  name: Droits
   label:
     id: ID
-    key: Clé
+    role: Rôle
     description: Description
     appli: Application
   help:
-    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
+    role: 'Caractères autorisés : lettres minuscules et underscore'
   error:
-    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
-
-metarole:
-  name: Méta-rôles
-  label:
-    id: ID
-    key: Clé
-    description: Description
-    roles: Rôles
-  help:
-    key: 'Caractères autorisés : lettres majuscules, chiffres et underscore'
-  error:
-    invalidKey: Ne doit contenir que des lettres majuscules, des chiffres, ou le symbole _.
+    invalidRole: Ne doit contenir que des lettres minuscules ou le symbole _.
+  

@@ -141,11 +141,9 @@
         {{- block('choice_widget_expanded_options') -}}
       </fieldset>
     {%- else -%}
-      <div>
-        {%- set child = form.children|filter(child => child.vars.value == option.value)|first -%}
-        {{- form_widget(child) -}}
-        {{- form_label(child) -}}
-      </div>
+      {%- set child = form.children|filter(child => child.vars.value == option.value)|first -%}
+      {{- form_widget(child, { label_html: label_html, parent_label_class: label_attr.class|default(''), translation_domain: choice_translation_domain, valid: valid }) -}}
+      {{- form_label(child) -}}
     {%- endif -%}
   {% endfor %}
 {% endblock %}

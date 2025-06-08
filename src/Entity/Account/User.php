@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity\Account;
 
+use App\Entity\Hub\Right;
 use App\Repository\Account\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -16,8 +19,7 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * The User is described by a username, that must be unique. It can only be created by an meta-admin.
- * The meta-admin boolean grants the admin role on this app and therefore, allows to manage roles of all other apps and users.
+ * The User is described by a username, that must be unique.
  * The password and image are editable by the user.
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -41,12 +43,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull]
-    private ?bool $metaAdmin = null;
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $roles = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?MetaRole $metaRole = null;
+    #[ORM\Column]
+    private ?string $avatarPath = null;
+
+    /**
+     * @var Collection<int, Right>
+     */
+    #[ORM\ManyToMany(targetEntity: Right::class, inversedBy: 'users')]
+    private Collection $rights;
 
     #[
         Vich\UploadableField(
@@ -78,8 +85,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->metaAdmin = false;
         $this->imageMeta = new FileMeta();
+        $this->rights = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -106,7 +113,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'password' => $this->getPassword(),
-            // 'roles' => $this->getRoles(),
+            'roles' => $this->getRoles(),
         ];
     }
 
@@ -115,7 +122,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = $data['id'];
         $this->username = $data['username'];
         $this->password = $data['password'];
-        // $this->roles = $data['roles'];
+        $this->roles = $data['roles'];
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
+    }
+
+    public function eraseCredentials(): void
+    {
     }
 
     public function getId(): ?int
@@ -135,18 +151,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUserIdentifier(): string
-    {
-        return $this->username;
-    }
-
-    public function getRoles(): array
-    {
-        $roles[] = $this->isMetaAdmin() ? 'ROLE_ADMIN' : 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -159,20 +163,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function eraseCredentials(): void
+    public function getRoles(): array
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        return $this->roles;
     }
 
-    public function isMetaAdmin(): ?bool
+    public function setRoles(?array $roles): static
     {
-        return $this->metaAdmin;
+        $this->roles = $roles;
+
+        return $this;
     }
 
-    public function setMetaAdmin(?bool $metaAdmin): static
+    public function getAvatarPath(): ?string
     {
-        $this->metaAdmin = $metaAdmin;
+        return $this->avatarPath;
+    }
+
+    public function setAvatarPath(string $avatarPath): static
+    {
+        $this->avatarPath = $avatarPath;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Right>
+     */
+    public function getRights(): Collection
+    {
+        return $this->rights;
+    }
+
+    public function addRight(Right $right): static
+    {
+        if (!$this->rights->contains($right)) {
+            $this->rights->add($right);
+        }
+
+        return $this;
+    }
+
+    public function removeRight(Right $right): static
+    {
+        $this->rights->removeElement($right);
 
         return $this;
     }
@@ -240,18 +274,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateLastCo(?\DateTimeInterface $dateLastCo): static
     {
         $this->dateLastCo = $dateLastCo;
-
-        return $this;
-    }
-
-    public function getMetaRole(): ?MetaRole
-    {
-        return $this->metaRole;
-    }
-
-    public function setMetaRole(?MetaRole $metaRole): static
-    {
-        $this->metaRole = $metaRole;
 
         return $this;
     }

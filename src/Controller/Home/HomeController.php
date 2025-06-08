@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Home;
 
-use App\Entity\Account\Role;
+use App\Entity\Hub\Right;
+use App\Enum\AppliStatusEnum;
 use App\Repository\Hub\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class HomeController extends AbstractController
 {
     /**
      * Displays the homepage with public applis for any visitor,
-     * adapting the visible applis for an authenticated user depending on its roles.
+     * adapting the visible applis for an authenticated user depending on its rights.
      *
      * @param Request            $request      the HTTP request instance
      * @param CategoryRepository $categoryRepo $shortcutRepo the repository managing the categories
@@ -32,22 +33,23 @@ class HomeController extends AbstractController
         $categories = $categoryRepo->findAndSort();
         $serverBaseUrl = $request->getSchemeAndHttpHost();
 
-        // Determines in which applis the user has at least one role
+        // Determine in which applis the connected user has at least one right
         $allowedApplis = [];
-        if ($this->isGranted('ROLE_USER')) {
-            // Check if the user has a metaRole and if it contains roles
-            $metaRole = $this->getUser()->getMetaRole();
-            if ($metaRole && $metaRole->getRoles()->count() > 0) {
-                $allowedApplis = array_unique($metaRole->getRoles()->map(fn (Role $role) => $role->getAppli())->toArray());
-            }
+        if ($this->isGranted('ROLE_HUB_USER')) {
+            /** @var \App\Entity\Account\User $user */
+            $user = $this->getUser();
+            $allowedApplis = array_unique(array_map(fn (Right $r) => $r->getAppli(), $user->getRights()->toArray()));
         }
 
         // Loop through categories and remove applis the user is not authorized for
-        foreach ($categories as $category) {
+        foreach ($categories as $key => $category) {
             foreach ($category->getApplis() as $appli) {
-                if (!$appli->isPublic() && !in_array($appli, $allowedApplis)) {
+                if (AppliStatusEnum::PRIVATE === $appli->getStatus() || (AppliStatusEnum::USERONLY === $appli->getStatus() && !in_array($appli, $allowedApplis))) {
                     $category->removeAppli($appli);
                 }
+            }
+            if (0 == count($category->getApplis())) {
+                unset($categories[$key]);
             }
         }
 

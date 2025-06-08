@@ -42,7 +42,7 @@ final class CategoryController extends CrudController
                 1 => ['getter' => 'label'],
                 2 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
                 3 => ['getter' => 'number', 'breakpoint' => 'md'],
-                4 => ['getter' => 'applis', 'filters' => 'fmt_collec', 'breakpoint' => 'md'],
+                4 => ['getter' => 'applis', 'filters' => 'fmt_collec|default("-")', 'breakpoint' => 'md'],
             ],
             'backlink' => [
                 'text' => 'admin.link.backToMainPage',
@@ -60,7 +60,7 @@ final class CategoryController extends CrudController
                 1 => ['getter' => 'label'],
                 2 => ['getter' => 'icon.faClass', 'label' => 'icon', 'filters' => 'fmt_fa_class|raw'],
                 3 => ['getter' => 'number'],
-                4 => ['getter' => 'applis', 'filters' => 'fmt_collec'],
+                4 => ['getter' => 'applis', 'filters' => 'fmt_collec("<br>")|default("-")|raw'],
             ],
         ];
     }

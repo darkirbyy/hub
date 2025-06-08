@@ -1,4 +1,8 @@
-{% block error %}
+{% extends 'base.html.twig' %}
+
+{% set title = 'error.title'|trans({ code: error_code }) %}
+
+{% block main %}
   <section>
     <div class="container">
       <p class="text-center fs-4">
