@@ -31,8 +31,8 @@ class ConnectUserType extends DefaultType
                 'mapped' => false,
                 'required' => true,
                 'label' => 'user.label.password',
+                'button_action' => 'reveal',
                 'attr' => [
-                    'button_action' => 'reveal',
                     'placeholder' => 'user.label.password',
                     'autocomplete' => 'current-password',
                 ],

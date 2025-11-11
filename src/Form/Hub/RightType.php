@@ -19,17 +19,17 @@ class RightType extends DefaultType
                 'required' => true,
                 'label' => 'right.label.role',
                 'help' => 'right.help.role',
+                'button_action' => 'clear',
                 'attr' => [
                     'data-collec-field-target' => 'focus',
-                    'button_action' => 'clear',
                     'placeholder' => 'right.label.role',
                 ],
             ])
             ->add('description', TextType::class, [
                 'required' => true,
                 'label' => 'right.label.description',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'right.label.description',
                 ],
                 'row_attr' => [
@@ -44,7 +44,9 @@ class RightType extends DefaultType
 
         $resolver->setDefaults([
             'data_class' => Right::class,
-            'attr' => [],
+            'attr' => [
+                'data-controller' => 'button-action',
+            ],
         ]);
     }
 }

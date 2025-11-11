@@ -31,13 +31,14 @@
     {% if form.vars.attr.placeholder is defined %}
       <div class="input-group">
         <div class="form-floating">
-          {{ form_widget(form, { attr: { class: form.vars.attr.button_action|default('') is not empty ? 'pe-5' } }) }}
+          {% set button_action = form.vars.button_action %}
+          {{ form_widget(form, { attr: { class: button_action is not empty ? 'pe-5' } }) }}
           {{ form_label(form) }}
-          {% if form.vars.attr.button_action|default('') is not empty %}
+          {% if button_action is not empty %}
             <small>
               <button type="button"
-                aria-label="{{ ('form.button.' ~ form.vars.attr.button_action)|trans }}"
-                data-button-action-target="{{ form.vars.attr.button_action }}"
+                aria-label="{{ ('form.button.' ~ button_action)|trans }}"
+                data-button-action-target="{{ button_action }}"
                 data-button-action-id="{{ form.vars.id }}"
                 class="app-btn-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}"
                 tabindex="-1">
@@ -113,7 +114,7 @@
 
 {# Add one mandatory target and the delete button #}
 {% block collection_entry_row %}
-  <div class="d-flex gap-2">
+  <div class="d-flex gap-2" {{ block('attributes') }}>
     {% for row in form.children %}
       {{ form_row(row) }}
     {% endfor %}

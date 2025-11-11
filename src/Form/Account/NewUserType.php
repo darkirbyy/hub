@@ -18,8 +18,8 @@ class NewUserType extends DefaultType
             'required' => true,
             'label' => 'user.label.username',
             'help' => 'user.help.username',
+            'button_action' => 'clear',
             'attr' => [
-                'button_action' => 'clear',
                 'placeholder' => 'user.label.username',
             ],
         ]);

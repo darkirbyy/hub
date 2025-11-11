@@ -18,8 +18,8 @@ class IconType extends DefaultType
             ->add('label', TextType::class, [
                 'required' => true,
                 'label' => 'icon.label.label',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'icon.label.label',
                 ],
             ])

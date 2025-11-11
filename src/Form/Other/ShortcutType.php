@@ -20,8 +20,8 @@ class ShortcutType extends DefaultType
             ->add('label', TextType::class, [
                 'required' => true,
                 'label' => 'shortcut.label.label',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'shortcut.label.label',
                 ],
             ])
@@ -43,8 +43,8 @@ class ShortcutType extends DefaultType
                 'required' => true,
                 'default_protocol' => 'http',
                 'label' => 'shortcut.label.url',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'shortcut.label.url',
                 ],
             ]);

@@ -27,8 +27,8 @@ class AppliType extends DefaultType
                 'required' => true,
                 'label' => 'appli.label.title',
                 'help' => 'appli.help.title',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.title',
                 ],
             ])
@@ -66,8 +66,8 @@ class AppliType extends DefaultType
                 'label' => 'appli.label.name',
                 'help' => 'appli.help.name',
                 'help_html' => true,
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.name',
                 ],
             ])
@@ -75,8 +75,8 @@ class AppliType extends DefaultType
                 'required' => true,
                 'label' => 'appli.label.path',
                 'help' => 'appli.help.path',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.path',
                 ],
             ])
@@ -97,16 +97,16 @@ class AppliType extends DefaultType
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'appli.label.description',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.description',
                 ],
             ])
             ->add('linkText', TextType::class, [
                 'required' => true,
                 'label' => 'appli.label.linkText',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'appli.label.linkText',
                 ],
             ])

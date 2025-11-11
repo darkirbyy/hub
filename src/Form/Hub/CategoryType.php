@@ -21,8 +21,8 @@ class CategoryType extends DefaultType
             ->add('label', TextType::class, [
                 'required' => true,
                 'label' => 'category.label.label',
+                'button_action' => 'clear',
                 'attr' => [
-                    'button_action' => 'clear',
                     'placeholder' => 'category.label.label',
                 ],
             ])

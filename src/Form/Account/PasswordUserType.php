@@ -36,15 +36,15 @@ class PasswordUserType extends DefaultType
             'type' => PasswordType::class,
             'first_options' => [
                 'label' => 'user.label.newPassword',
+                'button_action' => 'reveal',
                 'attr' => [
-                    'button_action' => 'reveal',
                     'placeholder' => 'user.label.newPassword',
                 ],
             ],
             'second_options' => [
                 'label' => 'user.label.repeatPassword',
+                'button_action' => 'reveal',
                 'attr' => [
-                    'button_action' => 'reveal',
                     'placeholder' => 'user.label.repeatPassword',
                 ],
             ],

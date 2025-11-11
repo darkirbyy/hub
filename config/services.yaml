@@ -22,14 +22,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Extension\EventExtension:
-        tags: [kernel.event_subscriber]
-
     App\Form\:
         resource: '../src/Form'
         tags: ['form.type']
         arguments:
             $htmlValidation: '%env(bool:APP_HTML_VALIDATION)%'
+
+    App\Extension\EventExtension:
+        tags: [kernel.event_subscriber]
+
+    App\Extension\TypeExtension:
+        tags: [form.type_extension]
 
     App\Form\Account\PasswordUserType:
         arguments:
