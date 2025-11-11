@@ -74,7 +74,7 @@
               {# Link to disconnect #}
               <p class="d-flex flex-column">
                 <span>
-                  <a class="btn btn-outline-primary" href="{{ path('account_logout', { 'disconnect_user[_token]': csrf_token('logout') }) }}" data-turbo-prefetch="false">
+                  <a class="btn btn-outline-primary" href="{{ path('account_logout', { 'disconnect_user[_token]': csrf_token('hub/logout') }) }}" data-turbo-prefetch="false">
                     {{ 'account.button.logout'|trans }}
                   </a>
                 </span>

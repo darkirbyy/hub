@@ -21,8 +21,9 @@ security:
                 check_path: account_login
                 username_parameter: connect_user[username]
                 password_parameter: connect_user[password]
-                csrf_parameter: connect_user[_token]
                 enable_csrf: true
+                csrf_parameter: connect_user[_token]
+                csrf_token_id: hub/login
                 form_only: true
                 post_only: true
             logout:
@@ -30,6 +31,8 @@ security:
                 target: home_index
                 enable_csrf: true
                 csrf_parameter: disconnect_user[_token]
+                csrf_token_id: hub/logout
+                invalidate_session: true
             login_throttling:
                 max_attempts: 5          
                 interval: '15 minutes'
@@ -61,10 +64,3 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
-
-# when@prod:
-#     security:
-#         firewalls:
-#             main:
-#                 remember_me:
-#                     path: '/%app.name%'

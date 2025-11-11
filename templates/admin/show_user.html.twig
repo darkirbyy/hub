@@ -14,7 +14,7 @@
     </a>
     {% with {
       path: path('admin_account_user_delete', { id: object.id }),
-      token: csrf_token('delete-' ~ object.id),
+      token: csrf_token('hub/delete-' ~ object.id),
       body_param: { object: object },
       btn_class: '',
       text_class: 'd-md-inline ms-md-1',

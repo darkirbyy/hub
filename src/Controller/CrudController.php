@@ -253,7 +253,7 @@ abstract class CrudController extends AbstractController
      *
      * @throws NotFoundHttpException if the entity is not found
      */
-    #[IsCsrfTokenValid(new Expression('"delete-" ~ args["id"]'), tokenKey: 'delete_token')]
+    #[IsCsrfTokenValid(new Expression('"hub/delete-" ~ args["id"]'), tokenKey: 'delete_token')]
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(int $id, FlushManager $fm): Response
     {
