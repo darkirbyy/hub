@@ -28,7 +28,7 @@
               {% if config_edit.button.delete %}
                 {% with {
                   path: path(config_main.route_prefix ~ 'delete', { id: object.id }),
-                  token: csrf_token('hub/delete-' ~ object.id),
+                  token: csrf_token('hub/delete-' ~ config_main.entity_key),
                   body_param: { object: object },
                   text_class: 'd-md-inline ms-1',
                 }

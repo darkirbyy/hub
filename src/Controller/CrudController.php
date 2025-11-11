@@ -7,12 +7,11 @@ namespace App\Controller;
 use App\Service\FlushManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 /**
  * Abstract controller providing CRUD functionality for any entity.
@@ -253,10 +252,15 @@ abstract class CrudController extends AbstractController
      *
      * @throws NotFoundHttpException if the entity is not found
      */
-    #[IsCsrfTokenValid(new Expression('"hub/delete-" ~ args["id"]'), tokenKey: 'delete_token')]
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function delete(int $id, FlushManager $fm): Response
+    public function delete(int $id, Request $request, FlushManager $fm): Response
     {
+        $token = $request->getPayload()->get('delete_token');
+        $tokenId = 'hub/delete-' . $this->configMain['entity_key'];
+        if (!$this->isCsrfTokenValid($tokenId, $token)) {
+            throw new InvalidCsrfTokenException();
+        }
+
         $object = $this->repository->find($id);
         empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
 

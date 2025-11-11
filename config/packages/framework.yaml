@@ -13,8 +13,15 @@ framework:
         cookie_path: /
         cookie_lifetime: 0 # until browser is closed
 
-    #esi: true
-    #fragments: true
+    form:
+        csrf_protection:
+            token_id: hub/submit
+            
+    csrf_protection:
+        stateless_token_ids:
+            - hub/login
+            - hub/logout
+            - hub/submit
 
 when@test:
     framework:
