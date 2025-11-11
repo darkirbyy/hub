@@ -28,15 +28,13 @@ class ErrorController extends AbstractController
         };
 
         $isTurbo = $request->headers->has('Turbo-Frame') || str_contains((string) $request->headers->get('Accept'), 'turbo-stream');
+        $turboForceReload = $isTurbo && 422 != $statusCode;
 
         $response = $this->render('theme/error.html.twig', [
+            'turbo_force_reload' => $turboForceReload,
             'error_code' => $statusCode,
             'error_key' => $errorKey,
         ]);
-
-        if ($isTurbo && 422 != $statusCode) {
-            $response->headers->set('Turbo-Visit-Control', 'reload');
-        }
 
         return new Response($response->getContent(), $statusCode, $response->headers->all());
     }

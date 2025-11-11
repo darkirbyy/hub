@@ -3,12 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% if turbo_force_reload is defined and turbo_force_reload == true %}
+      <meta name="turbo-visit-control" content="reload" />
+    {% endif %}
     {# <meta name="turbo-refresh-method" content="morph" /> #}
     {# <meta name="turbo-refresh-scroll" content="preserve" /> #}
+
     <title>
       {{ title ~ ' - ' ~ ('layout.name'|trans) }}
     </title>
+
     <link rel="icon" href="{{ asset('build/images/darkirby-logo-square.png') }}" />
+
     {% block stylesheets %}
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
