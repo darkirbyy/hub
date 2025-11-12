@@ -8,7 +8,7 @@ parameters:
     app.env: '%env(string:APP_ENV)%'
     app.html_validation: '%env(bool:APP_HTML_VALIDATION)%'
     app.password_min_strength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'
-    app.enable_prefetch: '%env(string:APP_ENABLE_PREFETCH)%'
+    app.enable_prefetch: '%env(bool:APP_ENABLE_PREFETCH)%'
 
 imports:
     - { resource: 'version.yaml' }

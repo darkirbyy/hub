@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 import * as Turbo from '@hotwired/turbo';
 
 /**
- * Stimulus controller that MUST be placed on a form tag within a turbo-frame, to follow redirection on success.
+ * Stimulus controller that MUST be placed on a form tag within a turbo-frame.
  */
 export default class extends Controller {
   static values = {
@@ -10,7 +10,15 @@ export default class extends Controller {
   };
 
   connect() {
+    document.addEventListener('turbo:frame-missing', this.missing.bind(this));
     this.element.addEventListener('turbo:submit-end', this.next.bind(this));
+  }
+
+  missing(event) {
+    event.preventDefault();
+    const response = event.detail.response;
+    const visit = event.detail.visit;
+    visit(response); // you have to render your "application" layout for this
   }
 
   next(event) {

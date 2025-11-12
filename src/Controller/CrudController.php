@@ -9,8 +9,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -187,13 +185,13 @@ abstract class CrudController extends AbstractController
      *
      * @return Response renders the show template with entity details
      *
-     * @throws NotFoundHttpException if the entity is not found
+     * @throws \RuntimeException if the entity is not found
      */
     #[Route('/{id}', name: 'show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(int $id): Response
     {
         $object = $this->repository->find($id);
-        empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
+        empty($object) ? throw new \RuntimeException($this->configMain['entity_class'] . ' object not found.') : null;
 
         return $this->render($this->configShow['template'], [
             'config_main' => $this->configMain,
@@ -211,7 +209,7 @@ abstract class CrudController extends AbstractController
      *
      * @return Response redirects to the entity details page on success or re-renders the form if invalid
      *
-     * @throws NotFoundHttpException if the entity is not found
+     * @throws \RuntimeException if the entity is not found
      */
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(?int $id, Request $request, FlushManager $fm): Response
@@ -222,7 +220,7 @@ abstract class CrudController extends AbstractController
             $object = new ($this->configMain['entity_class'])();
         } else {
             $object = $this->repository->find($id);
-            empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
+            empty($object) ? throw new \RuntimeException($this->configMain['entity_class'] . ' object not found.') : null;
         }
 
         $form = $this->createForm($isNewObject ? $this->configNew['form_class'] : $this->configEdit['form_class'], $object);
@@ -250,19 +248,19 @@ abstract class CrudController extends AbstractController
      *
      * @return Response redirects to the index page after deletion
      *
-     * @throws NotFoundHttpException if the entity is not found
+     * @throws \RuntimeException if the CRSF token is invalid or the entity is not found
      */
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(int $id, Request $request, FlushManager $fm): Response
     {
-        $token = $request->getPayload()->get('delete_token');
+        $token = $request->getPayload()->get('_token');
         $tokenId = 'hub/delete-' . $this->configMain['entity_key'];
         if (!$this->isCsrfTokenValid($tokenId, $token)) {
-            throw new BadRequestHttpException('Invalid CSRF Token.');
+            throw new \RuntimeException('Invalid CSRF Token.');
         }
 
         $object = $this->repository->find($id);
-        empty($object) ? throw new NotFoundHttpException($this->configMain['entity_class'] . ' object not found.') : null;
+        empty($object) ? throw new \RuntimeException($this->configMain['entity_class'] . ' object not found.') : null;
 
         $fm->remove($object, ['message' => 'form.flash.deleted', 'params' => ['object' => (string) $object]]);
 

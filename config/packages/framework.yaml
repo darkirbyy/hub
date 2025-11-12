@@ -20,7 +20,6 @@ framework:
     csrf_protection:
         stateless_token_ids:
             - hub/login
-            - hub/logout
             - hub/submit
 
 when@test:

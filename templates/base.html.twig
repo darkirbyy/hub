@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {%- if turbo_force_reload is defined and turbo_force_reload == true -%}
+    {% if (turbo_force_reload|default(false)) == true %}
       <meta name="turbo-visit-control" content="reload" />
-    {%- endif -%}
-    <meta name="turbo-prefetch" content="{{ env.app.enable_prefetch }}" />
+    {% endif %}
+    <meta name="turbo-prefetch" content="{{ env.app.enable_prefetch ? 'true' : 'false' }}" />
     {# <meta name="turbo-refresh-method" content="morph" /> #}
     {# <meta name="turbo-refresh-scroll" content="preserve" /> #}
 
