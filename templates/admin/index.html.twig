@@ -48,6 +48,7 @@
             {% for type, shortcuts in shortcuts_by_type %}
               <span class="list-group-item fw-bold list-group-item-secondary">{{ type }}</span>
               {% for shortcut in shortcuts %}
+                {# Disable turbo : we may leave this app when following these links #}
                 <a class="list-group-item list-group-item-action" href="{{ shortcut.url }}" data-turbo="false">
                   <span class="fa-solid fa-arrow-up-right-from-square fa-fw me-1" aria-hidden="true"></span>{{ shortcut.label }}
                 </a>

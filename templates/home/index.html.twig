@@ -51,6 +51,7 @@
                 {% set appli_url = server_base_url ~ appli.path %}
                 <div class="card swiper-slide app-home-card">
                   {# Card top with a clickable image #}
+                  {# Disable turbo : we may leave this app when following these links #}
                   <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center" data-turbo="false">
                     <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-img-fluid" alt="{{ appli.title }}" />
                   </a>
@@ -68,6 +69,7 @@
                     <div class="d-flex flex-row gap-2 justify-content-start align-items-end">
                       {# Main button #}
                       <div class="flex-fill text-start">
+                        {# Disable turbo : we may leave this app when following these links #}
                         <a href="{{ appli_url }}" class="btn btn-outline-primary" data-turbo="false">{{ appli.linkText }}</a>
                       </div>
                       {# All externals links #}

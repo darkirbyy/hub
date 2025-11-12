@@ -27,8 +27,7 @@ class ErrorController extends AbstractController
             default => 'other',
         };
 
-        $isTurbo = $request->headers->has('Turbo-Frame') || str_contains((string) $request->headers->get('Accept'), 'turbo-stream');
-        $turboForceReload = $isTurbo && 422 != $statusCode;
+        $turboForceReload = $request->headers->has('Turbo-Frame') && 422 != $statusCode;
 
         $response = $this->render('theme/error.html.twig', [
             'turbo_force_reload' => $turboForceReload,
@@ -36,6 +35,7 @@ class ErrorController extends AbstractController
             'error_key' => $errorKey,
         ]);
 
+        // todo : log the error ?
         return new Response($response->getContent(), $statusCode, $response->headers->all());
     }
 }

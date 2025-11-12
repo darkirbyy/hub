@@ -15,6 +15,7 @@
         </h2>
 
         {# Login form #}
+        {# Disable turbo : we may leave this app on login success #}
         {{ form_start(form, { attr: { 'data-turbo': 'false' } }) }}
         <p>
           {{ ('account.other.login.' ~ (loginType|default('normal')))|trans|raw }}
