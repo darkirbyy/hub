@@ -31,10 +31,7 @@ class AvatarUserType extends DefaultType
 
         $resolver->setDefaults([
             'data_class' => User::class,
-            'attr' => [
-                'data-controller' => 'form-redirect load-popover',
-                'data-form-redirect-action-value' => 'replace',
-            ],
+            'attr' => [],
         ]);
     }
 }

@@ -32,10 +32,6 @@ class AccountController extends AbstractController
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(Request $request): Response
     {
-        if ($request->query->getBoolean('flash', false)) {
-            $this->addFlash('hub/success', ['message' => 'account.flash.avatarUpdated']);
-        }
-
         return $this->render('account/index.html.twig', []);
     }
 
@@ -57,10 +53,11 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Flash doesn't work, why ? use a query param instead...
             $fm->persist($user, ['message' => 'account.flash.avatarUpdated']);
 
-            return $this->redirectToRoute('account_index', ['flash' => true], Response::HTTP_SEE_OTHER);
+            return $this->render('account/_avatar.html.twig', [
+                'url' => $this->generateUrl('account_index'),
+            ]);
         }
 
         return $this->render('account/_avatar.html.twig', [
