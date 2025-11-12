@@ -33,7 +33,7 @@ class AccountController extends AbstractController
     public function index(Request $request): Response
     {
         if ($request->query->getBoolean('flash', false)) {
-            $this->addFlash('success', ['message' => 'account.flash.avatarUpdated']);
+            $this->addFlash('hub/success', ['message' => 'account.flash.avatarUpdated']);
         }
 
         return $this->render('account/index.html.twig', []);
@@ -163,7 +163,7 @@ class AccountController extends AbstractController
 
         // Transforms the authentication error into a flash message
         if (!empty($error)) {
-            $this->addFlash('danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
+            $this->addFlash('hub/danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
         }
 
         return $this->render('account/login.html.twig', [
