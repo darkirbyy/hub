@@ -6,7 +6,7 @@
     {%- if turbo_force_reload is defined and turbo_force_reload == true -%}
       <meta name="turbo-visit-control" content="reload" />
     {%- endif -%}
-    {# <meta name="turbo-prefetch" content="false"> #}
+    <meta name="turbo-prefetch" content="{{ env.app.enable_prefetch }}" />
     {# <meta name="turbo-refresh-method" content="morph" /> #}
     {# <meta name="turbo-refresh-scroll" content="preserve" /> #}
 

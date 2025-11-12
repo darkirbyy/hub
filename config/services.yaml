@@ -6,6 +6,9 @@
 parameters:
     app.name: '%env(string:APP_NAME)%'
     app.env: '%env(string:APP_ENV)%'
+    app.html_validation: '%env(bool:APP_HTML_VALIDATION)%'
+    app.password_min_strength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'
+    app.enable_prefetch: '%env(string:APP_ENABLE_PREFETCH)%'
 
 imports:
     - { resource: 'version.yaml' }
@@ -26,7 +29,7 @@ services:
         resource: '../src/Form'
         tags: ['form.type']
         arguments:
-            $htmlValidation: '%env(bool:APP_HTML_VALIDATION)%'
+            $htmlValidation: '%app.html_validation%'
 
     App\Extension\EventExtension:
         tags: [kernel.event_subscriber]
@@ -36,5 +39,5 @@ services:
 
     App\Form\Account\PasswordUserType:
         arguments:
-            $htmlValidation: '%env(bool:APP_HTML_VALIDATION)%'
-            $passwordMinStrength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'
+            $htmlValidation: '%app.html_validation%'
+            $passwordMinStrength: '%app.password_min_strength%'

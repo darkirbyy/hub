@@ -9,7 +9,7 @@ security:
 
     firewalls:
         dev:
-            pattern: '%env(string:APP_DISABLE_AUTH_PATH)%'
+            pattern: '^/(_(profiler|wdt)|build)/'
             security: false
         main:
             pattern: ^/
