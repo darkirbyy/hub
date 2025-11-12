@@ -17,7 +17,7 @@
         {# Body with custom message and button #}
         <div class="modal-body d-flex flex-column gap-3">
           <div data-delete-modal-target="body"></div>
-          <form method="post" data-delete-modal-target="form">
+          <form method="post" data-delete-modal-target="form" data-turbo="false">
             <button type="submit" class="btn btn-outline-danger">
               <span class="bi bi-trash me-1" aria-hidden="true"></span>
               {{ 'form.button.delete'|trans }}

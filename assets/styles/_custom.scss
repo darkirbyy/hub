@@ -199,11 +199,19 @@ legend.col-form-label.required::after {
   }
 }
 
+// turbo bar //////////////////////
+
+.turbo-progress-bar {
+  height: 4px;
+  background-color: var(--app-btn-primary-text-color);
+  @include app-neon-line(transparent, var(--app-btn-primary-text-color), var(--app-navbar-bg-color), 1);
+}
+
 ///////////////////////////////////
 // App-specific classes ///////////
 ///////////////////////////////////
 
-// Switch modale ///////////////////
+// Switch modale //////////////////
 
 .app-switch-theme-btn {
   min-height: 4rem;

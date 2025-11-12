@@ -9,9 +9,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 /**
  * Abstract controller providing CRUD functionality for any entity.
@@ -258,7 +258,7 @@ abstract class CrudController extends AbstractController
         $token = $request->getPayload()->get('delete_token');
         $tokenId = 'hub/delete-' . $this->configMain['entity_key'];
         if (!$this->isCsrfTokenValid($tokenId, $token)) {
-            throw new InvalidCsrfTokenException();
+            throw new BadRequestHttpException('Invalid CSRF Token.');
         }
 
         $object = $this->repository->find($id);
