@@ -29,7 +29,6 @@
     data-bs-target="#delete-modal"
     data-bs-path="{{ path }}"
     data-bs-body="{{ body|default('form.modal.body')|trans(body_param|default({ object: '' })|map(p => p|e), body_domain|default('messages')) }}"
-    data-bs-token="{{ token }}"
     aria-label="{{ 'form.button.delete'|trans }}">
     <span class="bi bi-trash" aria-hidden="true"></span>
     <span class="d-none {{ text_class|default('') }}">{{ 'form.button.delete'|trans }}</span>

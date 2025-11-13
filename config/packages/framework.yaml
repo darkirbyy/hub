@@ -12,16 +12,13 @@ framework:
         cookie_httponly: true
         cookie_path: /
         cookie_lifetime: 0 # until browser is closed
-
-    form:
-        csrf_protection:
-            token_id: hub/submit
             
     csrf_protection:
         check_header: true
         stateless_token_ids:
             - hub/login
             - hub/submit
+            - hub/delete
 
 when@test:
     framework:
