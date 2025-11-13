@@ -18,6 +18,7 @@ framework:
             token_id: hub/submit
             
     csrf_protection:
+        check_header: true
         stateless_token_ids:
             - hub/login
             - hub/submit
