@@ -7,7 +7,7 @@ parameters:
     app.name: '%env(string:APP_NAME)%'
     app.env: '%env(string:APP_ENV)%'
     app.html_validation: '%env(bool:APP_HTML_VALIDATION)%'
-    app.password_min_strength: '%env(int:APP_PASSWORD_MIN_STRENGTH)%'
+    app.password_strength: '%env(enum:App\Enum\PasswordStrengthEnum:APP_PASSWORD_STRENGTH)%'
     app.enable_prefetch: '%env(bool:APP_ENABLE_PREFETCH)%'
 
 imports:
@@ -36,4 +36,4 @@ services:
     App\Form\Account\PasswordUserType:
         arguments:
             $htmlValidation: '%app.html_validation%'
-            $passwordMinStrength: '%app.password_min_strength%'
+            $passwordStrength: '%app.password_strength%'

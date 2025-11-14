@@ -132,7 +132,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      */
     public function fmtBool(bool $input): string
     {
-        return $this->trans->trans($input ? 'enum.choices.yes' : 'enum.choices.no', [], 'messages');
+        return $this->trans->trans($input ? 'enum.choice.yes' : 'enum.choice.no', [], 'messages');
     }
 
     /**

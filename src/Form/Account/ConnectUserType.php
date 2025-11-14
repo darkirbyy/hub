@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Account;
 
 use App\Entity\Account\User;
+use App\Enum\LoginTypeEnum;
 use App\Form\DefaultType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -44,6 +45,9 @@ class ConnectUserType extends DefaultType
                 'attr' => [
                     'placeholder' => 'user.label.rememberMe',
                 ],
+                'row_attr' => [
+                    'class' => LoginTypeEnum::FORCED == $options['loginType'] ? 'd-none' : '',
+                ],
             ]);
     }
 
@@ -51,11 +55,15 @@ class ConnectUserType extends DefaultType
     {
         parent::configureOptions($resolver);
 
+        $resolver->setRequired(['loginType']);
+        $resolver->setAllowedTypes('loginType', LoginTypeEnum::class);
+
         $resolver->setDefaults([
             'data_class' => User::class,
             'csrf_token_id' => 'hub/login',
             'attr' => [
                 'data-controller' => 'button-action',
+                'data-turbo' => 'false', // Disable turbo as we may leave the app on login success
             ],
         ]);
     }

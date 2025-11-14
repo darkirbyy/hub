@@ -7,6 +7,7 @@ twig:
             app:
                 name: '%app.name%'
                 env: '%app.env%'
+                password_strength: '%app.password_strength%'
                 enable_prefetch: '%app.enable_prefetch%'
             versioning:
                 version: '%versioning.version%'

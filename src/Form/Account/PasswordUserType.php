@@ -5,29 +5,28 @@ declare(strict_types=1);
 namespace App\Form\Account;
 
 use App\Entity\Account\User;
+use App\Enum\PasswordStrengthEnum;
 use App\Form\DefaultType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\PasswordStrength;
+use Symfony\Component\Validator\Constraints\PasswordStrength as PasswordConstraint;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PasswordUserType extends DefaultType
 {
-    private int $passwordMinStrength;
-
-    public function __construct(bool $htmlValidation, int $passwordMinStrength)
+    public function __construct(protected bool $htmlValidation, private PasswordStrengthEnum $passwordStrength, private TranslatorInterface $trans)
     {
         parent::__construct($htmlValidation);
-        $this->passwordMinStrength = $passwordMinStrength >= 0 && $passwordMinStrength <= 4 ? $passwordMinStrength : PasswordStrength::STRENGTH_MEDIUM;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $constraints = [new NotBlank()];
-        if ($this->passwordMinStrength > 0) {
-            $constraints[] = new PasswordStrength(['minScore' => $this->passwordMinStrength]);
+        if (PasswordStrengthEnum::VERY_WEAK !== $this->passwordStrength) {
+            $constraints[] = new PasswordConstraint(['minScore' => $this->passwordStrength->toMinScore()]);
         }
 
         $builder->add('plainPassword', RepeatedType::class, [
@@ -39,6 +38,7 @@ class PasswordUserType extends DefaultType
                 'button_action' => 'reveal',
                 'attr' => [
                     'placeholder' => 'user.label.newPassword',
+                    'data-password-strength-target' => 'input',
                 ],
             ],
             'second_options' => [
@@ -56,11 +56,12 @@ class PasswordUserType extends DefaultType
     {
         parent::configureOptions($resolver);
 
+        $strengthTexts = json_encode(array_map(fn (PasswordStrengthEnum $p) => $p->trans($this->trans), PasswordStrengthEnum::cases()));
         $resolver->setDefaults([
             'data_class' => User::class,
             'attr' => [
                 'data-controller' => 'button-action password-strength',
-                'passwordMinStrength' => $this->passwordMinStrength,
+                'data-password-strength-strength-texts-value' => $strengthTexts,
             ],
         ]);
     }

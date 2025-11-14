@@ -9,23 +9,23 @@
         {# Insert the flashes #}
         {{ block('flash', 'theme/flash.html.twig') }}
 
+        {% set loginTypeTransKey = loginType.toTransKey %}
         {# Subtitle #}
         <h2 class="text-center text-md-start mb-3">
-          {{ ('account.subtitles.login.' ~ (loginType|default('normal')))|trans }}
+          {{ ('account.subtitles.login.' ~ loginTypeTransKey)|trans }}
         </h2>
 
         {# Login form #}
-        {# Disable turbo : we may leave this app on login success #}
-        {{ form_start(form, { attr: { 'data-turbo': 'false' } }) }}
+        {{ form_start(form) }}
         <p>
-          {{ ('account.other.login.' ~ (loginType|default('normal')))|trans|raw }}
+          {{ ('account.other.login.' ~ loginTypeTransKey)|trans|raw }}
         </p>
 
         {{ form_row(form.username) }}
         {{ form_row(form.password) }}
-        {{ form_row(form.rememberMe, loginType == 'forced' ? { row_attr: { class: 'd-none' } } : { }) }}
+        {{ form_row(form.rememberMe) }}
         <div class="text-start">
-          <button type="submit" class="btn btn-outline-primary">{{ ('account.button.login.' ~ (loginType|default('normal')))|trans }}</button>
+          <button type="submit" class="btn btn-outline-primary">{{ ('account.button.login.' ~ loginTypeTransKey)|trans }}</button>
         </div>
         {{ form_end(form) }}
       </div>

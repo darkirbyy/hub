@@ -11,11 +11,11 @@ export default class extends Controller {
   };
 
   static PasswordStrength = {
-    STRENGTH_VERY_WEAK: 0,
-    STRENGTH_WEAK: 1,
-    STRENGTH_MEDIUM: 2,
-    STRENGTH_STRONG: 3,
-    STRENGTH_VERY_STRONG: 4,
+    VERY_WEAK: 0,
+    WEAK: 1,
+    MEDIUM: 2,
+    STRONG: 3,
+    VERY_STRONG: 4,
   };
 
   initialize() {
@@ -52,31 +52,20 @@ export default class extends Controller {
     }
 
     this.barOuter.setAttribute('aria-valuenow', this.currentStrength * 25);
-    this.barInner.classList.add(
-      'progress-bar',
-      'w-' + this.currentStrength * 25,
-      barColor
-    );
+    this.barInner.classList.add('progress-bar', 'w-' + this.currentStrength * 25, barColor);
     this.textTarget.innerText = this.strengthTextsValue[this.currentStrength];
   }
 
   estimateStrength(password) {
-    const {
-      STRENGTH_VERY_WEAK,
-      STRENGTH_WEAK,
-      STRENGTH_MEDIUM,
-      STRENGTH_STRONG,
-      STRENGTH_VERY_STRONG,
-    } = this.constructor.PasswordStrength;
+    const { VERY_WEAK, WEAK, MEDIUM, STRONG, VERY_STRONG } = this.constructor.PasswordStrength;
 
     if (!password.length) {
-      return STRENGTH_VERY_WEAK;
+      return VERY_WEAK;
     }
 
     const charCounts = {};
     for (let char of password) {
-      charCounts[char.charCodeAt(0)] =
-        (charCounts[char.charCodeAt(0)] || 0) + 1;
+      charCounts[char.charCodeAt(0)] = (charCounts[char.charCodeAt(0)] || 0) + 1;
     }
 
     let control = 0,
@@ -104,19 +93,18 @@ export default class extends Controller {
 
     const pool = lower + upper + digit + symbol + control + other;
     const chars = Object.keys(charCounts).length;
-    const entropy =
-      chars * Math.log2(pool) + (password.length - chars) * Math.log2(chars);
+    const entropy = chars * Math.log2(pool) + (password.length - chars) * Math.log2(chars);
 
     if (entropy >= 120) {
-      return STRENGTH_VERY_STRONG;
+      return VERY_STRONG;
     } else if (entropy >= 100) {
-      return STRENGTH_STRONG;
+      return STRONG;
     } else if (entropy >= 80) {
-      return STRENGTH_MEDIUM;
+      return MEDIUM;
     } else if (entropy >= 60) {
-      return STRENGTH_WEAK;
+      return WEAK;
     } else {
-      return STRENGTH_VERY_WEAK;
+      return VERY_WEAK;
     }
   }
 }

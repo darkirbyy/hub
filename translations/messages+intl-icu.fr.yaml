@@ -37,8 +37,9 @@ account:
     login:
       normal: Pour vous authentifier, veuillez indiquer vos identifiants. 
       forced: L'accès à cette page nécessite une authentification <strong>forte</strong>. Pour poursuivre, veuillez confirmer vos identifiants.
-    passwordMinStrength: Par politique de sécurité, le mot de passe doit avoir une force au moins égale à 
-    passwordStrength: 'Force du mot de passe : '
+    passwordStrength: 
+      text: 'Par politique de sécurité, le mot de passe doit avoir une force au moins égale à "{passwordStrength}"'
+      label: 'Force du mot de passe : '
     confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
 
 error:
@@ -107,10 +108,13 @@ form:
     none: Aucun
 
 enum:
-  choices:
+  choice:
     yes: Oui
     no: Non
-  passwordStrengths:
+  loginType:
+    normal: Normal
+    forced: Forcé
+  passwordStrength:
     veryWeak: Très faible
     weak: Faible
     medium: Moyen

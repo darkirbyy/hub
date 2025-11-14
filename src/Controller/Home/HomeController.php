@@ -44,7 +44,7 @@ class HomeController extends AbstractController
         // Loop through categories and remove applis the user is not authorized for
         foreach ($categories as $key => $category) {
             foreach ($category->getApplis() as $appli) {
-                if (AppliStatusEnum::PRIVATE === $appli->getStatus() || (AppliStatusEnum::USERONLY === $appli->getStatus() && !in_array($appli, $allowedApplis))) {
+                if (AppliStatusEnum::PRIVATE === $appli->getStatus() || (AppliStatusEnum::USER_ONLY === $appli->getStatus() && !in_array($appli, $allowedApplis))) {
                     $category->removeAppli($appli);
                 }
             }

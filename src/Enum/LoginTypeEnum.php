@@ -7,25 +7,23 @@ namespace App\Enum;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-enum AppliStatusEnum: string implements TranslatableInterface
+enum LoginTypeEnum: string implements TranslatableInterface
 {
-    case PUBLIC = 'PUBLIC';
-    case USER_ONLY = 'USER_ONLY';
-    case PRIVATE = 'PRIVATE';
+    case NORMAL = 'NORMAL';
+    case FORCED = 'FORCED';
 
     // Implement the TranslatableInterface so that the label are automatically translated in the form
     public function trans(TranslatorInterface $trans, ?string $locale = null): string
     {
-        return $trans->trans('enum.appliStatus.' . $this->toTransKey(), locale: $locale);
+        return $trans->trans('enum.loginType.' . $this->toTransKey(), locale: $locale);
     }
 
     // Convert to key used in the translations yaml
     public function toTransKey(): string
     {
         return match ($this) {
-            self::PUBLIC => 'public',
-            self::USER_ONLY => 'userOnly',
-            self::PRIVATE => 'private',
+            self::NORMAL => 'normal',
+            self::FORCED => 'forced',
         };
     }
 }

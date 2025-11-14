@@ -2,6 +2,7 @@
 
 namespace App\Controller\Account;
 
+use App\Enum\LoginTypeEnum;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
 use App\Form\Account\DeleteUserType;
@@ -144,7 +145,7 @@ class AccountController extends AbstractController
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('account_index');
         } else {
-            $loginType = $this->isGranted('IS_REMEMBERED') ? 'forced' : 'normal';
+            $loginType = $this->isGranted('IS_REMEMBERED') ? LoginTypeEnum::FORCED : LoginTypeEnum::NORMAL;
         }
 
         // Get the login error if there is one and last username entered by the user
@@ -152,9 +153,9 @@ class AccountController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         // Creates the form, pre fill the username value, and enable+hide the rememberme value if it's a forced login
-        $form = $this->createForm(ConnectUserType::class);
+        $form = $this->createForm(ConnectUserType::class, null, ['loginType' => $loginType]);
         $form->get('username')->setData($lastUsername);
-        if ('forced' == $loginType) {
+        if (LoginTypeEnum::FORCED == $loginType) {
             $form->get('rememberMe')->setData(true);
         }
 
