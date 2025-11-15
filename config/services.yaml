@@ -18,6 +18,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    Symfony\Component\Dotenv\Command\DotenvDumpCommand: ~
+    
     App\:
         resource: '../src/'
 
