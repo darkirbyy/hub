@@ -45,7 +45,7 @@ class RightType extends DefaultType
         $resolver->setDefaults([
             'data_class' => Right::class,
             'attr' => [
-                'data-controller' => 'button-action',
+                'data-controller' => 'button-action load-popover',
             ],
         ]);
     }
