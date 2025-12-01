@@ -33,7 +33,30 @@ class AccountController extends AbstractController
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(Request $request): Response
     {
-        return $this->render('account/index.html.twig', []);
+        $hasBackPath = $request->getSession()->has('hub/back-target-path');
+
+        return $this->render('account/index.html.twig', [
+            'has_back_path' => $hasBackPath,
+        ]);
+    }
+
+    /**
+     * Redirect the user to the original app.
+     *
+     * @param Request $request the HTTP request instance, necessary to get the session
+     *
+     * @return Response redirect to the back path in session
+     */
+    #[Route(path: '/back', name: 'back', methods: ['GET'])]
+    public function back(Request $request): Response
+    {
+        $backPath = $request->getSession()->get('hub/back-target-path');
+        if (empty($backPath)) {
+            throw new \RuntimeException('No backpath in session.', 500);
+        }
+        $request->getSession()->remove('hub/back-target-path');
+
+        return $this->redirect($backPath);
     }
 
     /**
@@ -167,7 +190,7 @@ class AccountController extends AbstractController
         return $this->render('account/login.html.twig', [
             'form' => $form,
             'error' => $error,
-            'loginType' => $loginType,
+            'login_type' => $loginType,
         ]);
     }
 

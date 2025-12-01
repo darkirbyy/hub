@@ -9,23 +9,23 @@
         {# Insert the flashes #}
         {{ block('flash', 'theme/flash.html.twig') }}
 
-        {% set loginTypeTransKey = loginType.toTransKey %}
+        {% set login_type_trans_key = login_type.toTransKey %}
         {# Subtitle #}
         <h2 class="text-center text-md-start mb-3">
-          {{ ('account.subtitles.login.' ~ loginTypeTransKey)|trans }}
+          {{ ('account.subtitles.login.' ~ login_type_trans_key)|trans }}
         </h2>
 
         {# Login form #}
         {{ form_start(form) }}
         <p>
-          {{ ('account.other.login.' ~ loginTypeTransKey)|trans|raw }}
+          {{ ('account.other.login.' ~ login_type_trans_key)|trans|raw }}
         </p>
 
         {{ form_row(form.username) }}
         {{ form_row(form.password) }}
         {{ form_row(form.rememberMe) }}
         <div class="text-start">
-          <button type="submit" class="btn btn-outline-primary">{{ ('account.button.login.' ~ loginTypeTransKey)|trans }}</button>
+          <button type="submit" class="btn btn-outline-primary">{{ ('account.button.login.' ~ login_type_trans_key)|trans }}</button>
         </div>
         {{ form_end(form) }}
       </div>

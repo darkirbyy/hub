@@ -14,6 +14,7 @@ account:
       normal: Authentification
       forced: Authentification forte
     myProfile: Mon profil
+    myRights: Mes droits d'accès
     updatePassword: Modifier mon mot de passe
     deleteAccount: Supprimer mon compte
   button:
@@ -21,6 +22,7 @@ account:
       normal: Se connecter
       forced: Confirmer
     logout: Se déconnecter
+    back: Retour à l'application
   link:
     backToIndex: Retour au profil
     updatePassword: Modifier mon mot de passe
