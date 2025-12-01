@@ -48,7 +48,7 @@
             <div class="swiper-wrapper">
               {# For each appli, calculate the full url and use a card to display it #}
               {% for appli in category.applis %}
-                {% set appli_url = server_base_url ~ appli.path %}
+                {% set appli_url = appli.path starts with '/' ? server_base_url ~ appli.path : appli.path %}
                 <div class="card swiper-slide app-home-card">
                   {# Card top with a clickable image #}
                   {# Disable turbo : we may leave this app when following these links #}

@@ -42,10 +42,11 @@ appli:
   help:
     title: Apparaît sur les cartes du HUB
     name: "Doit être identique à la variable APP_NAME renseignée dans l'application cible<br>Caractères autorisés : lettres minuscules"
-    path: Définit le chemin de l'application cible depuis la racine du serveur, en commençant par '/'
+    path: Définit le chemin de l'application cible, soit depuis la racine du serveur (en commençant par '/'), soit avec une URL complète (commençant pat https)
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
   error:
     invalidName: Ne doit contenir que des lettres minuscules.
+    invalidPath: Doit commencer par / (chemin depuis la racine du serveur) ou par http (URL complète).
 
 externalLink:
   name: Liens externes

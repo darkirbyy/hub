@@ -53,6 +53,7 @@ class Appli
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
+    #[Assert\Regex('/^\/|http/', 'appli.error.invalidPath')]
     private ?string $path = null;
 
     #[ORM\ManyToOne(inversedBy: 'applis')]
