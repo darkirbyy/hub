@@ -12,8 +12,8 @@
     <a href="{{ path('admin_account_user_reset', { id: object.id }) }}" class="btn btn-outline-secondary" aria-label="{{ 'form.button.reset'|trans }}" data-turbo-prefetch="false">
       <span class="bi bi-eraser" aria-hidden="true"></span><span class="d-none d-md-inline ms-md-1">{{ 'form.button.reset'|trans }}</span>
     </a>
-    {% with { path: path('admin_account_user_delete', { id: object.id }), body_param: { object: object }, btn_class: '', text_class: 'd-md-inline ms-md-1' } %}
 
+    {% with { path: path('admin_account_user_delete', { id: object.id }), body_param: { object: object }, btn_class: '', text_class: 'd-md-inline ms-md-1' } %}
     {{ block('delete', 'theme/crud/_button.html.twig') }}
     {% endwith %}
   </div>

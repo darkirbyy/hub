@@ -2,6 +2,7 @@
 
 namespace App\Controller\Account;
 
+use App\Entity\Hub\Right;
 use App\Enum\LoginTypeEnum;
 use App\Form\Account\AvatarUserType;
 use App\Form\Account\ConnectUserType;
@@ -33,9 +34,14 @@ class AccountController extends AbstractController
     #[Route(path: '', name: 'index', methods: ['GET'])]
     public function index(Request $request): Response
     {
+        /** @var \App\Entity\Account\User $user */
+        $user = $this->getUser();
+        $allowedApplis = array_unique(array_map(fn (Right $r) => $r->getAppli(), $user->getRights()->toArray()));
+
         $hasBackPath = $request->getSession()->has('hub/back-target-path');
 
         return $this->render('account/index.html.twig', [
+            'allowed_applis' => $allowedApplis,
             'has_back_path' => $hasBackPath,
         ]);
     }

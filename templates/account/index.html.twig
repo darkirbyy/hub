@@ -34,7 +34,7 @@
 
         {# Back to original path button #}
         {% if has_back_path %}
-          <div class="text-center text-md-end my-2">
+          <div class="text-center text-md-end">
             <a class="btn btn-outline-secondary" href="{{ path('account_back') }}" data-turbo="false">
               {{ 'account.button.back'|trans }}
               <span class="bi bi-box-arrow-up-right ms-1" aria-hidden="true"></span>
@@ -43,7 +43,7 @@
         {% endif %}
 
         {# Profile Subtitle #}
-        <h2 class="text-center text-md-start mb-3">
+        <h2 class="text-center text-md-start mt-4 mt-md-2 mb-3">
           {{ 'account.subtitles.myProfile'|trans }}
         </h2>
 
@@ -93,10 +93,24 @@
           </div>
         </div>
 
-        {# Right Subtitle #}
-        <h2 class="text-center text-md-start mb-3">
+        {# Rights subtitle #}
+        <h2 class="text-center text-md-start mt-5 mb-3">
           {{ 'account.subtitles.myRights'|trans }}
         </h2>
+
+        {# The rights "card" #}
+        <div class="border rounded p-3 app-account-card mb-4">
+          {% for appli in allowed_applis %}
+            <h6 class="fs-5">
+              {{ appli.title }}
+            </h6>
+            <ul>
+              {% for right in app.user.rights|filter(r => r.appli == appli) %}
+                <li>{{ right.description }}</li>
+              {% endfor %}
+            </ul>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </section>
