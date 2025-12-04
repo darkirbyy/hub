@@ -31,7 +31,9 @@ class AvatarUserType extends DefaultType
 
         $resolver->setDefaults([
             'data_class' => User::class,
-            'attr' => [],
+            'attr' => [
+                'data-controller' => 'load-popover',
+            ],
         ]);
     }
 }
