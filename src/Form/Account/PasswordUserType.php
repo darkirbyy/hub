@@ -26,7 +26,7 @@ class PasswordUserType extends DefaultType
     {
         $constraints = [new NotBlank()];
         if (PasswordStrengthEnum::VERY_WEAK !== $this->passwordStrength) {
-            $constraints[] = new PasswordConstraint(['minScore' => $this->passwordStrength->toMinScore()]);
+            $constraints[] = new PasswordConstraint(minScore: $this->passwordStrength->toMinScore());
         }
 
         $builder->add('plainPassword', RepeatedType::class, [
