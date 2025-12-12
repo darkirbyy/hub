@@ -128,6 +128,9 @@ class UserController extends CrudController
             $plainPassword = $passwordGenerator->generatePassword();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            // Roles cannot be null
+            $user->setRoles([]);
+
             $fm->persist($user, ['message' => 'admin.flash.userAdded', 'params' => ['username' => $user->getUsername(), 'password' => $plainPassword]]);
 
             return $this->redirectToRoute('admin_account_user_index', [], Response::HTTP_SEE_OTHER);
