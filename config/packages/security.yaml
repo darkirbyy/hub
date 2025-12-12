@@ -9,7 +9,7 @@ security:
 
     firewalls:
         dev:
-            pattern: '^/(_(profiler|wdt)|build)/'
+            pattern: '^/(_profiler|_wdt|build)/'
             security: false
         main:
             pattern: ^/

@@ -1,6 +1,6 @@
 // import swiper SCSS
-import 'swiper/scss';
-import 'swiper/scss/navigation';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 // start the Stimulus application
 import './bootstrap';
