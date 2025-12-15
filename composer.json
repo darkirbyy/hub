@@ -99,8 +99,9 @@
         "lint-js": "npm run lint-js-file \"assets/controllers/**/*.js\"",
         "lint-all": ["@lint-php", "@lint-twig", "@lint-scss",  "@lint-js"],
 
-        "tests-unit": "./bin/phpunit",
-        "tests-all": ["@tests-unit"]
+        "tests-unit": "symfony php bin/phpunit --testsuite unit",
+        "tests-func": "symfony php bin/phpunit --testsuite func",
+        "tests-all": ["symfony php bin/phpunit"]
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -113,7 +114,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.65",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "7.4.*",
         "symfony/css-selector": "7.4.*",
         "symfony/debug-bundle": "7.4.*",
