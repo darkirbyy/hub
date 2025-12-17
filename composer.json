@@ -100,6 +100,7 @@
         "lint-all": ["@lint-php", "@lint-twig", "@lint-scss",  "@lint-js"],
 
         "tests-unit": "symfony php bin/phpunit --testsuite unit",
+        "tests-inte": "symfony php bin/phpunit --testsuite inte",
         "tests-func": "symfony php bin/phpunit --testsuite func",
         "tests-all": ["symfony php bin/phpunit"]
     },
@@ -113,6 +114,7 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.4",
         "friendsofphp/php-cs-fixer": "^3.65",
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "7.4.*",
@@ -122,6 +124,7 @@
         "symfony/phpunit-bridge": "^7.3",
         "symfony/stopwatch": "7.4.*",
         "symfony/web-profiler-bundle": "7.4.*",
-        "vincentlanglet/twig-cs-fixer": "^3.4"
+        "vincentlanglet/twig-cs-fixer": "^3.4",
+        "zenstruck/foundry": "^2.8"
     }
 }

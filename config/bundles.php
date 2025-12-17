@@ -16,4 +16,6 @@ return [
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Bizkit\VersioningBundle\BizkitVersioningBundle::class => ['all' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+    Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+    DAMA\DoctrineTestBundle\DAMADoctrineTestBundle::class => ['test' => true],
 ];
