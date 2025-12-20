@@ -6,11 +6,16 @@ namespace App\Tests\Func;
 
 use PHPUnit\Framework\Attributes as PU;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-#[PU\RequiresFunction('databaseAvailable')]
 final class FakeFuncTest extends WebTestCase
 {
-    public function testFake(): void
+    use ResetDatabase;
+    use Factories;
+
+    #[PU\Test]
+    public function fake(): void
     {
         $client = static::createClient();
         $client->request('GET', '');

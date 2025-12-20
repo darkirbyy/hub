@@ -8,13 +8,14 @@ Hub of my own server, displaying all the available services.
   - **Symfony**: 7.4 framework
   - **PHP**: 8.2 (compatible with Symfony 7.4)
   - **Composer**: >= 2.8 for dependency management
-  - **MariaDB**: 11.5 through docker for the database
+  - **MariaDB**: 11.8 through **docker** for the database
 - Front-end:
   - **Node.js**: 22.x
   - **npm**: >= 10.x for dependency management
   - **Sass**: >= 1.82
   - **Webpack Encore**: 5.x
 - **git** for source and version control
+- **symfony CLI** for main commands
 - **GitHub** to share and deploy
 
 ## Code quality
@@ -44,18 +45,15 @@ After this first install or cloning the existing project:
 - install the dependencies with `composer install` and `npm install`.
 - copy the `.env` file into a `.env.local` file and customize the values.  
 :information_source: `DATABASE_URL` is not mandatory for dev environment as Symfony will get the correct values from docker.  
+- start the php/web server along with docker and npm server with `symfony server:start -d`.  
 - execute `symfony console doctrine:migrations:migrate`.
 
 To use default git hooks, run `git config core.hooksPath ./githooks`. Current hooks are
 
 - prettify and linting all staged files before commit
-- running all tests before push
+- running tests before push : all tests for `main` branch, unit tests otherwise
 
 ## Dev
-
-Start the php/web server along with docker and npm server with `symfony server:start -d`.  
-Check the logs with `symfony server:logs`.  
-Stop all the services with `symfony server:stop`.
 
 To increment the version, use `symfony console bizkit:versioning:increment`.
 

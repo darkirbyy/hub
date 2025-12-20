@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
+use PHPUnit\Framework\Attributes as PU;
 use PHPUnit\Framework\TestCase;
 
 final class FakeUnitTest extends TestCase
 {
-    public function testFake(): void
+    #[PU\Test]
+    public function fake(): void
     {
         $test = 1;
 
