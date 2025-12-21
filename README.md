@@ -1,5 +1,8 @@
 # Hub
 
+![version](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/darkirbyy/07bb4b086f8e7dea73754e73bc5c1bb2/raw/hub-version.json)
+![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/darkirbyy/07bb4b086f8e7dea73754e73bc5c1bb2/raw/hub-coverage.json)
+
 Hub of my own server, displaying all the available services.
 
 ## Prerequisite
@@ -66,6 +69,6 @@ To start all tests, run `composer tests-all`.
 
 ## Deploy
 
-A workflow to build and deploy the application is preconfigured.  
+A workflow to test, build and deploy the application is preconfigured.  
 The workflow can be triggered manually in GitHub Actions or automatically when pushing to main (for prod) or to develop (for stage).  
 :warning: Some triggers may not be available depending on the project.

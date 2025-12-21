@@ -29,11 +29,11 @@
     {# Bar not visible in prod env #}
     {% if env.app.env != 'prod' %}
       <div class="container-fluid p-0 m-0 text-center fw-bold d-flex justify-content-around app-env-dev">
-        {% for i in 1..10 %}
+        {%- for i in 1..10 -%}
           <div>
             {{ env.app.env|upper }}
           </div>
-        {% endfor %}
+        {%- endfor -%}
       </div>
     {% endif %}
 
@@ -47,8 +47,10 @@
       {% set currentRoute = app.current_route %}
       {% set activeLink = 'class="nav-link app-navbar-btn py-1 active" aria-current="page" aria-selected="true"' %}
       {% set otherLink = 'class="nav-link app-navbar-btn py-1"' %}
-      <nav class="navbar navbar-expand app-navbar-bg-color {{ currentRoute starts with 'home' ? '' : 'border-bottom app-navbar-neon' }}"
-        aria-label="{{ 'aria.mainNavigation'|trans }}">
+      <nav
+        class="navbar navbar-expand app-navbar-bg-color {{ currentRoute starts with 'home' ? '' : 'border-bottom app-navbar-neon' }}"
+        aria-label="{{ 'aria.mainNavigation'|trans }}"
+      >
         <div class="container-fluid">
           {# Left part of the navbar #}
           <ul class="navbar-nav me-auto align-items-center gap-1">
@@ -94,9 +96,7 @@
     <main class="flex-grow-1 pb-5" role="main" id="mainContent">
       {% block h1 %}
         <div class="container-fluid p-0 py-2 mt-4 mb-2">
-          <h1 class="text-center">
-            {{ title }}
-          </h1>
+          <h1 class="text-center">{{ title }}</h1>
         </div>
       {% endblock %}
 
@@ -139,9 +139,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="theme-modal-label">
-              {{ 'layout.theme.switch'|trans }}
-            </h5>
+            <h5 class="modal-title" id="theme-modal-label">{{ 'layout.theme.switch'|trans }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
           </div>
           <div class="modal-body d-flex flex-column gap-2">
