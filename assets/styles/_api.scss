@@ -1,10 +1,8 @@
-// Import Bootstrap API
-@import '~bootstrap/scss/maps';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/utilities';
-
 // Use bootstrap API to generate custom responsive classes
 
+$responsive-true: (
+  responsive: true,
+);
 $utilities: map.merge(
   $utilities,
   (
@@ -26,9 +24,6 @@ $utilities: map.merge(
     ),
   )
 );
-
-// Import Bootstrap utilities API (processes utility changes)
-@import '~bootstrap/scss/utilities/api';
 
 // Generate light/dark variables
 :root {

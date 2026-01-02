@@ -1,5 +1,6 @@
 when@dev:
     zenstruck_foundry:
+        enable_auto_refresh_with_lazy_objects: true
         faker:
             locale: fr_FR
             # seed: 5170
@@ -24,6 +25,7 @@ when@dev:
 
 when@test: 
     zenstruck_foundry:
+        enable_auto_refresh_with_lazy_objects: true
         faker:
             locale: fr_FR
             # seed: 709584
