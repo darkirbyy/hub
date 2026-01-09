@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2ba5d2edfc6b2480a0d87479cfadbfe",
+    "content-hash": "5d5484a5425e76379f2facda22e9f00c",
     "packages": [
         {
             "name": "bizkit/versioning-bundle",
@@ -12146,7 +12146,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
