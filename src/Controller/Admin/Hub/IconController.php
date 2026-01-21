@@ -8,7 +8,7 @@ use App\Controller\CrudController;
 use App\Entity\Hub\Icon;
 use App\Form\Hub\IconType;
 use App\Repository\Hub\IconRepository;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Controller for managing icons in the admin panel.

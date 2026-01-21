@@ -8,7 +8,7 @@ use App\Controller\CrudController;
 use App\Entity\Hub\Category;
 use App\Form\Hub\CategoryType;
 use App\Repository\Hub\CategoryRepository;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Controller for managing categories in the admin panel.

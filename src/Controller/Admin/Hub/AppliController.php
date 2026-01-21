@@ -8,7 +8,7 @@ use App\Controller\CrudController;
 use App\Entity\Hub\Appli;
 use App\Form\Hub\AppliType;
 use App\Repository\Hub\AppliRepository;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Controller for managing applis in the admin panel.

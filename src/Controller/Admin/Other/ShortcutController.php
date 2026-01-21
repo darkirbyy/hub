@@ -8,7 +8,7 @@ use App\Controller\CrudController;
 use App\Entity\Other\Shortcut;
 use App\Form\Other\ShortcutType;
 use App\Repository\Other\ShortcutRepository;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Controller for managing shortcuts in the admin panel.
