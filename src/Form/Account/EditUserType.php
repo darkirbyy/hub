@@ -30,7 +30,7 @@ class EditUserType extends DefaultType
             ->add('rights', EntityType::class, [
                 'required' => false,
                 'class' => Right::class,
-                'choice_label' => fn (Right $right) => $right->__toString(),
+                'choice_label' => fn(Right $right) => $right->__toString(),
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'user.label.rights',

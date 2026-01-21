@@ -15,7 +15,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
 /**
- * Update user flatten roles every time the user is changed or a right is changed
+ * Update user flatten roles every time the user is changed or a right is changed.
  */
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdateUser', entity: User::class)]
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdateRight', entity: Right::class)]

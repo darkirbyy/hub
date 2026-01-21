@@ -13,9 +13,7 @@
         {{ block('flash', 'theme/flash.html.twig') }}
 
         {# Subtitle #}
-        <h2>
-          {{ (config_main.entity_key ~ '.name')|trans({ }, 'validators') }} <span class="fs-5">- {{ 'form.title.index'|trans }}</span>
-        </h2>
+        <h2>{{ (config_main.entity_key ~ '.name')|trans([], 'validators') }} <span class="fs-5">- {{ 'form.title.index'|trans }}</span></h2>
 
         <div class="d-flex justify-content-between align-items-end">
           {# Backlink #}
@@ -38,14 +36,12 @@
               <tr>
                 {# Add head cell for each col defined, with corresponding breakpoint #}
                 {% for col in config_index.cols|ksort %}
-                  <th class="align-center {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
-                    {{ (config_main.entity_key ~ '.label.' ~ (col.label|default(col.getter)))|trans({ }, 'validators') }}
+                  <th class="align-center {{ (col.breakpoint|default('xs')) != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}" scope="col">
+                    {{ (config_main.entity_key ~ '.label.' ~ (col.label|default(col.getter)))|trans([], 'validators') }}
                   </th>
                 {% endfor %}
                 {# Add one more mandatory head cell for the action text #}
-                <th class="w-1 text-nowrap text-end align-center" scope="col">
-                  {{ 'form.other.action'|trans }}
-                </th>
+                <th class="w-1 text-nowrap text-end align-center" scope="col">{{ 'form.other.action'|trans }}</th>
               </tr>
             </thead>
             {# Table body #}
@@ -54,7 +50,7 @@
                 <tr>
                   {# Add normal call for each col defined, with corresponding breakpoint #}
                   {% for col in config_index.cols|ksort %}
-                    <td class="py-2 {{ col.breakpoint|default('xs') != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
+                    <td class="py-2 {{ (col.breakpoint|default('xs')) != 'xs' ? 'd-none d-' ~ col.breakpoint ~ '-table-cell' }}">
                       {% set value = deep_attribute(object, col.getter) %}
                       {{ value is not null ? col.filters is defined ? value|apply_filters(col.filters) : value : '-' }}
                     </td>

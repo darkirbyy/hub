@@ -19,9 +19,7 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
  */
 class TwigExtension extends AbstractExtension implements GlobalsInterface
 {
-    public function __construct(private ImageResolver $imageResolver, private TranslatorInterface $trans)
-    {
-    }
+    public function __construct(private ImageResolver $imageResolver, private TranslatorInterface $trans) {}
 
     public function getGlobals(): array
     {
@@ -140,7 +138,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      */
     public function fmtCollec(PersistentCollection $input, string $separator = ', ', string $getter = '__toString'): string
     {
-        return implode($separator, array_map(fn ($object) => $object->$getter(), $input->toArray()));
+        return implode($separator, array_map(fn($object) => $object->$getter(), $input->toArray()));
     }
 
     /**

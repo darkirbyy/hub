@@ -11,9 +11,7 @@
 
         {% set login_type_trans_key = login_type.toTransKey %}
         {# Subtitle #}
-        <h2 class="text-center text-md-start mb-3">
-          {{ ('account.subtitles.login.' ~ login_type_trans_key)|trans }}
-        </h2>
+        <h2 class="text-center text-md-start mb-3">{{ ('account.subtitles.login.' ~ login_type_trans_key)|trans }}</h2>
 
         {# Login form #}
         {{ form_start(form) }}

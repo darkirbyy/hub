@@ -23,13 +23,15 @@
 
 {# Delete button MUST be use with a modal #}
 {% block delete %}
-  <button type="button"
+  <button
+    type="button"
     class="btn btn-outline-danger {{ btn_class|default('') }}"
     data-bs-toggle="modal"
     data-bs-target="#delete-modal"
     data-bs-path="{{ path }}"
     data-bs-body="{{ body|default('form.modal.body')|trans(body_param|default({ object: '' })|map(p => p|e), body_domain|default('messages')) }}"
-    aria-label="{{ 'form.button.delete'|trans }}">
+    aria-label="{{ 'form.button.delete'|trans }}"
+  >
     <span class="bi bi-trash" aria-hidden="true"></span>
     <span class="d-none {{ text_class|default('') }}">{{ 'form.button.delete'|trans }}</span>
   </button>

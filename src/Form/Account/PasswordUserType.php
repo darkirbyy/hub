@@ -56,7 +56,7 @@ class PasswordUserType extends DefaultType
     {
         parent::configureOptions($resolver);
 
-        $strengthTexts = json_encode(array_map(fn (PasswordStrengthEnum $p) => $p->trans($this->trans), PasswordStrengthEnum::cases()));
+        $strengthTexts = json_encode(array_map(fn(PasswordStrengthEnum $p) => $p->trans($this->trans), PasswordStrengthEnum::cases()));
         $resolver->setDefaults([
             'data_class' => User::class,
             'attr' => [

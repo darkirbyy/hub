@@ -6,9 +6,7 @@
 {% block h1 %}
   <div class="container-fluid p-0 pt-4 pt-md-0 mb-5 app-home-gradient app-navbar-text-color app-navbar-bg-color">
     <div class="container">
-      <h1 class="text-center pb-2 app-home-title">
-        {{ 'home.h1'|trans|raw }}
-      </h1>
+      <h1 class="text-center pb-2 app-home-title">{{ 'home.h1'|trans|raw }}</h1>
       <div class="px-4 fs-5 text-center">
         <p class="mb-0">
           {{ 'home.introText'|trans|raw }}
@@ -41,9 +39,7 @@
           {# Swiper content as two parts: the category title, and all corresponding applis #}
           <div class="swiper mx-0" id="swiper-{{ category.id }}-main">
             {# Category title #}
-            <h2 class="m-3 text-center text-md-start">
-              <span class="{{ category.icon.faClass|e }} fa-fw me-2"></span> {{ category.label }}
-            </h2>
+            <h2 class="m-3 text-center text-md-start"><span class="{{ category.icon.faClass|e }} fa-fw me-2"></span> {{ category.label }}</h2>
             {# All corresponding applis #}
             <div class="swiper-wrapper">
               {# For each appli, calculate the full url and use a card to display it #}
@@ -58,9 +54,7 @@
                   {# Card body in three vertical flex parts: appli title, description and buttons #}
                   <div class="card-body d-flex flex-column justify-content-between">
                     {# Appli title #}
-                    <h5 class="card-title">
-                      {{ appli.title }}
-                    </h5>
+                    <h5 class="card-title">{{ appli.title }}</h5>
                     {# Appli description #}
                     <p class="flex-grow-1">
                       {{ appli.description }}

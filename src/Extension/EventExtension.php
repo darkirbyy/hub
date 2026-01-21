@@ -15,9 +15,7 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
  */
 class EventExtension implements EventSubscriberInterface
 {
-    public function __construct(private FlushManager $fm)
-    {
-    }
+    public function __construct(private FlushManager $fm) {}
 
     public static function getSubscribedEvents(): array
     {

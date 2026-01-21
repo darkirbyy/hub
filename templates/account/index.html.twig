@@ -9,9 +9,7 @@
       <div class="modal-content">
         {# Header with title and dismiss button #}
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="avatar-modal-label">
-            {{ 'account.modal.updateAvatar'|trans }}
-          </h1>
+          <h1 class="modal-title fs-5" id="avatar-modal-label">{{ 'account.modal.updateAvatar'|trans }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'form.button.close'|trans }}"></button>
         </div>
 
@@ -43,9 +41,7 @@
         {% endif %}
 
         {# Profile Subtitle #}
-        <h2 class="text-center text-md-start mt-4 mt-md-2 mb-3">
-          {{ 'account.subtitles.myProfile'|trans }}
-        </h2>
+        <h2 class="text-center text-md-start mt-4 mt-md-2 mb-3">{{ 'account.subtitles.myProfile'|trans }}</h2>
 
         {# The profile "card" as a flex with two parts #}
         <div class="border rounded p-3 app-account-card mb-4">
@@ -63,9 +59,7 @@
             {# Part two : some information about the user and action links #}
             <div class="text-center text-md-start">
               {# Username #}
-              <h6 class="fs-2">
-                {{ app.user.username }}
-              </h6>
+              <h6 class="fs-2">{{ app.user.username }}</h6>
               {# Some useful dates #}
               <p class="d-flex flex-column text-muted">
                 <span>{{ ('account.other.dateLastCo'|trans) ~ ' ' ~ (app.user.dateLastCo|format_datetime('short', 'short')) }}</span>
@@ -94,16 +88,12 @@
         </div>
 
         {# Rights subtitle #}
-        <h2 class="text-center text-md-start mt-5 mb-3">
-          {{ 'account.subtitles.myRights'|trans }}
-        </h2>
+        <h2 class="text-center text-md-start mt-5 mb-3">{{ 'account.subtitles.myRights'|trans }}</h2>
 
         {# The rights "card" #}
         <div class="border rounded p-3 app-account-card mb-4">
           {% for appli in allowed_applis %}
-            <h6 class="fs-5">
-              {{ appli.title }}
-            </h6>
+            <h6 class="fs-5">{{ appli.title }}</h6>
             <ul>
               {% for right in app.user.rights|filter(r => r.appli == appli) %}
                 <li>{{ right.description }}</li>

@@ -38,7 +38,7 @@ class HomeController extends AbstractController
         if ($this->isGranted('ROLE_HUB_USER')) {
             /** @var \App\Entity\Account\User $user */
             $user = $this->getUser();
-            $allowedApplis = array_unique(array_map(fn (Right $r) => $r->getAppli(), $user->getRights()->toArray()));
+            $allowedApplis = array_unique(array_map(fn(Right $r) => $r->getAppli(), $user->getRights()->toArray()));
         }
 
         // Loop through categories and remove applis the user is not authorized for

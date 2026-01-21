@@ -6,12 +6,14 @@
   {# Creates the help button as a icon + help text in a popover #}
   {% set help_button %}
     {% if form.vars.help is not empty %}
-      <button type="button"
+      <button
+        type="button"
         aria-label="{{ 'form.button.help'|trans }}"
         class="btn btn-outline-info py-0 {{ form.vars.valid == false ? 'is-invalid' }}"
         data-bs-toggle="popover"
         {{ form.vars.help_html ? 'data-bs-html="true"' }}
-        data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}">
+        data-bs-content="{{ form.vars.help|trans(form.vars.help_translation_parameters|map(p => p|e), form.vars.translation_domain) }}"
+      >
         <span class="fs-5 bi bi-info-circle" aria-hidden="true"></span>
       </button>
     {% endif %}
@@ -36,12 +38,14 @@
           {{ form_label(form) }}
           {% if button_action is not empty %}
             <small>
-              <button type="button"
+              <button
+                type="button"
                 aria-label="{{ ('form.button.' ~ button_action)|trans }}"
                 data-button-action-target="{{ button_action }}"
                 data-button-action-id="{{ form.vars.id }}"
                 class="app-btn-action btn-close position-absolute top-50 end-0 translate-middle-y {{ form.vars.valid == false ? 'is-invalid' }}"
-                tabindex="-1">
+                tabindex="-1"
+              >
                 <span class="fa-solid fa-lg" aria-hidden="true"></span>
               </button>
             </small>
@@ -80,15 +84,17 @@
     {%- if image_uri -%}
       <div class="text-center mt-2">
         <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download tabindex="-1">
-          <img class="{{ row_attr.image_class|default('app-img-fluid') }}"
+          <img
+            class="{{ row_attr.image_class|default('app-img-fluid') }}"
             src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}"
-            alt="{{ 'form.button.download'|trans }}" />
+            alt="{{ 'form.button.download'|trans }}"
+          />
         </a>
       </div>
     {%- endif -%}
     {%- if download_uri -%}
       <a href="{{ asset_helper is same as(true) ? asset(download_uri) : download_uri }}" download>
-        {{ translation_domain is same as(false) ? download_label : download_label|trans({ }, translation_domain) }}
+        {{ translation_domain is same as(false) ? download_label : download_label|trans([], translation_domain) }}
       </a>
     {%- endif -%}
   {% endif %}
@@ -135,9 +141,7 @@
   {%- for group_label, option in options -%}
     {%- if option is iterable -%}
       <fieldset>
-        <h6 class="fw-bold">
-          {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({ }, choice_translation_domain) }}
-        </h6>
+        <h6 class="fw-bold">{{ choice_translation_domain is same as(false) ? group_label : group_label|trans([], choice_translation_domain) }}</h6>
         {%- set options = option -%}
         {{- block('choice_widget_expanded_options') -}}
       </fieldset>

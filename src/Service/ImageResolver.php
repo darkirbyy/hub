@@ -12,9 +12,7 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  */
 class ImageResolver
 {
-    public function __construct(private UploaderHelper $helper, private Packages $assets)
-    {
-    }
+    public function __construct(private UploaderHelper $helper, private Packages $assets) {}
 
     /**
      * Generates the path of an entity's image containing a VichUpload field.

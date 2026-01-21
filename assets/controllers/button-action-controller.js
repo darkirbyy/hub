@@ -15,9 +15,7 @@ export default class extends Controller {
       faSpan.classList.add('fa-xmark');
 
       item.addEventListener('click', () => {
-        const inputField = document.getElementById(
-          item.getAttribute('data-button-action-id')
-        );
+        const inputField = document.getElementById(item.getAttribute('data-button-action-id'));
         inputField.value = '';
         item.blur();
       });
@@ -25,9 +23,7 @@ export default class extends Controller {
 
     this.revealTargets.forEach((item) => {
       const faSpan = item.querySelector('span');
-      const inputField = document.getElementById(
-        item.getAttribute('data-button-action-id')
-      );
+      const inputField = document.getElementById(item.getAttribute('data-button-action-id'));
       faSpan.classList.remove('fa-xmark');
       faSpan.classList.add('fa-eye-slash');
 

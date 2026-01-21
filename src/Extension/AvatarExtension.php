@@ -23,9 +23,7 @@ class AvatarExtension
 {
     public bool $avatarChanged;
 
-    public function __construct(private EntityManagerInterface $entityManager, private ImageResolver $imageResolver)
-    {
-    }
+    public function __construct(private EntityManagerInterface $entityManager, private ImageResolver $imageResolver) {}
 
     public function prePersistUser(User $user, PrePersistEventArgs $event): void
     {

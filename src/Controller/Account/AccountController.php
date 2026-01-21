@@ -36,7 +36,7 @@ class AccountController extends AbstractController
     {
         /** @var \App\Entity\Account\User $user */
         $user = $this->getUser();
-        $allowedApplis = array_unique(array_map(fn (Right $r) => $r->getAppli(), $user->getRights()->toArray()));
+        $allowedApplis = array_unique(array_map(fn(Right $r) => $r->getAppli(), $user->getRights()->toArray()));
 
         $hasBackPath = $request->getSession()->has('hub/back-target-path');
 
@@ -206,9 +206,7 @@ class AccountController extends AbstractController
      * This method is intercepted by the Symfony firewall configuration.
      */
     #[Route(path: '/logout', name: 'logout', methods: ['GET', 'POST'])]
-    public function logout(): void
-    {
-    }
+    public function logout(): void {}
 
     /**
      * Check if the user is connected and has the role described in the parameter.
