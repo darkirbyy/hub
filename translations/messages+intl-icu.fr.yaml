@@ -138,11 +138,15 @@ layout:
     light: Thème clair
     dark: Thème sombre
     auto: Auto <br /><small class="text-muted fst-italic">Utiliser les paramètres systèmes</small>
-
   footer:
     madeWith: Réalisé avec
     version: Version
     releaseDate: Mise à jour le
+  env:
+    dev: dev
+    test: test
+    stag: qualif
+    prod: prod
 
 aria:
   skipToContent: Aller au contenu

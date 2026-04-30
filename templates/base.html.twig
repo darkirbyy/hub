@@ -28,10 +28,10 @@
   <body class="d-flex flex-column min-vh-100" data-controller="load-popover">
     {# Bar not visible in prod env #}
     {% if env.app.env != 'prod' %}
-      <div class="container-fluid p-0 m-0 text-center fw-bold d-flex justify-content-around app-env-dev">
+      <div class="container-fluid p-0 m-0 text-center fw-bold d-flex justify-content-around app-env-{{ env.app.env }}">
         {%- for i in 1..10 -%}
           <div>
-            {{ env.app.env|upper }}
+            {{ ('layout.env.' ~ env.app.env)|trans|upper }}
           </div>
         {%- endfor -%}
       </div>
