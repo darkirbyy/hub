@@ -38,7 +38,7 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         $allowedApplis = array_unique(array_map(fn(Right $r) => $r->getAppli(), $user->getRights()->toArray()));
 
-        $hasBackPath = $request->getSession()->has('hub/back-target-path');
+        $hasBackPath = $request->getSession()->has('back-target-path');
 
         return $this->render('account/index.html.twig', [
             'allowed_applis' => $allowedApplis,
@@ -56,11 +56,11 @@ class AccountController extends AbstractController
     #[Route(path: '/back', name: 'back', methods: ['GET'])]
     public function back(Request $request): Response
     {
-        $backPath = $request->getSession()->get('hub/back-target-path');
+        $backPath = $request->getSession()->get('back-target-path');
         if (empty($backPath)) {
             throw new \RuntimeException('No backpath in session.', 500);
         }
-        $request->getSession()->remove('hub/back-target-path');
+        $request->getSession()->remove('back-target-path');
 
         return $this->redirect($backPath);
     }
@@ -173,9 +173,8 @@ class AccountController extends AbstractController
         // Redirects the user if fully authenticated, otherwise decides if it's a normal login or forced login for sensitive actions
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('account_index');
-        } else {
-            $loginType = $this->isGranted('IS_REMEMBERED') ? LoginTypeEnum::FORCED : LoginTypeEnum::NORMAL;
         }
+        $loginType = $this->isGranted('IS_REMEMBERED') ? LoginTypeEnum::FORCED : LoginTypeEnum::NORMAL;
 
         // Get the login error if there is one and last username entered by the user
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -190,7 +189,7 @@ class AccountController extends AbstractController
 
         // Transforms the authentication error into a flash message
         if (!empty($error)) {
-            $this->addFlash('hub/danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
+            $this->addFlash('danger', ['message' => $error->getMessageKey(), 'params' => $error->getMessageData(), 'domain' => 'security']);
         }
 
         return $this->render('account/login.html.twig', [

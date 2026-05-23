@@ -36,10 +36,10 @@ class EventExtension implements EventSubscriberInterface
         $user->setDateLastCo(new \DateTime());
         $this->fm->persist($user);
 
-        $targetPath = $event->getRequest()->getSession()->get('hub/login-target-path');
+        $targetPath = $event->getRequest()->getSession()->get('login-target-path');
 
         if ($targetPath) {
-            $event->getRequest()->getSession()->remove('hub/login-target-path');
+            $event->getRequest()->getSession()->remove('login-target-path');
             $event->setResponse(new RedirectResponse($targetPath));
         }
     }
@@ -51,10 +51,10 @@ class EventExtension implements EventSubscriberInterface
      */
     public function onLogout(LogoutEvent $event): void
     {
-        $targetPath = $event->getRequest()->getSession()->get('hub/logout-target-path');
+        $targetPath = $event->getRequest()->getSession()->get('logout-target-path');
 
         if ($targetPath) {
-            $event->getRequest()->getSession()->remove('hub/logout-target-path');
+            $event->getRequest()->getSession()->remove('logout-target-path');
             $event->setResponse(new RedirectResponse($targetPath));
         }
     }

@@ -25,7 +25,7 @@ abstract class DefaultType extends AbstractType
     {
         $resolver->setDefaults([
             'translation_domain' => 'validators',
-            'csrf_token_id' => 'hub/submit',
+            'csrf_token_id' => 'submit',
             'attr' => [],
         ]);
 

@@ -35,12 +35,12 @@ class FlushManager
             $this->entityManager->persist($object);
             $this->entityManager->flush();
             if (!empty($flashSuccess)) {
-                $this->flashBag->add('hub/success', $flashSuccess);
+                $this->flashBag->add('success', $flashSuccess);
             }
         } catch (ConstraintViolationException $e) {
             $this->logger->warning('Error while trying to persist the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
             if (!empty($flashSuccess)) {
-                $this->flashBag->add('hub/danger', ['message' => 'form.flash.error']);
+                $this->flashBag->add('danger', ['message' => 'form.flash.error']);
             }
         }
     }
@@ -58,12 +58,12 @@ class FlushManager
             $this->entityManager->remove($object);
             $this->entityManager->flush();
             if (!empty($flashSuccess)) {
-                $this->flashBag->add('hub/success', $flashSuccess);
+                $this->flashBag->add('success', $flashSuccess);
             }
         } catch (ConstraintViolationException $e) {
             $this->logger->warning('Error while trying to remove the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
             if (!empty($flashSuccess)) {
-                $this->flashBag->add('hub/danger', ['message' => 'form.flash.error']);
+                $this->flashBag->add('danger', ['message' => 'form.flash.error']);
             }
         }
     }

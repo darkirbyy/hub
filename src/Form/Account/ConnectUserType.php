@@ -60,7 +60,7 @@ class ConnectUserType extends DefaultType
 
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_token_id' => 'hub/login',
+            'csrf_token_id' => 'login',
             'attr' => [
                 'data-controller' => 'button-action',
                 'data-turbo' => 'false', // Disable turbo as we may leave the app on login success

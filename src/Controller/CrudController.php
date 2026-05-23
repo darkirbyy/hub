@@ -254,7 +254,7 @@ abstract class CrudController extends AbstractController
     public function delete(int $id, Request $request, FlushManager $fm): Response
     {
         $token = $request->getPayload()->get('_token');
-        if (!$this->isCsrfTokenValid('hub/delete', $token)) {
+        if (!$this->isCsrfTokenValid('delete', $token)) {
             throw new \RuntimeException('Invalid CSRF Token.');
         }
 
