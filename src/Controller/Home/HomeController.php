@@ -35,7 +35,7 @@ class HomeController extends AbstractController
 
         // Determine in which applis the connected user has at least one right
         $allowedApplis = [];
-        if ($this->isGranted('ROLE_HUB_USER')) {
+        if ($this->isGranted('ROLE_USER')) {
             /** @var \App\Entity\Account\User $user */
             $user = $this->getUser();
             $allowedApplis = array_unique(array_map(fn(Right $r) => $r->getAppli(), $user->getRights()->toArray()));

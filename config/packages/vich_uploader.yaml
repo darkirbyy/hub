@@ -18,11 +18,13 @@ vich_uploader:
             delete_on_remove: true
 
 
-when@prod:
+when@prod: &vich-prod
     vich_uploader:
         mappings:
             applis:
                 uri_prefix: '/%app.name%/uploads/applis'
             users:
                 uri_prefix: '/%app.name%/uploads/users'
+
+when@stag: *vich-prod
 
