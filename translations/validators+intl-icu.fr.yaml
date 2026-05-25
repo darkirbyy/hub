@@ -33,7 +33,6 @@ appli:
     status: Statut
     name: Nom
     path: Chemin
-    rights: Droits
     description: Description
     linkText: Texte du lien
     imageFile: Image
@@ -64,38 +63,3 @@ shortcut:
     type: Type
     number: Ordre
     url: URL
-
-user:
-  name: Utilisateurs
-  label:
-    id: ID
-    username: Nom d'utilisateur
-    password: Mot de passe
-    rights: Droits
-    dateAdd: Date création
-    dateUpdate: Date modification
-    dateLastCo: Date dernière connexion
-    imageFile: Avatar
-    imageMeta: Métadonnées de l'avatar
-    newPassword: Nouveau mot de passe
-    repeatPassword: Répéter le mot de passe
-    rememberMe: Se souvenir de cet appareil pendant 30 jours
-    confirmDeletion: Je confirme la suppression
-  help:
-    username: 'Caractères autorisés : lettres, chiffres, tiret et underscore'
-    image: 'Extensions : png, jpg, webp<br>Largeur : entre 64px et 1024px<br>Poids : maximum 1Mio'
-  error:
-    invalidUsername: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
-
-right:
-  name: Droits
-  label:
-    id: ID
-    role: Rôle
-    description: Description
-    appli: Application
-  help:
-    role: 'Caractères autorisés : lettres minuscules et underscore'
-  error:
-    invalidRole: Ne doit contenir que des lettres minuscules ou le symbole _.
-  

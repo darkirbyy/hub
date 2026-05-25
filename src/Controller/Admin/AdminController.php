@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Repository\Other\ShortcutRepository;
+use App\Repository\ShortcutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

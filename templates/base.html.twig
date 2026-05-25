@@ -7,8 +7,6 @@
       <meta name="turbo-visit-control" content="reload" />
     {% endif %}
     <meta name="turbo-prefetch" content="{{ env.app.enable_prefetch ? 'true' : 'false' }}" />
-    {# <meta name="turbo-refresh-method" content="morph" /> #}
-    {# <meta name="turbo-refresh-scroll" content="preserve" /> #}
 
     <title>
       {{ title ~ ' - ' ~ ('layout.name'|trans) }}
@@ -69,16 +67,19 @@
           <ul class="navbar-nav align-items-center gap-1">
             {% if is_granted('ROLE_USER') %}
               <li class="nav-item">
-                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_index') }}">
+                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} {# href="{{ path('todo') }}" #}>
                   {{ app.user.username }}
-                  <div class="app-avatar-container-xs app-navbar-avatar d-inline-block ms-1">
+                  {# todo #}
+                  {# <div class="app-avatar-container-xs app-navbar-avatar d-inline-block ms-1">
                     <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
-                  </div>
+                  </div> #}
                 </a>
               </li>
             {% else %}
               <li class="nav-item">
-                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('account_login') }}">{{ 'layout.navbar.login'|trans }}</a>
+                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="{{ path('mainick_keycloak_security_auth_connect') }}">
+                  {{ 'layout.navbar.login'|trans }}
+                </a>
               </li>
             {% endif %}
             <li class="nav-item">

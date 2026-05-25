@@ -40,7 +40,6 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('fmt_bool', [$this, 'fmtBool']),
             new TwigFilter('fmt_enum', [$this, 'fmtEnum']),
             new TwigFilter('fmt_collec', [$this, 'fmtCollec']),
-            new TwigFilter('fmt_password', [$this, 'fmtPassword']),
             new TwigFilter('fmt_fa_class', [$this, 'fmtFaClass']),
             new TwigFilter('fmt_image_meta', [$this, 'fmtImageMeta']),
             new TwigFilter('fmt_image_path', [$this, 'fmtImagePath']),
@@ -57,6 +56,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      */
     public function deepAttribute($object, $getter)
     {
+        // todo : user property accessor
         if ('self' == $getter) {
             return $object;
         }
@@ -142,14 +142,6 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
     }
 
     /**
-     * Masks a password by replacing it with `"***"`.
-     */
-    public function fmtPassword(string $input): string
-    {
-        return '***';
-    }
-
-    /**
      * Generates an HTML `<span>` element for a FontAwesome icon, adding the $custom classes.
      */
     public function fmtFaClass(string $input, string $custom = ''): string
@@ -162,7 +154,11 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      */
     public function fmtImageMeta(FileMeta $input): string
     {
-        return $input->getMimeType() . ' ; ' . \round($input->getSize() / 1024, 0) . 'Kio ; ' . $input->getWidth() . 'x' . $input->getHeight();
+        if (!empty($input->getMimeType()) || !empty($input->getDimensions() || !empty($input->getSize()))) {
+            return $input->getMimeType() . ' ; ' . \round($input->getSize() / 1024, 0) . 'Kio ; ' . $input->getWidth() . 'x' . $input->getHeight();
+        }
+
+        return mb_lcfirst($this->trans->trans('form.other.noImage'));
     }
 
     /**

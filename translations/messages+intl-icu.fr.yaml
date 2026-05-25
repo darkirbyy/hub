@@ -7,43 +7,6 @@ home:
   introText: Bienvenue sur le serveur de <span class="app-home-tag">Darkirby</span> ! <small class="app-navbar-muted-color">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.
   haveFun: Bonne visite 😀
 
-account:
-  title: Compte
-  subtitles:
-    login: 
-      normal: Authentification
-      forced: Authentification forte
-    myProfile: Mon profil
-    myRights: Mes droits d'accès
-    updatePassword: Modifier mon mot de passe
-    deleteAccount: Supprimer mon compte
-  button:
-    login:
-      normal: Se connecter
-      forced: Confirmer
-    logout: Se déconnecter
-    back: Retour à l'application
-  link:
-    backToIndex: Retour au profil
-    updatePassword: Modifier mon mot de passe
-    deleteAccount: Supprimer mon compte
-  modal:
-    updateAvatar: Choisir un nouvel avatar
-  flash:
-    avatarUpdated: Votre nouvel avatar a été enregistré.
-    passwordUpdated: Votre mot de passe a été mise à jour.
-    accountDeleted: Votre compte a été supprimé.
-  other:
-    dateLastCo: 'Dernière connexion : '
-    dateAdd: 'Inscrit depuis : '
-    login:
-      normal: Pour vous authentifier, veuillez indiquer vos identifiants. 
-      forced: L'accès à cette page nécessite une authentification <strong>forte</strong>. Pour poursuivre, veuillez confirmer vos identifiants.
-    passwordStrength: 
-      text: 'Par politique de sécurité, le mot de passe doit avoir une force au moins égale à "{passwordStrength}"'
-      label: 'Force du mot de passe : '
-    confirmDeletion: Veuillez confirmer la suppression de votre compte. Cette action est <strong>irréversible</strong>.
-
 error:
   title: Erreur {code}
   message:
@@ -55,15 +18,11 @@ admin:
   title: Administration
   subtitles:
     configs: Configurations
-    accounts: Comptes
-    hub: Hub
+    home: Accueil
     others: Autres
     shortcuts: Raccourcis
   link:
     backToMainPage: Retour à la page principale
-  flash:
-    userAdded: '<strong>{username}</strong> ajouté avec le mot de passe temporaire <strong>{password}</strong> !'
-    userReset: '<strong>{username}</strong> réinitialisé avec le mot de passe temporaire <strong>{password}</strong> !'
 
 ##################################
 # Common translations ############
@@ -106,6 +65,7 @@ form:
     backToSee: Retour aux détails
   other:
     deleteImage: Supprimer l'image
+    noImage: Pas d'image
     action: Actions
     none: Aucun
 
@@ -113,15 +73,6 @@ enum:
   choice:
     yes: Oui
     no: Non
-  loginType:
-    normal: Normal
-    forced: Forcé
-  passwordStrength:
-    veryWeak: Très faible
-    weak: Faible
-    medium: Moyen
-    strong: Fort
-    veryStrong: Très fort
   appliStatus:
     public: Publique
     userOnly: Utilisateur uniquement

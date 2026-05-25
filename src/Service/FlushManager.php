@@ -19,7 +19,9 @@ class FlushManager
 
     public function __construct(private EntityManagerInterface $entityManager, private LoggerInterface $logger, private RequestStack $requestStack)
     {
-        $this->flashBag = $requestStack->getSession()->getFlashBag();
+        if ($this->requestStack->getMainRequest()->hasSession()) {
+            $this->flashBag = $requestStack->getSession()->getFlashBag();
+        }
     }
 
     /**
@@ -34,12 +36,12 @@ class FlushManager
         try {
             $this->entityManager->persist($object);
             $this->entityManager->flush();
-            if (!empty($flashSuccess)) {
+            if (!empty($this->flashBag) && !empty($flashSuccess)) {
                 $this->flashBag->add('success', $flashSuccess);
             }
         } catch (ConstraintViolationException $e) {
             $this->logger->warning('Error while trying to persist the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
-            if (!empty($flashSuccess)) {
+            if (!empty($this->flashBag) && !empty($flashSuccess)) {
                 $this->flashBag->add('danger', ['message' => 'form.flash.error']);
             }
         }
@@ -57,12 +59,12 @@ class FlushManager
         try {
             $this->entityManager->remove($object);
             $this->entityManager->flush();
-            if (!empty($flashSuccess)) {
+            if (!empty($this->flashBag) && !empty($flashSuccess)) {
                 $this->flashBag->add('success', $flashSuccess);
             }
         } catch (ConstraintViolationException $e) {
             $this->logger->warning('Error while trying to remove the entity {entity}. Error: {error}', ['entity' => $object::class, 'error' => $e->getMessage()]);
-            if (!empty($flashSuccess)) {
+            if (!empty($this->flashBag) && !empty($flashSuccess)) {
                 $this->flashBag->add('danger', ['message' => 'form.flash.error']);
             }
         }

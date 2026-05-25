@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Home;
 
-use App\Entity\Hub\Right;
 use App\Enum\AppliStatusEnum;
-use App\Repository\Hub\CategoryRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +19,7 @@ class HomeController extends AbstractController
 {
     /**
      * Displays the homepage with public applis for any visitor,
-     * adapting the visible applis for an authenticated user depending on its rights.
+     * adapting the visible applis for an authenticated user depending on its roles.
      *
      * @param Request            $request      the HTTP request instance
      * @param CategoryRepository $categoryRepo $shortcutRepo the repository managing the categories
@@ -31,14 +30,15 @@ class HomeController extends AbstractController
     public function index(Request $request, CategoryRepository $categoryRepo): Response
     {
         $categories = $categoryRepo->findAndSort();
+        // todo : use env var ?
         $serverBaseUrl = $request->getSchemeAndHttpHost();
 
-        // Determine in which applis the connected user has at least one right
+        // Determine in which applis the connected user has at least one role
         $allowedApplis = [];
         if ($this->isGranted('ROLE_USER')) {
             /** @var \App\Entity\Account\User $user */
             $user = $this->getUser();
-            $allowedApplis = array_unique(array_map(fn(Right $r) => $r->getAppli(), $user->getRights()->toArray()));
+            $allowedApplis = [];
         }
 
         // Loop through categories and remove applis the user is not authorized for

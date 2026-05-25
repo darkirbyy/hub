@@ -10,7 +10,6 @@ parameters:
     app.name: '%env(string:APP_NAME)%'
     app.env: '%env(string:APP_ENV)%'
     app.html_validation: '%env(bool:APP_HTML_VALIDATION)%'
-    app.password_strength: '%env(enum:App\Enum\PasswordStrengthEnum:APP_PASSWORD_STRENGTH)%'
     app.enable_prefetch: '%env(bool:APP_ENABLE_PREFETCH)%'
 
 imports:
@@ -32,13 +31,5 @@ services:
         arguments:
             $htmlValidation: '%app.html_validation%'
 
-    App\Extension\EventExtension:
-        tags: [kernel.event_subscriber]
-
     App\Extension\TypeExtension:
         tags: [form.type_extension]
-
-    App\Form\Account\PasswordUserType:
-        arguments:
-            $htmlValidation: '%app.html_validation%'
-            $passwordStrength: '%app.password_strength%'
