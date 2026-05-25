@@ -34,17 +34,21 @@ class HomeController extends AbstractController
         $serverBaseUrl = $request->getSchemeAndHttpHost();
 
         // Determine in which applis the connected user has at least one role
-        $allowedApplis = [];
+        $allowedClientsId = [];
         if ($this->isGranted('ROLE_USER')) {
-            /** @var \App\Entity\Account\User $user */
-            $user = $this->getUser();
-            $allowedApplis = [];
+            $userArray = $this->getUser()->toArray();
+            if (array_key_exists('clients_roles', $userArray)) {
+                $allowedClientsId = array_diff(array_keys($userArray['clients_roles']), ['account']);
+            }
         }
 
         // Loop through categories and remove applis the user is not authorized for
         foreach ($categories as $key => $category) {
             foreach ($category->getApplis() as $appli) {
-                if (AppliStatusEnum::PRIVATE === $appli->getStatus() || (AppliStatusEnum::USER_ONLY === $appli->getStatus() && !in_array($appli, $allowedApplis))) {
+                if (
+                    AppliStatusEnum::PRIVATE === $appli->getStatus()
+                    || (AppliStatusEnum::USER_ONLY === $appli->getStatus() && !in_array($appli->getClientId(), $allowedClientsId))
+                ) {
                     $category->removeAppli($appli);
                 }
             }

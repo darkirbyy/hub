@@ -19,8 +19,8 @@ use Vich\UploaderBundle\Mapping\Attribute as Vich;
 /**
  * An Appli is described by a title, a description, a link text and an image, displayed on the homepage.
  * The number allows to decide in which order the applis should appear in a given Category and must be unique.
- * The name must be unique.
  * The path is relative to the root of the server or an absolute URL and must be unique.
+ * The client ID is optional and must correspond to the keycloak one if used.
  * Some external links can be added to redirect to other website.
  */
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
@@ -56,6 +56,11 @@ class Appli
     #[Assert\NotBlank]
     #[Assert\GreaterThanOrEqual(0)]
     private ?int $number = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(min: 2)]
+    #[Assert\Regex('/^[a-zA-Z0-9-_]{2,}$/', 'appli.error.invalidClientId')]
+    private ?string $clientId = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -150,6 +155,18 @@ class Appli
     public function setNumber(?int $number): static
     {
         $this->number = $number;
+
+        return $this;
+    }
+
+    public function getClientId(): ?string
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(?string $clientId): static
+    {
+        $this->clientId = $clientId;
 
         return $this;
     }

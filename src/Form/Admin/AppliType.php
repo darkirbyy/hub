@@ -69,6 +69,15 @@ class AppliType extends DefaultType
                     'class' => 'app-form-row-bordered',
                 ],
             ])
+            ->add('clientId', TextType::class, [
+                'required' => true,
+                'label' => 'appli.label.clientId',
+                'help' => 'appli.help.clientId',
+                'button_action' => 'clear',
+                'attr' => [
+                    'placeholder' => 'appli.label.clientId',
+                ],
+            ])
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'appli.label.description',

@@ -32,6 +32,7 @@ appli:
     category: Catégorie
     number: Ordre
     status: Statut
+    clientId: Client ID
     description: Description
     linkText: Texte du lien
     imageFile: Image
@@ -39,9 +40,11 @@ appli:
     externalLinks: Liens externes
   help:
     path: Définit le chemin de l'application cible, soit depuis la racine du serveur (en commençant par '/'), soit avec une URL complète (commençant pat https)
+    clientId: Correspond au client ID renseigné sur Keycloak, format 'app-env'
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
   error:
     invalidPath: Doit commencer par / (chemin depuis la racine du serveur) ou par http (URL complète).
+    invalidClient: Ne doit contenir que des lettres, des chiffres, ou les symboles - et _.
 
 externalLink:
   name: Liens externes

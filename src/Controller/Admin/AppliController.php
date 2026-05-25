@@ -42,7 +42,8 @@ final class AppliController extends CrudController
                 2 => ['getter' => 'category'],
                 3 => ['getter' => 'number', 'breakpoint' => 'md'],
                 4 => ['getter' => 'status', 'filters' => 'fmt_enum'],
-                5 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
+                5 => ['getter' => 'clientId'],
+                6 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta', 'breakpoint' => 'md'],
             ],
             'backlink' => [
                 'text' => 'admin.link.backToMainPage',
@@ -65,11 +66,12 @@ final class AppliController extends CrudController
                 4 => ['getter' => 'category'],
                 5 => ['getter' => 'number'],
                 6 => ['getter' => 'status', 'filters' => 'fmt_enum'],
-                7 => ['getter' => 'description'],
-                8 => ['getter' => 'linkText'],
-                9 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-appli.png")|fmt_image_path("app-img-fluid")|raw'],
-                10 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
-                11 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec("<br>")|default("-")|raw'],
+                7 => ['getter' => 'clientId'],
+                8 => ['getter' => 'description'],
+                9 => ['getter' => 'linkText'],
+                10 => ['getter' => 'self', 'label' => 'imageFile', 'filters' => 'get_image_path("default-appli.png")|fmt_image_path("app-img-fluid")|raw'],
+                11 => ['getter' => 'imageMeta', 'filters' => 'fmt_image_meta'],
+                12 => ['getter' => 'externalLinks', 'filters' => 'fmt_collec("<br>")|default("-")|raw'],
             ],
         ];
     }
