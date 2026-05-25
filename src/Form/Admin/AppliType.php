@@ -26,10 +26,18 @@ class AppliType extends DefaultType
             ->add('title', TextType::class, [
                 'required' => true,
                 'label' => 'appli.label.title',
-                'help' => 'appli.help.title',
                 'button_action' => 'clear',
                 'attr' => [
                     'placeholder' => 'appli.label.title',
+                ],
+            ])
+            ->add('path', TextType::class, [
+                'required' => true,
+                'label' => 'appli.label.path',
+                'help' => 'appli.help.path',
+                'button_action' => 'clear',
+                'attr' => [
+                    'placeholder' => 'appli.label.path',
                 ],
             ])
             ->add('category', EntityType::class, [
@@ -39,6 +47,13 @@ class AppliType extends DefaultType
                 'label' => 'appli.label.category',
                 'attr' => [
                     'placeholder' => 'appli.label.category',
+                ],
+            ])
+            ->add('number', IntegerType::class, [
+                'required' => true,
+                'label' => 'appli.label.number',
+                'attr' => [
+                    'placeholder' => 'appli.label.number',
                 ],
             ])
             ->add('status', EnumType::class, [
@@ -54,32 +69,6 @@ class AppliType extends DefaultType
                     'class' => 'app-form-row-bordered',
                 ],
             ])
-            ->add('number', IntegerType::class, [
-                'required' => true,
-                'label' => 'appli.label.number',
-                'attr' => [
-                    'placeholder' => 'appli.label.number',
-                ],
-            ])
-            ->add('name', TextType::class, [
-                'required' => true,
-                'label' => 'appli.label.name',
-                'help' => 'appli.help.name',
-                'help_html' => true,
-                'button_action' => 'clear',
-                'attr' => [
-                    'placeholder' => 'appli.label.name',
-                ],
-            ])
-            ->add('path', TextType::class, [
-                'required' => true,
-                'label' => 'appli.label.path',
-                'help' => 'appli.help.path',
-                'button_action' => 'clear',
-                'attr' => [
-                    'placeholder' => 'appli.label.path',
-                ],
-            ])
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'appli.label.description',
@@ -89,7 +78,7 @@ class AppliType extends DefaultType
                 ],
             ])
             ->add('linkText', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'appli.label.linkText',
                 'button_action' => 'clear',
                 'attr' => [

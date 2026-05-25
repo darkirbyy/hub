@@ -20,14 +20,12 @@ use Vich\UploaderBundle\Mapping\Attribute as Vich;
  * An Appli is described by a title, a description, a link text and an image, displayed on the homepage.
  * The number allows to decide in which order the applis should appear in a given Category and must be unique.
  * The name must be unique.
- * The path is relative to the root of the server and must be unique.
+ * The path is relative to the root of the server or an absolute URL and must be unique.
  * Some external links can be added to redirect to other website.
  */
 #[ORM\Entity(repositoryClass: AppliRepository::class)]
-#[ORM\UniqueConstraint(fields: ['name'])]
 #[ORM\UniqueConstraint(fields: ['path'])]
 #[ORM\UniqueConstraint(fields: ['number', 'category'])]
-#[UniqueEntity(fields: ['name'])]
 #[UniqueEntity(fields: ['path'])]
 #[UniqueEntity(fields: ['number', 'category'])]
 #[Vich\Uploadable]
@@ -42,12 +40,6 @@ class Appli
     #[Assert\NotBlank]
     #[Assert\Length(min: 2)]
     private ?string $title = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 2)]
-    #[Assert\Regex('/^[a-z]+$/', 'appli.error.invalidName')]
-    private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
@@ -68,8 +60,7 @@ class Appli
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $linkText = null;
 
     #[ORM\Column(enumType: AppliStatusEnum::class)]
@@ -77,16 +68,14 @@ class Appli
     #[Assert\NotBlank]
     private ?AppliStatusEnum $status = null;
 
-    #[
-        Vich\UploadableField(
-            mapping: 'applis',
-            fileNameProperty: 'imageMeta.name',
-            size: 'imageMeta.size',
-            mimeType: 'imageMeta.mimeType',
-            originalName: 'imageMeta.originalName',
-            dimensions: 'imageMeta.dimensions',
-        ),
-    ]
+    #[Vich\UploadableField(
+        mapping: 'applis',
+        fileNameProperty: 'imageMeta.name',
+        size: 'imageMeta.size',
+        mimeType: 'imageMeta.mimeType',
+        originalName: 'imageMeta.originalName',
+        dimensions: 'imageMeta.dimensions',
+    ),]
     #[Assert\Image(maxSize: '5Mi', minWidth: 128, maxWidth: 2048, minRatio: 0.25, maxRatio: 4, mimeTypes: ['image/jpeg', 'image/png', 'image/webp'], detectCorrupted: true)]
     private ?File $imageFile = null;
 
@@ -125,18 +114,6 @@ class Appli
     public function setTitle(?string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): static
-    {
-        $this->name = $name;
 
         return $this;
     }

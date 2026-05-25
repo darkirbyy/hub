@@ -28,23 +28,19 @@ appli:
   label:
     id: ID
     title: Titre
+    path: Chemin
     category: Catégorie
     number: Ordre
     status: Statut
-    name: Nom
-    path: Chemin
     description: Description
     linkText: Texte du lien
     imageFile: Image
     imageMeta: Métadonnées de l'image
     externalLinks: Liens externes
   help:
-    title: Apparaît sur les cartes du HUB
-    name: "Préfixe utilisé pour la définition des rôles.<br>Caractères autorisés : lettres minuscules"
     path: Définit le chemin de l'application cible, soit depuis la racine du serveur (en commençant par '/'), soit avec une URL complète (commençant pat https)
     image: 'Extensions : png, jpg, webp<br>Largeur : entre 128px et 2048px<br>Poids : maximum 5Mio'
   error:
-    invalidName: Ne doit contenir que des lettres minuscules.
     invalidPath: Doit commencer par / (chemin depuis la racine du serveur) ou par http (URL complète).
 
 externalLink:

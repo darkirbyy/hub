@@ -6,6 +6,7 @@ home:
   h1: <span class="part-1">Bon</span><span class="part-2">jour</span>
   introText: Bienvenue sur le serveur de <span class="app-home-tag">Darkirby</span> ! <small class="app-navbar-muted-color">(oula, j'ai peur...)</small><br>Vous trouverez ici la liste de toutes les applications disponibles sur ce serveur.
   haveFun: Bonne visite 😀
+  visit: Visiter
 
 error:
   title: Erreur {code}

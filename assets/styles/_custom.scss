@@ -114,7 +114,8 @@
 
 input + label.form-label.required::after,
 textarea + label.form-label.required::after,
-legend.col-form-label.required::after {
+legend.col-form-label.required::after,
+select + label.required::after {
   content: ' *';
   color: var(--app-form-required) !important;
 }
@@ -126,6 +127,15 @@ legend.col-form-label.required::after {
 
 .invalid-feedback {
   padding-left: 0.5rem;
+}
+
+legend.col-form-label {
+  font-size: 0.9rem;
+  color: rgb(var(--bs-body-color-rgb), 0.65);
+}
+
+.form-floating > .form-control:not(:focus, :placeholder-shown) ~ label {
+  transform: none;
 }
 
 // swiper cards ///////////////////

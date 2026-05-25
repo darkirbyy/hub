@@ -64,7 +64,7 @@
                       {# Main button #}
                       <div class="flex-fill text-start">
                         {# Disable turbo : we may leave this app when following these links #}
-                        <a href="{{ appli_url }}" class="btn btn-outline-primary" data-turbo="false">{{ appli.linkText }}</a>
+                        <a href="{{ appli_url }}" class="btn btn-outline-primary" data-turbo="false">{{ appli.linkText|default('home.visit'|trans) }}</a>
                       </div>
                       {# All externals links #}
                       {% for externalLink in appli.externalLinks %}
