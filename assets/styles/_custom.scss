@@ -76,6 +76,7 @@
 }
 
 // links //////////////////////////
+
 .icon-link {
   text-decoration-color: var(--bs-link-color-rgb);
 
@@ -134,8 +135,37 @@ legend.col-form-label {
   color: rgb(var(--bs-body-color-rgb), 0.65);
 }
 
+// todo : don't work (firefox)
 .form-floating > .form-control:not(:focus, :placeholder-shown) ~ label {
   transform: none;
+}
+
+// bootstrap dropdown /////////////
+
+.dropdown-menu {
+  background-color: var(--app-dropdown-bg-color);
+  overflow: hidden;
+  @include app-neon-line(var(--app-dropdown-border-color), rgba($linen, 0.8), rgba($linen, 0.2), 0.5);
+
+  & li a {
+    color: var(--app-dropdown-primary-text-color) !important;
+
+    &.link-danger {
+      color: var(--app-dropdown-danger-text-color) !important;
+    }
+  }
+
+  & li:hover a,
+  & li:focus a,
+  & li:focus-visible a {
+    outline: none;
+    background-color: var(--app-dropdown-bg-color-hover) !important;
+    text-shadow: 0 0 0.1rem var(--app-dropdown-primary-text-color-hover);
+
+    &.link-danger {
+      text-shadow: 0 0 0.1rem var(--app-dropdown-danger-text-color-hover);
+    }
+  }
 }
 
 // swiper cards ///////////////////
@@ -309,6 +339,7 @@ legend.col-form-label {
 }
 
 .app-navbar-avatar {
+  filter: brightness(100%);
   position: relative;
   top: -0.1rem;
 }
@@ -343,6 +374,10 @@ legend.col-form-label {
     .app-navbar-logo {
       opacity: 1;
       filter: drop-shadow(0 0 0.1rem var(--app-navbar-text-color));
+    }
+
+    .app-navbar-avatar {
+      filter: brightness(150%);
     }
   }
 
@@ -517,12 +552,6 @@ legend.col-form-label {
       );
     }
   }
-}
-
-// Account ////////////////////////
-
-.app-account-card {
-  background-color: var(--app-account-card-bg-color);
 }
 
 // Form rows //////////////////////

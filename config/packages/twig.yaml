@@ -8,6 +8,7 @@ twig:
                 name: '%app.name%'
                 env: '%app.env%'
                 enable_prefetch: '%app.enable_prefetch%'
+                iam_url: '%app.iam_url%'
             versioning:
                 version: '%versioning.version%'
                 version_hash: '%versioning.version_hash%'

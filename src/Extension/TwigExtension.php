@@ -6,6 +6,7 @@ namespace App\Extension;
 
 use App\Service\ImageResolver;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -19,7 +20,7 @@ use Vich\UploaderBundle\Entity\File as FileMeta;
  */
 class TwigExtension extends AbstractExtension implements GlobalsInterface
 {
-    public function __construct(private ImageResolver $imageResolver, private TranslatorInterface $trans) {}
+    public function __construct(private ImageResolver $imageResolver, private TranslatorInterface $trans, private PropertyAccessorInterface $propertyAccessor) {}
 
     public function getGlobals(): array
     {
@@ -52,34 +53,19 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      * @param object $object this object to traverse
      * @param string $getter this dot-notated path to the attribute
      *
-     * @return mixed|null this attribute value, or null if not found
+     * @return mixed this attribute value, or null if not found
      */
-    public function deepAttribute($object, $getter)
+    public function deepAttribute(object $object, string $getter): mixed
     {
-        // todo : user property accessor
         if ('self' == $getter) {
             return $object;
         }
 
-        $attributes = explode('.', $getter);
-
-        foreach ($attributes as $attribute) {
-            $getter = 'get' . ucfirst($attribute);
-            $isGetter = 'is' . ucfirst($attribute);
-            $hasGetter = 'has' . ucfirst($attribute);
-
-            if (method_exists($object, $getter)) {
-                $object = $object->$getter();
-            } elseif (method_exists($object, $isGetter)) {
-                $object = $object->$isGetter();
-            } elseif (method_exists($object, $hasGetter)) {
-                $object = $object->$hasGetter();
-            } else {
-                return null;
-            }
+        if ($this->propertyAccessor->isReadable($object, $getter)) {
+            return $this->propertyAccessor->getValue($object, $getter);
         }
 
-        return $object;
+        return null;
     }
 
     /**

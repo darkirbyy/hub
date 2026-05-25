@@ -66,14 +66,22 @@
           {# Right part of the navbar : connect or go to your account page #}
           <ul class="navbar-nav align-items-center gap-1">
             {% if is_granted('ROLE_USER') %}
-              <li class="nav-item">
-                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} {# href="{{ path('todo') }}" #}>
+              <li class="nav-item dropdown">
+                <a {{ currentRoute starts with 'account' ? activeLink|raw : otherLink|raw }} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   {{ app.user.username }}
-                  {# todo #}
-                  {# <div class="app-avatar-container-xs app-navbar-avatar d-inline-block ms-1">
-                    <img src="{{ app.user|get_image_path('default-avatar.png') }}" class="app-avatar-img" alt="" />
-                  </div> #}
+                  <div class="app-avatar-container-xs app-navbar-avatar d-inline-block ms-1">
+                    {% if app.user.toArray.picture is defined and app.user.toArray.picture is not empty %}
+                      {% set avatarPath = app.user.toArray.picture %}
+                    {% else %}
+                      {% set avatarPath = asset('build/images/default-avatar.png') %}
+                    {% endif %}
+                    <img src="{{ avatarPath }}" class="app-avatar-img" alt="" />
+                  </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-end text-center py-0">
+                  <li><a href="{{ env.app.iam_url }}" class="dropdown-item pt-2">Mon compte</a></li>
+                  <li><a href="{{ path('mainick_keycloak_security_auth_logout') }}" class="dropdown-item link-danger pb-2">Se déconnecter</a></li>
+                </ul>
               </li>
             {% else %}
               <li class="nav-item">

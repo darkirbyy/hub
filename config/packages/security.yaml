@@ -5,7 +5,6 @@ security:
         mainick_keycloak_user_provider:
             id: Mainick\KeycloakClientBundle\Security\User\KeycloakUserProvider
 
-
     firewalls:
         dev:
             pattern: '^/(_profiler|_wdt|build)/'
@@ -27,7 +26,6 @@ security:
 
     access_control:
         - { path: /auth/keycloak/connect, roles: PUBLIC_ACCESS }
-        - { path: ^/account, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
 when@test:

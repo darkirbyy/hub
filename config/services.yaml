@@ -11,6 +11,7 @@ parameters:
     app.env: '%env(string:APP_ENV)%'
     app.html_validation: '%env(bool:APP_HTML_VALIDATION)%'
     app.enable_prefetch: '%env(bool:APP_ENABLE_PREFETCH)%'
+    app.iam_url: '%env(string:IAM_BASE_URL)%'
 
 imports:
     - { resource: 'version.yaml' }
