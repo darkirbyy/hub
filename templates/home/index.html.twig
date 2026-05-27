@@ -44,11 +44,10 @@
             <div class="swiper-wrapper">
               {# For each appli, calculate the full url and use a card to display it #}
               {% for appli in category.applis %}
-                {% set appli_url = appli.path starts with '/' ? server_base_url ~ appli.path : appli.path %}
                 <div class="card swiper-slide app-home-card">
                   {# Card top with a clickable image #}
                   {# Disable turbo : we may leave this app when following these links #}
-                  <a href="{{ appli_url }}" class="border-bottom border-2 d-flex align-items-center" data-turbo="false">
+                  <a href="{{ appli.path }}" class="border-bottom border-2 d-flex align-items-center" data-turbo="false">
                     <img src="{{ appli|get_image_path('default-appli.png') }}" class="card-img app-img-fluid" alt="{{ appli.title }}" />
                   </a>
                   {# Card body in three vertical flex parts: appli title, description and buttons #}
@@ -64,7 +63,7 @@
                       {# Main button #}
                       <div class="flex-fill text-start">
                         {# Disable turbo : we may leave this app when following these links #}
-                        <a href="{{ appli_url }}" class="btn btn-outline-primary" data-turbo="false">{{ appli.linkText|default('home.visit'|trans) }}</a>
+                        <a href="{{ appli.path }}" class="btn btn-outline-primary" data-turbo="false">{{ appli.linkText|default('home.visit'|trans) }}</a>
                       </div>
                       {# All externals links #}
                       {% for externalLink in appli.externalLinks %}

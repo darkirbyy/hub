@@ -7,7 +7,7 @@ namespace App\Controller\Home;
 use App\Enum\AppliStatusEnum;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -21,17 +21,14 @@ class HomeController extends AbstractController
      * Displays the homepage with public applis for any visitor,
      * adapting the visible applis for an authenticated user depending on its roles.
      *
-     * @param Request            $request      the HTTP request instance
      * @param CategoryRepository $categoryRepo $shortcutRepo the repository managing the categories
      *
      * @return Response the rendered homepage
      */
     #[Route('', name: 'index', methods: ['GET'])]
-    public function index(Request $request, CategoryRepository $categoryRepo): Response
+    public function index(#[Autowire('%env(DEFAULT_URI)%')] string $defaultUri, CategoryRepository $categoryRepo): Response
     {
         $categories = $categoryRepo->findAndSort();
-        // todo : use env var ?
-        $serverBaseUrl = $request->getSchemeAndHttpHost();
 
         // Determine in which applis the connected user has at least one role
         $allowedClientsId = [];
@@ -51,6 +48,10 @@ class HomeController extends AbstractController
                 ) {
                     $category->removeAppli($appli);
                 }
+                // todo : not useful ? remove and remove autowire defaultUri
+                // if(str_starts_with($appli->getPath(), '/')){
+                //     $appli->setPath($defaultUri . $appli->getPath());
+                // }
             }
             if (0 == count($category->getApplis())) {
                 unset($categories[$key]);
@@ -59,7 +60,6 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
-            'server_base_url' => $serverBaseUrl,
         ]);
     }
 }

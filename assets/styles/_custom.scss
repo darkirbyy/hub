@@ -135,13 +135,6 @@ legend.col-form-label {
   color: rgb(var(--bs-body-color-rgb), 0.65);
 }
 
-// todo : don't work (firefox)
-.form-floating > .form-control:not(:focus, :placeholder-shown) ~ label {
-  transform: none;
-}
-
-// bootstrap dropdown /////////////
-
 .dropdown-menu {
   background-color: var(--app-dropdown-bg-color);
   overflow: hidden;
