@@ -26,7 +26,7 @@ class HomeController extends AbstractController
      * @return Response the rendered homepage
      */
     #[Route('', name: 'index', methods: ['GET'])]
-    public function index(#[Autowire('%env(DEFAULT_URI)%')] string $defaultUri, CategoryRepository $categoryRepo): Response
+    public function index(CategoryRepository $categoryRepo): Response
     {
         $categories = $categoryRepo->findAndSort();
 
@@ -48,10 +48,6 @@ class HomeController extends AbstractController
                 ) {
                     $category->removeAppli($appli);
                 }
-                // todo : not useful ? remove and remove autowire defaultUri
-                // if(str_starts_with($appli->getPath(), '/')){
-                //     $appli->setPath($defaultUri . $appli->getPath());
-                // }
             }
             if (0 == count($category->getApplis())) {
                 unset($categories[$key]);
