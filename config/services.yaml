@@ -34,3 +34,9 @@ services:
 
     App\Extension\TypeExtension:
         tags: [form.type_extension]
+
+    App\Security\KeycloakLogoutListener:
+        arguments:
+            $defaultTargetRouteName: '%mainick_keycloak_client.security.default_target_route_name%'
+        tags:
+            - { name: kernel.event_listener, event: 'Symfony\Component\Security\Http\Event\LogoutEvent', priority: -30 }
