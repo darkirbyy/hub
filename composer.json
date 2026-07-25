@@ -51,7 +51,7 @@
         "twig/extra-bundle": "^3.0",
         "twig/intl-extra": "^3.17",
         "twig/twig": "^3.0",
-        "vich/uploader-bundle": "^2.5"
+        "vich/uploader-bundle": "^2.9"
     },
     "config": {
         "allow-plugins": {
@@ -121,7 +121,7 @@
         "symfony/css-selector": "7.4.*",
         "symfony/debug-bundle": "7.4.*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^7.3",
+        "symfony/phpunit-bridge": "^7.4",
         "symfony/stopwatch": "7.4.*",
         "symfony/web-profiler-bundle": "7.4.*",
         "vincentlanglet/twig-cs-fixer": "^3.4",
