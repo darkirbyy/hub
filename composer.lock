@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ec53f51bb235f6caf7ba59e5760d7a6",
+    "content-hash": "faca2d77db90eed937afbb2f17cd883b",
     "packages": [
         {
             "name": "bizkit/versioning-bundle",

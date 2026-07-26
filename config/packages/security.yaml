@@ -26,6 +26,7 @@ security:
 
     access_control:
         - { path: /auth/keycloak/connect, roles: PUBLIC_ACCESS }
+        - { path: ^/auth, roles: IS_AUTHENTICATED }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
 when@test:
