@@ -69,7 +69,7 @@ class HomeController extends AbstractController
      *
      * @return Response a http code (403, 401, 400 or 200)
      */
-    #[Route('/check', name: 'check', methods: ['GET'])]
+    #[Route('/check', name: 'check', methods: ['GET'], env: ['dev', 'test', 'prod'])]
     public function check(Request $request): Response
     {
         // User MUST be connected
