@@ -70,7 +70,7 @@ class AppliType extends DefaultType
                 ],
             ])
             ->add('clientId', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'appli.label.clientId',
                 'help' => 'appli.help.clientId',
                 'button_action' => 'clear',
