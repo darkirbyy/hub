@@ -35,7 +35,8 @@ when@test:
 when@prod: &framework-prod
     framework:
         error_controller: App\Controller\Home\ErrorController::show
-        session:
-            cookie_path: '/%app.name%'
+        # Hub cookie must be placed on '/' for the /check route
+        # session: 
+        #     cookie_path: '/%app.name%'
 
 when@stag: *framework-prod

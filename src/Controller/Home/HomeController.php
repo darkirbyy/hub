@@ -93,7 +93,7 @@ class HomeController extends AbstractController
         // User MUST have clients_roles scope in the token
         $userArray = $user->toArray();
         if (!array_key_exists('clients_roles', $userArray)) {
-            return new Response('Unauthorized', Response::HTTP_FORBIDDEN);
+            return new Response('Forbidden', Response::HTTP_FORBIDDEN);
         }
 
         // User MUST have the given role for the given client
