@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
  * Controller for all the homepage of the server, that any visitor can see.
@@ -27,21 +26,17 @@ class HomeController extends AbstractController
      * @return Response the rendered homepage
      */
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(Request $request, CategoryRepository $categoryRepo): Response
+    public function index(CategoryRepository $categoryRepo): Response
     {
         $categories = $categoryRepo->findAndSort();
         $allowedClientsId = [];
 
         // Determine in which applis the connected user has at least one role
-        try {
-            if ($this->isGranted('ROLE_USER')) {
-                $userArray = $this->getUser()->toArray();
-                if (array_key_exists('clients_roles', $userArray)) {
-                    $allowedClientsId = array_diff(array_keys($userArray['clients_roles']), ['account']);
-                }
+        if ($this->isGranted('ROLE_USER')) {
+            $userArray = $this->getUser()->toArray();
+            if (array_key_exists('clients_roles', $userArray)) {
+                $allowedClientsId = array_diff(array_keys($userArray['clients_roles']), ['account']);
             }
-        } catch (AuthenticationException $e) {
-            $request->getSession()->invalidate();
         }
 
         // Loop through categories and remove applis the user is not authorized for
