@@ -80,7 +80,11 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-center py-0">
                   <li><a href="{{ env.app.iam_url }}" class="dropdown-item pt-2">Mon compte</a></li>
-                  <li><a href="{{ path('mainick_keycloak_security_auth_logout') }}" class="dropdown-item link-danger pb-2" data-turbo-prefetch="false" data-turbo="false">Se déconnecter</a></li>
+                  <li>
+                    <a href="{{ path('mainick_keycloak_security_auth_logout') }}" class="dropdown-item link-danger pb-2" data-turbo-prefetch="false" data-turbo="false">
+                      Se déconnecter
+                    </a>
+                  </li>
                 </ul>
               </li>
             {% else %}
