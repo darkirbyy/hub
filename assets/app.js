@@ -2,8 +2,8 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-// start the Stimulus application
-import './bootstrap';
+// Bootstrap the Stimulus application
+import './stimulus_bootstrap.js';
 
 // import app custom SCSS 
 import './styles/global.scss';

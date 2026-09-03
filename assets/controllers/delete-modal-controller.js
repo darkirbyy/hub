@@ -12,10 +12,8 @@ export default class extends Controller {
       const button = event.relatedTarget;
       const path = button.getAttribute('data-bs-path');
       const body = button.getAttribute('data-bs-body');
-      // const token = button.getAttribute('data-bs-token');
       this.formTarget.setAttribute('action', path);
       this.bodyTarget.innerHTML = body;
-      // this.hiddenTarget.value = token;
     });
   }
 }
