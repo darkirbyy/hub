@@ -23,7 +23,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function findAndSort(): array
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->orderBy('c.number', 'ASC');
+        $qb->orderBy('c.number', \SortDirection::Ascending);
 
         return $qb->getQuery()->getResult();
     }

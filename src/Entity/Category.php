@@ -41,7 +41,7 @@ class Category
     private ?Icon $icon = null;
 
     #[ORM\OneToMany(targetEntity: Appli::class, mappedBy: 'category')]
-    #[ORM\OrderBy(['number' => 'ASC'])]
+    #[ORM\OrderBy(['number' => \SortDirection::Ascending])]
     private Collection $applis;
 
     public function __construct()

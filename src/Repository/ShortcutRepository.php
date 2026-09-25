@@ -23,7 +23,7 @@ class ShortcutRepository extends ServiceEntityRepository
     public function findAndSort(): array
     {
         $qb = $this->createQueryBuilder('s');
-        $qb->orderBy('s.type', 'ASC')->addOrderBy('s.number', 'ASC');
+        $qb->orderBy('s.type', \SortDirection::Ascending)->addOrderBy('s.number', \SortDirection::Ascending);
 
         return $qb->getQuery()->getResult();
     }

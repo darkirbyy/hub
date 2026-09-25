@@ -24,8 +24,8 @@ class AppliRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.category', 'c') // Explicitly join the category table
-            ->orderBy('c.number', 'ASC')
-            ->addOrderBy('a.number', 'ASC');
+            ->orderBy('c.number', \SortDirection::Ascending)
+            ->addOrderBy('a.number', \SortDirection::Ascending);
 
         return $qb->getQuery()->getResult();
     }

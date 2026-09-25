@@ -23,7 +23,7 @@ class IconRepository extends ServiceEntityRepository
     public function findAndSort(): array
     {
         $qb = $this->createQueryBuilder('i');
-        $qb->orderBy('i.label', 'ASC');
+        $qb->orderBy('i.label', \SortDirection::Ascending);
 
         return $qb->getQuery()->getResult();
     }
