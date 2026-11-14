@@ -21,7 +21,7 @@ class HomeController extends AbstractController
      * Displays the homepage with public applis for any visitor,
      * adapting the visible applis for an authenticated user depending on its roles.
      *
-     * @param CategoryRepository $categoryRepo $shortcutRepo the repository managing the categories
+     * @param CategoryRepository $categoryRepo the repository managing the categories
      *
      * @return Response the rendered homepage
      */
@@ -54,8 +54,16 @@ class HomeController extends AbstractController
             }
         }
 
+        // todo : generate
+        $url =
+            'https://comptes.darkirby.fr/realms/web/protocol/openid-connect/auth?client_id=hub-dev&scope=openid&prompt=none&response_type=code&redirect_uri=https://localhost:8000/sync?';
+        if (!is_null($this->getUser())) {
+            $url .= 'hubConnected=1';
+        }
+
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
+            'url' => $url,
         ]);
     }
 

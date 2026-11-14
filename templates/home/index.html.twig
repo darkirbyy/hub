@@ -28,6 +28,11 @@
     {# No flashes on the main home page #}
     {# {{ block('flash', 'theme/flash.html.twig') }} #}
 
+    {# TODO : comment #}
+    <div data-controller="keycloak-check" data-keycloak-check-url-value="{{ url }}">
+      <iframe data-keycloak-check-target="iframe" style="display:none"></iframe>
+    </div>
+
     {# For each category, only display it if not empty #}
     {% for category in categories %}
       <section class="mt-4" data-controller="main-carousel" data-main-carousel-id-value="{{ category.id }}">
